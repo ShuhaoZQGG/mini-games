@@ -102,3 +102,13 @@ export async function getRecentScores(gameId: string, limit: number = 5) {
     return { success: false, error: 'Failed to fetch recent scores', data: [] }
   }
 }
+
+// Export as a service object for easier use in games
+export const scoreService = {
+  saveScore: (gameId: string, score: number, metadata?: Record<string, any>) => {
+    return submitScore({ gameId, score, metadata })
+  },
+  getLeaderboard,
+  getPersonalBest,
+  getRecentScores
+}
