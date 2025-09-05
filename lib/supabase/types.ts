@@ -9,6 +9,38 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      games: {
+        Row: {
+          id: string
+          slug: string
+          name: string
+          description: string | null
+          category: string | null
+          play_count: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          slug: string
+          name: string
+          description?: string | null
+          category?: string | null
+          play_count?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          slug?: string
+          name?: string
+          description?: string | null
+          category?: string | null
+          play_count?: number
+          created_at?: string
+          updated_at?: string
+        }
+      }
       scores: {
         Row: {
           id: string
@@ -100,6 +132,49 @@ export interface Database {
           avatar_url?: string | null
           total_games_played?: number
           achievements?: Json | null
+        }
+      }
+      achievements: {
+        Row: {
+          id: string
+          name: string
+          description: string | null
+          criteria: Json
+          icon: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          description?: string | null
+          criteria: Json
+          icon?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          description?: string | null
+          criteria?: Json
+          icon?: string | null
+          created_at?: string
+        }
+      }
+      user_achievements: {
+        Row: {
+          user_id: string
+          achievement_id: string
+          unlocked_at: string
+        }
+        Insert: {
+          user_id: string
+          achievement_id: string
+          unlocked_at?: string
+        }
+        Update: {
+          user_id?: string
+          achievement_id?: string
+          unlocked_at?: string
         }
       }
     }
