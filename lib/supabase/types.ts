@@ -1,0 +1,116 @@
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[]
+
+export interface Database {
+  public: {
+    Tables: {
+      scores: {
+        Row: {
+          id: string
+          created_at: string
+          game_id: string
+          player_id: string | null
+          guest_session_id: string | null
+          player_name: string
+          score: number
+          metadata: Json | null
+        }
+        Insert: {
+          id?: string
+          created_at?: string
+          game_id: string
+          player_id?: string | null
+          guest_session_id?: string | null
+          player_name: string
+          score: number
+          metadata?: Json | null
+        }
+        Update: {
+          id?: string
+          created_at?: string
+          game_id?: string
+          player_id?: string | null
+          guest_session_id?: string | null
+          player_name?: string
+          score?: number
+          metadata?: Json | null
+        }
+      }
+      leaderboards: {
+        Row: {
+          id: string
+          game_id: string
+          period: 'all_time' | 'monthly' | 'weekly' | 'daily'
+          player_id: string | null
+          guest_session_id: string | null
+          player_name: string
+          score: number
+          rank: number
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          game_id: string
+          period: 'all_time' | 'monthly' | 'weekly' | 'daily'
+          player_id?: string | null
+          guest_session_id?: string | null
+          player_name: string
+          score: number
+          rank?: number
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          game_id?: string
+          period?: 'all_time' | 'monthly' | 'weekly' | 'daily'
+          player_id?: string | null
+          guest_session_id?: string | null
+          player_name?: string
+          score?: number
+          rank?: number
+          updated_at?: string
+        }
+      }
+      profiles: {
+        Row: {
+          id: string
+          created_at: string
+          username: string
+          avatar_url: string | null
+          total_games_played: number
+          achievements: Json | null
+        }
+        Insert: {
+          id: string
+          created_at?: string
+          username: string
+          avatar_url?: string | null
+          total_games_played?: number
+          achievements?: Json | null
+        }
+        Update: {
+          id?: string
+          created_at?: string
+          username?: string
+          avatar_url?: string | null
+          total_games_played?: number
+          achievements?: Json | null
+        }
+      }
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      [_ in never]: never
+    }
+    Enums: {
+      [_ in never]: never
+    }
+  }
+}

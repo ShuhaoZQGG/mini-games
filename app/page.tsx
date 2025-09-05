@@ -3,8 +3,11 @@ import Link from 'next/link'
 export default function HomePage() {
   const games = [
     { id: 'cps-test', name: 'CPS Test', description: 'Test your clicking speed', path: '/games/cps-test' },
+    { id: 'reaction-time', name: 'Reaction Time', description: 'Test your reflexes', path: '/games/reaction-time' },
     { id: 'memory-match', name: 'Memory Match', description: 'Match the cards', path: '/games/memory-match' },
     { id: 'typing-test', name: 'Typing Test', description: 'Test your typing speed', path: '/games/typing-test' },
+    { id: 'tic-tac-toe', name: 'Tic-Tac-Toe', description: 'Classic X and O game', path: '/games/tic-tac-toe' },
+    { id: 'minesweeper', name: 'Minesweeper', description: 'Find all the mines', path: '/games/minesweeper' },
     { id: 'snake', name: 'Snake', description: 'Classic snake game', path: '/games/snake' },
     { id: '2048', name: '2048', description: 'Slide tiles to reach 2048', path: '/games/2048' },
     { id: 'sudoku', name: 'Sudoku', description: 'Number puzzle game', path: '/games/sudoku' },
