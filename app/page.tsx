@@ -11,6 +11,9 @@ export default function HomePage() {
     { id: 'snake', name: 'Snake', description: 'Classic snake game', path: '/games/snake' },
     { id: '2048', name: '2048', description: 'Slide tiles to reach 2048', path: '/games/2048' },
     { id: 'sudoku', name: 'Sudoku', description: 'Number puzzle game', path: '/games/sudoku' },
+    { id: 'connect-four', name: 'Connect Four', description: 'Get four in a row', path: '/games/connect-four' },
+    { id: 'word-search', name: 'Word Search', description: 'Find hidden words', path: '/games/word-search' },
+    { id: 'tetris', name: 'Tetris', description: 'Stack falling blocks', path: '/games/tetris' },
   ]
 
   return (
