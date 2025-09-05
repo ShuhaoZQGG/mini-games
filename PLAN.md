@@ -1,170 +1,202 @@
-# Mini Games Platform - Project Plan
+# Cycle 6: Platform Enhancement Plan
 
 ## Executive Summary
-Web-based gaming platform featuring 15+ mini-games with focus on SEO optimization and user engagement. Guest-first approach with optional authentication for enhanced features.
+With all 15 MVP games completed, Cycle 6 focuses on transforming the mini-games collection into a scalable platform with persistent data, real-time features, and social engagement capabilities.
 
-## Requirements Analysis
+## Current State Analysis
 
-### Functional Requirements
-1. **Game Engine**: Modular system supporting diverse game types
-2. **User System**: Guest play with optional registration
-3. **Scoring**: Real-time leaderboards and statistics
-4. **Social**: Share functionality and multiplayer support
-5. **Monetization**: Ad integration and premium features
+### Achievements
+- 15 fully functional games (100% MVP complete)
+- Mobile-responsive design across all games
+- SEO-optimized with SSR/SSG
+- Score tracking with localStorage fallback
+- Optional authentication configured
+- Supabase schema designed but not connected
+- Production-ready build (143-144KB bundles)
 
-### Non-Functional Requirements
-- Performance: <3s page load, 60fps gameplay
-- SEO: 90+ Lighthouse score
-- Accessibility: WCAG 2.1 AA compliance
-- Security: OWASP Top 10 protection
-- Scalability: Support 100k+ concurrent users
+### Technical Debt
+- Supabase environment variables not configured
+- Leaderboards showing mock data only
+- No real-time features active
+- Missing user profiles and achievements
+- No social sharing implementation
+- PWA features not configured
+- Analytics not integrated
 
-## System Architecture
+## Requirements
 
-### Frontend Architecture
-```
-Next.js App Router
-├── app/
-│   ├── (marketing)/     # SSG landing pages
-│   ├── games/           # SSR game pages
-│   ├── api/            # API routes
-│   └── (auth)/         # Auth flows
-├── components/
-│   ├── games/          # Game components
-│   ├── ui/             # Shared UI
-│   └── layouts/        # Layout templates
-└── lib/
-    ├── games/          # Game logic
-    ├── hooks/          # Custom hooks
-    └── utils/          # Utilities
-```
+### Primary Goals
+1. **Data Persistence**: Connect Supabase for permanent score storage
+2. **Real-time Features**: Live leaderboards and multiplayer support
+3. **User Engagement**: Profiles, achievements, social sharing
+4. **Platform Optimization**: PWA, analytics, performance monitoring
+5. **Growth Features**: SEO enhancements, social virality mechanisms
 
-### Backend Architecture (Supabase)
-```
-PostgreSQL Database
-├── auth.users          # Supabase Auth
-├── profiles           # User profiles
-├── games             # Game metadata
-├── scores            # Score history
-├── leaderboards      # Cached rankings
-└── analytics         # Usage metrics
+### Success Metrics
+- <3s page load time maintained
+- 90+ Lighthouse score
+- Real-time leaderboard updates <500ms
+- 50% user registration rate after 3 games
+- 30% social share rate on high scores
 
-Edge Functions
-├── score-submission
-├── leaderboard-update
-├── multiplayer-sync
-└── achievement-check
-```
+## Architecture
 
-### Data Models
+### Database Schema (Supabase)
 ```sql
 -- Core Tables
-games (id, slug, name, category, rules)
-scores (id, user_id, game_id, score, timestamp)
-leaderboards (game_id, period, rankings)
-profiles (id, username, avatar, stats)
-achievements (id, user_id, type, unlocked_at)
+games (id, slug, name, description, category, play_count)
+scores (id, game_id, user_id, score, metadata, created_at)
+leaderboards (game_id, period, user_id, score, rank)
+profiles (user_id, username, avatar_url, total_score, games_played)
+achievements (id, name, description, criteria, icon)
+user_achievements (user_id, achievement_id, unlocked_at)
+
+-- Realtime Tables
+active_games (id, game_id, players, state, created_at)
+game_events (game_id, event_type, payload, timestamp)
 ```
 
-## Technology Stack
+### Service Architecture
+```
+Frontend (Next.js)
+    ├── Game Components
+    ├── Auth Context (Supabase Auth)
+    ├── Score Service (with caching)
+    └── Realtime Subscriptions
 
-### Core
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript 5
-- **Styling**: Tailwind CSS + shadcn/ui
-- **State**: Zustand + React Query
-- **Animation**: Framer Motion
+Backend (Supabase)
+    ├── PostgreSQL Database
+    ├── Row Level Security
+    ├── Edge Functions (leaderboard calculations)
+    ├── Realtime Broadcasting
+    └── Storage (avatars, game assets)
+```
+
+### Caching Strategy
+- Client: React Query with 5min cache
+- Database: Materialized views for leaderboards
+- CDN: Static assets with 1-year cache
+- API: Redis for frequently accessed data
+
+## Tech Stack Decisions
+
+### Frontend
+- **State Management**: Zustand for game state, React Query for server state
+- **Real-time**: Supabase Realtime client
+- **PWA**: Workbox for service worker
+- **Analytics**: Plausible (privacy-focused)
+- **Monitoring**: Sentry for error tracking
 
 ### Backend
-- **Database**: Supabase (PostgreSQL)
-- **Auth**: Supabase Auth
-- **Realtime**: Supabase Realtime
-- **Storage**: Supabase Storage
-- **Functions**: Supabase Edge Functions
+- **Database**: PostgreSQL via Supabase
+- **Auth**: Supabase Auth with Google/GitHub/Discord
+- **Functions**: Supabase Edge Functions (Deno)
+- **Storage**: Supabase Storage for user content
+- **Queue**: pg-boss for background jobs
 
 ### Infrastructure
-- **Hosting**: Vercel
+- **Hosting**: Vercel (frontend)
+- **Database**: Supabase (managed PostgreSQL)
 - **CDN**: Vercel Edge Network
-- **Monitoring**: Vercel Analytics
-- **Testing**: Jest + Playwright
+- **Monitoring**: Vercel Analytics + Custom dashboard
 
 ## Implementation Phases
 
-### Phase 1: Foundation (Week 1-2)
-- [x] Project setup and configuration
-- [ ] Supabase integration
-- [ ] Authentication system
-- [ ] Base UI components
-- [ ] Game framework architecture
+### Phase 1: Database Connection (Week 1)
+1. Configure Supabase environment variables
+2. Run database migrations
+3. Connect scoreService to real backend
+4. Test score persistence across all games
+5. Implement error handling and fallbacks
 
-### Phase 2: Core Games (Week 3-4)
-- [ ] CPS Test implementation
-- [ ] Memory Match game
-- [ ] Typing Speed Test
-- [ ] Tic-Tac-Toe
-- [ ] Score submission system
+### Phase 2: Real-time Features (Week 2)
+1. Set up Supabase Realtime subscriptions
+2. Implement live leaderboard updates
+3. Add presence indicators for online players
+4. Create multiplayer lobby for applicable games
+5. Test real-time performance at scale
 
-### Phase 3: Platform Features (Week 5-6)
-- [ ] Global leaderboards
-- [ ] User profiles
-- [ ] Social sharing
-- [ ] Achievement system
-- [ ] Analytics integration
+### Phase 3: User Profiles (Week 3)
+1. Implement profile creation flow
+2. Add avatar upload functionality
+3. Create profile pages with statistics
+4. Build achievement system
+5. Add profile customization options
 
-### Phase 4: Extended Games (Week 7-8)
-- [ ] Snake game
-- [ ] 2048 puzzle
-- [ ] Sudoku solver
-- [ ] Card games
-- [ ] Multiplayer support
+### Phase 4: Social Features (Week 4)
+1. Implement social sharing for scores
+2. Create challenge link generation
+3. Add friend system with invites
+4. Build activity feed
+5. Implement tournaments/competitions
 
-### Phase 5: Optimization (Week 9-10)
-- [ ] SEO optimization
-- [ ] Performance tuning
-- [ ] PWA implementation
-- [ ] A/B testing setup
-- [ ] Marketing pages
+### Phase 5: Platform Optimization (Week 5)
+1. Configure PWA manifest and service worker
+2. Implement offline game selection
+3. Add push notifications
+4. Integrate analytics tracking
+5. Set up A/B testing framework
 
-## Risk Analysis
+## Risk Mitigation
 
 ### Technical Risks
-1. **Game Performance**: Complex games may impact mobile performance
-   - Mitigation: Progressive enhancement, WebWorker usage
-2. **SEO Challenges**: Dynamic content indexing
-   - Mitigation: SSG for game pages, structured data
-3. **Scalability**: Leaderboard calculations at scale
-   - Mitigation: Caching, materialized views
+- **Database Scale**: Use connection pooling, implement caching
+- **Real-time Load**: Rate limiting, message batching
+- **Bundle Size**: Code splitting, lazy loading
+- **Mobile Performance**: Canvas optimization, reduced animations
 
 ### Business Risks
-1. **User Retention**: Keeping users engaged
-   - Mitigation: Daily challenges, achievements
-2. **Monetization**: Ad blocker prevalence
-   - Mitigation: Premium features, sponsorships
+- **User Retention**: Progressive engagement, daily challenges
+- **Monetization**: Non-intrusive ads, premium features
+- **Competition**: Unique games, superior UX
+- **SEO Competition**: Long-tail keywords, content marketing
 
-## Success Metrics
-- 100k+ monthly active users
-- 5+ minutes average session duration
-- 50k+ organic search traffic
-- 3.5+ user rating
-- <2% bounce rate on game pages
+## Monitoring & Analytics
+
+### Performance Metrics
+- Core Web Vitals (LCP, FID, CLS)
+- Database query performance
+- Real-time message latency
+- API response times
+- Client-side errors
+
+### User Metrics
+- Daily/Monthly Active Users
+- Game engagement rates
+- Registration conversion
+- Social share rates
+- Retention cohorts
 
 ## Security Considerations
-- Rate limiting on score submissions
-- Input validation for all user data
-- CSRF protection on state changes
-- Content Security Policy headers
-- Regular dependency updates
 
-## Development Guidelines
-1. Mobile-first responsive design
-2. Component-driven development
-3. Test coverage >80%
-4. Accessibility-first approach
-5. Performance budget enforcement
+### Data Protection
+- Row Level Security on all tables
+- Input validation on all forms
+- Rate limiting on API endpoints
+- CAPTCHA for high-score submissions
+- Regular security audits
 
-## Deployment Strategy
-- Feature branch workflow
-- Automated CI/CD pipeline
-- Preview deployments for PRs
-- Staged rollouts with feature flags
-- Automated rollback on errors
+### Anti-cheat Measures
+- Server-side score validation
+- Anomaly detection algorithms
+- Time-based score limits
+- IP-based rate limiting
+- Manual review queue
+
+## Next Cycle Recommendations
+
+After completing Cycle 6 platform enhancements:
+
+1. **Content Expansion**: Add 10+ new games
+2. **Monetization**: Implement revenue streams
+3. **Mobile Apps**: Native iOS/Android apps
+4. **International**: Multi-language support
+5. **Advanced Features**: AI opponents, game creation tools
+
+## Immediate Actions
+
+1. Set up Supabase project and obtain credentials
+2. Configure environment variables
+3. Run database migrations
+4. Begin Phase 1 implementation
+5. Set up monitoring dashboards
