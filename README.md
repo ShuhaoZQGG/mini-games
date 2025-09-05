@@ -45,19 +45,28 @@ A high-performance web application featuring a collection of engaging mini-games
 
 ## Completed Features
 
-### Games (6/15+ implemented)
+### Games (12/15+ implemented - 80%)
 - **CPS Test**: Click speed testing with real-time calculation
 - **Memory Match**: Card matching game with emoji pairs
 - **Typing Test**: WPM and accuracy testing
 - **Snake**: Classic arcade game with touch controls
 - **2048**: Number sliding puzzle with undo functionality
 - **Sudoku**: Complete implementation with difficulty levels
+- **Reaction Time Test**: Reflex speed measurement with statistics
+- **Tic-Tac-Toe**: AI opponent with difficulty levels and PvP mode
+- **Minesweeper**: Classic game with timer and difficulty settings
+- **Connect Four**: Strategic dropping game with win detection
+- **Word Search**: Find hidden words in letter grid
+- **Tetris**: Classic block-stacking with scoring system
 
 ### Platform Features
 - **Dark Mode**: System-aware theme toggle
 - **Database Schema**: Supabase tables with RLS policies (ready for integration)
 - **Mobile Support**: Touch controls on all games
 - **SEO Optimization**: Server-side rendering with meta tags
+- **Authentication**: Optional sign-in with social providers configured
+- **Score Persistence**: Service layer with localStorage fallback
+- **Leaderboards**: Component built with period filtering (mock data)
 
 ## In Progress
 
