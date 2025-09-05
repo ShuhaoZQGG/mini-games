@@ -5,6 +5,9 @@ export default function HomePage() {
     { id: 'cps-test', name: 'CPS Test', description: 'Test your clicking speed', path: '/games/cps-test' },
     { id: 'memory-match', name: 'Memory Match', description: 'Match the cards', path: '/games/memory-match' },
     { id: 'typing-test', name: 'Typing Test', description: 'Test your typing speed', path: '/games/typing-test' },
+    { id: 'snake', name: 'Snake', description: 'Classic snake game', path: '/games/snake' },
+    { id: '2048', name: '2048', description: 'Slide tiles to reach 2048', path: '/games/2048' },
+    { id: 'sudoku', name: 'Sudoku', description: 'Number puzzle game', path: '/games/sudoku' },
   ]
 
   return (
