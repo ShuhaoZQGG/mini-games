@@ -1,373 +1,420 @@
-# Mini Games Platform - UI/UX Design Specifications
+# UI/UX Design Specifications - Mini Games Platform
 
-## Design System
+## Visual Identity
 
-### Brand Identity
-- **Primary Color**: #6366F1 (Indigo-500)
-- **Secondary Color**: #8B5CF6 (Violet-500)
-- **Success**: #10B981 (Emerald-500)
-- **Warning**: #F59E0B (Amber-500)
-- **Error**: #EF4444 (Red-500)
-- **Dark Mode**: System preference with manual toggle
+### Brand Principles
+- **Playful**: Vibrant, engaging, fun without being childish
+- **Accessible**: Clear contrast, readable fonts, intuitive navigation
+- **Fast**: Instant feedback, smooth animations, quick load times
+- **Responsive**: Seamless experience across all devices
+
+### Color System
+```css
+--primary: #6366f1        /* Indigo - CTAs, active states */
+--primary-hover: #4f46e5  /* Darker indigo for hover */
+--secondary: #8b5cf6      /* Purple - achievements, rewards */
+--accent: #ec4899         /* Pink - highlights, notifications */
+--success: #10b981        /* Green - wins, correct answers */
+--warning: #f59e0b        /* Amber - time warnings, hints */
+--danger: #ef4444         /* Red - errors, game over */
+--background: #ffffff     /* White - main background */
+--surface: #f9fafb        /* Light gray - cards, panels */
+--text-primary: #111827   /* Dark gray - main text */
+--text-secondary: #6b7280 /* Medium gray - secondary text */
+
+/* Dark Mode */
+--dark-background: #0f172a
+--dark-surface: #1e293b
+--dark-text-primary: #f1f5f9
+--dark-text-secondary: #94a3b8
+```
 
 ### Typography
-- **Headings**: Inter (fallback: system-ui)
-- **Body**: Inter (fallback: system-ui)
-- **Game UI**: Orbitron (retro games), Inter (modern games)
-- **Scale**: 14px base, 1.5 line-height
+- **Headings**: Inter (600-800 weight)
+- **Body**: Inter (400-500 weight)
+- **Game UI**: Orbitron (scores, timers)
+- **Sizes**: 14px base, 1.5 line-height
 
-### Spacing System
-- Base unit: 4px
-- Scale: 0, 1, 2, 4, 6, 8, 12, 16, 20, 24, 32, 40, 48, 56, 64
+## Layout Architecture
+
+### Navigation Structure
+```
+Header (sticky, 64px)
+├── Logo + Brand
+├── Game Categories Dropdown
+├── Search (expandable)
+├── Theme Toggle
+└── User Menu / Sign In
+
+Main Content
+├── Hero Section (home only)
+├── Game Grid / Game Area
+├── Leaderboards Sidebar
+└── Social Feed (authenticated)
+
+Footer
+├── Game Categories
+├── Platform Links
+├── Social Links
+└── Legal
+```
+
+### Responsive Breakpoints
+- **Mobile**: 320-768px (single column, bottom nav)
+- **Tablet**: 768-1024px (2 columns, side drawer)
+- **Desktop**: 1024px+ (3 columns, full sidebar)
 
 ## User Journeys
 
 ### Guest User Flow
 ```
-Landing → Browse Games → Select Game → Play → View Score → 
-→ Share Score (optional) → Play Again / Try Another Game
-→ Sign Up Prompt (after 3 games)
+Landing Page
+├── Featured Games Carousel
+├── Popular Games Grid
+├── Live Leaderboard Preview
+└── "Play as Guest" CTA
+
+Game Selection
+├── Category Filter
+├── Difficulty Badge
+├── Play Count
+└── Best Score Preview
+
+Gameplay
+├── Instant Start (no loading)
+├── Tutorial Overlay (first time)
+├── Real-time Score
+└── Share Score Prompt
+
+Post-Game
+├── Score Summary
+├── Leaderboard Position
+├── "Beat This Score" Share
+└── Sign Up Prompt (after 3 games)
 ```
 
 ### Authenticated User Flow
 ```
-Landing → Sign In → Dashboard → Select Game → Play → 
-→ Score Saved → Leaderboard Position → Achievements Check →
-→ Share / Challenge Friends → View Stats
+Dashboard
+├── Continue Playing
+├── Daily Challenges
+├── Friend Activity
+└── Achievement Progress
+
+Profile
+├── Avatar + Username
+├── Total Score + Rank
+├── Game Statistics
+├── Achievement Showcase
+└── Friend List
+
+Social Features
+├── Challenge Friends
+├── Share Achievements
+├── Tournament Entry
+└── Activity Feed
 ```
 
-### First-Time User Onboarding
-1. Landing page with featured games
-2. One-click game start (no barriers)
-3. Post-game: Show what they're missing (leaderboards, stats)
-4. Soft registration prompt with benefits
-5. Social sign-in options
+## Component Design
 
-## Page Layouts
-
-### Homepage
+### Game Card
 ```
-┌─────────────────────────────────────┐
-│ Header (sticky)                     │
-├─────────────────────────────────────┤
-│ Hero: Featured Game + CTA           │
-├─────────────────────────────────────┤
-│ Popular Games Carousel              │
-├─────────────────────────────────────┤
-│ Game Categories Grid                │
-├─────────────────────────────────────┤
-│ Live Leaderboards                   │
-├─────────────────────────────────────┤
-│ Footer                              │
-└─────────────────────────────────────┘
+┌─────────────────────┐
+│ [Game Thumbnail]    │
+│                     │
+├─────────────────────┤
+│ Game Title          │
+│ ★4.5 | 1.2M plays   │
+│ Your Best: 2,450    │
+│ [Play Now]          │
+└─────────────────────┘
 ```
 
-### Game Page
+### Leaderboard Widget
 ```
-┌─────────────────────────────────────┐
-│ Minimal Header                      │
-├─────────────────────────────────────┤
-│ Game Title | Instructions | Timer   │
-├─────────────────────────────────────┤
-│                                     │
-│         Game Canvas                 │
-│         (Responsive)                │
-│                                     │
-├─────────────────────────────────────┤
-│ Score | Best | Controls             │
-├─────────────────────────────────────┤
-│ Leaderboard | Share | Play Again    │
-└─────────────────────────────────────┘
+┌─────────────────────┐
+│ Top Scores | Today ▼│
+├─────────────────────┤
+│ 🥇 User1    12,450  │
+│ 🥈 User2    11,200  │
+│ 🥉 User3    10,900  │
+│ ...                 │
+│ 42. You      5,200  │
+├─────────────────────┤
+│ [View Full]         │
+└─────────────────────┘
 ```
 
-### Dashboard (Authenticated)
+### Game Interface
 ```
-┌─────────────────────────────────────┐
-│ Header with User Menu               │
-├─────────────────────────────────────┤
-│ Stats Summary Cards                 │
-├─────────────────────────────────────┤
-│ Recent Games | Achievements         │
-├─────────────────────────────────────┤
-│ Favorite Games | Recommendations    │
-└─────────────────────────────────────┘
+┌──────────────────────────┐
+│ Score: 1,250  Time: 0:45 │
+├──────────────────────────┤
+│                          │
+│      [Game Canvas]       │
+│                          │
+├──────────────────────────┤
+│ [Pause] [Restart] [Exit] │
+└──────────────────────────┘
 ```
 
-## Component Library
-
-### Navigation Components
-- **Header**: Logo, game search, theme toggle, auth buttons
-- **Mobile Menu**: Full-screen overlay with categories
-- **Breadcrumbs**: Home > Category > Game
-- **Footer**: Links, social, language selector
-
-### Game Components
-- **GameCard**: Thumbnail, title, play count, rating, play button
-- **GameCanvas**: Responsive container with aspect ratio lock
-- **ScoreDisplay**: Current, best, global best with animations
-- **GameControls**: Touch-friendly buttons, keyboard hints
-- **CountdownTimer**: Visual progress bar + numbers
-- **LiveLeaderboard**: Real-time updates with position highlighting
-
-### Interactive Elements
-- **PlayButton**: Large, prominent CTA with hover effects
-- **ShareModal**: Social platforms, copy link, QR code
-- **ResultsScreen**: Score, rank, improvements, share options
-- **AchievementToast**: Slide-in notification with progress
-- **TutorialOverlay**: Interactive hints on first play
-
-### Form Components
-- **AuthModal**: Tabs for sign in/up, social providers
-- **ProfileForm**: Avatar upload, username, preferences
-- **SearchBar**: Autocomplete with game suggestions
-- **SettingsPanel**: Slide-out drawer with sections
-
-## Responsive Design
-
-### Breakpoints
-- Mobile: 320px - 767px
-- Tablet: 768px - 1023px
-- Desktop: 1024px - 1279px
-- Wide: 1280px+
-
-### Mobile Adaptations
-- Full-width game canvas
-- Bottom sheet for game info
-- Thumb-reachable controls
-- Swipe gestures for navigation
-- Simplified headers
-
-### Tablet Adaptations
-- 2-column game grid
-- Side panel leaderboards
-- Landscape game optimization
-- Hover states on supported devices
-
-### Desktop Features
-- 3-4 column game grid
-- Persistent sidebars
-- Keyboard shortcuts
-- Rich hover previews
-- Multi-game comparisons
-
-## Game-Specific UIs
+## Game-Specific UI
 
 ### CPS Test
-- Large click area (mobile: 80% screen)
-- Real-time click counter
-- Progress bar for time
-- Click heatmap visualization
-- Result graph comparing to average
+- Large click area with ripple effect
+- Real-time CPS counter
+- Progress bar for time remaining
+- Click streak indicator
 
 ### Memory Match
-- Grid layout (4x4 to 6x6)
-- Card flip animation (3D transform)
-- Timer and move counter
-- Difficulty selector
-- Theme options (emojis, numbers, images)
+- 3D card flip animation
+- Match celebration animation
+- Timer with warning states
+- Moves counter
 
-### Typing Speed Test
-- Text display with highlight
-- Virtual keyboard indicator
-- WPM/accuracy meters
+### Typing Test
+- Text highlight for current word
+- WPM speedometer visualization
+- Accuracy percentage badge
 - Error highlighting
-- Practice mode toggle
 
-### Snake Game
-- Responsive grid (adapts to screen)
-- Swipe controls (mobile)
-- Score and high score
+### Snake
+- Gradient snake body
+- Food pulse animation
+- Score multiplier display
 - Speed indicator
-- Pause overlay
 
-### Puzzle Games (2048, Sudoku)
-- Touch gestures
-- Undo/redo buttons
-- Hint system
-- Progress saves
-- Number pad (mobile)
+### 2048
+- Smooth tile slide animations
+- Number merge effects
+- Undo button with count
+- Best score comparison
 
-## Accessibility
+### Puzzle Games (Sudoku, Minesweeper)
+- Cell hover highlights
+- Validation indicators
+- Hint system UI
+- Timer with pause
 
-### WCAG 2.1 AA Compliance
-- Color contrast: 4.5:1 minimum
-- Focus indicators: 2px solid outline
-- Keyboard navigation: All interactive elements
-- Screen reader: ARIA labels and live regions
-- Text scaling: Up to 200% without loss
+### Competitive Games (Tic-Tac-Toe, Connect Four)
+- Turn indicator
+- Win line animation
+- AI difficulty selector
+- Move history
 
-### Interaction Patterns
-- Touch targets: 44x44px minimum
-- Gesture alternatives: Buttons for all swipes
-- Pause/resume: Spacebar or dedicated button
-- Reduced motion: Respect prefers-reduced-motion
-- High contrast mode: Simplified color scheme
-
-## Animation & Transitions
+## Animation & Interactions
 
 ### Micro-interactions
-- Button hover: Scale 1.05, 200ms ease
-- Card hover: Lift shadow, 300ms ease
-- Score update: Number roll animation
-- Achievement unlock: Confetti burst
-- Loading states: Skeleton screens
+- **Button Hover**: Scale 1.05, shadow elevation
+- **Card Hover**: Lift effect with shadow
+- **Score Update**: Number roll animation
+- **Achievement Unlock**: Slide in + confetti
+- **Error State**: Subtle shake animation
 
 ### Page Transitions
-- Route change: Fade 200ms
-- Modal open: Scale + fade 300ms
-- Drawer slide: 400ms ease-out
-- Game start: Countdown animation
-- Game over: Result slide-up
+- **Route Change**: Fade with 200ms
+- **Modal Open**: Scale + fade 300ms
+- **Drawer Slide**: 250ms ease-out
+- **Tab Switch**: Slide horizontal 200ms
+
+### Game Animations
+- **Start Countdown**: 3-2-1-GO pulse
+- **Score Increase**: +points float up
+- **Game Over**: Overlay fade in
+- **New High Score**: Celebration burst
+
+## Mobile Optimizations
+
+### Touch Targets
+- Minimum 44x44px tap areas
+- 8px spacing between targets
+- Gesture support (swipe, pinch)
+- Haptic feedback on actions
+
+### Mobile Navigation
+```
+Bottom Tab Bar (fixed)
+├── Home
+├── Categories
+├── Leaderboard
+├── Profile
+└── More
+```
+
+### Game Controls
+- Virtual joystick for Snake
+- Swipe gestures for 2048
+- Touch-optimized buttons
+- Landscape mode support
+
+## Accessibility Features
+
+### WCAG 2.1 AA Compliance
+- Color contrast ratio 4.5:1 minimum
+- Focus indicators on all interactive elements
+- Keyboard navigation support
+- Screen reader announcements
+
+### Game Accessibility
+- Colorblind modes
+- Reduced motion option
+- Adjustable game speed
+- Audio cues toggle
+- High contrast mode
 
 ## Loading & Error States
 
-### Loading Patterns
-- Initial: Logo pulse animation
-- Games: Skeleton with shimmer
-- Leaderboards: Progressive load
-- Images: Blur-up technique
+### Loading States
+```
+Skeleton Screen
+├── Header (static)
+├── Content shimmer
+├── Progressive reveal
+└── Estimated time
+```
 
 ### Error Handling
-- Network error: Retry button with message
-- Game crash: Reload option with state save
-- 404: Game suggestions
-- Form errors: Inline validation
+```
+Error Display
+├── Friendly message
+├── Retry action
+├── Report issue link
+└── Fallback content
+```
 
-## SEO & Performance Optimizations
+## Social Sharing Templates
 
-### Meta Structure
-- Dynamic titles: "Game Name - Play Free Mini Games"
-- Descriptions: Game-specific with keywords
-- Open Graph: Game thumbnail, score sharing
-- Structured data: Game, Rating, BreadcrumbList
+### Score Share Card
+```
+┌─────────────────────┐
+│ I scored 12,450!    │
+│ on [Game Name]      │
+│                     │
+│ [Game Screenshot]   │
+│                     │
+│ Can you beat it?    │
+│ play.minigames.com  │
+└─────────────────────┘
+```
 
-### Performance Targets
-- LCP: <2.5s
-- FID: <100ms
-- CLS: <0.1
-- Bundle size: <200KB initial
+## PWA Features
 
-## Social Features
+### Offline UI
+- Cached game availability badges
+- Offline score queue indicator
+- Sync status in header
+- Download progress for games
 
-### Sharing Templates
-- Score: "I scored X in [Game]! Can you beat it?"
-- Achievement: "Just unlocked [Achievement] in [Game]!"
-- Challenge: "I challenge you to beat my score!"
+### Install Prompt
+```
+┌─────────────────────┐
+│ Install Mini Games  │
+│ Play offline!       │
+│ [Install] [Later]   │
+└─────────────────────┘
+```
 
-### Multiplayer UI
-- Lobby: Player list, ready states
-- In-game: Opponent progress indicator
-- Results: Comparison view
-- Rematch: Quick action button
+## Performance Budgets
 
-## Progressive Disclosure
+### Initial Load
+- First Paint: <1s
+- Interactive: <3s
+- Full Load: <5s
 
-### Feature Introduction
-1. Core gameplay first
-2. Scoring after first game
-3. Leaderboards after 3 games
-4. Account benefits at natural points
-5. Advanced features in settings
+### Runtime Performance
+- 60 FPS animations
+- <100ms input latency
+- <50ms score updates
 
-## Component Prioritization
+## Implementation Priority
 
-### Phase 1 (MVP)
-- GameCard, GameCanvas, PlayButton
-- Basic Header/Footer
-- Score display
-- Mobile responsive layouts
+### Phase 1: Core Platform
+1. Navigation system
+2. Game cards grid
+3. Basic leaderboards
+4. Guest gameplay flow
 
-### Phase 2
-- Leaderboard
-- Auth modal
-- Share functionality
-- Theme toggle
+### Phase 2: User Features
+1. Authentication UI
+2. User profiles
+3. Score persistence
+4. Social sharing
 
-### Phase 3
-- Dashboard
-- Achievements
-- Social features
-- Advanced settings
+### Phase 3: Engagement
+1. Achievements UI
+2. Daily challenges
+3. Tournament brackets
+4. Friend system
 
-## Design Tokens
+### Phase 4: Polish
+1. Advanced animations
+2. PWA features
+3. Offline mode
+4. Push notifications
 
+## Design System Components
+
+### Using Supabase Auth UI
+- Pre-built Auth component for sign-in/up
+- Social provider buttons (Google, GitHub, Discord)
+- Magic link email authentication
+- Password reset flow
+
+### Component Library
+- shadcn/ui base components
+- Custom game-specific components
+- Framer Motion for animations
+- React Query for data fetching
+
+## Responsive Design Patterns
+
+### Mobile-First Approach
+```tsx
+// Base mobile styles
+className="grid grid-cols-1 gap-4 
+          md:grid-cols-2 
+          lg:grid-cols-3 
+          xl:grid-cols-4"
+```
+
+### Container Queries
 ```css
-:root {
-  /* Colors */
-  --color-primary: #6366F1;
-  --color-secondary: #8B5CF6;
-  --color-success: #10B981;
-  --color-warning: #F59E0B;
-  --color-error: #EF4444;
-  
-  /* Spacing */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  
-  /* Typography */
-  --font-sans: 'Inter', system-ui;
-  --font-game: 'Orbitron', monospace;
-  
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
-  
-  /* Animation */
-  --transition-fast: 200ms ease;
-  --transition-base: 300ms ease;
-  --transition-slow: 500ms ease;
+@container (min-width: 400px) {
+  .game-card { flex-direction: row; }
 }
 ```
 
-## Recommended UI Libraries
+## State Management UI
 
-### Core Components
-- **shadcn/ui**: Base component system
-- **Radix UI**: Accessible primitives
-- **Tailwind CSS**: Utility styling
+### Loading States
+- Skeleton screens for content
+- Spinner for actions
+- Progress bars for uploads
+- Optimistic updates
 
-### Enhancements
+### Error Recovery
+- Inline error messages
+- Toast notifications
+- Retry mechanisms
+- Fallback UI
+
+## Recommendations
+
+### Frontend Framework
+- **Next.js 14**: App Router for SEO
+- **React 18**: For component architecture
+- **TypeScript**: Type safety
+- **Tailwind CSS**: Utility-first styling
 - **Framer Motion**: Animations
-- **React Hot Toast**: Notifications
-- **Recharts**: Statistics graphs
-- **React Confetti**: Celebrations
 
-### Game-Specific
-- **Phaser**: Complex games
-- **Canvas API**: Simple games
-- **React DnD**: Drag interactions
+### Testing Approach
+- Component testing with React Testing Library
+- Visual regression with Chromatic
+- Accessibility testing with axe-core
+- Performance testing with Lighthouse
 
-## Mobile App Considerations
-
-### PWA Features
-- Install prompt
-- Offline game selection
-- Push notifications
-- Home screen icon
-- Splash screen
-
-### Native Feelings
-- Haptic feedback
-- Full-screen mode
-- Gesture navigation
-- App-like transitions
-- Native share sheet
-
-## Testing Requirements
-
-### User Testing Metrics
-- Task completion rate: >90%
-- Error rate: <5%
-- Time to first game: <10s
-- Satisfaction score: >4.0/5
-
-### A/B Testing Areas
-- CTA button colors/text
-- Game card layouts
-- Onboarding flows
-- Registration prompts
-- Leaderboard designs
+### Monitoring
+- Sentry for error tracking
+- Vercel Analytics for performance
+- Plausible for privacy-focused analytics
+- Custom game metrics dashboard
