@@ -1,7 +1,7 @@
-import { GameState } from './types'
+import { GameStatus } from './types'
 
 export abstract class BaseGame {
-  protected state: GameState = {
+  protected state: GameStatus = {
     isPlaying: false,
     isPaused: false,
     isGameOver: false,
@@ -16,7 +16,7 @@ export abstract class BaseGame {
   abstract reset(): void
   abstract handleInput(input: any): void
 
-  getState(): GameState {
+  getState(): GameStatus {
     return { ...this.state }
   }
 
