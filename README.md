@@ -45,11 +45,25 @@ A high-performance web application featuring a collection of engaging mini-games
 
 ## Completed Features
 
-*To be updated as features are implemented*
+### Games (6/15+ implemented)
+- **CPS Test**: Click speed testing with real-time calculation
+- **Memory Match**: Card matching game with emoji pairs
+- **Typing Test**: WPM and accuracy testing
+- **Snake**: Classic arcade game with touch controls
+- **2048**: Number sliding puzzle with undo functionality
+- **Sudoku**: Complete implementation with difficulty levels
+
+### Platform Features
+- **Dark Mode**: System-aware theme toggle
+- **Database Schema**: Supabase tables with RLS policies (ready for integration)
+- **Mobile Support**: Touch controls on all games
+- **SEO Optimization**: Server-side rendering with meta tags
 
 ## In Progress
 
-*Current development tasks*
+- Connecting Supabase backend for score persistence
+- Implementing leaderboard UI components
+- Adding more games to reach MVP target
 
 ## Getting Started
 
