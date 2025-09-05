@@ -114,24 +114,45 @@ export interface Database {
           created_at: string
           username: string
           avatar_url: string | null
+          bio: string | null
           total_games_played: number
+          total_score: number
+          highest_score: number
+          win_rate: number
+          favorite_game: string | null
           achievements: Json | null
+          theme_preference: string | null
+          stats: Json | null
         }
         Insert: {
           id: string
           created_at?: string
           username: string
           avatar_url?: string | null
+          bio?: string | null
           total_games_played?: number
+          total_score?: number
+          highest_score?: number
+          win_rate?: number
+          favorite_game?: string | null
           achievements?: Json | null
+          theme_preference?: string | null
+          stats?: Json | null
         }
         Update: {
           id?: string
           created_at?: string
           username?: string
           avatar_url?: string | null
+          bio?: string | null
           total_games_played?: number
+          total_score?: number
+          highest_score?: number
+          win_rate?: number
+          favorite_game?: string | null
           achievements?: Json | null
+          theme_preference?: string | null
+          stats?: Json | null
         }
       }
       achievements: {
