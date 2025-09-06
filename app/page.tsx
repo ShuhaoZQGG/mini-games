@@ -17,6 +17,9 @@ export default function HomePage() {
     { id: 'tetris', name: 'Tetris', description: 'Stack falling blocks', path: '/games/tetris' },
     { id: 'breakout', name: 'Breakout', description: 'Break all the bricks', path: '/games/breakout' },
     { id: 'mental-math', name: 'Mental Math', description: 'Solve math problems', path: '/games/mental-math' },
+    { id: 'solitaire', name: 'Solitaire', description: 'Classic card game', path: '/games/solitaire' },
+    { id: 'simon-says', name: 'Simon Says', description: 'Memory pattern game', path: '/games/simon-says' },
+    { id: 'whack-a-mole', name: 'Whack-a-Mole', description: 'Test your reflexes', path: '/games/whack-a-mole' },
   ]
 
   return (
