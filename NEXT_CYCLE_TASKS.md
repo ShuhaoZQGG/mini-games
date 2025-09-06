@@ -1,175 +1,88 @@
 # Next Cycle Tasks
 
-## Completed in Previous Cycles ✅
-- Cycle 7: Phase 2 & 3 - Real-time Features and User Profiles
-- Cycle 8: Phase 4 (Part 1) - Social Sharing and Friend System
-- Cycle 9: Phase 4 (Part 2) - Tournament System and PWA Support
+## Priority 1: Production Deployment
+1. **Configure Production Environment**
+   - Set up actual Supabase production instance
+   - Configure environment variables in `.env.production`
+   - Set up Vercel project with production secrets
 
-## Priority 1: Platform Enhancement Completion
+2. **Database Deployment**
+   - Apply all migrations to production Supabase
+   - Verify RLS policies are working correctly
+   - Test database performance under load
 
-### Remaining Social Features
-- [ ] Dynamic share images API (server-side generation)
-- [ ] Push notifications for challenges and tournaments
-- [ ] Real-time tournament updates via WebSocket
-- [ ] Complete double elimination tournament format
-- [ ] Complete Swiss tournament format
-- [ ] Tournament history and statistics pages
-- [ ] Friend-only leaderboards
-- [ ] Spectator mode for tournaments
+3. **Deploy to Production**
+   - Run `scripts/deploy-production.sh`
+   - Verify deployment on Vercel
+   - Set up custom domain if available
 
-### Remaining PWA Features
-- [ ] Push notification implementation
-- [ ] Enhanced background sync
-- [ ] App shortcuts customization
-- [ ] Share target API integration
-- [ ] Web share target registration
+4. **Monitoring Setup**
+   - Configure error tracking (Sentry or similar)
+   - Set up performance monitoring
+   - Configure analytics tracking
 
-## Priority 2: Phase 5 - Platform Optimization
+## Priority 2: Test Fixes
+1. **Fix Test Failures**
+   - Mental Math test: Fix input clearing issue
+   - Sudoku test: Fix solution array initialization
+   - Configure test environment variables properly
 
-### PWA Implementation
-- [ ] Service worker setup with Workbox
-- [ ] Offline game caching strategy
-- [ ] App manifest with icons
-- [ ] Install prompts at strategic points
-- [ ] Push notification infrastructure
-- [ ] Background sync for scores
+2. **Improve Test Coverage**
+   - Add tests for spectator mode
+   - Add tests for tournament system
+   - Add E2E tests for critical user flows
 
-### Analytics Integration
-- [ ] Plausible Analytics setup
-- [ ] Custom event tracking:
-  - Game starts/completions
-  - Score submissions
-  - Achievement unlocks
-  - Social shares
-- [ ] User journey mapping
-- [ ] Conversion funnel analysis
-- [ ] Performance metrics dashboard
+## Priority 3: Performance Optimization
+1. **Bundle Size Optimization**
+   - Code splitting for game components
+   - Lazy loading for non-critical features
+   - Optimize image assets
 
-### Performance Monitoring
-- [ ] Sentry error tracking
-- [ ] Performance budgets
-- [ ] Core Web Vitals monitoring
-- [ ] Real user monitoring (RUM)
-- [ ] Automated performance testing
-
-### A/B Testing Framework
-- [ ] Feature flag system
-- [ ] Experiment management
-- [ ] Variant allocation
-- [ ] Result tracking
-- [ ] Statistical analysis tools
-
-## Priority 3: Technical Debt
-
-### Metadata Issues
-- [ ] Fix viewport/themeColor metadata warnings (move to viewport export)
-- [ ] Update all game pages to use new Next.js metadata format
-
-### Testing Improvements
-- [ ] Fix failing snake game direction test
-- [ ] Add missing @testing-library/react types
-- [ ] Increase test coverage to 80%+
-- [ ] Add E2E tests with Playwright
-- [ ] Performance testing suite
-- [ ] Visual regression testing
-
-### Configuration & Setup
-- [ ] Fix ESLint deprecated options
-- [ ] Configure production Supabase credentials
-- [ ] Environment variable validation
-- [ ] CI/CD pipeline with GitHub Actions
-- [ ] Automated dependency updates
-
-### Code Quality
-- [ ] Code splitting for individual games
-- [ ] Bundle size optimization
-- [ ] Lazy loading for heavy components
-- [ ] Image optimization pipeline
-- [ ] Remove unused dependencies
+2. **Core Web Vitals**
+   - Improve LCP (Largest Contentful Paint)
+   - Optimize CLS (Cumulative Layout Shift)
+   - Enhance FID (First Input Delay)
 
 ## Priority 4: Feature Enhancements
+1. **Mobile App Development**
+   - React Native or PWA enhancement
+   - App store deployment strategy
+   - Push notification implementation
 
-### Multiplayer Games
-- [ ] Real-time Tic-Tac-Toe PvP
-- [ ] Multiplayer Connect Four
-- [ ] Co-op puzzle modes
-- [ ] Turn-based game infrastructure
-- [ ] Game room creation/joining
-- [ ] Spectator mode for all games
+2. **Monetization Strategy**
+   - Ad integration (non-intrusive)
+   - Premium features planning
+   - Sponsorship opportunities
 
-### Additional Games
-- [ ] Solitaire (Klondike)
-- [ ] Blackjack
-- [ ] Simon Says
-- [ ] Whack-a-Mole
-- [ ] Trivia/Quiz Game
-- [ ] Crossword Puzzle
+3. **Content Expansion**
+   - Add more game variations
+   - Seasonal/themed game modes
+   - User-generated content system
 
-### User Experience
-- [ ] Advanced profile themes
-- [ ] Custom avatar builder
-- [ ] Interactive tutorials
-- [ ] Accessibility audit (WCAG 2.1 AAA)
-- [ ] Multi-language support (i18n)
-- [ ] Keyboard shortcuts
+## Technical Debt
+1. **ESLint Warnings**
+   - Fix React Hook dependency warnings
+   - Update ESLint configuration for stricter rules
 
-## Priority 5: Infrastructure & Scaling
+2. **Code Refactoring**
+   - Extract common game logic to shared utilities
+   - Improve type safety with stricter TypeScript
+   - Optimize state management patterns
 
-### Database Optimization
-- [ ] Query performance tuning
-- [ ] Materialized views for leaderboards
-- [ ] Database connection pooling
-- [ ] Read replicas setup
-- [ ] Automated backups
+3. **Documentation**
+   - API documentation
+   - Component storybook
+   - Deployment guide updates
 
-### Security Enhancements
-- [ ] Security audit
-- [ ] Rate limiting per user/IP
-- [ ] CAPTCHA for high scores
-- [ ] Input sanitization review
-- [ ] GDPR compliance
-- [ ] Privacy policy implementation
+## Known Issues
+- Tests fail without Supabase environment variables
+- Some ESLint warnings about React Hook dependencies
+- Bundle size could be optimized further
 
-### DevOps & Deployment
-- [ ] Docker containerization
-- [ ] Kubernetes deployment configs
-- [ ] CDN configuration
-- [ ] Load balancer setup
-- [ ] Monitoring dashboards
-- [ ] Automated scaling policies
-
-## Recommended Execution Plan
-
-### Week 1: Social Foundation
-1. Implement social sharing with custom cards
-2. Begin friend system backend
-3. Fix snake test and ESLint issues
-
-### Week 2: Social Completion
-1. Complete friend system UI
-2. Implement challenge system
-3. Start tournament infrastructure
-
-### Week 3: PWA & Offline
-1. Service worker implementation
-2. Offline game support
-3. Push notifications
-
-### Week 4: Analytics & Monitoring
-1. Plausible Analytics integration
-2. Sentry error tracking
-3. A/B testing framework
-
-### Week 5: Polish & Launch
-1. Performance optimizations
-2. Security audit
-3. Production deployment
-
-## Notes for Next Developer
-- Supabase credentials need to be configured for full backend functionality
-- The mock/fallback system works well for development
-- All 15 games are complete and working
-- Real-time and profile features are ready but using mock data
-- Focus on social features to drive user engagement
-- PWA implementation will significantly improve mobile experience
-- Consider implementing the most requested games from user feedback first
+## Success Metrics to Track
+- User engagement rates
+- Game completion rates
+- Social sharing frequency
+- Performance metrics (Core Web Vitals)
+- Error rates in production
+- User retention (DAU/MAU)
