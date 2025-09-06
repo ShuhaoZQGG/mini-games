@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { TwentyFortyEightGame, Direction } from '@/lib/games/twenty-forty-eight';
 import { GameState } from '@/lib/games/types';
 import { cn } from '@/lib/utils';
+import { ShareCard } from '@/components/social/share-card';
 
 export function TwentyFortyEight() {
   const gameRef = useRef<TwentyFortyEightGame | null>(null);
@@ -210,10 +211,17 @@ export function TwentyFortyEight() {
         )}
 
         {gameState === GameState.GAME_OVER && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-            <strong className="font-bold">Game Over!</strong>
-            <span className="block sm:inline"> No more moves available.</span>
-          </div>
+          <>
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+              <strong className="font-bold">Game Over!</strong>
+              <span className="block sm:inline"> No more moves available.</span>
+            </div>
+            <ShareCard
+              gameTitle="2048"
+              gameSlug="2048"
+              score={score}
+            />
+          </>
         )}
 
         <div 

@@ -32,7 +32,7 @@ class SocialSharingService {
    * Generate Open Graph meta tags for dynamic sharing
    */
   generateOpenGraphTags(data: ShareData) {
-    const tags = {
+    const tags: Record<string, string> = {
       'og:title': data.title,
       'og:description': data.text,
       'og:url': data.url || this.baseUrl,
