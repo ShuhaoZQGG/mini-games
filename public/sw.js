@@ -171,3 +171,106 @@ self.addEventListener('message', (event) => {
     self.skipWaiting();
   }
 });
+
+// Push notification event handlers
+self.addEventListener('push', (event) => {
+  let notification = {
+    title: 'Mini Games Platform',
+    body: 'You have a new notification',
+    icon: '/icon-192x192.png',
+    badge: '/icon-72x72.png'
+  };
+
+  if (event.data) {
+    try {
+      notification = event.data.json();
+    } catch (e) {
+      notification.body = event.data.text();
+    }
+  }
+
+  event.waitUntil(
+    self.registration.showNotification(notification.title, {
+      body: notification.body,
+      icon: notification.icon || '/icon-192x192.png',
+      badge: notification.badge || '/icon-72x72.png',
+      tag: notification.tag || 'default',
+      requireInteraction: notification.requireInteraction || false,
+      actions: notification.actions || [],
+      data: notification.data || {}
+    })
+  );
+});
+
+// Handle notification clicks
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  let targetUrl = '/';
+  
+  // Handle action clicks
+  if (event.action) {
+    switch (event.action) {
+      case 'accept':
+        if (event.notification.data.type === 'challenge') {
+          targetUrl = '/challenges';
+        } else if (event.notification.data.type === 'friend-request') {
+          targetUrl = '/friends';
+        }
+        break;
+      case 'decline':
+        // Could send a decline message to the server
+        return;
+      case 'view':
+        if (event.notification.data.type === 'tournament') {
+          targetUrl = '/tournaments';
+        } else if (event.notification.data.type === 'leaderboard') {
+          targetUrl = `/games/${event.notification.data.gameName}/leaderboard`;
+        }
+        break;
+    }
+  } else {
+    // Default click behavior based on notification type
+    if (event.notification.data && event.notification.data.type) {
+      switch (event.notification.data.type) {
+        case 'challenge':
+          targetUrl = '/challenges';
+          break;
+        case 'tournament':
+          targetUrl = '/tournaments';
+          break;
+        case 'friend-request':
+          targetUrl = '/friends';
+          break;
+        case 'achievement':
+          targetUrl = '/profile#achievements';
+          break;
+        case 'leaderboard':
+          targetUrl = `/games/${event.notification.data.gameName}`;
+          break;
+      }
+    }
+  }
+
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true })
+      .then((clientList) => {
+        // If a window is already open, focus it
+        for (const client of clientList) {
+          if (client.url === targetUrl && 'focus' in client) {
+            return client.focus();
+          }
+        }
+        // Otherwise, open a new window
+        if (clients.openWindow) {
+          return clients.openWindow(targetUrl);
+        }
+      })
+  );
+});
+
+// Handle notification close
+self.addEventListener('notificationclose', (event) => {
+  // Track notification dismissal if needed
+  console.log('Notification closed:', event.notification.tag);
+});
