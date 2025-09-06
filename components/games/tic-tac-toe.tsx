@@ -229,7 +229,7 @@ export default function TicTacToeGame() {
             Tic-Tac-Toe
           </CardTitle>
           <CardDescription>
-            Classic game of X's and O's. Play against a friend or challenge the AI!
+            Classic game of X&apos;s and O&apos;s. Play against a friend or challenge the AI!
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -356,9 +356,9 @@ export default function TicTacToeGame() {
           <div className="bg-muted p-4 rounded-lg">
             <h4 className="font-semibold mb-2">How to Play:</h4>
             <ul className="text-sm space-y-1 text-muted-foreground">
-              <li>• Players take turns placing X's and O's on the grid</li>
+              <li>• Players take turns placing X&apos;s and O&apos;s on the grid</li>
               <li>• First player to get 3 in a row (horizontal, vertical, or diagonal) wins</li>
-              <li>• If all squares are filled with no winner, it's a draw</li>
+              <li>• If all squares are filled with no winner, it&apos;s a draw</li>
               {gameMode === 'ai' && <li>• You play as X, AI plays as O</li>}
             </ul>
           </div>

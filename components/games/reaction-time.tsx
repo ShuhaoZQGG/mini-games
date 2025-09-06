@@ -217,7 +217,7 @@ export default function ReactionTimeGame() {
           <div className="bg-muted p-4 rounded-lg">
             <h4 className="font-semibold mb-2">How to Play:</h4>
             <ol className="text-sm space-y-1 text-muted-foreground">
-              <li>1. Click "Start Test" to begin</li>
+              <li>1. Click &quot;Start Test&quot; to begin</li>
               <li>2. Wait for the red screen to turn green</li>
               <li>3. Click as quickly as possible when it turns green</li>
               <li>4. Your reaction time will be measured in milliseconds</li>
