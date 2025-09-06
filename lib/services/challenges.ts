@@ -110,16 +110,17 @@ class ChallengeService {
       }
 
       if (supabase) {
-        const { data, error } = await supabase
-          .from('challenges')
+        const { data, error } = await (supabase
+          .from('challenges') as any)
           .insert(challenge)
           .select()
           .single()
 
         if (!error && data) {
-          this.challenges.set(data.id, data)
+          const challenge = data as any
+          this.challenges.set(challenge.id, challenge)
           this.saveToStorage()
-          return data
+          return challenge as Challenge
         }
       }
 
@@ -144,8 +145,8 @@ class ChallengeService {
       challenge.status = 'accepted'
 
       if (supabase) {
-        const { error } = await supabase
-          .from('challenges')
+        const { error } = await (supabase
+          .from('challenges') as any)
           .update({ status: 'accepted' })
           .eq('id', challengeId)
 
@@ -171,8 +172,8 @@ class ChallengeService {
       challenge.status = 'declined'
 
       if (supabase) {
-        const { error } = await supabase
-          .from('challenges')
+        const { error } = await (supabase
+          .from('challenges') as any)
           .update({ status: 'declined' })
           .eq('id', challengeId)
 
@@ -234,8 +235,8 @@ class ChallengeService {
       }
 
       if (supabase) {
-        const { error } = await supabase
-          .from('challenges')
+        const { error } = await (supabase
+          .from('challenges') as any)
           .update({
             results: challenge.results,
             status: challenge.status,
@@ -260,18 +261,18 @@ class ChallengeService {
   async getChallenges(filter?: 'sent' | 'received' | 'pending' | 'completed'): Promise<Challenge[]> {
     try {
       if (supabase) {
-        let query = supabase.from('challenges').select('*')
+        let query = (supabase.from('challenges') as any).select('*')
         
         if (filter === 'sent') {
-          query = query.eq('from_user_id', this.currentUserId)
+          query = query.eq('from_user_id', this.currentUserId || '')
         } else if (filter === 'received') {
-          query = query.eq('to_user_id', this.currentUserId)
+          query = query.eq('to_user_id', this.currentUserId || '')
         } else if (filter === 'pending') {
           query = query.eq('status', 'pending')
         } else if (filter === 'completed') {
           query = query.eq('status', 'completed')
         } else {
-          query = query.or(`from_user_id.eq.${this.currentUserId},to_user_id.eq.${this.currentUserId}`)
+          query = query.or(`from_user_id.eq.${this.currentUserId || ''},to_user_id.eq.${this.currentUserId || ''}`)
         }
 
         const { data, error } = await query

@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { SnakeGame, Direction } from '@/lib/games/snake';
 import { GameState } from '@/lib/games/types';
+import { ShareCard } from '@/components/social/share-card';
 
 export function Snake() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -255,7 +256,14 @@ export function Snake() {
               </>
             )}
             {gameState === GameState.GAME_OVER && (
-              <Button onClick={handleStart}>Play Again</Button>
+              <>
+                <ShareCard
+                  gameTitle="Snake"
+                  gameSlug="snake"
+                  score={score}
+                />
+                <Button onClick={handleStart}>Play Again</Button>
+              </>
             )}
           </div>
         </div>
