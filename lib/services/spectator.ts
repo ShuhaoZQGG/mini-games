@@ -106,12 +106,12 @@ class SpectatorService {
             viewer_count: 0,
             max_viewers: session.maxViewers,
             is_active: true
-          })
+          } as any)
           .select()
           .single()
 
         if (!error && data) {
-          session.id = data.id
+          session.id = (data as any).id
           this.currentSession = session
           await this.setupRealtimeChannel(session.id)
           return session
@@ -170,12 +170,12 @@ class SpectatorService {
             viewer_count: 0,
             max_viewers: session.maxViewers,
             is_active: true
-          })
+          } as any)
           .select()
           .single()
 
         if (!error && data) {
-          session.id = data.id
+          session.id = (data as any).id
           this.currentSession = session
           await this.setupRealtimeChannel(session.id)
           return session
@@ -216,12 +216,12 @@ class SpectatorService {
             viewer_id: viewerId,
             viewer_name: viewerName,
             viewer_type: viewer.viewerType
-          })
+          } as any)
           .select()
           .single()
 
         if (!error && data) {
-          viewer.id = data.id
+          viewer.id = (data as any).id
           this.viewers.set(viewer.id, viewer)
           await this.setupRealtimeChannel(sessionId)
           
@@ -254,8 +254,8 @@ class SpectatorService {
       if (!viewer) return
 
       if (supabase && viewer.id) {
-        await supabase
-          .from('spectator_viewers')
+        await (supabase
+          .from('spectator_viewers') as any)
           .update({ left_at: new Date().toISOString() })
           .eq('id', viewer.id)
       }
@@ -287,8 +287,8 @@ class SpectatorService {
       if (!this.currentSession) return
 
       if (supabase) {
-        await supabase
-          .from('spectator_sessions')
+        await (supabase
+          .from('spectator_sessions') as any)
           .update({ 
             is_active: false,
             ended_at: new Date().toISOString()
@@ -348,13 +348,13 @@ class SpectatorService {
             username: message.username,
             message: message.message,
             message_type: message.messageType
-          })
+          } as any)
           .select()
           .single()
 
         if (!error && data) {
-          message.id = data.id
-          message.createdAt = new Date(data.created_at)
+          message.id = (data as any).id
+          message.createdAt = new Date((data as any).created_at)
         }
       }
 
@@ -459,17 +459,18 @@ class SpectatorService {
           .single()
 
         if (!error && data) {
+          const session = data as any
           return {
-            id: data.id,
-            sessionType: data.session_type,
-            targetId: data.target_id,
-            hostUserId: data.host_user_id,
-            hostUsername: data.host_username,
-            viewerCount: data.viewer_count,
-            maxViewers: data.max_viewers,
-            isActive: data.is_active,
-            startedAt: new Date(data.started_at),
-            endedAt: data.ended_at ? new Date(data.ended_at) : undefined
+            id: session.id,
+            sessionType: session.session_type,
+            targetId: session.target_id,
+            hostUserId: session.host_user_id,
+            hostUsername: session.host_username,
+            viewerCount: session.viewer_count,
+            maxViewers: session.max_viewers,
+            isActive: session.is_active,
+            startedAt: new Date(session.started_at),
+            endedAt: session.ended_at ? new Date(session.ended_at) : undefined
           }
         }
       }

@@ -198,6 +198,99 @@ export interface Database {
           unlocked_at?: string
         }
       }
+      spectator_sessions: {
+        Row: {
+          id: string
+          session_type: 'game' | 'tournament'
+          target_id: string
+          host_user_id: string | null
+          host_username: string
+          viewer_count: number
+          max_viewers: number
+          is_active: boolean
+          started_at: string
+          ended_at: string | null
+        }
+        Insert: {
+          id?: string
+          session_type: 'game' | 'tournament'
+          target_id: string
+          host_user_id?: string | null
+          host_username: string
+          viewer_count?: number
+          max_viewers?: number
+          is_active?: boolean
+          started_at?: string
+          ended_at?: string | null
+        }
+        Update: {
+          id?: string
+          session_type?: 'game' | 'tournament'
+          target_id?: string
+          host_user_id?: string | null
+          host_username?: string
+          viewer_count?: number
+          max_viewers?: number
+          is_active?: boolean
+          started_at?: string
+          ended_at?: string | null
+        }
+      }
+      spectator_viewers: {
+        Row: {
+          id: string
+          session_id: string
+          viewer_id: string | null
+          viewer_name: string
+          viewer_type: 'registered' | 'guest'
+          joined_at: string
+          left_at: string | null
+        }
+        Insert: {
+          id?: string
+          session_id: string
+          viewer_id?: string | null
+          viewer_name: string
+          viewer_type: 'registered' | 'guest'
+          joined_at?: string
+          left_at?: string | null
+        }
+        Update: {
+          id?: string
+          session_id?: string
+          viewer_id?: string | null
+          viewer_name?: string
+          viewer_type?: 'registered' | 'guest'
+          joined_at?: string
+          left_at?: string | null
+        }
+      }
+      spectator_chat: {
+        Row: {
+          id: string
+          session_id: string
+          viewer_id: string | null
+          viewer_name: string
+          message: string
+          sent_at: string
+        }
+        Insert: {
+          id?: string
+          session_id: string
+          viewer_id?: string | null
+          viewer_name: string
+          message: string
+          sent_at?: string
+        }
+        Update: {
+          id?: string
+          session_id?: string
+          viewer_id?: string | null
+          viewer_name?: string
+          message?: string
+          sent_at?: string
+        }
+      }
     }
     Views: {
       [_ in never]: never
