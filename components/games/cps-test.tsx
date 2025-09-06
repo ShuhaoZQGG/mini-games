@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { CPSTestGame } from '@/lib/games/cps-test'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { ShareCard } from '@/components/social/share-card'
 
 export function CPSTestComponent() {
   const [game] = useState(() => new CPSTestGame(10000))
@@ -139,6 +140,16 @@ export function CPSTestComponent() {
               <li>• Try to beat your high score!</li>
             </ul>
           </div>
+
+          {isGameOver && finalCPS > 0 && (
+            <ShareCard
+              gameTitle="CPS Test"
+              gameSlug="cps-test"
+              score={finalCPS}
+              achievement={finalCPS >= 10 ? 'Lightning Fast!' : finalCPS >= 8 ? 'Speed Demon' : undefined}
+              showPreview={false}
+            />
+          )}
         </CardContent>
       </Card>
     </div>
