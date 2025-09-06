@@ -29,23 +29,47 @@ class SocialSharingService {
   }
 
   /**
+   * Generate dynamic share image URL
+   */
+  generateShareImageUrl(data: ShareData): string {
+    const params = new URLSearchParams();
+    
+    if (data.gameSlug) params.append('game', data.gameSlug);
+    if (data.score) params.append('score', data.score.toString());
+    if (data.achievement) params.append('achievement', data.achievement);
+    
+    // Get player name from localStorage or use default
+    const playerName = localStorage.getItem('username') || 'Player';
+    params.append('player', playerName);
+    
+    // Determine share type
+    let type = 'score';
+    if (data.achievement) type = 'achievement';
+    params.append('type', type);
+    
+    return `${this.baseUrl}/api/share-image?${params.toString()}`;
+  }
+
+  /**
    * Generate Open Graph meta tags for dynamic sharing
    */
   generateOpenGraphTags(data: ShareData) {
+    // Generate dynamic image if not provided
+    const imageUrl = data.imageUrl || this.generateShareImageUrl(data);
+    
     const tags: Record<string, string> = {
       'og:title': data.title,
       'og:description': data.text,
       'og:url': data.url || this.baseUrl,
       'og:type': 'website',
       'og:site_name': 'Mini Games Platform',
+      'og:image': imageUrl,
+      'og:image:width': '1200',
+      'og:image:height': '630',
       'twitter:card': 'summary_large_image',
       'twitter:title': data.title,
       'twitter:description': data.text,
-    }
-
-    if (data.imageUrl) {
-      tags['og:image'] = data.imageUrl
-      tags['twitter:image'] = data.imageUrl
+      'twitter:image': imageUrl
     }
 
     return tags
@@ -239,20 +263,6 @@ class SocialSharingService {
     }
   }
 
-  /**
-   * Generate share image URL for game results
-   */
-  generateShareImageUrl(data: ShareData): string {
-    // In production, this would call an API endpoint that generates dynamic images
-    // For now, return a placeholder
-    const params = new URLSearchParams({
-      game: data.gameSlug || '',
-      score: data.score?.toString() || '0',
-      title: data.title,
-    })
-    
-    return `${this.baseUrl}/api/share-image?${params.toString()}`
-  }
 
   /**
    * Format text for Twitter

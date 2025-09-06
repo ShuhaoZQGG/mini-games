@@ -262,8 +262,12 @@ class TournamentService {
     
     if (tournament.format === 'single_elimination') {
       await this.generateSingleEliminationBracket(tournamentId, participants)
+    } else if (tournament.format === 'double_elimination') {
+      await this.generateDoubleEliminationBracket(tournamentId, participants)
     } else if (tournament.format === 'round_robin') {
       await this.generateRoundRobinBracket(tournamentId, participants)
+    } else if (tournament.format === 'swiss') {
+      await this.generateSwissBracket(tournamentId, participants)
     }
   }
 
@@ -347,6 +351,215 @@ class TournamentService {
     }
 
     this.matches.set(tournamentId, matches)
+  }
+
+  /**
+   * Generate double elimination bracket
+   */
+  private async generateDoubleEliminationBracket(
+    tournamentId: string,
+    participants: TournamentParticipant[]
+  ): Promise<void> {
+    // Shuffle and seed participants
+    const shuffled = [...participants].sort(() => Math.random() - 0.5)
+    shuffled.forEach((p, i) => p.seed = i + 1)
+
+    const matches: TournamentMatch[] = []
+    const numParticipants = shuffled.length
+    const numRounds = Math.ceil(Math.log2(numParticipants))
+    
+    // Winners Bracket
+    let matchNumber = 0
+    
+    // First round of winners bracket
+    for (let i = 0; i < shuffled.length; i += 2) {
+      const match: TournamentMatch = {
+        id: `match_${tournamentId}_wb_1_${matchNumber}`,
+        tournamentId,
+        round: 1,
+        matchNumber: matchNumber++,
+        player1Id: shuffled[i]?.userId,
+        player1Name: shuffled[i]?.username,
+        player2Id: shuffled[i + 1]?.userId,
+        player2Name: shuffled[i + 1]?.username,
+        status: shuffled[i + 1] ? 'ready' : 'completed',
+        winnerId: shuffled[i + 1] ? undefined : shuffled[i].userId
+      }
+      matches.push(match)
+    }
+
+    // Subsequent rounds of winners bracket
+    for (let round = 2; round <= numRounds; round++) {
+      const matchesInRound = Math.pow(2, numRounds - round)
+      for (let i = 0; i < matchesInRound; i++) {
+        const match: TournamentMatch = {
+          id: `match_${tournamentId}_wb_${round}_${i}`,
+          tournamentId,
+          round,
+          matchNumber: matchNumber++,
+          status: 'pending'
+        }
+        matches.push(match)
+      }
+    }
+
+    // Losers Bracket
+    // Calculate losers bracket rounds (approximately 2x winners bracket)
+    const losersRounds = (numRounds - 1) * 2
+    
+    for (let round = 1; round <= losersRounds; round++) {
+      // Losers bracket has alternating number of matches per round
+      const isEvenRound = round % 2 === 0
+      const baseMatches = Math.pow(2, Math.floor((losersRounds - round) / 2))
+      const matchesInRound = isEvenRound ? baseMatches : baseMatches * 2
+      
+      for (let i = 0; i < Math.max(1, matchesInRound); i++) {
+        const match: TournamentMatch = {
+          id: `match_${tournamentId}_lb_${round}_${i}`,
+          tournamentId,
+          round: numRounds + round, // Offset for UI display
+          matchNumber: matchNumber++,
+          status: 'pending'
+        }
+        matches.push(match)
+      }
+    }
+
+    // Grand Finals
+    const grandFinals: TournamentMatch = {
+      id: `match_${tournamentId}_gf_1`,
+      tournamentId,
+      round: numRounds + losersRounds + 1,
+      matchNumber: matchNumber++,
+      status: 'pending'
+    }
+    matches.push(grandFinals)
+
+    // Reset match (if loser bracket winner wins first grand finals)
+    const resetMatch: TournamentMatch = {
+      id: `match_${tournamentId}_gf_2`,
+      tournamentId,
+      round: numRounds + losersRounds + 2,
+      matchNumber: matchNumber++,
+      status: 'pending'
+    }
+    matches.push(resetMatch)
+
+    this.matches.set(tournamentId, matches)
+  }
+
+  /**
+   * Generate Swiss system bracket
+   */
+  private async generateSwissBracket(
+    tournamentId: string,
+    participants: TournamentParticipant[]
+  ): Promise<void> {
+    // Swiss system generates pairings dynamically based on results
+    // Initial round pairs players randomly
+    const shuffled = [...participants].sort(() => Math.random() - 0.5)
+    const matches: TournamentMatch[] = []
+    
+    // Calculate number of rounds (typically log2(n) rounded up)
+    const numRounds = Math.ceil(Math.log2(participants.length))
+    
+    // Generate first round pairings
+    let matchNumber = 0
+    for (let i = 0; i < shuffled.length; i += 2) {
+      if (shuffled[i + 1]) {
+        const match: TournamentMatch = {
+          id: `match_${tournamentId}_swiss_1_${matchNumber}`,
+          tournamentId,
+          round: 1,
+          matchNumber: matchNumber++,
+          player1Id: shuffled[i].userId,
+          player1Name: shuffled[i].username,
+          player2Id: shuffled[i + 1].userId,
+          player2Name: shuffled[i + 1].username,
+          status: 'ready'
+        }
+        matches.push(match)
+      } else {
+        // Bye for odd number of players
+        shuffled[i].wins = 1 // Give a win for the bye
+      }
+    }
+
+    // Placeholder matches for subsequent rounds (will be generated dynamically)
+    for (let round = 2; round <= numRounds; round++) {
+      const matchesInRound = Math.floor(participants.length / 2)
+      for (let i = 0; i < matchesInRound; i++) {
+        const match: TournamentMatch = {
+          id: `match_${tournamentId}_swiss_${round}_${i}`,
+          tournamentId,
+          round,
+          matchNumber: matchNumber++,
+          status: 'pending'
+        }
+        matches.push(match)
+      }
+    }
+
+    this.matches.set(tournamentId, matches)
+  }
+
+  /**
+   * Generate next Swiss round pairings
+   */
+  async generateSwissRoundPairings(tournamentId: string, round: number): Promise<void> {
+    const tournament = this.tournaments.get(tournamentId)
+    if (!tournament || tournament.format !== 'swiss') return
+
+    const participants = this.participants.get(tournamentId) || []
+    const matches = this.matches.get(tournamentId) || []
+    
+    // Sort participants by score (wins - losses)
+    const sorted = [...participants].sort((a, b) => {
+      const scoreA = a.wins - a.losses
+      const scoreB = b.wins - b.losses
+      return scoreB - scoreA
+    })
+
+    // Pair players with similar scores who haven't played each other
+    const paired = new Set<string>()
+    const roundMatches = matches.filter(m => m.round === round)
+    let matchIndex = 0
+
+    for (let i = 0; i < sorted.length; i++) {
+      if (paired.has(sorted[i].userId)) continue
+
+      // Find the best opponent (closest score who hasn't been played)
+      for (let j = i + 1; j < sorted.length; j++) {
+        if (paired.has(sorted[j].userId)) continue
+
+        // Check if they've played before
+        const havePlayed = matches.some(m => 
+          m.status === 'completed' &&
+          ((m.player1Id === sorted[i].userId && m.player2Id === sorted[j].userId) ||
+           (m.player2Id === sorted[i].userId && m.player1Id === sorted[j].userId))
+        )
+
+        if (!havePlayed && matchIndex < roundMatches.length) {
+          // Update the placeholder match
+          roundMatches[matchIndex].player1Id = sorted[i].userId
+          roundMatches[matchIndex].player1Name = sorted[i].username
+          roundMatches[matchIndex].player2Id = sorted[j].userId
+          roundMatches[matchIndex].player2Name = sorted[j].username
+          roundMatches[matchIndex].status = 'ready'
+          
+          paired.add(sorted[i].userId)
+          paired.add(sorted[j].userId)
+          matchIndex++
+          break
+        }
+      }
+    }
+
+    // Handle bye if odd number of players
+    const unpaired = sorted.find(p => !paired.has(p.userId))
+    if (unpaired) {
+      unpaired.wins += 1 // Award a win for the bye
+    }
   }
 
   /**

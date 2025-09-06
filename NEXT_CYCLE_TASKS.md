@@ -1,43 +1,28 @@
 # Next Cycle Tasks
 
-## Completed in Cycle 7! ✅
-- Phase 2: Real-time Features (live leaderboards, presence, events)
-- Phase 3: User Profiles (achievements, stats, customization)
+## Completed in Previous Cycles ✅
+- Cycle 7: Phase 2 & 3 - Real-time Features and User Profiles
+- Cycle 8: Phase 4 (Part 1) - Social Sharing and Friend System
+- Cycle 9: Phase 4 (Part 2) - Tournament System and PWA Support
 
-## Priority 1: Phase 4 - Social Features
-Transform the platform into a social gaming experience:
+## Priority 1: Platform Enhancement Completion
 
-### Social Sharing
-- [ ] Implement share cards with Open Graph meta tags
-- [ ] Twitter/X share integration with score screenshots
-- [ ] Facebook share with game results
-- [ ] WhatsApp share links
-- [ ] Custom share images for each game
-- [ ] Share achievement unlocks
-
-### Friend System
-- [ ] Friend request functionality
-- [ ] Friend list management
-- [ ] Friend activity feed
+### Remaining Social Features
+- [ ] Dynamic share images API (server-side generation)
+- [ ] Push notifications for challenges and tournaments
+- [ ] Real-time tournament updates via WebSocket
+- [ ] Complete double elimination tournament format
+- [ ] Complete Swiss tournament format
+- [ ] Tournament history and statistics pages
 - [ ] Friend-only leaderboards
-- [ ] Online friend indicators
-- [ ] Friend game invites
+- [ ] Spectator mode for tournaments
 
-### Challenge System
-- [ ] Create challenge infrastructure
-- [ ] Send/receive challenges
-- [ ] Challenge notifications
-- [ ] Track challenge history
-- [ ] Challenge rewards/badges
-- [ ] Time-limited challenges
-
-### Tournament System
-- [ ] Tournament creation tools
-- [ ] Bracket generation
-- [ ] Tournament progression tracking
-- [ ] Prize/reward distribution
-- [ ] Tournament history
-- [ ] Spectator mode
+### Remaining PWA Features
+- [ ] Push notification implementation
+- [ ] Enhanced background sync
+- [ ] App shortcuts customization
+- [ ] Share target API integration
+- [ ] Web share target registration
 
 ## Priority 2: Phase 5 - Platform Optimization
 
@@ -75,6 +60,10 @@ Transform the platform into a social gaming experience:
 - [ ] Statistical analysis tools
 
 ## Priority 3: Technical Debt
+
+### Metadata Issues
+- [ ] Fix viewport/themeColor metadata warnings (move to viewport export)
+- [ ] Update all game pages to use new Next.js metadata format
 
 ### Testing Improvements
 - [ ] Fix failing snake game direction test
