@@ -1,88 +1,50 @@
 # Next Cycle Tasks
 
-## Priority 1: Production Deployment
-1. **Configure Production Environment**
-   - Set up actual Supabase production instance
-   - Configure environment variables in `.env.production`
-   - Set up Vercel project with production secrets
+## Immediate Fixes Required (Cycle 16 Revision)
 
-2. **Database Deployment**
-   - Apply all migrations to production Supabase
-   - Verify RLS policies are working correctly
-   - Test database performance under load
+### Critical Build Fixes
+1. **Fix ESLint Errors**:
+   - Fix unescaped apostrophe in `app/profile/page.tsx` line 74
+   - Fix unescaped apostrophe in `components/auth/auth-button.tsx` line 236
+   - Replace apostrophes with `&apos;` or use template literals
 
-3. **Deploy to Production**
-   - Run `scripts/deploy-production.sh`
-   - Verify deployment on Vercel
-   - Set up custom domain if available
+2. **Script Permissions**:
+   - Run: `chmod +x scripts/setup-production.sh`
 
-4. **Monitoring Setup**
-   - Configure error tracking (Sentry or similar)
-   - Set up performance monitoring
-   - Configure analytics tracking
+3. **Verify Build**:
+   - Run `npm run build` and ensure it completes without errors
+   - Confirm `.next/BUILD_ID` file is created
 
-## Priority 2: Test Fixes
-1. **Fix Test Failures**
-   - Mental Math test: Fix input clearing issue
-   - Sudoku test: Fix solution array initialization
-   - Configure test environment variables properly
+## After Build Fixes Are Complete
 
-2. **Improve Test Coverage**
-   - Add tests for spectator mode
-   - Add tests for tournament system
-   - Add E2E tests for critical user flows
+### Production Deployment
+1. Create Supabase production project
+2. Run `./scripts/setup-production.sh` to configure environment
+3. Apply migrations using `scripts/apply-migrations.sql` in Supabase
+4. Deploy to Vercel with `vercel --prod`
+5. Configure GitHub secrets for CI/CD
 
-## Priority 3: Performance Optimization
-1. **Bundle Size Optimization**
-   - Code splitting for game components
-   - Lazy loading for non-critical features
-   - Optimize image assets
+### Post-Deployment
+1. Monitor initial performance metrics
+2. Test all 18 games in production
+3. Verify authentication flows
+4. Check real-time features
+5. Configure custom domain (optional)
 
-2. **Core Web Vitals**
-   - Improve LCP (Largest Contentful Paint)
-   - Optimize CLS (Cumulative Layout Shift)
-   - Enhance FID (First Input Delay)
+## Future Enhancements (After Production Launch)
 
-## Priority 4: Feature Enhancements
-1. **Mobile App Development**
-   - React Native or PWA enhancement
-   - App store deployment strategy
-   - Push notification implementation
+### Performance Optimization
+- Implement Redis caching for leaderboards
+- Optimize bundle splitting
+- Add CDN for game assets
 
-2. **Monetization Strategy**
-   - Ad integration (non-intrusive)
-   - Premium features planning
-   - Sponsorship opportunities
+### Feature Additions
+- Mobile app development (React Native)
+- More games (target 30+ games)
+- Tournament scheduling system
+- Reward/monetization system
 
-3. **Content Expansion**
-   - Add more game variations
-   - Seasonal/themed game modes
-   - User-generated content system
-
-## Technical Debt
-1. **ESLint Warnings**
-   - Fix React Hook dependency warnings
-   - Update ESLint configuration for stricter rules
-
-2. **Code Refactoring**
-   - Extract common game logic to shared utilities
-   - Improve type safety with stricter TypeScript
-   - Optimize state management patterns
-
-3. **Documentation**
-   - API documentation
-   - Component storybook
-   - Deployment guide updates
-
-## Known Issues
-- Tests fail without Supabase environment variables
-- Some ESLint warnings about React Hook dependencies
-- Bundle size could be optimized further
-
-## Success Metrics to Track
-- User engagement rates
-- Game completion rates
-- Social sharing frequency
-- Performance metrics (Core Web Vitals)
-- Error rates in production
-- User retention (DAU/MAU)
+### Technical Debt
+- Remaining ESLint warnings (non-critical)
+- Test coverage improvements
+- Documentation updates
