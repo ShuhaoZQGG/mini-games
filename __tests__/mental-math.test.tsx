@@ -45,7 +45,7 @@ describe('MentalMath', () => {
     }
   })
 
-  it('shows feedback for wrong answers', () => {
+  it('shows feedback for wrong answers', async () => {
     render(<MentalMath />)
     const startButton = screen.getByText(/Start Game/i)
     fireEvent.click(startButton)
@@ -54,7 +54,15 @@ describe('MentalMath', () => {
     fireEvent.change(input, { target: { value: '999' } })
     fireEvent.keyPress(input, { key: 'Enter', code: 13 })
     
-    // Should show incorrect feedback
+    // Input should still have the value immediately after wrong answer
+    expect(input.value).toBe('999')
+    
+    // Wait for the timeout to clear the input
+    await act(async () => {
+      await new Promise(resolve => setTimeout(resolve, 600))
+    })
+    
+    // Now the input should be cleared
     expect(input.value).toBe('')
   })
 

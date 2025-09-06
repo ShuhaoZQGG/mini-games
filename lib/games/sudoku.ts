@@ -296,6 +296,11 @@ export class SudokuGame extends BaseGame<SudokuGameData> {
   }
 
   public isComplete(): boolean {
+    // Check if the game has been started and solution exists
+    if (!this.gameData.solution) {
+      return false;
+    }
+    
     for (let row = 0; row < 9; row++) {
       for (let col = 0; col < 9; col++) {
         if (this.gameData.grid[row][col].value !== this.gameData.solution[row][col]) {

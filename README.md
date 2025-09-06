@@ -45,7 +45,7 @@ A high-performance web application featuring a collection of engaging mini-games
 
 ## Completed Features
 
-### Games (15/15+ implemented - 100% MVP Complete)
+### Games (18/15+ implemented - 120% MVP Complete)
 - **CPS Test**: Click speed testing with real-time calculation
 - **Memory Match**: Card matching game with emoji pairs
 - **Typing Test**: WPM and accuracy testing
@@ -61,15 +61,25 @@ A high-performance web application featuring a collection of engaging mini-games
 - **Aim Trainer**: Accuracy and reflex testing with moving targets
 - **Breakout**: Classic arcade brick-breaking game
 - **Mental Math**: Quick calculation challenges with difficulty scaling
+- **Solitaire**: Classic card game with drag-and-drop mechanics
+- **Simon Says**: Memory pattern game with increasing difficulty
+- **Whack-a-Mole**: Reaction time game with speed progression
 
 ### Platform Features
 - **Dark Mode**: System-aware theme toggle
-- **Database Schema**: Supabase tables with RLS policies (ready for integration)
+- **Database Schema**: Supabase tables with RLS policies and migrations
 - **Mobile Support**: Touch controls on all games
 - **SEO Optimization**: Server-side rendering with meta tags
 - **Authentication**: Optional sign-in with social providers configured
 - **Score Persistence**: Service layer with localStorage fallback
-- **Leaderboards**: Component built with period filtering (mock data)
+- **Leaderboards**: Component built with period filtering
+- **Tournament System**: Complete tournament management with history tracking
+- **Spectator Mode**: Real-time game spectating with live chat
+- **Friend System**: Social connections and friend-only leaderboards
+- **Challenge System**: Head-to-head challenges between players
+- **Achievement System**: Unlock rewards based on performance
+- **Real-time Updates**: WebSocket/Supabase realtime integration
+- **Production Config**: Environment templates and deployment scripts
 
 ## In Progress
 
