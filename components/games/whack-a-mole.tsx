@@ -342,7 +342,7 @@ export function WhackAMoleComponent() {
                 gameTitle="Whack-a-Mole"
                 gameSlug="whack-a-mole"
                 score={game.calculateFinalScore()}
-                metadata={{ level, difficulty }}
+                level={level}
               />
               
               <div className="space-x-4">

@@ -62,7 +62,7 @@ export function SimonSaysComponent() {
     
     try {
       const osc = audioContext.current.createOscillator()
-      const gain = audioContext.current.createGainNode()
+      const gain = audioContext.current.createGain()
       
       osc.connect(gain)
       gain.connect(audioContext.current.destination)
@@ -85,7 +85,7 @@ export function SimonSaysComponent() {
     
     try {
       const osc = audioContext.current.createOscillator()
-      const gain = audioContext.current.createGainNode()
+      const gain = audioContext.current.createGain()
       
       osc.connect(gain)
       gain.connect(audioContext.current.destination)
@@ -315,7 +315,7 @@ export function SimonSaysComponent() {
                 gameTitle="Simon Says"
                 gameSlug="simon-says"
                 score={score}
-                metadata={{ level }}
+                level={level}
               />
               
               <div className="space-x-4">

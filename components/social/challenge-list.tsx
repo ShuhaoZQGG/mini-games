@@ -382,7 +382,7 @@ export function ChallengeList({ userId, className }: ChallengeListProps) {
                       
                       {challenge.message && (
                         <p className="text-sm text-muted-foreground mb-3">
-                          "{challenge.message}"
+                          &quot;{challenge.message}&quot;
                         </p>
                       )}
                       
