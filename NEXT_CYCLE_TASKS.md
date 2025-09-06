@@ -1,37 +1,68 @@
 # Next Cycle Tasks
 
+## URGENT: Cycle 12 Fixes Required (MUST DO FIRST)
+
+### Build Failures (P0) - BLOCKING DEPLOYMENT
+- [ ] Fix `createGainNode()` → `createGain()` in components/games/simon-says.tsx:65
+- [ ] Update .eslintrc.json for Next.js 14 compatibility
+- [ ] Add Jest DOM type definitions to test setup
+- [ ] Fix all TypeScript compilation errors
+
+### Missing Implementation (P0) - CRITICAL
+- [ ] Create `002_tournament_history.sql` migration file
+- [ ] Complete tournament history service implementation
+- [ ] Fix spectator mode components
+- [ ] Verify all database migrations
+
+### Test Failures (P1) - HIGH PRIORITY
+- [ ] Fix 59 failing tests across 16 test suites
+- [ ] Update component test configurations
+- [ ] Add proper test setup for new games
+- [ ] Ensure 100% test pass rate
+
+### Production Readiness (P1)
+- [ ] Ensure npm run build succeeds
+- [ ] Fix all ESLint errors
+- [ ] Add error boundaries to new components
+- [ ] Verify production configuration
+
 ## Completed in Previous Cycles ✅
 - Cycle 7: Phase 2 & 3 - Real-time Features and User Profiles
 - Cycle 8: Phase 4 (Part 1) - Social Sharing and Friend System
 - Cycle 9: Phase 4 (Part 2) - Tournament System and PWA Support
 - Cycle 10: Push Notifications, Dynamic Share Images, Real-time Tournament Updates
 - Cycle 11: Analytics Integration, A/B Testing Framework, Performance Monitoring
+- Cycle 12: ATTEMPTED - Tournament History, Spectator Mode, 3 New Games (NEEDS REVISION)
 
-## Priority 1: Platform Enhancement Completion
+## Priority 1: Complete Cycle 12 Features After Fixes
+- [ ] Tournament history tracking completion
+- [ ] Spectator mode full implementation
+- [ ] Three new games bug fixes (Solitaire, Simon Says, Whack-a-Mole)
+- [ ] Integration testing
+
+## Priority 2: Platform Enhancement Completion
 
 ### Remaining Social Features
-- [ ] Tournament history and statistics pages
-- [ ] Friend-only leaderboards  
-- [ ] Spectator mode for tournaments
-- [ ] Private tournament creation
+- [ ] Friend-only leaderboards refinement
+- [ ] Private tournament creation with access codes
 - [ ] Tournament chat/messaging
+- [ ] Spectator mode for all game types
 
 ### Production Configuration
-- [x] ✅ Analytics Integration (Plausible) - COMPLETED in Cycle 11
-- [x] ✅ A/B Testing Framework - COMPLETED in Cycle 11
-- [x] ✅ Performance Monitoring - COMPLETED in Cycle 11
-- [x] ✅ Push Notifications - COMPLETED in Cycle 10
-- [x] ✅ Dynamic Share Images - COMPLETED in Cycle 10
-- [x] ✅ Real-time Tournament Updates - COMPLETED in Cycle 10
 - [ ] Configure production Plausible account
 - [ ] Set up VAPID keys for push notifications
 - [ ] Create performance monitoring dashboard
 - [ ] Plan first A/B test experiments
 - [ ] Set up alerting for performance regressions
 
-## Priority 2: Additional Games
+## Priority 3: Additional Games
+- [ ] Blackjack
+- [ ] Trivia/Quiz Game
+- [ ] Word Scramble
+- [ ] Pattern Memory
+- [ ] Crossword Puzzle
 
-## Priority 3: Technical Debt
+## Priority 4: Technical Debt
 
 ### Metadata Issues
 - [ ] Fix viewport/themeColor metadata warnings (move to viewport export)
@@ -46,7 +77,7 @@
 - [ ] Visual regression testing
 
 ### Configuration & Setup
-- [ ] Fix ESLint deprecated options
+- [ ] Fix ESLint deprecated options completely
 - [ ] Configure production Supabase credentials
 - [ ] Environment variable validation
 - [ ] CI/CD pipeline with GitHub Actions
@@ -59,7 +90,7 @@
 - [ ] Image optimization pipeline
 - [ ] Remove unused dependencies
 
-## Priority 4: Infrastructure & Scaling Improvements
+## Priority 5: Infrastructure & Scaling
 
 ### Database Optimization
 - [ ] Query performance tuning for leaderboards
@@ -79,7 +110,7 @@
 - [ ] Optimize image delivery pipeline
 - [ ] Set up monitoring dashboards
 
-## Priority 5: Feature Enhancements
+## Future Considerations
 
 ### Multiplayer Games
 - [ ] Real-time Tic-Tac-Toe PvP
@@ -87,15 +118,6 @@
 - [ ] Co-op puzzle modes
 - [ ] Turn-based game infrastructure
 - [ ] Game room creation/joining
-- [ ] Spectator mode for all games
-
-### Additional Games
-- [ ] Solitaire (Klondike)
-- [ ] Blackjack
-- [ ] Simon Says
-- [ ] Whack-a-Mole
-- [ ] Trivia/Quiz Game
-- [ ] Crossword Puzzle
 
 ### User Experience
 - [ ] Advanced profile themes
@@ -105,63 +127,43 @@
 - [ ] Multi-language support (i18n)
 - [ ] Keyboard shortcuts
 
-## Priority 5: Infrastructure & Scaling
+### Mobile & Apps
+- [ ] React Native mobile app
+- [ ] Discord bot integration
+- [ ] Twitch integration
+- [ ] Browser extensions
 
-### Database Optimization
-- [ ] Query performance tuning
-- [ ] Materialized views for leaderboards
-- [ ] Database connection pooling
-- [ ] Read replicas setup
-- [ ] Automated backups
+## Recommended Execution Plan for Next Developer
 
-### Security Enhancements
-- [ ] Security audit
-- [ ] Rate limiting per user/IP
-- [ ] CAPTCHA for high scores
-- [ ] Input sanitization review
-- [ ] GDPR compliance
-- [ ] Privacy policy implementation
+### Day 1: Fix Critical Build Issues
+1. Fix simon-says.tsx TypeScript error
+2. Update ESLint configuration
+3. Fix Jest DOM types
+4. Ensure build succeeds
 
-### DevOps & Deployment
-- [ ] Docker containerization
-- [ ] Kubernetes deployment configs
-- [ ] CDN configuration
-- [ ] Load balancer setup
-- [ ] Monitoring dashboards
-- [ ] Automated scaling policies
+### Day 2: Fix Tests
+1. Resolve all 59 failing tests
+2. Complete missing implementations
+3. Create database migrations
+4. Verify all features work
 
-## Recommended Execution Plan
+### Day 3: Complete Cycle 12
+1. Finish tournament history
+2. Complete spectator mode
+3. Polish three new games
+4. Run full test suite
 
-### Week 1: Social Foundation
-1. Implement social sharing with custom cards
-2. Begin friend system backend
-3. Fix snake test and ESLint issues
-
-### Week 2: Social Completion
-1. Complete friend system UI
-2. Implement challenge system
-3. Start tournament infrastructure
-
-### Week 3: PWA & Offline
-1. Service worker implementation
-2. Offline game support
-3. Push notifications
-
-### Week 4: Analytics & Monitoring
-1. Plausible Analytics integration
-2. Sentry error tracking
-3. A/B testing framework
-
-### Week 5: Polish & Launch
-1. Performance optimizations
-2. Security audit
-3. Production deployment
+### Day 4: Production Prep
+1. Configure production environment
+2. Performance optimization
+3. Security review
+4. Deploy to production
 
 ## Notes for Next Developer
-- Supabase credentials need to be configured for full backend functionality
-- The mock/fallback system works well for development
-- All 15 games are complete and working
-- Real-time and profile features are ready but using mock data
-- Focus on social features to drive user engagement
-- PWA implementation will significantly improve mobile experience
-- Consider implementing the most requested games from user feedback first
+- **CRITICAL**: Build is currently broken - fix TypeScript errors first
+- Test suite has 59 failures that need immediate attention
+- Tournament history migration file is missing - needs creation
+- ESLint configuration is outdated for Next.js 14
+- Once fixes are complete, all Cycle 12 features should work
+- The foundation is solid, just needs completion and bug fixes
+- Focus on getting build green before adding new features
