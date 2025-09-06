@@ -73,10 +73,10 @@ class FriendService {
     try {
       // Try to load from Supabase
       if (supabase) {
-        const { data, error } = await supabase
-          .from('friendships')
+        const { data, error } = await (supabase
+          .from('friendships') as any)
           .select('*, friend:profiles!friend_id(*)')
-          .eq('user_id', this.currentUserId)
+          .eq('user_id', this.currentUserId || '')
           .eq('status', 'accepted')
 
         if (!error && data) {
@@ -113,10 +113,10 @@ class FriendService {
   async getFriendRequests(): Promise<FriendRequest[]> {
     try {
       if (supabase) {
-        const { data, error } = await supabase
-          .from('friend_requests')
+        const { data, error } = await (supabase
+          .from('friend_requests') as any)
           .select('*, from_user:profiles!from_user_id(*)')
-          .eq('to_user_id', this.currentUserId)
+          .eq('to_user_id', this.currentUserId || '')
           .eq('status', 'pending')
 
         if (!error && data) {
@@ -156,8 +156,8 @@ class FriendService {
     try {
       if (supabase) {
         // First, find the user by username
-        const { data: userData, error: userError } = await supabase
-          .from('profiles')
+        const { data: userData, error: userError } = await (supabase
+          .from('profiles') as any)
           .select('user_id')
           .eq('username', toUsername)
           .single()
@@ -167,10 +167,10 @@ class FriendService {
         }
 
         // Check if already friends or request exists
-        const { data: existingFriendship } = await supabase
-          .from('friendships')
+        const { data: existingFriendship } = await (supabase
+          .from('friendships') as any)
           .select('id')
-          .eq('user_id', this.currentUserId)
+          .eq('user_id', this.currentUserId || '')
           .eq('friend_id', userData.user_id)
           .single()
 
@@ -179,8 +179,8 @@ class FriendService {
         }
 
         // Send the request
-        const { error } = await supabase
-          .from('friend_requests')
+        const { error } = await (supabase
+          .from('friend_requests') as any)
           .insert({
             from_user_id: this.currentUserId,
             to_user_id: userData.user_id,
@@ -221,16 +221,16 @@ class FriendService {
 
       if (supabase) {
         // Update request status
-        const { error: updateError } = await supabase
-          .from('friend_requests')
+        const { error: updateError } = await (supabase
+          .from('friend_requests') as any)
           .update({ status: 'accepted' })
           .eq('id', requestId)
 
         if (updateError) throw updateError
 
         // Create bidirectional friendship
-        const { error: friendshipError } = await supabase
-          .from('friendships')
+        const { error: friendshipError } = await (supabase
+          .from('friendships') as any)
           .insert([
             { user_id: request.toUserId, friend_id: request.fromUserId },
             { user_id: request.fromUserId, friend_id: request.toUserId }
@@ -266,8 +266,8 @@ class FriendService {
   async rejectFriendRequest(requestId: string): Promise<boolean> {
     try {
       if (supabase) {
-        const { error } = await supabase
-          .from('friend_requests')
+        const { error } = await (supabase
+          .from('friend_requests') as any)
           .update({ status: 'rejected' })
           .eq('id', requestId)
 
@@ -289,8 +289,8 @@ class FriendService {
     try {
       if (supabase) {
         // Delete bidirectional friendship
-        const { error } = await supabase
-          .from('friendships')
+        const { error } = await (supabase
+          .from('friendships') as any)
           .delete()
           .or(`and(user_id.eq.${this.currentUserId},friend_id.eq.${friendId}),and(user_id.eq.${friendId},friend_id.eq.${this.currentUserId})`)
 
@@ -313,8 +313,8 @@ class FriendService {
       if (supabase) {
         const friendIds = Array.from(this.friends.keys())
         
-        const { data, error } = await supabase
-          .from('activities')
+        const { data, error } = await (supabase
+          .from('activities') as any)
           .select('*, user:profiles!user_id(*)')
           .in('user_id', friendIds)
           .order('created_at', { ascending: false })
