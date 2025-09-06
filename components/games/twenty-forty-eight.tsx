@@ -202,7 +202,7 @@ export function TwentyFortyEight() {
         {showWinDialog && (
           <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
             <strong className="font-bold">Congratulations!</strong>
-            <span className="block sm:inline"> You've reached 2048!</span>
+            <span className="block sm:inline"> You&apos;ve reached 2048!</span>
             <div className="mt-2 space-x-2">
               <Button size="sm" onClick={handleContinue}>Continue Playing</Button>
               <Button size="sm" variant="outline" onClick={handleReset}>New Game</Button>

@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import MentalMath from '@/components/games/mental-math'
 
 describe('MentalMath', () => {
@@ -75,7 +75,10 @@ describe('MentalMath', () => {
     const startButton = screen.getByText(/Start Game/i)
     fireEvent.click(startButton)
     
-    jest.advanceTimersByTime(60000) // 60 seconds
+    // Wrap timer advancement in act to handle state updates
+    act(() => {
+      jest.advanceTimersByTime(60000) // 60 seconds
+    })
     
     expect(screen.getByText(/Game Over!/i)).toBeInTheDocument()
     expect(screen.getByText(/Play Again/i)).toBeInTheDocument()

@@ -328,7 +328,7 @@ export function FriendList({ userId, className }: FriendListProps) {
                       
                       {request.message && (
                         <p className="text-sm text-muted-foreground mb-3">
-                          "{request.message}"
+                          &quot;{request.message}&quot;
                         </p>
                       )}
                       

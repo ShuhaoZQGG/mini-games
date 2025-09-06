@@ -176,7 +176,7 @@ export function ConnectFour() {
           <div className="flex items-center gap-4 text-lg">
             {winner ? (
               winner === 'draw' ? (
-                <span className="font-semibold">It's a draw!</span>
+                <span className="font-semibold">It&apos;s a draw!</span>
               ) : (
                 <div className="flex items-center gap-2">
                   <Trophy className="h-5 w-5 text-yellow-500" />
