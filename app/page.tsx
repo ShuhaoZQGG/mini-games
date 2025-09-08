@@ -3,8 +3,20 @@ import Link from 'next/link'
 export default function HomePage() {
   const games = [
     { id: 'cps-test', name: 'CPS Test', description: 'Test your clicking speed', path: '/games/cps-test' },
+    { id: 'reaction-time', name: 'Reaction Time', description: 'Test your reflexes', path: '/games/reaction-time' },
+    { id: 'aim-trainer', name: 'Aim Trainer', description: 'Test your accuracy', path: '/games/aim-trainer' },
     { id: 'memory-match', name: 'Memory Match', description: 'Match the cards', path: '/games/memory-match' },
     { id: 'typing-test', name: 'Typing Test', description: 'Test your typing speed', path: '/games/typing-test' },
+    { id: 'tic-tac-toe', name: 'Tic-Tac-Toe', description: 'Classic X and O game', path: '/games/tic-tac-toe' },
+    { id: 'minesweeper', name: 'Minesweeper', description: 'Find all the mines', path: '/games/minesweeper' },
+    { id: 'snake', name: 'Snake', description: 'Classic snake game', path: '/games/snake' },
+    { id: '2048', name: '2048', description: 'Slide tiles to reach 2048', path: '/games/2048' },
+    { id: 'sudoku', name: 'Sudoku', description: 'Number puzzle game', path: '/games/sudoku' },
+    { id: 'connect-four', name: 'Connect Four', description: 'Get four in a row', path: '/games/connect-four' },
+    { id: 'word-search', name: 'Word Search', description: 'Find hidden words', path: '/games/word-search' },
+    { id: 'tetris', name: 'Tetris', description: 'Stack falling blocks', path: '/games/tetris' },
+    { id: 'breakout', name: 'Breakout', description: 'Break all the bricks', path: '/games/breakout' },
+    { id: 'mental-math', name: 'Mental Math', description: 'Solve math problems', path: '/games/mental-math' },
   ]
 
   return (

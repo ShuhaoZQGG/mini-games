@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { TypingTestGame, TypingStats } from '@/lib/games/typing-test'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { ShareCard } from '@/components/social/share-card'
 
 export function TypingTestComponent() {
   const [game] = useState(() => new TypingTestGame(60000))
@@ -195,6 +196,12 @@ export function TypingTestComponent() {
                   </div>
                 </div>
               </div>
+              <ShareCard
+                gameTitle="Typing Test"
+                gameSlug="typing-test"
+                score={stats.wpm}
+                accuracy={stats.accuracy}
+              />
               <div className="space-x-4">
                 <Button onClick={handleStart} size="lg">
                   Try Again
