@@ -29,7 +29,14 @@ export interface GameScore {
   metadata?: Record<string, any>
 }
 
-export interface GameState {
+export enum GameState {
+  READY = 'ready',
+  PLAYING = 'playing',
+  PAUSED = 'paused',
+  GAME_OVER = 'game_over'
+}
+
+export interface GameStatus {
   isPlaying: boolean
   isPaused: boolean
   isGameOver: boolean

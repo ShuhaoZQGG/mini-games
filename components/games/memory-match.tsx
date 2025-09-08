@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { MemoryMatchGame, Card } from '@/lib/games/memory-match'
 import { Button } from '@/components/ui/button'
 import { Card as UICard, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { ShareCard } from '@/components/social/share-card'
 
 export function MemoryMatchComponent() {
   const [game] = useState(() => new MemoryMatchGame(4))
@@ -113,6 +114,12 @@ export function MemoryMatchComponent() {
                 <p className="text-3xl font-bold mb-1">{moves} moves</p>
                 <p className="text-lg text-gray-600 dark:text-gray-400">Time: {gameTime} seconds</p>
               </div>
+              <ShareCard
+                gameTitle="Memory Match"
+                gameSlug="memory-match"
+                score={moves}
+                time={gameTime}
+              />
               <div className="space-x-4">
                 <Button onClick={handleStart} size="lg">
                   Play Again
