@@ -17,6 +17,12 @@ export default function HomePage() {
     { id: 'tetris', name: 'Tetris', description: 'Stack falling blocks', path: '/games/tetris' },
     { id: 'breakout', name: 'Breakout', description: 'Break all the bricks', path: '/games/breakout' },
     { id: 'mental-math', name: 'Mental Math', description: 'Solve math problems', path: '/games/mental-math' },
+    { id: 'pacman', name: 'Pac-Man', description: 'Classic arcade maze game', path: '/games/pacman' },
+    { id: 'space-invaders', name: 'Space Invaders', description: 'Defend Earth from aliens', path: '/games/space-invaders' },
+    { id: 'pattern-memory', name: 'Pattern Memory', description: 'Test your memory skills', path: '/games/pattern-memory' },
+    { id: 'color-switch', name: 'Color Switch', description: 'Match colors to survive', path: '/games/color-switch' },
+    { id: 'sliding-puzzle', name: 'Sliding Puzzle', description: 'Classic 15-puzzle game', path: '/games/sliding-puzzle' },
+    { id: 'crossword', name: 'Crossword', description: 'Word puzzle challenges', path: '/games/crossword' },
   ]
 
   return (
