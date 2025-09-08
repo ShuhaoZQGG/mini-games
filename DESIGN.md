@@ -1,524 +1,436 @@
-# Mini Games Platform - Cycle 18 UI/UX Design Specifications
+# Mini Games Platform - UI/UX Design Specifications
 
 ## Design System
 
-### Brand Identity
-- **Primary Color**: #3B82F6 (Blue)
-- **Secondary Color**: #10B981 (Green)
-- **Accent Color**: #F59E0B (Amber)
-- **Error Color**: #EF4444 (Red)
-- **Dark Mode Primary**: #1F2937
-- **Dark Mode Surface**: #111827
+### Core Principles
+- **Guest-First**: Full functionality without registration
+- **Mobile-First**: Touch-optimized responsive design
+- **Performance**: < 100KB initial bundle, < 2s load time
+- **Accessibility**: WCAG 2.1 AA compliant
+- **Engagement**: Instant gameplay, minimal friction
 
-### Typography
-- **Headings**: Inter, system-ui, -apple-system
-- **Body**: Inter, system-ui, -apple-system
-- **Monospace**: 'Fira Code', 'Courier New'
-- **Scale**: 12px, 14px, 16px, 20px, 24px, 32px, 48px
+### Design Tokens
 
-## PR Management Interface (Priority)
+#### Colors
+```css
+/* Light Theme */
+--primary: #3B82F6      /* Blue - CTAs, links */
+--secondary: #10B981    /* Green - success, scores */
+--accent: #F59E0B       /* Amber - achievements */
+--danger: #EF4444       /* Red - errors, losses */
+--surface: #FFFFFF      /* Game backgrounds */
+--background: #F9FAFB   /* Page background */
+--text: #111827         /* Primary text */
+--text-muted: #6B7280   /* Secondary text */
 
-### PR Dashboard
-```
-┌────────────────────────────────────────┐
-│ Pull Request Management                │
-├────────────────────────────────────────┤
-│ ✅ PR #17: Production Infrastructure   │
-│    → main | Ready to merge            │
-│    Build: ✅ Passing                   │
-│    [Squash & Merge] [View Changes]    │
-├────────────────────────────────────────┤
-│ ⚠️ PR #18: Development Pipeline       │
-│    → cycle-1 | 2 conflicts            │
-│    Build: ⏸️ Pending                   │
-│    [Resolve Conflicts] [View Diff]    │
-└────────────────────────────────────────┘
-```
-
-### Conflict Resolution UI
-```
-┌─────────────────────────────────────────┐
-│ Resolving Conflicts: PR #18             │
-├─────────────────────────────────────────┤
-│ File: package.json                      │
-│ <<<<<<< cycle-17 (Current)              │
-│   "version": "1.1.0"                    │
-│ =======                                  │
-│   "version": "1.0.0"                    │
-│ >>>>>>> cycle-1 (Base)                  │
-│                                         │
-│ [Accept Current] [Accept Base] [Edit]   │
-└─────────────────────────────────────────┘
+/* Dark Theme */
+--primary-dark: #60A5FA
+--secondary-dark: #34D399
+--accent-dark: #FCD34D
+--danger-dark: #F87171
+--surface-dark: #1F2937
+--background-dark: #111827
+--text-dark: #F9FAFB
+--text-muted-dark: #9CA3AF
 ```
 
-## User Journeys
+#### Typography
+```css
+--font-display: 'Inter', system-ui    /* Headings */
+--font-body: 'Inter', system-ui       /* Body text */
+--font-mono: 'JetBrains Mono'         /* Scores, timers */
 
-### Guest User Flow
-1. **Landing** → Game grid with instant play CTAs
-2. **Game Selection** → Direct game launch without friction
-3. **Gameplay** → Full features, local score tracking
-4. **Game End** → Score display, retry, share, sign-up prompt
-5. **Discovery** → Related games, popular games carousel
-
-### Authenticated User Flow
-1. **Landing** → Personalized dashboard with recent games
-2. **Profile** → Stats, achievements, friends, settings
-3. **Gameplay** → Score sync, leaderboard position live
-4. **Social** → Challenge friends, join tournaments
-5. **Progress** → Achievement unlocks, level progression
-
-## New Games UI Specifications (10 Games)
-
-### 1. Blackjack
-```
-┌─────────────────────────────────────────┐
-│ Dealer: 17        [?][7♠]              │
-├─────────────────────────────────────────┤
-│                                         │
-│ You: 20          [K♥][10♣]             │
-│                                         │
-│ Chips: $1000     Bet: $50              │
-│ [Hit] [Stand] [Double] [Split]         │
-└─────────────────────────────────────────┘
-```
-- Card animations with flip effects
-- Chip betting interface with drag-drop
-- Split/double down action buttons
-- Running count display
-
-### 2. Pattern Memory
-```
-┌─────────────────────────────────────────┐
-│ Level: 5    Score: 450    Lives: ♥♥♥   │
-├─────────────────────────────────────────┤
-│   ┌─┬─┬─┬─┐                           │
-│   ├─┼─┼─┼─┤  Pattern Preview          │
-│   ├─┼─┼─┼─┤  (3 seconds)              │
-│   ├─┼─┼─┼─┤                           │
-│   └─┴─┴─┴─┘                           │
-│                                         │
-│ [Start Round] Time Bonus: x2           │
-└─────────────────────────────────────────┘
-```
-- Grid of tiles with reveal animations
-- Pattern preview with countdown
-- Score multiplier for speed
-- Difficulty progression indicator
-
-### 3. Color Switch
-```
-┌─────────────────────────────────────────┐
-│ Score: 24        Best: 89              │
-├─────────────────────────────────────────┤
-│           ◯ (rotating wheel)           │
-│           |                            │
-│          ⬤ (player ball)               │
-│           |                            │
-│           ◯ (rotating wheel)           │
-│                                         │
-│        [Tap to Jump]                   │
-└─────────────────────────────────────────┘
-```
-- Vertical scrolling viewport
-- Color wheel obstacles with rotation
-- Particle effects on collision
-- High score ghost line
-
-### 4. Jigsaw Puzzle
-```
-┌─────────────────────────────────────────┐
-│ Progress: 67%    Time: 5:23    🧩      │
-├─────────────────────────────────────────┤
-│ ┌──────────────┐  ┌──────────────┐     │
-│ │ Puzzle Area  │  │ Piece Tray   │     │
-│ │              │  │ [🧩][🧩][🧩]  │     │
-│ │   [Image]    │  │ [🧩][🧩][🧩]  │     │
-│ │              │  │              │     │
-│ └──────────────┘  └──────────────┘     │
-│ [Hint] [Preview] [Edges Only] [Reset]  │
-└─────────────────────────────────────────┘
-```
-- Piece tray with auto-organization
-- Snap-to-grid with magnetism
-- Progress percentage display
-- Hint system with edge highlighting
-
-### 5. Sliding Puzzle
-```
-┌─────────────────────────────────────────┐
-│ Moves: 142    Best: 98    Timer: 2:15  │
-├─────────────────────────────────────────┤
-│         ┌──┬──┬──┬──┐                  │
-│         │1 │2 │3 │4 │                  │
-│         ├──┼──┼──┼──┤                  │
-│         │5 │6 │7 │8 │                  │
-│         ├──┼──┼──┼──┤                  │
-│         │9 │10│11│  │                  │
-│         ├──┼──┼──┼──┤                  │
-│         │13│14│15│12│                  │
-│         └──┴──┴──┴──┘                  │
-│ [Shuffle] [Solution] [Reset]           │
-└─────────────────────────────────────────┘
-```
-- Smooth tile sliding animations
-- Move counter and timer
-- Shuffle animation on start
-- Solution preview toggle
-
-### 6. Flappy Bird Clone
-```
-┌─────────────────────────────────────────┐
-│ Score: 12        Best: 45              │
-├─────────────────────────────────────────┤
-│ ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ │
-│ ░░░░░░░░██░░░░░░░░░░░░░░░░░░░░░░░░░░░░ │
-│ ░░🐦░░░░██░░░░░░░░██░░░░░░░░░░░░░░░░░░ │
-│ ░░░░░░░░░░░░░░░░░░██░░░░░░░░░░░░░░░░░░ │
-│ ░░░░░░░░░░░░░░░░░░██░░░░░░░░░░░░░░░░░░ │
-│ ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ │
-│                                         │
-│         [Tap/Space to Flap]            │
-└─────────────────────────────────────────┘
-```
-- Parallax background scrolling
-- Pipe generation with varied gaps
-- Score popup animations
-- Medal achievements display
-
-### 7. Crossword
-```
-┌─────────────────────────────────────────┐
-│ Daily Crossword    Timer: 12:34        │
-├─────────────────────────────────────────┤
-│ ┌─────────────┐  ┌──────────────────┐  │
-│ │ Grid        │  │ Clues            │  │
-│ │ ■□□□■      │  │ Across:          │  │
-│ │ □□□□□      │  │ 1. Capital (5)   │  │
-│ │ □■□■□      │  │ 3. Animal (3)    │  │
-│ │             │  │ Down:            │  │
-│ │             │  │ 2. Color (4)     │  │
-│ └─────────────┘  └──────────────────┘  │
-│ [Check] [Reveal Letter] [Clear] [Hint] │
-└─────────────────────────────────────────┘
-```
-- Interactive grid with keyboard input
-- Clue sidebar with active highlighting
-- Word validation feedback
-- Progress save/restore
-
-### 8. Pac-Man Clone
-```
-┌─────────────────────────────────────────┐
-│ Score: 1240   Lives: ●●○   🍒          │
-├─────────────────────────────────────────┤
-│ ╔════════════════════════════════════╗ │
-│ ║·····················●··············║ │
-│ ║·╔══╗·╔════╗·╔══╗·╔════╗·╔══╗·····║ │
-│ ║·║  ║·║    ║·║  ║·║    ║·║  ║·····║ │
-│ ║·╚══╝·╚════╝·╚══╝·╚════╝·╚══╝·····║ │
-│ ║····ᗤ·······👻·····················║ │
-│ ╚════════════════════════════════════╝ │
-│         [Arrow Keys/Swipe]             │
-└─────────────────────────────────────────┘
-```
-- Maze with neon glow effects
-- Ghost AI state indicators
-- Power-up timer visualization
-- Lives and fruit bonus display
-
-### 9. Space Invaders
-```
-┌─────────────────────────────────────────┐
-│ Score: 890    Lives: ▲▲▲   Wave: 3     │
-├─────────────────────────────────────────┤
-│  👾 👾 👾 👾 👾 👾 👾 👾                 │
-│  👾 👾 👾 👾 👾 👾 👾 👾                 │
-│  👾 👾 👾 👾 👾 👾 👾 👾                 │
-│                                         │
-│  ▓▓▓  ▓▓▓  ▓▓▓  ▓▓▓                   │
-│                                         │
-│          ▲                             │
-│ [←→ Move] [Space: Fire]                │
-└─────────────────────────────────────────┘
-```
-- Retro pixel art style
-- Wave formation movements
-- Barrier degradation effects
-- UFO bonus appearances
-
-### 10. Video Poker
-```
-┌─────────────────────────────────────────┐
-│ Credits: 500    Bet: 5    Win: 0       │
-├─────────────────────────────────────────┤
-│   [A♠] [K♠] [Q♠] [J♠] [10♠]           │
-│   HOLD  HOLD  HOLD  HOLD  HOLD         │
-│                                         │
-│ Royal Flush: 800x  │  Flush: 6x        │
-│ Straight: 4x       │  Pair: 1x         │
-│                                         │
-│ [Deal/Draw] [Bet Max] [Cash Out]       │
-└─────────────────────────────────────────┘
-```
-- Card deal animations
-- Hold/draw toggle buttons
-- Payout table highlight
-- Credit/bet management
-
-## Core Components
-
-### Navigation Header
-```
-┌─────────────────────────────────────────────────┐
-│ 🎮 Mini Games  [Search...]  🌙  🔔  👤          │
-├─────────────────────────────────────────────────┤
-│ All Games | Popular | New | Categories | Tournaments│
-└─────────────────────────────────────────────────┘
+/* Scale */
+--text-xs: 0.75rem     /* 12px */
+--text-sm: 0.875rem    /* 14px */
+--text-base: 1rem      /* 16px */
+--text-lg: 1.125rem    /* 18px */
+--text-xl: 1.25rem     /* 20px */
+--text-2xl: 1.5rem     /* 24px */
+--text-3xl: 1.875rem   /* 30px */
+--text-4xl: 2.25rem    /* 36px */
 ```
 
-### Game Card Component
-```
-┌─────────────────┐
-│     [Icon]      │
-│   Game Title    │
-│  ⭐ 4.8  👥 12K │
-│ [Play Now] [♥]  │
-└─────────────────┘
-```
-
-### Leaderboard Widget
-```
-┌──────────────────────┐
-│ 🏆 Top Players       │
-├──────────────────────┤
-│ 1. Player1    9,999  │
-│ 2. Player2    8,888  │
-│ 3. You        7,777  │
-│ ...                  │
-│ [View All]           │
-└──────────────────────┘
+#### Spacing
+```css
+--space-1: 0.25rem     /* 4px */
+--space-2: 0.5rem      /* 8px */
+--space-3: 0.75rem     /* 12px */
+--space-4: 1rem        /* 16px */
+--space-6: 1.5rem      /* 24px */
+--space-8: 2rem        /* 32px */
+--space-12: 3rem       /* 48px */
+--space-16: 4rem       /* 64px */
 ```
 
-## Responsive Breakpoints
-
-### Mobile (320-768px)
-- Single column game grid
-- Bottom navigation bar
-- Full-screen game mode
-- Touch-optimized controls (44px minimum)
-
-### Tablet (768-1024px)
-- 2-3 column game grid
-- Side navigation drawer
-- Split-view for game + leaderboard
-- Hover states on capable devices
-
-### Desktop (1024px+)
-- 4-6 column game grid
-- Persistent sidebar
-- Multi-panel layouts
-- Keyboard shortcuts enabled
-
-## Accessibility
-
-### WCAG 2.1 AA Compliance
-- **Color Contrast**: 4.5:1 minimum
-- **Focus Indicators**: 2px solid outline
-- **Touch Targets**: 44x44px minimum
-- **Alt Text**: All images and icons
-
-### Screen Reader Support
-- ARIA labels on interactive elements
-- Live regions for score updates
-- Semantic HTML structure
-- Skip navigation links
-
-### Reduced Motion
-- Respect prefers-reduced-motion
-- Alternative transitions
-- Disable auto-playing animations
-- Static loading indicators
-
-## Performance Targets
-
-### Core Web Vitals
-- **LCP**: <2.5s (Largest Contentful Paint)
-- **FID**: <100ms (First Input Delay)
-- **CLS**: <0.1 (Cumulative Layout Shift)
-- **TTI**: <3.0s (Time to Interactive)
-
-## Dark Mode Adaptations
-
-### Color Inversions
-- Backgrounds: #111827 → #F9FAFB
-- Text: #F9FAFB → #111827
-- Shadows: Reduced opacity
-- Borders: Subtle glow effects
-
-### Game-Specific
-- Preserve game colors
-- Adjust UI chrome only
-- Maintain contrast ratios
-- Optional per-game toggle
-
-## Animation Guidelines
-
-### Micro-interactions
-- Button hover: scale(1.05) 200ms ease
-- Card flip: rotateY(180deg) 400ms cubic-bezier
-- Score increment: countUp animation 500ms
-- Achievement unlock: slideIn + bounce 600ms
-
-### Game Transitions
-- Scene transitions: 300ms fade
-- Level progression: 500ms slide
-- Game over: 400ms blur + scale
-- Victory: confetti particle system
-
-## Social Features UI
-
-### Friend List
-```
-┌──────────────────────┐
-│ Friends (12 online)  │
-├──────────────────────┤
-│ 🟢 Alice  [Challenge]│
-│ 🟢 Bob    [Spectate] │
-│ ⚫ Charlie [Invite]  │
-└──────────────────────┘
+#### Breakpoints
+```css
+--mobile: 640px
+--tablet: 768px
+--desktop: 1024px
+--wide: 1280px
 ```
 
-### Tournament Bracket
+## Layout Architecture
+
+### Navigation Structure
 ```
-┌─────────────────────────────────────────┐
-│         Tournament: Summer Cup          │
-├─────────────────────────────────────────┤
-│  Round 1    Semi-Finals    Finals      │
-│  Player1 ─┐                            │
-│           ├─ Winner1 ─┐                │
-│  Player2 ─┘            │                │
-│                        ├─ Champion      │
-│  Player3 ─┐            │                │
-│           ├─ Winner2 ─┘                │
-│  Player4 ─┘                            │
-└─────────────────────────────────────────┘
+Header (Sticky)
+├── Logo/Home
+├── Game Categories Dropdown
+├── Search (Desktop)
+├── Theme Toggle
+└── Auth/Profile Button
+
+Mobile Navigation (Bottom)
+├── Home
+├── Games
+├── Leaderboards
+├── Tournaments
+└── Profile
 ```
 
-### Live Chat
+### Page Templates
+
+#### Home Page
 ```
-┌──────────────────────┐
-│ Spectator Chat  👥8  │
-├──────────────────────┤
-│ User1: Nice move!    │
-│ User2: GG            │
-│ [Type message...]    │
-└──────────────────────┘
+Hero Section
+├── Featured Game Carousel
+├── Quick Play CTAs
+└── Daily Challenge Card
+
+Game Categories Grid
+├── Click Speed (5 games)
+├── Puzzle (6 games)
+├── Strategy (4 games)
+├── Card Games (3 games)
+├── Typing (2 games)
+└── Casual (4+ games)
+
+Social Proof
+├── Active Players Counter
+├── Recent High Scores
+└── Tournament Winners
+```
+
+#### Game Page
+```
+Game Header
+├── Title & Category
+├── Difficulty Selector
+├── Instructions Toggle
+└── Share Button
+
+Game Canvas (Responsive)
+├── Pre-game Overlay
+├── Game Area
+├── Controls (Mobile)
+└── Post-game Results
+
+Game Stats Sidebar
+├── Personal Best
+├── Session Stats
+├── Leaderboard Preview
+└── Challenge Friends CTA
 ```
 
 ## Component Library
 
-### Buttons
-- Primary: Blue background, white text
-- Secondary: Border only, blue text
-- Danger: Red background, white text
-- Ghost: Transparent, hover reveal
+### Core Components
 
-### Forms
-- Input: Border focus, label animation
-- Select: Custom dropdown, search filter
-- Checkbox: Custom design, smooth check
-- Radio: Grouped with clear selection
+#### GameCard
+```tsx
+interface GameCardProps {
+  game: {
+    id: string
+    title: string
+    category: string
+    thumbnail: string
+    playCount: number
+    difficulty: 'easy' | 'medium' | 'hard'
+    isNew?: boolean
+    isTrending?: boolean
+  }
+  variant: 'compact' | 'featured'
+}
+```
+- Hover: Scale 1.05, shadow elevation
+- Click: Scale 0.98, ripple effect
+- Loading: Skeleton shimmer
 
-### Modals
-- Backdrop blur effect
-- Slide-up animation mobile
-- Fade-in animation desktop
-- Trap focus, escape to close
+#### LeaderboardRow
+```tsx
+interface LeaderboardRowProps {
+  rank: number
+  player: {
+    id: string
+    name: string
+    avatar?: string
+    isOnline?: boolean
+  }
+  score: number
+  game: string
+  timestamp: Date
+  isCurrentUser?: boolean
+}
+```
+- Highlight current user row
+- Animate rank changes
+- Show live indicators
 
-### Notifications
-- Toast: Auto-dismiss 4s
-- Banner: Persistent, dismissible
-- Badge: Number indicators
-- Pulse: Attention animation
-
-## Implementation Priority
-
-### Phase 1: PR Management (Immediate)
-1. PR dashboard UI
-2. Conflict resolution interface
-3. Build status indicators
-4. Merge action buttons
-
-### Phase 2: New Games UI (Days 3-8)
-1. Quick wins (Blackjack, Pattern Memory, Color Switch)
-2. Medium complexity (Jigsaw, Sliding Puzzle, Flappy Bird)
-3. Advanced games (Crossword, Pac-Man, Space Invaders, Video Poker)
-
-### Phase 3: Platform Enhancement
-1. Improved leaderboards
-2. Tournament UI updates
-3. Social features refinement
-4. Performance optimizations
-
-## Design Tokens
-
-```typescript
-const tokens = {
-  colors: {
-    primary: '#3B82F6',
-    secondary: '#10B981',
-    accent: '#F59E0B',
-    error: '#EF4444',
-    success: '#10B981',
-    warning: '#F59E0B',
-    info: '#3B82F6'
-  },
-  spacing: {
-    xs: '4px',
-    sm: '8px',
-    md: '16px',
-    lg: '24px',
-    xl: '32px',
-    xxl: '48px'
-  },
-  borderRadius: {
-    sm: '4px',
-    md: '8px',
-    lg: '12px',
-    xl: '16px',
-    full: '9999px'
-  },
-  shadows: {
-    sm: '0 1px 2px rgba(0,0,0,0.05)',
-    md: '0 4px 6px rgba(0,0,0,0.1)',
-    lg: '0 10px 15px rgba(0,0,0,0.1)',
-    xl: '0 20px 25px rgba(0,0,0,0.1)'
+#### TournamentCard
+```tsx
+interface TournamentCardProps {
+  tournament: {
+    id: string
+    name: string
+    game: string
+    startTime: Date
+    endTime: Date
+    entrants: number
+    maxEntrants: number
+    prize?: string
+    status: 'upcoming' | 'live' | 'completed'
   }
 }
 ```
+- Live tournaments pulse animation
+- Progress bar for registration
+- Countdown timer
 
-## Frontend Recommendations
+### Game-Specific UI
 
-### Tech Stack
-- **Next.js 14**: App Router for SEO optimization
-- **React 18**: Component architecture
-- **TypeScript**: Type safety
-- **Tailwind CSS**: Utility-first styling
-- **Framer Motion**: Smooth animations
-- **Supabase Auth UI**: Pre-built authentication components
+#### Click Speed Games
+- Large touch targets (min 44x44px)
+- Visual feedback on click (ripple)
+- Real-time counter animations
+- Progress bars for time/clicks
 
-### Testing Strategy
-- Component testing with React Testing Library
-- Visual regression with Chromatic
-- Accessibility testing with axe-core
-- Performance testing with Lighthouse
+#### Puzzle Games
+- Grid layouts with gap spacing
+- Drag-and-drop with ghost preview
+- Hint system overlay
+- Completion celebration animation
 
-## Conclusion
+#### Strategy Games
+- Board visualization with clear cells
+- Valid move highlighting
+- AI thinking indicator
+- Move history sidebar
 
-This design system provides comprehensive UI/UX specifications for Cycle 18, focusing on:
-1. **Immediate needs**: PR management interface for merging #17 and resolving #18 conflicts
-2. **Game expansion**: UI designs for 10 new games to reach 25+ total
-3. **Platform consistency**: Unified design system across all features
-4. **Performance & accessibility**: Meeting web standards and user needs
+#### Card Games
+- Card flip animations (3D transform)
+- Drag-and-drop with snap zones
+- Hand organization (fan layout)
+- Deck/discard pile visualization
 
-The modular component approach enables rapid development while maintaining design coherence and optimal user experience across all devices.
+## User Journeys
+
+### Guest User Flow
+```
+Landing → Game Selection → Instant Play
+                ↓
+        Score Display → Share Prompt
+                ↓
+    Sign Up Upsell (Soft) → Continue as Guest
+```
+
+### New User Onboarding
+```
+Sign Up → Avatar Selection → Favorite Games
+            ↓
+    Tutorial Game → First Achievement
+            ↓
+    Friend Suggestions → Homepage
+```
+
+### Returning Player Flow
+```
+Login → Personalized Dashboard
+    ↓
+Daily Challenge → Streak Update
+    ↓
+Resume Last Game / Browse New
+```
+
+## Responsive Design
+
+### Mobile (< 640px)
+- Single column layout
+- Bottom navigation bar
+- Full-width game canvas
+- Collapsible game info
+- Touch-optimized controls
+- Swipe gestures for navigation
+
+### Tablet (640-1024px)
+- 2-column game grid
+- Side navigation drawer
+- Floating action buttons
+- Split-screen multiplayer
+- Landscape game optimization
+
+### Desktop (> 1024px)
+- Multi-column layouts
+- Sidebar navigation
+- Hover interactions
+- Keyboard shortcuts
+- Picture-in-picture spectator
+- Multi-tab tournament view
+
+## Accessibility Features
+
+### Visual
+- High contrast mode
+- Font size controls (75%-150%)
+- Reduced motion option
+- Focus indicators (2px outline)
+- Color blind friendly palettes
+
+### Navigation
+- Skip to content links
+- Keyboard navigation (Tab, Arrow keys)
+- Screen reader announcements
+- ARIA labels and landmarks
+- Semantic HTML structure
+
+### Gaming
+- Difficulty adjustments
+- Pause/resume capability
+- Alternative input methods
+- Audio cues for visual elements
+- Extended time limits option
+
+## Animation & Micro-interactions
+
+### Page Transitions
+- Route changes: Fade (200ms)
+- Modal open: Scale + fade (300ms)
+- Drawer slide: TranslateX (250ms)
+- Tab switch: Slide (200ms)
+
+### Game Feedback
+- Score increase: Number roll-up
+- Achievement unlock: Confetti burst
+- Level complete: Star animation
+- Error: Shake (150ms)
+- Success: Check mark draw
+
+### Loading States
+- Skeleton screens for content
+- Spinner for actions (< 1s)
+- Progress bar for long operations
+- Shimmer effect for placeholders
+
+## New Game UI Specifications
+
+### Pac-Man
+- Maze: High contrast walls, clear paths
+- Characters: Distinct colors, smooth animation
+- Score: Top corner with combo multiplier
+- Lives: Visual hearts/pac-men icons
+- Power-ups: Pulsing glow effect
+
+### Space Invaders
+- Grid: Clear enemy formation
+- Player: Centered bottom position
+- Projectiles: Tracer effects
+- Barriers: Damage visualization
+- Score: Retro LED font style
+
+### Pattern Memory
+- Sequence: Large colored buttons
+- Playback: Smooth highlight animation
+- Input: Touch feedback ripple
+- Progress: Level/speed indicator
+- Timer: Circular progress ring
+
+### Color Switch
+- Path: Vertical scrolling smooth
+- Obstacles: Clear color coding
+- Player: Bouncing ball physics
+- Transitions: Color fade effects
+- Score: Floating +1 animations
+
+### Sliding Puzzle
+- Grid: Clear tile boundaries
+- Numbers: Large, readable font
+- Empty space: Dashed outline
+- Moves: Slide animation (200ms)
+- Completion: Tiles merge animation
+
+### Crossword Puzzle
+- Grid: Black/white squares
+- Clues: Collapsible sidebar
+- Input: Virtual keyboard (mobile)
+- Validation: Green/red highlights
+- Progress: Percentage complete
+
+## Performance Optimizations
+
+### Image Loading
+- Lazy load below fold
+- WebP with fallbacks
+- Responsive srcset
+- Blur-up placeholders
+- CDN delivery
+
+### Code Splitting
+- Route-based chunks
+- Game component lazy load
+- Vendor bundle separation
+- Dynamic imports for features
+
+### Caching Strategy
+- Static assets: 1 year
+- API responses: 5 minutes
+- User data: Session storage
+- Game state: Local storage
+
+## Implementation Priority
+
+### Phase 1: Core Gaming
+1. Game canvas responsive layouts
+2. Touch controls for mobile
+3. Score/leaderboard displays
+4. Guest gameplay flow
+
+### Phase 2: Social Features
+1. Authentication UI (Supabase Auth)
+2. Profile pages
+3. Friend system interface
+4. Tournament brackets
+
+### Phase 3: Polish
+1. Animations and transitions
+2. Achievement notifications
+3. Share cards generation
+4. PWA installation prompts
+
+## Design Handoff Notes
+
+### For Developers
+- Use Tailwind CSS classes for consistency
+- Implement shadcn/ui components
+- Follow mobile-first development
+- Test on real devices
+- Monitor Core Web Vitals
+
+### Component Props
+- All games accept difficulty prop
+- Leaderboards accept period filter
+- Cards support loading/error states
+- Forms include validation feedback
+
+### State Management
+- Game state in React hooks
+- User data in Zustand store
+- Real-time via Supabase subscriptions
+- Offline queue for score syncing
+
+### Testing Requirements
+- Cross-browser compatibility
+- Touch/mouse input parity
+- Offline mode functionality
+- Accessibility audit pass
+- Performance budget adherence
