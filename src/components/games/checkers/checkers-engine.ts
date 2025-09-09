@@ -235,7 +235,7 @@ export class CheckersEngine {
     this.mustCapture = false;
 
     if (gameOver) {
-      return { valid: true, captures: capturedPieces, gameOver: true, winner: this.getWinner() };
+      return { valid: true, captures: capturedPieces, gameOver: true, winner: this.getWinner() || undefined };
     }
 
     return { valid: true, captures: capturedPieces };
@@ -315,7 +315,7 @@ export class CheckersEngine {
       mustCapture: this.mustCapture,
       captureSequence: this.captureSequence,
       gameOver: this.checkGameOver(),
-      winner: this.getWinner()
+      winner: this.getWinner() || undefined
     };
   }
 

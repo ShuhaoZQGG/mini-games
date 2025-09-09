@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import PoolGame from '@/components/games/pool/pool-game'
-// import GameWithLevels from '@/components/games/game-with-levels'
+// Temporarily removed GameWithLevels import - needs refactoring
 
 const levelRequirements = [
   { level: 1, stars: 0, description: 'Beginner - Win 1 game', winTarget: 1 },
@@ -30,13 +30,8 @@ export default function PoolPage() {
     return 0
   }
 
+  const currentLevel = 1; // Temporary - will integrate with level system later
   return (
-    <GameWithLevels
-      gameId="pool"
-      gameName="8-Ball Pool"
-      levelRequirements={levelRequirements}
-    >
-      {(currentLevel) => (
         <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900 dark:to-green-800">
           <div className="p-4">
             <div className="text-center mb-4">
@@ -72,7 +67,5 @@ export default function PoolPage() {
             </div>
           </div>
         </div>
-      )}
-    </GameWithLevels>
   )
 }
