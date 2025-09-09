@@ -495,13 +495,10 @@ export async function getProfile(userId?: string): Promise<{ success: boolean; d
       
       if (!targetUserId) {
         // Not authenticated, try guest profile
-        const guestId = getGuestSession()
-        if (guestId) {
-          const profile = getProfileLocally(guestId) || generateMockProfile(guestId)
-          saveProfileLocally(profile)
-          return { success: true, data: profile }
-        }
-        return { success: false, data: null, error: 'No user found' }
+        const guestId = 'guest-' + Date.now()
+        const profile = getProfileLocally(guestId) || generateMockProfile(guestId)
+        saveProfileLocally(profile)
+        return { success: true, data: profile }
       }
     }
     
