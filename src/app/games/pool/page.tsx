@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import PoolGame from '@/components/games/pool/pool-game'
-import GameWithLevels from '@/components/games/game-with-levels'
+// import GameWithLevels from '@/components/games/game-with-levels'
 
 const levelRequirements = [
   { level: 1, stars: 0, description: 'Beginner - Win 1 game', winTarget: 1 },

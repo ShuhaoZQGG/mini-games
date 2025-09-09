@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import ChessGame from '@/components/games/chess/chess-game'
-import GameWithLevels from '@/components/games/game-with-levels'
+// import GameWithLevels from '@/components/games/game-with-levels'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Users, Bot, Globe } from 'lucide-react'
