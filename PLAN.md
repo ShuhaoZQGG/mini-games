@@ -1,23 +1,28 @@
-# Mini Games Platform - Cycle 2 Architectural Plan
+# Mini Games Platform - Cycle 9 Architectural Plan
 
 ## Project Vision
-With 30 games successfully completed (100% MVP target achieved), Cycle 2 focuses on production deployment, level system integration across all games, and expanding to 40+ games with enhanced multiplayer capabilities and platform optimization.
+Merge open PRs, resolve conflicts, then add more mini games and continue development to enhance the platform. With 100% level system coverage achieved (30/30 games), focus shifts to production deployment, conflict resolution, and strategic expansion with multiplayer games.
 
 ## Current State Analysis
 
 ### Achievements
-- **30 Games Implemented** (100% of MVP target) ✅
-- **Level System Infrastructure** ready with 2 games integrated
-- **Comprehensive Platform Features** including tournaments, spectator mode, social features
-- **Production Ready** with clean build and test coverage
-- **PR #22 Successfully Merged** completing Cycle 1
+- **30 Games Implemented** (100% MVP target) ✅
+- **Level System**: 100% coverage across all 30 games ✅
+- **Platform Features**: Tournament system, spectator mode, social features complete
+- **Build Status**: Clean compilation (87.2KB bundle)
+- **Cycle 8 Complete**: PR #29 merged with 100% level system coverage
 
-### Cycle 2 Goals
-- **Production Deployment** to Vercel (Priority 1)
-- **Level System Integration** for 28 remaining games
-- **10+ New Games** to reach 40+ total
-- **Performance Optimization** < 100KB bundle, < 2s load
-- **Multiplayer Features** for applicable games
+### Outstanding Issues
+- **PR #18**: APPROVED but has merge conflicts with main branch
+- **Build Errors**: Some ESLint errors in older PRs need resolution
+- **Test Failures**: Unit tests for 2048 game need fixing
+
+### Cycle 9 Goals
+1. **Resolve PR Conflicts** (Priority 1)
+2. **Production Deployment** to Vercel
+3. **Add 10+ Multiplayer Games** 
+4. **Performance Optimization** < 100KB bundle
+5. **Daily Challenges System**
 
 ## Technical Architecture
 
@@ -25,117 +30,156 @@ With 30 games successfully completed (100% MVP target achieved), Cycle 2 focuses
 - **Framework**: Next.js 14.2.5 with App Router
 - **UI**: React 18.3.1 + TypeScript 5.5.4
 - **Styling**: Tailwind CSS 3.4.10
-- **Components**: shadcn/ui + Radix UI primitives
-- **State**: React hooks + Zustand for complex state
-- **Animation**: Framer Motion 11.3.30
+- **Components**: shadcn/ui + Radix UI
+- **State**: React hooks + Zustand
+- **Animation**: Framer Motion
 
 ### Backend Infrastructure
-- **Database**: PostgreSQL 15 via Supabase
-- **Authentication**: Supabase Auth with social providers
-- **Real-time**: Supabase Realtime for live features
-- **Storage**: Supabase Storage for game assets
-- **Edge Functions**: Serverless game logic
-- **RLS**: Row-level security policies
+- **Database**: PostgreSQL via Supabase
+- **Authentication**: Supabase Auth
+- **Real-time**: Supabase Realtime
+- **Storage**: Supabase Storage
+- **Edge Functions**: Serverless logic
+- **RLS**: Row-level security
 
 ### Deployment Strategy
 - **Hosting**: Vercel Edge Network
 - **CI/CD**: GitHub Actions
-- **Preview**: Automatic PR deployments
 - **Monitoring**: Vercel Analytics + Sentry
 - **Cost**: ~$45/month for 10K users
 
 ## Implementation Roadmap
 
-### Phase 1: Production Deployment (Days 1-3)
-**Target**: Deploy platform to production with monitoring
+### Phase 1: Conflict Resolution & Cleanup (Day 1)
+**Target**: Resolve all outstanding PRs and technical debt
 
-#### Key Tasks:
-- Configure Vercel production environment
-- Set up Supabase production instance
-- Apply database migrations
-- Configure environment variables
-- Set up monitoring (Sentry, Analytics)
-- Load testing and optimization
-- Create backup/restore procedures
+#### Tasks:
+1. Resolve PR #18 merge conflicts
+2. Fix ESLint errors in profile/page.tsx and auth-button.tsx
+3. Fix 2048 game unit test failures
+4. Update ESLint configuration
+5. Ensure all branches are properly merged
 
-### Phase 2: Level System Rollout (Days 4-7)
-**Target**: Apply levels to all 30 games
+### Phase 2: Production Deployment (Days 2-3)
+**Target**: Deploy platform to production
 
-#### Implementation Priority:
-- High-traffic games first (Memory Match, Typing Test, 2048)
-- Create progression configs for each game type
-- Implement achievement badges system
-- Update leaderboards with level filtering
-- Test progression mechanics thoroughly
+#### Deployment Steps:
+1. Create Supabase production project
+2. Configure Vercel project
+3. Set up environment variables
+4. Apply database migrations
+5. Deploy main branch
+6. Configure custom domain
+7. Set up monitoring
 
-### Phase 3: New Games Development (Days 8-15)
-**Target**: Add 10 new games (reaching 40+ total)
+### Phase 3: Multiplayer Games Development (Days 4-12)
+**Target**: Add 10 strategic multiplayer games
 
-#### Multiplayer Games (5):
+#### Core Multiplayer Games:
 1. **Chess** - Classic strategy with ELO rating
-2. **Checkers** - Tournament-ready implementation
-3. **Battleship** - Real-time naval combat
-4. **Pool/Billiards** - Physics-based 8-ball
-5. **Air Hockey** - Low-latency competitive play
+   - Real-time moves via WebSocket
+   - Opening book integration
+   - Time controls (bullet, blitz, rapid)
+   - Analysis board
 
-#### Puzzle Games (3):
-6. **Wordle Clone** - Daily word puzzles
-7. **Nonogram/Picross** - Picture logic puzzles
-8. **Flow Free** - Path connection puzzles
+2. **Checkers** - Tournament-ready
+   - International and American rules
+   - Forced captures
+   - King mechanics
+   - Tournament brackets
 
-#### Action Games (2):
-9. **Asteroids** - Classic space shooter
-10. **Centipede** - Retro arcade action
+3. **Battleship** - Naval strategy
+   - Grid placement phase
+   - Turn-based attacks
+   - Special abilities
+   - Fleet configurations
 
-### Phase 4: Performance & Platform Polish (Days 16-21)
-**Target**: Optimize performance and enhance user experience
+4. **Pool/8-Ball** - Physics-based
+   - Realistic ball physics
+   - Cue power/angle controls
+   - Foul detection
+   - Tournament mode
 
-#### Performance Goals:
-- Reduce initial bundle to < 100KB
-- Achieve 95+ Lighthouse scores
-- Implement route-based code splitting
-- Add PWA with offline capabilities
-- Optimize Core Web Vitals
+5. **Air Hockey** - Real-time action
+   - Low-latency controls
+   - Physics simulation
+   - Power shots
+   - Score to win settings
 
-#### Platform Features:
-- Daily challenges system
-- Game recommendation engine
-- Enhanced social features
-- Streak tracking and rewards
-- Mobile app preparation
+#### Additional Strategy Games:
+6. **Backgammon** - Classic board game
+   - Dice mechanics
+   - Doubling cube
+   - Match play
+   - Crawford rule
 
-#### Infrastructure:
-- CDN configuration
-- Auto-scaling setup
-- Backup automation
-- A/B testing framework
-- Analytics dashboards
+7. **Go** - Ancient strategy
+   - 9x9, 13x13, 19x19 boards
+   - Ko rule enforcement
+   - Territory scoring
+   - Handicap system
+
+8. **Reversi/Othello** - Flip strategy
+   - Valid move highlighting
+   - Corner strategy
+   - AI opponent levels
+   - Tournament mode
+
+9. **Dots and Boxes** - Territory control
+   - Variable grid sizes
+   - Chain completion
+   - Score tracking
+   - Multiplayer rooms
+
+10. **Mahjong Solitaire** - Tile matching
+    - Multiple layouts
+    - Hint system
+    - Time challenges
+    - Daily puzzles
+
+### Phase 4: Platform Enhancement (Days 13-18)
+**Target**: Optimize performance and add engagement features
+
+#### Daily Challenges:
+- Rotating game selection
+- Global leaderboards
+- Streak tracking
+- Reward system
+- Push notifications
+
+#### Performance Optimization:
+- Code splitting per game
+- Image optimization
+- Service worker caching
+- Bundle size reduction
+- Lazy loading
+
+#### Social Features:
+- Friend invitations
+- Private match creation
+- In-game chat
+- Activity feed
+- Achievement sharing
+
+### Phase 5: Quality & Polish (Days 19-21)
+**Target**: Final testing and launch preparation
+
+#### Testing:
+- Cross-browser compatibility
+- Mobile responsiveness
+- Load testing
+- Security audit
+- Accessibility review
+
+#### Documentation:
+- API documentation
+- Game rules/tutorials
+- Deployment guide
+- Contributing guidelines
 
 ## Database Schema Updates
 
 ```sql
--- Game levels configuration
-CREATE TABLE game_levels (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  game_id VARCHAR(50) NOT NULL,
-  level_number INT NOT NULL,
-  difficulty_config JSONB NOT NULL,
-  unlock_criteria JSONB,
-  created_at TIMESTAMP DEFAULT NOW(),
-  UNIQUE(game_id, level_number)
-);
-
--- Daily challenges with participation tracking
-CREATE TABLE daily_challenges (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  date DATE NOT NULL UNIQUE,
-  game_id VARCHAR(50) NOT NULL,
-  challenge_config JSONB NOT NULL,
-  participants INT DEFAULT 0,
-  winners JSONB,
-  created_at TIMESTAMP DEFAULT NOW()
-);
-
 -- Multiplayer game sessions
 CREATE TABLE multiplayer_sessions (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -143,19 +187,46 @@ CREATE TABLE multiplayer_sessions (
   player1_id UUID REFERENCES auth.users,
   player2_id UUID REFERENCES auth.users,
   game_state JSONB NOT NULL,
-  status VARCHAR(20) DEFAULT 'active',
+  current_turn UUID,
+  status VARCHAR(20) DEFAULT 'waiting',
   winner_id UUID,
+  time_control JSONB,
   created_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP DEFAULT NOW()
 );
 
--- Game recommendations with ML scoring
-CREATE TABLE game_recommendations (
+-- Game invitations
+CREATE TABLE game_invitations (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  from_user_id UUID REFERENCES auth.users,
+  to_user_id UUID REFERENCES auth.users,
+  game_id VARCHAR(50) NOT NULL,
+  status VARCHAR(20) DEFAULT 'pending',
+  expires_at TIMESTAMP,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- ELO ratings for competitive games
+CREATE TABLE player_ratings (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES auth.users,
   game_id VARCHAR(50) NOT NULL,
-  score FLOAT NOT NULL,
-  algorithm_version VARCHAR(10),
+  rating INT DEFAULT 1200,
+  games_played INT DEFAULT 0,
+  wins INT DEFAULT 0,
+  losses INT DEFAULT 0,
+  draws INT DEFAULT 0,
+  peak_rating INT DEFAULT 1200,
+  updated_at TIMESTAMP DEFAULT NOW(),
+  UNIQUE(user_id, game_id)
+);
+
+-- Chat messages for multiplayer
+CREATE TABLE game_chat (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  session_id UUID REFERENCES multiplayer_sessions,
+  user_id UUID REFERENCES auth.users,
+  message TEXT NOT NULL,
   created_at TIMESTAMP DEFAULT NOW()
 );
 ```
@@ -165,79 +236,91 @@ CREATE TABLE game_recommendations (
 ### Technical Risks:
 | Risk | Impact | Mitigation |
 |------|--------|------------|
-| Mobile Performance | HIGH | Progressive enhancement, optimized assets |
-| Database Scaling | MEDIUM | Connection pooling, query optimization |
-| Browser Compatibility | MEDIUM | Feature detection, polyfills |
-| Bundle Size Growth | LOW | Code splitting, tree shaking |
+| WebSocket latency | HIGH | Regional servers, connection pooling |
+| Merge conflicts | HIGH | Careful conflict resolution, testing |
+| Real-time sync issues | MEDIUM | Optimistic updates, conflict resolution |
+| Scaling multiplayer | MEDIUM | Load balancing, session management |
 
 ### Mitigation Strategies:
-- Implement performance budgets
-- Add automated testing for all browsers
-- Monitor Core Web Vitals
-- Use CDN for static assets
-- Implement caching strategies
+- Implement connection retry logic
+- Add offline mode fallbacks
+- Use optimistic UI updates
+- Monitor WebSocket performance
+- Implement rate limiting
 
 ## Success Metrics
 
-### Technical KPIs:
-- **Deployment**: 99.9% uptime achieved
-- **Performance**: < 100KB bundle, < 2s load time
-- **Quality**: 95+ Lighthouse scores
-- **Coverage**: 80%+ test coverage
-- **Latency**: < 50ms multiplayer response
+### Week 1:
+- All PRs merged and conflicts resolved
+- Production deployment live
+- 3+ multiplayer games functional
 
-### Business KPIs:
-- **Games**: 40+ available (33% growth)
-- **Levels**: 100% game coverage
-- **Users**: 1000+ DAU (Month 1)
-- **Retention**: 40% 7-day retention
-- **Engagement**: 5+ games per session
+### Week 2:
+- 10 multiplayer games complete
+- Daily challenges live
+- < 100KB initial bundle
+
+### Week 3:
+- 1000+ registered users
+- 95+ Lighthouse scores
+- < 50ms multiplayer latency
+- 99.9% uptime
 
 ## Resource Requirements
 
-### Development Team:
-- 1 Full-stack Developer (4 weeks)
-- UI/UX Review (2 days)
-- QA Testing (ongoing)
+### Development:
+- 1 Full-stack Developer (3 weeks)
+- Code review (ongoing)
+- QA testing (final week)
 
-### Infrastructure Costs:
+### Infrastructure:
 - Vercel Pro: $20/month
 - Supabase Pro: $25/month
-- Domain/SSL: Included
+- Monitoring: Included
 - Total: ~$45/month
 
 ## Immediate Next Steps
 
-### Today (Day 1):
-1. ✅ Merge PR #22 (Cycle 1 completion)
-2. Create Cycle 2 branch and PR
-3. Begin Vercel deployment setup
-4. Configure production environment
+### Today:
+1. Resolve PR #18 conflicts
+2. Fix build errors
+3. Create Cycle 9 PR
+4. Begin Supabase setup
 
-### Week 1 Deliverables:
-- Production deployment live
-- Level system for 15+ games
-- Performance baseline established
-- Monitoring dashboards active
+### This Week:
+- Deploy to production
+- Start Chess implementation
+- Set up WebSocket infrastructure
+- Configure monitoring
 
-### End of Cycle (3 Weeks):
+### End of Cycle:
 - 40+ games available
-- 100% level system coverage
-- < 100KB bundle achieved
-- Multiplayer games operational
+- Multiplayer fully operational
 - Daily challenges live
+- Production metrics established
+
+## Technical Decisions
+
+### Multiplayer Architecture:
+- **Real-time**: Supabase Realtime channels
+- **State sync**: CRDT-based conflict resolution
+- **Matchmaking**: Queue-based with ELO matching
+- **Sessions**: Stateful with Redis backup
+
+### Performance Strategy:
+- **Code splitting**: One bundle per game
+- **Caching**: Service worker + CDN
+- **Images**: WebP with lazy loading
+- **Fonts**: Variable fonts with subsetting
+
+### Security Considerations:
+- **Authentication**: Supabase Auth with JWT
+- **Authorization**: RLS policies per table
+- **Input validation**: Zod schemas
+- **Rate limiting**: Per-user and per-IP
 
 ## Conclusion
 
-With 30 games successfully completed (100% MVP), the platform has proven its viability and is ready for production deployment. Cycle 2 focuses on operational excellence, user engagement features, and strategic expansion to 40+ games with multiplayer capabilities.
+With 100% level system coverage achieved, the platform is ready for production deployment and strategic expansion. Cycle 9 focuses on resolving outstanding issues, deploying to production, and adding multiplayer capabilities to establish the platform as a comprehensive gaming destination.
 
-The modular architecture, comprehensive testing, and established patterns enable confident scaling. With production deployment, level system integration, and new multiplayer games, the platform will establish itself as a premier gaming destination.
-
-## Risk Mitigation
-
-| Risk | Impact | Mitigation |
-|------|--------|------------|
-| Production issues | High | Staged rollout, monitoring |
-| Level balance | Medium | A/B testing, user feedback |
-| Multiplayer latency | High | Regional servers, WebSocket optimization |
-| Cost overrun | Low | Usage monitoring, scaling limits |
+The combination of conflict resolution, production deployment, and multiplayer games will create a robust, scalable platform ready for thousands of concurrent users. The modular architecture and established patterns enable confident scaling while maintaining code quality and performance.
