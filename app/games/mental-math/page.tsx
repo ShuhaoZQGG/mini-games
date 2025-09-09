@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import MentalMath from '@/components/games/mental-math'
+import MentalMathWithLevels from '@/components/games/mental-math-with-levels'
 
 export const metadata: Metadata = {
   title: 'Mental Math - Quick Calculation Game | Mini Games',
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 }
 
 export default function MentalMathPage() {
-  return <MentalMath />
+  return <MentalMathWithLevels />
 }

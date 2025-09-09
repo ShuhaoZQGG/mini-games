@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import TicTacToeGame from '@/components/games/tic-tac-toe';
+import TicTacToeWithLevels from '@/components/games/tic-tac-toe-with-levels';
 
 export const metadata: Metadata = {
   title: 'Tic-Tac-Toe - Play Online Against AI or Friend | Mini Games',
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function TicTacToePage() {
-  return <TicTacToeGame />;
+  return <TicTacToeWithLevels />;
 }

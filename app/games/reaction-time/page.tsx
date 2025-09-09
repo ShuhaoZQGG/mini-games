@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import ReactionTimeGame from '@/components/games/reaction-time';
+import ReactionTimeWithLevels from '@/components/games/reaction-time-with-levels';
 
 export const metadata: Metadata = {
   title: 'Reaction Time Test - Test Your Reflexes | Mini Games',
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function ReactionTimePage() {
-  return <ReactionTimeGame />;
+  return <ReactionTimeWithLevels />;
 }

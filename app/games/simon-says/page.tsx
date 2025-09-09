@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { SimonSays } from '@/components/games/simon-says';
+import SimonSaysWithLevels from '@/components/games/simon-says-with-levels';
 
 export const metadata: Metadata = {
   title: 'Simon Says - Memory Pattern Game | Mini Games',
@@ -10,8 +10,7 @@ export const metadata: Metadata = {
 export default function SimonSaysPage() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mb-8">Simon Says</h1>
-      <SimonSays />
+      <SimonSaysWithLevels />
     </div>
   );
 }

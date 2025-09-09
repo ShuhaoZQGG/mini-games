@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { WordSearch } from '@/components/games/word-search';
+import WordSearchWithLevels from '@/components/games/word-search-with-levels';
 
 export const metadata: Metadata = {
   title: 'Word Search - Mini Games',
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function WordSearchPage() {
-  return <WordSearch />;
+  return <WordSearchWithLevels />;
 }

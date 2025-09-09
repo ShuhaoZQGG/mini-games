@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import AimTrainer from '@/components/games/aim-trainer'
+import AimTrainerWithLevels from '@/components/games/aim-trainer-with-levels'
 
 export const metadata: Metadata = {
   title: 'Aim Trainer - Test Your Accuracy | Mini Games',
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 }
 
 export default function AimTrainerPage() {
-  return <AimTrainer />
+  return <AimTrainerWithLevels />
 }

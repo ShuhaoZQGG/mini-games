@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import Breakout from '@/components/games/breakout'
+import BreakoutWithLevels from '@/components/games/breakout-with-levels'
 
 export const metadata: Metadata = {
   title: 'Breakout - Classic Brick Breaking Game | Mini Games',
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 }
 
 export default function BreakoutPage() {
-  return <Breakout />
+  return <BreakoutWithLevels />
 }
