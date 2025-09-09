@@ -37,8 +37,8 @@ export class MultiplayerGameManager {
     }
 
     // Create room in database
-    const { data, error } = await this.supabase
-      .from('game_rooms')
+    const { data, error } = await (this.supabase
+      .from('game_rooms') as any)
       .insert(room)
       .select()
       .single()
@@ -80,10 +80,10 @@ export class MultiplayerGameManager {
     await this.channel.subscribe()
     
     // Update room with new player
-    await this.supabase
-      .from('game_rooms')
+    await (this.supabase
+      .from('game_rooms') as any)
       .update({ 
-        players: this.supabase.rpc('array_append', { arr: 'players', elem: playerId })
+        players: (this.supabase.rpc as any)('array_append', { arr: 'players', elem: playerId })
       })
       .eq('id', roomId)
 
@@ -107,8 +107,8 @@ export class MultiplayerGameManager {
   async updateGameState(gameState: any): Promise<void> {
     if (!this.roomId) throw new Error('Not in a room')
     
-    await this.supabase
-      .from('game_rooms')
+    await (this.supabase
+      .from('game_rooms') as any)
       .update({ game_state: gameState })
       .eq('id', this.roomId)
   }

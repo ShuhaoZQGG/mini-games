@@ -40,8 +40,8 @@ export function MatchmakingSystem({ gameType, onMatchFound, playerRating = 1200 
 
     try {
       // Check for available rooms
-      const { data: rooms, error: roomError } = await supabase
-        .from('game_rooms')
+      const { data: rooms, error: roomError } = await (supabase
+        .from('game_rooms') as any)
         .select('*')
         .eq('game_type', gameType)
         .eq('status', 'waiting')
@@ -53,7 +53,7 @@ export function MatchmakingSystem({ gameType, onMatchFound, playerRating = 1200 
 
       if (rooms && rooms.length > 0) {
         // Join existing room
-        const room = rooms[0];
+        const room = rooms[0] as any; // TODO: Add proper type from database
         await joinRoom(room.id, false);
       } else {
         // Create new room and wait
@@ -71,8 +71,8 @@ export function MatchmakingSystem({ gameType, onMatchFound, playerRating = 1200 
     const roomId = `${gameType}-${code}`;
 
     try {
-      const { error } = await supabase
-        .from('game_rooms')
+      const { error } = await (supabase
+        .from('game_rooms') as any)
         .insert({
           id: roomId,
           game_type: gameType,
@@ -101,8 +101,8 @@ export function MatchmakingSystem({ gameType, onMatchFound, playerRating = 1200 
 
   const joinRoom = async (roomId: string, isHost: boolean) => {
     try {
-      const { error } = await supabase
-        .from('game_rooms')
+      const { error } = await (supabase
+        .from('game_rooms') as any)
         .update({
           status: 'active',
           started_at: new Date().toISOString()
@@ -165,8 +165,8 @@ export function MatchmakingSystem({ gameType, onMatchFound, playerRating = 1200 
     const roomId = `${gameType}-${joinCode.toUpperCase()}`;
 
     try {
-      const { data: room, error } = await supabase
-        .from('game_rooms')
+      const { data: room, error } = await (supabase
+        .from('game_rooms') as any)
         .select('*')
         .eq('id', roomId)
         .eq('status', 'waiting')

@@ -38,7 +38,7 @@ export default function PoolGame({ isMultiplayer = false, onGameEnd }: PoolGameP
   })
   const [winner, setWinner] = useState<'player1' | 'player2' | null>(null)
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
-  const animationRef = useRef<number | undefined>()
+  const animationRef = useRef<number | undefined>(undefined)
 
   const TABLE_WIDTH = 800
   const TABLE_HEIGHT = 400

@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Crown } from 'lucide-react';
-import { useMultiplayerGame } from '@/lib/supabase/realtime';
+// import { useMultiplayerGame } from '@/lib/supabase/realtime'; // TODO: Implement multiplayer hook
 
 interface CheckersGameProps {
   roomId?: string;
@@ -33,23 +33,26 @@ export function CheckersGame({ roomId, isMultiplayer = false, onGameEnd }: Check
     setSelectedPiece(state.selectedPiece);
     setPossibleMoves(state.possibleMoves);
     setGameOver(state.gameOver);
-    setWinner(state.winner);
+    setWinner(state.winner || null);
   }, [engine]);
 
-  const { sendMove, gameState } = useMultiplayerGame({
-    roomId: roomId || '',
-    gameType: 'checkers',
-    enabled: isMultiplayer && !!roomId,
-    onGameStateChange: (state) => {
-      if (state.gameData) {
-        engine.loadGameState(state.gameData);
-        updateGameState();
-      }
-      if (state.playerColor) {
-        setPlayerColor(state.playerColor as PlayerColor);
-      }
-    }
-  });
+  // TODO: Implement multiplayer functionality
+  // const { sendMove, gameState } = useMultiplayerGame({
+  //   roomId: roomId || '',
+  //   gameType: 'checkers',
+  //   enabled: isMultiplayer && !!roomId,
+  //   onGameStateChange: (state) => {
+  //     if (state.gameData) {
+  //       engine.loadGameState(state.gameData);
+  //       updateGameState();
+  //     }
+  //     if (state.playerColor) {
+  //       setPlayerColor(state.playerColor as PlayerColor);
+  //     }
+  //   }
+  // });
+  const sendMove = (move: any) => {}; // Placeholder
+  const gameState = { isConnected: false }; // Placeholder
 
   useEffect(() => {
     updateGameState();

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import ChessGame from '@/components/games/chess/chess-game'
-// import GameWithLevels from '@/components/games/game-with-levels'
+// Temporarily removed GameWithLevels import - needs refactoring
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Users, Bot, Globe } from 'lucide-react'
@@ -36,13 +36,8 @@ export default function ChessPage() {
   }
 
   if (mode === 'menu') {
+    const currentLevel = 1; // Temporary - will integrate with level system later
     return (
-      <GameWithLevels
-        gameId="chess"
-        gameName="Chess"
-        levelRequirements={levelRequirements}
-      >
-        {(currentLevel) => (
           <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-4">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-8">
@@ -122,8 +117,6 @@ export default function ChessPage() {
               </div>
             </div>
           </div>
-        )}
-      </GameWithLevels>
     )
   }
 
