@@ -1,4 +1,4 @@
-import JigsawPuzzle from '@/components/games/jigsaw-puzzle'
+import JigsawPuzzleWithLevels from '@/components/games/jigsaw-puzzle-with-levels'
 
 export const metadata = {
   title: 'Jigsaw Puzzle | Mini Games',
@@ -6,5 +6,5 @@ export const metadata = {
 }
 
 export default function JigsawPuzzlePage() {
-  return <JigsawPuzzle />
+  return <JigsawPuzzleWithLevels />
 }

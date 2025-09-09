@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import CrosswordGame from '@/components/games/crossword';
+import CrosswordWithLevels from '@/components/games/crossword-with-levels';
 
 export const metadata: Metadata = {
   title: 'Crossword Puzzle - Word Game | Mini Games',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function CrosswordPage() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <CrosswordGame />
+      <CrosswordWithLevels />
     </div>
   );
 }

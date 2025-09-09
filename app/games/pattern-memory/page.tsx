@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import PatternMemoryGame from '@/components/games/pattern-memory';
+import PatternMemoryWithLevels from '@/components/games/pattern-memory-with-levels';
 
 export const metadata: Metadata = {
   title: 'Pattern Memory - Sequence Memorization Game | Mini Games',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function PatternMemoryPage() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <PatternMemoryGame />
+      <PatternMemoryWithLevels />
     </div>
   );
 }

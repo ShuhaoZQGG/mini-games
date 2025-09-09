@@ -1,4 +1,4 @@
-import DoodleJump from '@/components/games/doodle-jump'
+import DoodleJumpWithLevels from '@/components/games/doodle-jump-with-levels'
 
 export const metadata = {
   title: 'Doodle Jump | Mini Games',
@@ -6,5 +6,5 @@ export const metadata = {
 }
 
 export default function DoodleJumpPage() {
-  return <DoodleJump />
+  return <DoodleJumpWithLevels />
 }

@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { SnakeWithRealtime } from '@/components/games/snake-realtime';
+import SnakeRealtimeWithLevels from '@/components/games/snake-realtime-with-levels';
 
 export const metadata: Metadata = {
   title: 'Snake Game with Real-time Features - Live Leaderboard | Mini Games',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function SnakeRealtimePage() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <SnakeWithRealtime />
+      <SnakeRealtimeWithLevels />
     </div>
   );
 }
