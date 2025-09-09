@@ -23,6 +23,9 @@ export default function HomePage() {
     { id: 'color-switch', name: 'Color Switch', description: 'Match colors to survive', path: '/games/color-switch' },
     { id: 'sliding-puzzle', name: 'Sliding Puzzle', description: 'Classic 15-puzzle game', path: '/games/sliding-puzzle' },
     { id: 'crossword', name: 'Crossword', description: 'Word puzzle challenges', path: '/games/crossword' },
+    { id: 'solitaire', name: 'Solitaire', description: 'Classic card game', path: '/games/solitaire' },
+    { id: 'simon-says', name: 'Simon Says', description: 'Memory pattern game', path: '/games/simon-says' },
+    { id: 'whack-a-mole', name: 'Whack-a-Mole', description: 'Test your reflexes', path: '/games/whack-a-mole' },
   ]
 
   return (

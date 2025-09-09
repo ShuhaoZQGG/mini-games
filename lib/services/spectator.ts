@@ -469,7 +469,7 @@ class SpectatorService {
             viewerCount: session.viewer_count,
             maxViewers: session.max_viewers,
             isActive: session.is_active,
-            startedAt: new Date(session.started_at),
+            startedAt: new Date(session.started_at || session.created_at),
             endedAt: session.ended_at ? new Date(session.ended_at) : undefined
           }
         }

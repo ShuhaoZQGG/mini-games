@@ -210,6 +210,8 @@ export interface Database {
           is_active: boolean
           started_at: string
           ended_at: string | null
+          created_at: string
+          updated_at: string
         }
         Insert: {
           id?: string
@@ -222,6 +224,8 @@ export interface Database {
           is_active?: boolean
           started_at?: string
           ended_at?: string | null
+          created_at?: string
+          updated_at?: string
         }
         Update: {
           id?: string
@@ -234,6 +238,8 @@ export interface Database {
           is_active?: boolean
           started_at?: string
           ended_at?: string | null
+          created_at?: string
+          updated_at?: string
         }
       }
       spectator_viewers: {
@@ -269,26 +275,29 @@ export interface Database {
         Row: {
           id: string
           session_id: string
-          viewer_id: string | null
-          viewer_name: string
+          user_id: string | null
+          username: string
           message: string
-          sent_at: string
+          message_type: 'chat' | 'system' | 'reaction'
+          created_at: string
         }
         Insert: {
           id?: string
           session_id: string
-          viewer_id?: string | null
-          viewer_name: string
+          user_id?: string | null
+          username: string
           message: string
-          sent_at?: string
+          message_type?: 'chat' | 'system' | 'reaction'
+          created_at?: string
         }
         Update: {
           id?: string
           session_id?: string
-          viewer_id?: string | null
-          viewer_name?: string
+          user_id?: string | null
+          username?: string
           message?: string
-          sent_at?: string
+          message_type?: 'chat' | 'system' | 'reaction'
+          created_at?: string
         }
       }
     }
