@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 export default function HomePage() {
-  const games = [
+  const singlePlayerGames = [
     { id: 'cps-test', name: 'CPS Test', description: 'Test your clicking speed', path: '/games/cps-test' },
     { id: 'reaction-time', name: 'Reaction Time', description: 'Test your reflexes', path: '/games/reaction-time' },
     { id: 'aim-trainer', name: 'Aim Trainer', description: 'Test your accuracy', path: '/games/aim-trainer' },
@@ -26,6 +26,25 @@ export default function HomePage() {
     { id: 'solitaire', name: 'Solitaire', description: 'Classic card game', path: '/games/solitaire' },
     { id: 'simon-says', name: 'Simon Says', description: 'Memory pattern game', path: '/games/simon-says' },
     { id: 'whack-a-mole', name: 'Whack-a-Mole', description: 'Test your reflexes', path: '/games/whack-a-mole' },
+    { id: 'blackjack', name: 'Blackjack', description: 'Casino card game', path: '/games/blackjack' },
+    { id: 'video-poker', name: 'Video Poker', description: 'Jacks or Better poker', path: '/games/video-poker' },
+    { id: 'flappy-bird', name: 'Flappy Bird', description: 'Navigate through pipes', path: '/games/flappy-bird' },
+    { id: 'stack-tower', name: 'Stack Tower', description: 'Build the tallest tower', path: '/games/stack-tower' },
+    { id: 'doodle-jump', name: 'Doodle Jump', description: 'Jump to new heights', path: '/games/doodle-jump' },
+    { id: 'jigsaw', name: 'Jigsaw Puzzle', description: 'Piece together puzzles', path: '/games/jigsaw' },
+  ]
+  
+  const multiplayerGames = [
+    { id: 'chess', name: 'Chess', description: 'Strategic board game', path: '/games/chess' },
+    { id: 'pool', name: '8-Ball Pool', description: 'Classic billiards game', path: '/games/pool' },
+    { id: 'checkers', name: 'Checkers', description: 'Classic strategy game', path: '/games/checkers' },
+    { id: 'battleship', name: 'Battleship', description: 'Naval strategy game', path: '/games/battleship' },
+    { id: 'air-hockey', name: 'Air Hockey', description: 'Fast-paced table game', path: '/games/air-hockey' },
+    { id: 'go', name: 'Go', description: 'Ancient strategy game', path: '/games/go' },
+    { id: 'reversi', name: 'Reversi/Othello', description: 'Disc-flipping strategy', path: '/games/reversi' },
+    { id: 'backgammon', name: 'Backgammon', description: 'Classic board game', path: '/games/backgammon' },
+    { id: 'dots-and-boxes', name: 'Dots and Boxes', description: 'Connect dots to win', path: '/games/dots-and-boxes' },
+    { id: 'mahjong-solitaire', name: 'Mahjong Solitaire', description: 'Tile matching puzzle', path: '/games/mahjong-solitaire' },
   ]
 
   return (
@@ -38,14 +57,30 @@ export default function HomePage() {
       </section>
 
       <div className="container-responsive py-12">
-        <section>
-          <h2 className="text-2xl font-semibold mb-6">Popular Games</h2>
+        <section className="mb-12">
+          <h2 className="text-2xl font-semibold mb-6">Single Player Games</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {games.map((game) => (
+            {singlePlayerGames.map((game) => (
               <Link key={game.id} href={game.path}>
                 <div className="game-card cursor-pointer hover:scale-105 transition-transform">
                   <h4 className="text-xl font-semibold mb-2">{game.name}</h4>
                   <p className="text-gray-600 dark:text-gray-400">{game.description}</p>
+                  <button className="mt-4 btn-primary">Play Now</button>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+        
+        <section>
+          <h2 className="text-2xl font-semibold mb-6">Multiplayer Games</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {multiplayerGames.map((game) => (
+              <Link key={game.id} href={game.path}>
+                <div className="game-card cursor-pointer hover:scale-105 transition-transform border-2 border-blue-500">
+                  <h4 className="text-xl font-semibold mb-2">{game.name}</h4>
+                  <p className="text-gray-600 dark:text-gray-400">{game.description}</p>
+                  <span className="inline-block px-2 py-1 text-xs bg-blue-500 text-white rounded mb-2">Multiplayer</span>
                   <button className="mt-4 btn-primary">Play Now</button>
                 </div>
               </Link>
