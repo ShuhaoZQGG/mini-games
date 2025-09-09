@@ -150,3 +150,6 @@ export class MultiplayerGameManager {
     })
   }
 }
+
+// Export the useMultiplayerGame hook from hooks directory
+export { useMultiplayerGame } from '@/hooks/use-multiplayer-game'
