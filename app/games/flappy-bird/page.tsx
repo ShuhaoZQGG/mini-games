@@ -1,4 +1,4 @@
-import FlappyBird from '@/components/games/flappy-bird'
+import FlappyBirdWithLevels from '@/components/games/flappy-bird-with-levels'
 
 export const metadata = {
   title: 'Flappy Bird | Mini Games',
@@ -6,5 +6,5 @@ export const metadata = {
 }
 
 export default function FlappyBirdPage() {
-  return <FlappyBird />
+  return <FlappyBirdWithLevels />
 }

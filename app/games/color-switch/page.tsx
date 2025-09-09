@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import ColorSwitchGame from '@/components/games/color-switch';
+import ColorSwitchWithLevels from '@/components/games/color-switch-with-levels';
 
 export const metadata: Metadata = {
   title: 'Color Switch - Color Matching Reflex Game | Mini Games',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function ColorSwitchPage() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <ColorSwitchGame />
+      <ColorSwitchWithLevels />
     </div>
   );
 }
