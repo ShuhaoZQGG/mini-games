@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import MinesweeperGame from '@/components/games/minesweeper';
+import MinesweeperWithLevels from '@/components/games/minesweeper-with-levels';
 
 export const metadata: Metadata = {
   title: 'Minesweeper - Classic Puzzle Game Online | Mini Games',
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function MinesweeperPage() {
-  return <MinesweeperGame />;
+  return <MinesweeperWithLevels />;
 }
