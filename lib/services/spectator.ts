@@ -253,13 +253,12 @@ class SpectatorService {
       const viewer = this.viewers.get(viewerId)
       if (!viewer) return
 
-      // Temporarily disabled due to type issues
-      // if (supabase && viewer.id) {
-      //   await supabase
-      //     .from('spectator_viewers')
-      //     .update({ left_at: new Date().toISOString() } as any)
-      //     .eq('id', viewer.id)
-      // }
+      if (supabase && viewer.id) {
+        await (supabase
+          .from('spectator_viewers') as any)
+          .update({ left_at: new Date().toISOString() })
+          .eq('id', viewer.id)
+      }
 
       this.viewers.delete(viewerId)
       this.notifyViewersUpdate()
@@ -287,15 +286,15 @@ class SpectatorService {
     try {
       if (!this.currentSession) return
 
-      // Temporarily disabled due to type issues
-      // if (supabase) {
-      //   await supabase
-      //     .from('spectator_sessions')
-      //     .update({ 
-      //       is_active: false
-      //     } as any)
-      //     .eq('id', this.currentSession.id)
-      // }
+      if (supabase) {
+        await (supabase
+          .from('spectator_sessions') as any)
+          .update({ 
+            is_active: false,
+            ended_at: new Date().toISOString()
+          })
+          .eq('id', this.currentSession.id)
+      }
 
       // Notify all viewers
       await this.sendMessage({
@@ -460,18 +459,18 @@ class SpectatorService {
           .single()
 
         if (!error && data) {
-          const sessionData = data as any
+          const session = data as any
           return {
-            id: sessionData.id,
-            sessionType: sessionData.session_type,
-            targetId: sessionData.target_id,
-            hostUserId: sessionData.host_user_id,
-            hostUsername: sessionData.host_username,
-            viewerCount: sessionData.viewer_count,
-            maxViewers: sessionData.max_viewers,
-            isActive: sessionData.is_active,
-            startedAt: new Date(sessionData.created_at),
-            endedAt: undefined
+            id: session.id,
+            sessionType: session.session_type,
+            targetId: session.target_id,
+            hostUserId: session.host_user_id,
+            hostUsername: session.host_username,
+            viewerCount: session.viewer_count,
+            maxViewers: session.max_viewers,
+            isActive: session.is_active,
+            startedAt: new Date(session.started_at || session.created_at),
+            endedAt: session.ended_at ? new Date(session.ended_at) : undefined
           }
         }
       }

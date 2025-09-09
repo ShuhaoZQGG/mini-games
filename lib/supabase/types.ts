@@ -208,6 +208,8 @@ export interface Database {
           viewer_count: number
           max_viewers: number
           is_active: boolean
+          started_at: string
+          ended_at: string | null
           created_at: string
           updated_at: string
         }
@@ -220,6 +222,8 @@ export interface Database {
           viewer_count?: number
           max_viewers?: number
           is_active?: boolean
+          started_at?: string
+          ended_at?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -232,6 +236,8 @@ export interface Database {
           viewer_count?: number
           max_viewers?: number
           is_active?: boolean
+          started_at?: string
+          ended_at?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -251,7 +257,7 @@ export interface Database {
           session_id: string
           viewer_id?: string | null
           viewer_name: string
-          viewer_type?: 'registered' | 'guest'
+          viewer_type: 'registered' | 'guest'
           joined_at?: string
           left_at?: string | null
         }
