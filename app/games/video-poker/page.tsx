@@ -1,4 +1,4 @@
-import VideoPoker from '@/components/games/video-poker'
+import { VideoPokerWithLevels } from '@/components/games/video-poker-with-levels'
 
 export const metadata = {
   title: 'Video Poker | Mini Games',
@@ -6,5 +6,5 @@ export const metadata = {
 }
 
 export default function VideoPokerPage() {
-  return <VideoPoker />
+  return <VideoPokerWithLevels />
 }

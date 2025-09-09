@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { Solitaire } from '@/components/games/solitaire';
+import { SolitaireWithLevels } from '@/components/games/solitaire-with-levels';
 
 export const metadata: Metadata = {
   title: 'Solitaire - Classic Card Game | Mini Games',
@@ -8,10 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function SolitairePage() {
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mb-8">Solitaire</h1>
-      <Solitaire />
-    </div>
-  );
+  return <SolitaireWithLevels />;
 }
