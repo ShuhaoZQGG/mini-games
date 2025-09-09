@@ -26,6 +26,7 @@ export default function HomePage() {
     { id: 'solitaire', name: 'Solitaire', description: 'Classic card game', path: '/games/solitaire' },
     { id: 'simon-says', name: 'Simon Says', description: 'Memory pattern game', path: '/games/simon-says' },
     { id: 'whack-a-mole', name: 'Whack-a-Mole', description: 'Test your reflexes', path: '/games/whack-a-mole' },
+    { id: 'wordle', name: 'Wordle', description: 'Guess the 5-letter word', path: '/games/wordle' },
   ]
 
   return (
