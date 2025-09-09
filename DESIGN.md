@@ -1,764 +1,372 @@
-# Mini Games Platform - Cycle 2 UI/UX Design Specifications
+# Mini Games Platform - UI/UX Design Specifications
 
-## Executive Summary
-Comprehensive design specifications for 40+ games platform with focus on production deployment, level system integration, and multiplayer capabilities. Mobile-first approach with PWA support for offline gameplay.
+## Design Vision
+A modern, high-performance gaming platform with focus on user engagement, seamless multiplayer experiences, and responsive design across all devices.
 
 ## Design System
 
-### Core Principles
-- **Guest-First**: Full functionality without registration
-- **Mobile-First**: Touch-optimized responsive design  
-- **Performance**: < 100KB initial bundle, < 2s load time
-- **Accessibility**: WCAG 2.1 AA compliant
-- **Engagement**: Instant gameplay, minimal friction
-- **Scalability**: Support 10K+ concurrent users
+### Color Palette
+- **Primary**: #3B82F6 (Blue)
+- **Secondary**: #10B981 (Green)
+- **Accent**: #F59E0B (Orange)
+- **Error**: #EF4444 (Red)
+- **Dark Background**: #0F172A
+- **Light Background**: #FFFFFF
+- **Surface Dark**: #1E293B
+- **Surface Light**: #F8FAFC
 
-### Design Tokens
+### Typography
+- **Headings**: Inter (900/700/600)
+- **Body**: Inter (400)
+- **Monospace**: JetBrains Mono (game stats/codes)
 
-#### Colors
-```css
-/* Light Theme */
---primary: #3B82F6      /* Blue - CTAs, links */
---secondary: #10B981    /* Green - success, scores */
---accent: #F59E0B       /* Amber - achievements */
---danger: #EF4444       /* Red - errors, losses */
---surface: #FFFFFF      /* Game backgrounds */
---background: #F9FAFB   /* Page background */
---text: #111827         /* Primary text */
---text-muted: #6B7280   /* Secondary text */
+### Spacing
+- Base unit: 4px
+- Components: 8px, 16px, 24px, 32px
+- Sections: 48px, 64px, 96px
 
-/* Dark Theme */
---primary-dark: #60A5FA
---secondary-dark: #34D399
---accent-dark: #FCD34D
---danger-dark: #F87171
---surface-dark: #1F2937
---background-dark: #111827
---text-dark: #F9FAFB
---text-muted-dark: #9CA3AF
+## Core Layout Components
+
+### Navigation Bar
+```
+┌─────────────────────────────────────────────────┐
+│ 🎮 MiniGames  [Games▼] [Leaderboards] [Daily]   │
+│                              [Avatar] [Theme] 🔔 │
+└─────────────────────────────────────────────────┘
+```
+- Fixed position with backdrop blur
+- Game categories dropdown with search
+- User menu with auth/profile/settings
+- Notification bell for challenges/invites
+
+### Game Hub (Homepage)
+```
+┌─────────────────────────────────────────────────┐
+│ Welcome back, Player!     [Continue Playing >]  │
+├─────────────────────────────────────────────────┤
+│ 🔥 Daily Challenge: Beat 50 in CPS Test         │
+├─────────────────────────────────────────────────┤
+│ Featured Games                                  │
+│ ┌────┐ ┌────┐ ┌────┐ ┌────┐                   │
+│ │Chess│ │CPS │ │2048│ │Snake│ [View All >]     │
+│ └────┘ └────┘ └────┘ └────┘                   │
+├─────────────────────────────────────────────────┤
+│ Multiplayer Lobby          [Create Room] [Join] │
+│ • Chess - 234 players online                    │
+│ • Pool - 156 players online                     │
+│ • Battleship - 89 players online               │
+└─────────────────────────────────────────────────┘
 ```
 
-#### Typography
-```css
---font-display: 'Inter', system-ui    /* Headings */
---font-body: 'Inter', system-ui       /* Body text */
---font-mono: 'JetBrains Mono'         /* Scores, timers */
-
-/* Scale */
---text-xs: 0.75rem     /* 12px */
---text-sm: 0.875rem    /* 14px */
---text-base: 1rem      /* 16px */
---text-lg: 1.125rem    /* 18px */
---text-xl: 1.25rem     /* 20px */
---text-2xl: 1.5rem     /* 24px */
---text-3xl: 1.875rem   /* 30px */
---text-4xl: 2.25rem    /* 36px */
+### Game Interface Template
+```
+┌─────────────────────────────────────────────────┐
+│ [← Back] Game Title         Level 3 ⭐⭐⭐☆☆    │
+├─────────────────────────────────────────────────┤
+│                                                 │
+│              [Game Canvas Area]                 │
+│                                                 │
+├─────────────────────────────────────────────────┤
+│ Score: 1250 | Time: 02:45 | Best: 2100        │
+│ [Restart] [Pause] [Settings] [Share]           │
+└─────────────────────────────────────────────────┘
 ```
 
-#### Spacing
-```css
---space-1: 0.25rem     /* 4px */
---space-2: 0.5rem      /* 8px */
---space-3: 0.75rem     /* 12px */
---space-4: 1rem        /* 16px */
---space-6: 1.5rem      /* 24px */
---space-8: 2rem        /* 32px */
---space-12: 3rem       /* 48px */
---space-16: 4rem       /* 64px */
+## Feature-Specific Designs
+
+### Level System UI
+```
+Level Progression Bar:
+[█████████░░░░░░] Level 3 - 450/600 XP
+
+Star Requirements:
+⭐ Complete level
+⭐⭐ Score > 1000
+⭐⭐⭐ Time < 60s
+⭐⭐⭐⭐ No mistakes
+⭐⭐⭐⭐⭐ Perfect run
 ```
 
-#### Breakpoints
-```css
---mobile: 640px
---tablet: 768px
---desktop: 1024px
---wide: 1280px
+### Multiplayer Game Room
+```
+┌─────────────────────────────────────────────────┐
+│ Chess - Room #4521          [Invite] [Settings] │
+├─────────────────────────────────────────────────┤
+│ ┌─────────┐  VS  ┌─────────┐                  │
+│ │ Player1 │      │ Player2 │   [Spectators: 5]│
+│ │ ELO:1435│      │ ELO:1502│                  │
+│ └─────────┘      └─────────┘                  │
+├─────────────────────────────────────────────────┤
+│              [Chess Board]                      │
+│                                                 │
+│ White: 05:23  ●○  Black: 04:15                │
+├─────────────────────────────────────────────────┤
+│ 💬 Chat                    [Send]               │
+└─────────────────────────────────────────────────┘
 ```
 
-## Layout Architecture
-
-### Navigation Structure
+### Daily Challenge Card
 ```
-Header (Sticky)
-├── Logo/Home
-├── Game Categories Dropdown
-├── Search (Desktop)
-├── Theme Toggle
-└── Auth/Profile Button
-
-Mobile Navigation (Bottom)
-├── Home
-├── Games
-├── Leaderboards
-├── Tournaments
-└── Profile
+┌─────────────────────────────────────────────────┐
+│ 📅 Today's Challenge - Nov 9                   │
+│ ┌───────────────────────────────────────────┐ │
+│ │ Beat 100 WPM in Typing Test               │ │
+│ │ Progress: ████░░░░░░ 67/100               │ │
+│ │ Time Left: 14h 32m                        │ │
+│ │ Reward: 500 XP + Badge                    │ │
+│ └───────────────────────────────────────────┘ │
+│ [Play Now] [View Leaderboard]                  │
+└─────────────────────────────────────────────────┘
 ```
 
-### Page Templates
-
-#### Home Page
+### Leaderboard Component
 ```
-Hero Section
-├── Featured Game Carousel
-├── Quick Play CTAs
-└── Daily Challenge Card
-
-Game Categories Grid
-├── Click Speed (5 games)
-├── Puzzle (6 games)
-├── Strategy (4 games)
-├── Card Games (3 games)
-├── Typing (2 games)
-└── Casual (4+ games)
-
-Social Proof
-├── Active Players Counter
-├── Recent High Scores
-└── Tournament Winners
+┌─────────────────────────────────────────────────┐
+│ Leaderboards    [Global] [Friends] [Country]   │
+│ Game: [All Games ▼]  Period: [Today ▼]        │
+├─────────────────────────────────────────────────┤
+│ 🥇 1. AlphaGamer      Score: 9,850  🇺🇸       │
+│ 🥈 2. SpeedDemon      Score: 9,720  🇯🇵       │
+│ 🥉 3. ProPlayer123    Score: 9,650  🇬🇧       │
+│ ─────────────────────────────────────          │
+│ 📍 47. You            Score: 4,320  🇺🇸       │
+└─────────────────────────────────────────────────┘
 ```
 
-#### Game Page
-```
-Game Header
-├── Title & Category
-├── Difficulty Selector
-├── Instructions Toggle
-└── Share Button
-
-Game Canvas (Responsive)
-├── Pre-game Overlay
-├── Game Area
-├── Controls (Mobile)
-└── Post-game Results
-
-Game Stats Sidebar
-├── Personal Best
-├── Session Stats
-├── Leaderboard Preview
-└── Challenge Friends CTA
-```
-
-## Component Library
-
-### Core Components
-
-#### GameCard
-```tsx
-interface GameCardProps {
-  game: {
-    id: string
-    title: string
-    category: string
-    thumbnail: string
-    playCount: number
-    difficulty: 'easy' | 'medium' | 'hard'
-    isNew?: boolean
-    isTrending?: boolean
-  }
-  variant: 'compact' | 'featured'
-}
-```
-- Hover: Scale 1.05, shadow elevation
-- Click: Scale 0.98, ripple effect
-- Loading: Skeleton shimmer
-
-#### LeaderboardRow
-```tsx
-interface LeaderboardRowProps {
-  rank: number
-  player: {
-    id: string
-    name: string
-    avatar?: string
-    isOnline?: boolean
-  }
-  score: number
-  game: string
-  timestamp: Date
-  isCurrentUser?: boolean
-}
-```
-- Highlight current user row
-- Animate rank changes
-- Show live indicators
-
-#### TournamentCard
-```tsx
-interface TournamentCardProps {
-  tournament: {
-    id: string
-    name: string
-    game: string
-    startTime: Date
-    endTime: Date
-    entrants: number
-    maxEntrants: number
-    prize?: string
-    status: 'upcoming' | 'live' | 'completed'
-  }
-}
-```
-- Live tournaments pulse animation
-- Progress bar for registration
-- Countdown timer
-
-### Game-Specific UI
-
-#### Click Speed Games
-- Large touch targets (min 44x44px)
-- Visual feedback on click (ripple)
-- Real-time counter animations
-- Progress bars for time/clicks
-
-#### Puzzle Games
-- Grid layouts with gap spacing
-- Drag-and-drop with ghost preview
-- Hint system overlay
-- Completion celebration animation
-
-#### Strategy Games
-- Board visualization with clear cells
-- Valid move highlighting
-- AI thinking indicator
-- Move history sidebar
-
-#### Card Games
-- Card flip animations (3D transform)
-- Drag-and-drop with snap zones
-- Hand organization (fan layout)
-- Deck/discard pile visualization
-
-## User Journeys
-
-### Guest User Flow
-```
-Landing → Game Selection → Instant Play
-                ↓
-        Score Display → Share Prompt
-                ↓
-    Sign Up Upsell (Soft) → Continue as Guest
-```
-
-### New User Onboarding
-```
-Sign Up → Avatar Selection → Favorite Games
-            ↓
-    Tutorial Game → First Achievement
-            ↓
-    Friend Suggestions → Homepage
-```
-
-### Returning Player Flow
-```
-Login → Personalized Dashboard
-    ↓
-Daily Challenge → Streak Update
-    ↓
-Resume Last Game / Browse New
-```
-
-## Responsive Design
+## Responsive Breakpoints
 
 ### Mobile (< 640px)
 - Single column layout
 - Bottom navigation bar
-- Full-width game canvas
-- Collapsible game info
-- Touch-optimized controls
+- Full-screen game canvas
 - Swipe gestures for navigation
+- Touch-optimized controls
 
-### Tablet (640-1024px)
-- 2-column game grid
+### Tablet (640px - 1024px)
+- 2-column grid for game selection
 - Side navigation drawer
-- Floating action buttons
-- Split-screen multiplayer
+- Larger touch targets
 - Landscape game optimization
 
 ### Desktop (> 1024px)
-- Multi-column layouts
-- Sidebar navigation
-- Hover interactions
+- 4-column grid for games
+- Persistent sidebar
+- Hover states and tooltips
 - Keyboard shortcuts
-- Picture-in-picture spectator
-- Multi-tab tournament view
+- Multi-window support
 
-## Accessibility Features
+## User Journeys
 
-### Visual
-- High contrast mode
-- Font size controls (75%-150%)
-- Reduced motion option
-- Focus indicators (2px outline)
-- Color blind friendly palettes
+### New User Flow
+1. **Landing** → Hero with "Play Now" CTA
+2. **Game Selection** → Popular games grid
+3. **Guest Play** → Immediate gameplay
+4. **Score Screen** → "Sign up to save" prompt
+5. **Registration** → Social/email signup
+6. **Profile Setup** → Avatar, username
+7. **Dashboard** → Personalized home
 
-### Navigation
-- Skip to content links
-- Keyboard navigation (Tab, Arrow keys)
-- Screen reader announcements
-- ARIA labels and landmarks
-- Semantic HTML structure
+### Multiplayer Flow
+1. **Game Selection** → Choose multiplayer game
+2. **Lobby** → Quick match / Create room / Join code
+3. **Matchmaking** → ELO-based pairing
+4. **Game Room** → Pre-game chat/settings
+5. **Gameplay** → Real-time sync with indicators
+6. **Results** → Stats, rematch option
+7. **Social** → Add friend, share replay
 
-### Gaming
-- Difficulty adjustments
-- Pause/resume capability
-- Alternative input methods
-- Audio cues for visual elements
-- Extended time limits option
+### Daily Challenge Flow
+1. **Notification** → Push/banner for new challenge
+2. **Challenge Card** → Requirements and rewards
+3. **Gameplay** → Special challenge mode
+4. **Progress** → Live tracking against goal
+5. **Completion** → Celebration animation
+6. **Rewards** → XP, badges, leaderboard position
 
-## Animation & Micro-interactions
-
-### Page Transitions
-- Route changes: Fade (200ms)
-- Modal open: Scale + fade (300ms)
-- Drawer slide: TranslateX (250ms)
-- Tab switch: Slide (200ms)
-
-### Game Feedback
-- Score increase: Number roll-up
-- Achievement unlock: Confetti burst
-- Level complete: Star animation
-- Error: Shake (150ms)
-- Success: Check mark draw
+## Interaction Patterns
 
 ### Loading States
 - Skeleton screens for content
-- Spinner for actions (< 1s)
-- Progress bar for long operations
-- Shimmer effect for placeholders
+- Progress bars for game loading
+- Shimmer effects for dynamic content
+- Optimistic UI updates
 
-## New Game UI Specifications (Cycle 2 - 10 Games)
+### Error Handling
+- Inline validation messages
+- Toast notifications for actions
+- Fallback UI for failed loads
+- Retry mechanisms with countdown
 
-### Multiplayer Games (5)
+### Animations
+- Page transitions: 200ms fade
+- Button hover: scale(1.05)
+- Card hover: translateY(-4px)
+- Success: confetti burst
+- Level up: star explosion
 
-#### Chess
-- Board: 8x8 alternating colors, coordinate labels
-- Pieces: 3D models with shadows
-- Moves: Drag preview, valid squares highlighted
-- Timer: Dual clocks with time control
-- Analysis: Move history with algebraic notation
-- ELO: Rating display and change animations
+## Accessibility
 
-#### Checkers
-- Board: 8x8 with dark squares active
-- Pieces: 3D stackable for kings
-- Moves: Jump sequences visualized
-- Captures: Animated removal
-- Tournament: Bracket view integration
+### WCAG 2.1 AA Compliance
+- Color contrast ratio ≥ 4.5:1
+- Focus indicators on all interactive elements
+- Keyboard navigation support
+- Screen reader announcements
+- Reduced motion options
 
-#### Battleship
-- Grids: Dual view (yours/opponent)
-- Ships: Drag to place, rotate button
-- Hits: Explosion animation
-- Misses: Water splash effect
-- Turn indicator: Prominent display
-- Chat: In-game messaging
-
-#### Pool/Billiards
-- Table: Realistic felt texture
-- Balls: Physics-based movement
-- Cue: Power/angle indicators
-- Guidelines: Optional aim assist
-- Score: Ball pocketed tracker
-- Replay: Shot replay system
-
-#### Air Hockey
-- Table: Smooth surface rendering
-- Physics: 60fps collision detection
-- Paddles: Touch/mouse tracking
-- Puck: Trail effect at high speed
-- Score: LED-style display
-- Sound: Impact and goal effects
-
-### Puzzle Games (3)
-
-#### Wordle Clone
-- Grid: 5x6 letter grid
-- Keyboard: Virtual with color coding
-- Feedback: Flip animation on submit
-- Stats: Win streak, distribution
-- Share: Emoji grid generator
-- Daily: Countdown to next puzzle
-
-#### Nonogram/Picross
-- Grid: Number hints on edges
-- Cells: Click to fill, X to mark
-- Progress: Auto-check rows/columns
-- Hints: Highlight errors option
-- Timer: Optional speedrun mode
-- Gallery: Completed puzzle collection
-
-#### Flow Free
-- Grid: Various sizes (5x5 to 15x15)
-- Pipes: Color-coded paths
-- Drawing: Smooth line rendering
-- Completion: Particle celebration
-- Levels: 500+ puzzles
-- Hints: Show one connection
-
-### Action Games (2)
-
-#### Asteroids
-- Ship: Vector graphics style
-- Asteroids: Procedural shapes
-- Bullets: Limited ammo indicator
-- Hyperspace: Teleport effect
-- Lives: Ship icons display
-- Waves: Progressive difficulty
-
-#### Centipede
-- Grid: Mushroom field layout
-- Centipede: Segmented movement
-- Spider: Erratic AI pattern
-- Shooter: Bottom screen movement
-- Score: Combo multiplier
-- Power-ups: Temporary upgrades
-
-## Level System UI Integration
-
-### Universal Level Components
-
-#### Progress Bar
-```
-[=====>    ] Level 5 - 60% Complete
-Next: Speed +10%, Enemies +2
-```
-
-#### Star Rating System
-```
-⭐⭐⭐ Perfect (No mistakes, fast time)
-⭐⭐☆ Good (Few mistakes OR slow)
-⭐☆☆ Complete (Finished level)
-```
-
-#### Unlock Gates
-```
-┌─────────────┐
-│ 🔒 Level 10 │ Locked
-│ Unlock: 25⭐ │ 18/25 stars earned
-└─────────────┘
-```
-
-#### Difficulty Progression
-- Visual indicators: Easy (Green) → Medium (Yellow) → Hard (Orange) → Expert (Red) → Master (Purple)
-- Dynamic scaling: Adjust speed, complexity, enemy count
-- Milestone rewards: Unlock cosmetics, titles, badges
-
-### Game-Specific Level Adaptations
-
-#### Action Games (Snake, Tetris, Pac-Man)
-- Speed increases per level
-- New obstacles/enemies introduced
-- Power-up frequency changes
-- Score multipliers increase
-
-#### Puzzle Games (Sudoku, 2048, Minesweeper)
-- Grid size expansion
-- Time limits decrease
-- Hint availability reduces
-- Complexity algorithms scale
-
-#### Skill Games (Typing, Mental Math, Memory)
-- Word/problem difficulty increases
-- Time pressure intensifies
-- Sequence length grows
-- Accuracy requirements rise
+### Game Accessibility
+- Colorblind modes
+- Adjustable game speed
+- Visual/audio cues toggle
+- Pause functionality
+- Skip animations option
 
 ## Performance Optimizations
 
-### Image Loading
-- Lazy load below fold
-- WebP with fallbacks
-- Responsive srcset
-- Blur-up placeholders
-- CDN delivery
+### Initial Load
+- Critical CSS inline
+- Lazy load below-fold content
+- Preload game assets on hover
+- Service worker for offline play
+- WebP images with fallbacks
 
-### Code Splitting
-- Route-based chunks
-- Game component lazy load
-- Vendor bundle separation
-- Dynamic imports for features
+### Runtime Performance
+- RequestAnimationFrame for games
+- Web Workers for AI opponents
+- Virtual scrolling for leaderboards
+- Debounced search inputs
+- Memoized expensive calculations
 
-### Caching Strategy
-- Static assets: 1 year
-- API responses: 5 minutes
-- User data: Session storage
-- Game state: Local storage
+## Supabase Auth Integration
 
-## Production UI Requirements
-
-### Vercel Deployment Dashboard
+### Sign-In Modal
 ```
-┌────────────────────────────────┐
-│ Deployment Status              │
-│ ✅ Build: Success (87.2KB)     │
-│ ✅ Tests: 30/30 passing        │
-│ ✅ Preview: Ready              │
-│ [View Site] [View Logs]        │
-└────────────────────────────────┘
-```
-
-### Performance Monitoring
-```
-Core Web Vitals
-├── LCP: 1.8s ✅ (Good)
-├── FID: 45ms ✅ (Good)
-├── CLS: 0.05 ✅ (Good)
-└── TTI: 2.3s ✅ (Good)
-
-Bundle Analysis
-├── Initial: 95KB (Target: <100KB)
-├── Lazy: 450KB (Games)
-└── Total: 545KB
-```
-
-### Daily Challenges UI
-```
-┌─────────────────────────────┐
-│ Today's Challenge: Snake    │
-│ Goal: Score 5000+ points    │
-│ ⏱ 18:32:15 remaining       │
-├─────────────────────────────┤
-│ Leaderboard                 │
-│ 1. Player1 - 8,250         │
-│ 2. Player2 - 7,900         │
-│ 3. Player3 - 6,500         │
-├─────────────────────────────┤
-│ Your Best: 4,200           │
-│ [Try Again] [Share]         │
-└─────────────────────────────┘
-```
-
-### Multiplayer Lobby
-```
-┌─────────────────────────────┐
-│ Quick Match - Chess         │
-│ 🔍 Finding opponent...      │
-│ 234 players online          │
-├─────────────────────────────┤
-│ Or Create Private Game:     │
-│ Room Code: [ABCD]           │
-│ [Copy Link] [Share]         │
-└─────────────────────────────┘
-```
-
-## Implementation Priority (Cycle 2)
-
-### Phase 1: Production Deployment (Days 1-3)
-1. Environment configuration UI
-2. Deployment status dashboard
-3. Monitoring widgets
-4. Error tracking interface
-
-### Phase 2: Level System (Days 4-7)  
-1. Progress bars for all 30 games
-2. Star rating displays
-3. Unlock gate components
-4. Achievement notifications
-
-### Phase 3: New Games (Days 8-15)
-1. Multiplayer game lobbies
-2. Real-time game boards
-3. Spectator mode views
-4. Tournament brackets
-
-### Phase 4: Platform Polish (Days 16-21)
-1. Daily challenge cards
-2. Recommendation engine UI
-3. Social features enhancement
-4. PWA install prompts
-
-## Design Handoff Notes
-
-### For Developers
-- Use Tailwind CSS classes for consistency
-- Implement shadcn/ui components
-- Follow mobile-first development
-- Test on real devices
-- Monitor Core Web Vitals
-
-### Component Props
-- All games accept difficulty prop
-- Leaderboards accept period filter
-- Cards support loading/error states
-- Forms include validation feedback
-
-### State Management
-- Game state in React hooks
-- User data in Zustand store
-- Real-time via Supabase subscriptions
-- Offline queue for score syncing
-
-### Testing Requirements
-- Cross-browser compatibility
-- Touch/mouse input parity
-- Offline mode functionality
-- Accessibility audit pass
-- Performance budget adherence
-
-## Supabase Auth UI Integration
-
-### Authentication Flow
-```
-┌─────────────────────────────┐
-│   Continue as Guest         │ Primary CTA
-├─────────────────────────────┤
-│   Sign in for Features:     │
-│   • Save Progress           │
-│   • Global Leaderboards     │
-│   • Unlock Achievements     │
-│   • Challenge Friends       │
-├─────────────────────────────┤
-│ [Google] [GitHub] [Discord] │ Social OAuth
-│ [Email Magic Link]          │ Passwordless
-└─────────────────────────────┘
+┌─────────────────────────────────────────────────┐
+│              Welcome Back!                      │
+├─────────────────────────────────────────────────┤
+│ [📧 Continue with Email      ]                 │
+│ [🔵 Continue with Google     ]                 │
+│ [🐙 Continue with GitHub     ]                 │
+│ ─────────── or ───────────                     │
+│ Email: [___________________]                   │
+│ Password: [________________]                   │
+│ [Sign In]  Forgot password?                    │
+│                                                 │
+│ New here? Sign up                              │
+└─────────────────────────────────────────────────┘
 ```
 
 ### Profile Management
 ```
-┌─────────────────────────────┐
-│ Profile Settings            │
-├─────────────────────────────┤
-│ Avatar: [Upload]            │
-│ Username: [@___________]    │
-│ Bio: [_______________]      │
-│ Theme: [●Dark ○Light]       │
-├─────────────────────────────┤
-│ Privacy                     │
-│ ☑ Public Profile            │
-│ ☑ Show on Leaderboards      │
-│ ☐ Accept Challenges         │
-├─────────────────────────────┤
-│ [Save Changes] [Sign Out]   │
-└─────────────────────────────┘
+┌─────────────────────────────────────────────────┐
+│ Profile Settings                    [Save]      │
+├─────────────────────────────────────────────────┤
+│ [Avatar]  Username: [ProGamer123_]             │
+│           Email: user@example.com              │
+│           Member since: Nov 2024               │
+├─────────────────────────────────────────────────┤
+│ Stats     Games Played: 1,234                  │
+│           Total Score: 45,678                  │
+│           Best Rank: #12 Global                │
+├─────────────────────────────────────────────────┤
+│ Privacy   [✓] Show on leaderboards             │
+│           [✓] Accept challenges                │
+│           [ ] Share activity                   │
+└─────────────────────────────────────────────────┘
 ```
 
-### Real-time Features UI
+## Component Library
 
-#### Live Spectator Count
-```
-👁 142 watching • [Join Stream]
-```
+### Buttons
+- Primary: Blue background, white text
+- Secondary: Border only, blue text
+- Danger: Red background for destructive
+- Ghost: Transparent with hover state
+- Icon: Square aspect, minimal padding
 
-#### Tournament Live Updates
-```
-🏆 Tournament Update
-Round 2 Starting Now!
-You vs PlayerName
-[Enter Match]
-```
+### Cards
+- Game card: Image, title, play count, rating
+- Stats card: Icon, metric, trend indicator
+- Player card: Avatar, name, status, actions
+- Achievement: Icon, title, progress, unlock
 
-#### Friend Activity Feed
-```
-┌─────────────────────────────┐
-│ Friend Activity             │
-├─────────────────────────────┤
-│ 🎮 Alex is playing Chess   │
-│ 🏆 Sam scored 10K in Snake │
-│ 🎯 Kit unlocked Master Aim │
-└─────────────────────────────┘
-```
+### Forms
+- Input: Border focus, error states
+- Select: Custom dropdown with search
+- Toggle: iOS-style switch
+- Slider: Range with value tooltip
+- Checkbox/Radio: Custom styled
 
-## Mobile App Considerations
+### Modals
+- Center overlay with backdrop
+- Slide-in for mobile
+- Close on escape/outside click
+- Focus trap for accessibility
 
-### PWA Install Banner
-```
-┌─────────────────────────────┐
-│ Install Mini Games          │
-│ Play offline, get notified  │
-│ about challenges!           │
-│ [Install] [Not Now]         │
-└─────────────────────────────┘
-```
+## Platform-Specific Features
 
-### Native App Features
-- Push notifications for challenges
-- Biometric authentication
-- Haptic feedback on interactions
-- Background score syncing
-- App shortcuts to favorite games
+### PWA Manifest
+- App icon: 512x512px
+- Splash screens for iOS/Android
+- Orientation: both
+- Display: standalone
+- Theme color: #3B82F6
 
-## Responsive Component Examples
+### Mobile Optimizations
+- Viewport meta tag
+- Touch gestures (swipe, pinch)
+- Safe area insets (notch)
+- Virtual keyboard handling
+- Orientation lock for games
 
-### Game Grid (Mobile)
-```
-┌──────┬──────┐
-│ Game │ Game │ 2 columns
-├──────┼──────┤
-│ Game │ Game │
-└──────┴──────┘
-```
+### Desktop Features
+- Keyboard shortcuts (R: restart, P: pause)
+- Right-click context menus
+- Drag and drop for card games
+- Multi-tab synchronization
+- Download for offline play
 
-### Game Grid (Tablet)
-```
-┌──────┬──────┬──────┐
-│ Game │ Game │ Game │ 3 columns
-├──────┼──────┼──────┤
-│ Game │ Game │ Game │
-└──────┴──────┴──────┘
-```
+## Technical Constraints
 
-### Game Grid (Desktop)
-```
-┌──────┬──────┬──────┬──────┐
-│ Game │ Game │ Game │ Game │ 4+ columns
-├──────┼──────┼──────┼──────┤
-│ Game │ Game │ Game │ Game │
-└──────┴──────┴──────┴──────┘
-```
+### Performance Targets
+- First Contentful Paint < 1.5s
+- Time to Interactive < 3.5s
+- Cumulative Layout Shift < 0.1
+- Bundle size < 100KB initial
+- 60 FPS game rendering
 
-## Success Metrics Dashboard
+### Browser Support
+- Chrome 90+
+- Firefox 88+
+- Safari 14+
+- Edge 90+
+- Mobile browsers latest 2 versions
 
-### User Engagement
-- Average session: 15+ minutes
-- Games per session: 5+
-- Return rate: 40% DAU/MAU
-- Social shares: 10% of players
+### Framework Integration
+- Next.js App Router patterns
+- shadcn/ui component usage
+- Tailwind utility classes
+- Framer Motion animations
+- Supabase client components
 
-### Technical Performance
-- Lighthouse: 95+ all categories
-- Bundle size: < 100KB initial
-- Load time: < 2s on 3G
-- Error rate: < 0.1%
+## Future Considerations
 
-## Frontend Framework Recommendations
+### Phase 2 Features
+- Tournament brackets UI
+- Replay system interface
+- Achievement showcase
+- Custom room settings
+- Voice chat indicators
 
-### Technology Stack
-- **Framework**: Next.js 14 (App Router)
-- **UI Library**: shadcn/ui + Radix
-- **Styling**: Tailwind CSS
-- **Animation**: Framer Motion
-- **State**: Zustand + TanStack Query
-- **Forms**: React Hook Form + Zod
-- **Real-time**: Supabase Realtime
-- **Charts**: Recharts
-- **Icons**: Lucide React
+### Monetization UI
+- Premium badge display
+- Ad placement zones
+- In-game currency display
+- Shop/store interface
+- Subscription management
 
-### Component Architecture
-```
-/components
-  /ui           # shadcn/ui base components
-  /game         # Game-specific components
-  /layout       # Layout components
-  /features     # Feature components
-  /shared       # Shared utilities
-```
-
-### Design Constraints for Development
-
-1. **Mobile Performance**
-   - Limit animations on low-end devices
-   - Use CSS transforms over JavaScript
-   - Implement virtual scrolling for lists
-   - Lazy load below-fold content
-
-2. **Accessibility**
-   - Maintain 4.5:1 color contrast
-   - Provide keyboard alternatives
-   - Include skip navigation links
-   - Test with screen readers
-
-3. **Browser Support**
-   - Chrome 90+, Firefox 88+, Safari 14+
-   - Progressive enhancement for older browsers
-   - Polyfills for missing features
-   - Graceful degradation strategy
+### Social Features
+- Friend activity feed
+- Guild/clan interfaces
+- Direct messaging
+- Game invitations
+- Social media sharing
