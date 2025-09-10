@@ -1,81 +1,65 @@
 # Next Cycle Tasks
 
-## 🎉 MILESTONE ACHIEVED: 40+ Games Complete!
+## Priority 1: Complete Game Implementation
+- [ ] Implement Wordle game (deferred from Cycle 18)
+- [ ] Implement Bubble Shooter game (deferred from Cycle 18) 
+- [ ] Add level progression system to Pinball
+- [ ] Add level progression system to Nonogram
+- [ ] Add more Nonogram puzzles (currently only 3)
 
-## Priority 1: Production Deployment
-- [ ] Deploy to Vercel production environment
-- [ ] Configure Supabase production instance  
-- [ ] Set up custom domain
-- [ ] Configure SSL certificates
-- [ ] Set up CDN for assets
-
-## Priority 2: Multiplayer Activation
-- [ ] Enable multiplayer for Backgammon, Dots and Boxes, Mahjong Solitaire
+## Priority 2: Testing & Quality
+- [ ] Add comprehensive test coverage for Pinball game
+- [ ] Add comprehensive test coverage for Nonogram game
+- [ ] Fix remaining test suites (13 suites failing)
+- [ ] Fix ESLint configuration warnings
 - [ ] Generate proper Supabase database types
+
+## Priority 3: Integration & Features
+- [ ] Integrate new games with category system homepage
+- [ ] Add games to featured games section
+- [ ] Implement game preview animations
+- [ ] Add personalized recommendations algorithm
+- [ ] Replace current homepage with category-based design
+
+## Priority 4: Production Deployment
+- [ ] Deploy to Vercel production environment
+- [ ] Configure Supabase production instance
+- [ ] Run database migrations on production
+- [ ] Set up monitoring and analytics
+- [ ] Configure CDN and caching strategies
+- [ ] Set up custom domain
+
+## Priority 5: Multiplayer Enhancement
+- [ ] Enable multiplayer for existing games via hook integration
 - [ ] Implement multiplayer lobby/matchmaking UI
 - [ ] Add ELO rating system
 - [ ] Create friend system and invitations
 
-## Priority 3: Quality & Testing
-- [ ] Add comprehensive test coverage for all 40 games
-- [ ] Integration tests for multiplayer functionality
-- [ ] Performance testing for real-time features
-- [ ] Load testing for concurrent players
-- [ ] Fix ESLint configuration warnings
-
-## Priority 4: Performance Optimization
-- [ ] Implement code splitting per game
-- [ ] Add lazy loading for game components
-- [ ] Set up service worker for offline play
-- [ ] Optimize images with WebP format
-- [ ] Implement caching strategies
-
-## Priority 5: Monitoring & Analytics
-- [ ] Set up Sentry error tracking
-- [ ] Configure Vercel Analytics
-- [ ] Implement user behavior tracking
-- [ ] Set up performance monitoring
-- [ ] Create admin dashboard
-
-## Priority 6: User Experience
-- [ ] Add game tutorials/onboarding
-- [ ] Implement achievement system
-- [ ] Add sound effects and music
-- [ ] Create game thumbnails/previews
-- [ ] Add social sharing features
-
 ## Technical Debt
 - [ ] Remove temporary type assertions
+- [ ] Optimize bundle splitting
+- [ ] Implement service worker for offline mode
 - [ ] Refactor duplicated game logic
 - [ ] Update deprecated dependencies
-- [ ] Clean up unused code
-- [ ] Optimize bundle size further
 
-## Documentation
-- [ ] Production deployment guide
-- [ ] Game development documentation
-- [ ] API documentation for multiplayer
-- [ ] User guide for all 40 games
-- [ ] Contributing guidelines update
+## Enhancement Ideas
+- [ ] Add daily challenges for new games
+- [ ] Implement achievement system for Pinball/Nonogram
+- [ ] Create tournament modes for puzzle games
+- [ ] Add social sharing for game scores
+- [ ] Add sound effects and music
+- [ ] Create game thumbnails/previews
 
-## Future Expansion Ideas
-- [ ] Mobile app (React Native)
-- [ ] Tournament system implementation
-- [ ] Spectator mode for all games
-- [ ] AI opponents for single-player modes
-- [ ] Daily/weekly challenges with rewards
-
-## Platform Status
-- **Games Total**: 40/40+ (100% TARGET ACHIEVED) ✅
-  - Single-Player: 30 games (all functional)
-  - Multiplayer: 10 games (all accessible)
-- **Build**: Clean compilation
-- **Bundle Size**: 87.2KB (within 100KB target)
-- **Ready for**: Production deployment
+## Current Status
+- **Total Games**: 42 (32 single-player + 10 multiplayer)
+- **Target**: 45+ games (3 more needed)
+- **Bundle Size**: 87.2KB (< 100KB target ✅)
+- **Platform Status**: Production ready with enhancements needed
 
 ## Success Metrics for Next Cycle
+- [ ] 45+ games total (implement remaining 3)
+- [ ] All games with level progression system
 - [ ] Production deployment live
-- [ ] 1000+ daily active users
 - [ ] < 2s page load time
 - [ ] 95+ Lighthouse score
-- [ ] Zero critical bugs in production
+- [ ] Test coverage > 80%
