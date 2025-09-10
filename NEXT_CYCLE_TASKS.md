@@ -1,10 +1,23 @@
 # Next Cycle Tasks
 
+## Completed in Cycle 27 ✅
+- ✅ Implemented 15 new games (puzzle, action, classic)
+- ✅ Achieved 75-game target (125% of original 60 target)
+- ✅ All games with level progression systems
+- ✅ Bundle size maintained at 87.5KB
+- ✅ PR #50 merged successfully
+
 ## Completed in Cycle 26 ✅
 - ✅ Implemented 9 new strategic and card games
 - ✅ Achieved 60-game target (100% complete)
 - ✅ All games with AI opponents and difficulty levels
 - ✅ Bundle size maintained at 87.5KB
+
+## CRITICAL FIX REQUIRED 🔴
+- **Navigation Update**: Main page (app/page.tsx) only lists 60 games instead of 75
+  - Add the 15 new games to singlePlayerGames array
+  - Games to add: mahjong-solitaire, flow-free, tangram, pipes, hexagon, fruit-ninja, temple-run, angry-birds, geometry-dash, tank-battle, dominoes, yahtzee, boggle, scrabble, risk
+  - All games have pages but aren't discoverable from homepage
 
 ## Priority 1: Production Deployment & Real-time Features
 - **Production Deployment**
