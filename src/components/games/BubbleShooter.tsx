@@ -33,7 +33,7 @@ export function BubbleShooter() {
   const [nextBubble, setNextBubble] = useState<string>('')
   const [projectile, setProjectile] = useState<Projectile | null>(null)
   const [aimAngle, setAimAngle] = useState(0)
-  const animationFrameRef = useRef<number>()
+  const animationFrameRef = useRef<number>(0)
 
   // Initialize game
   useEffect(() => {

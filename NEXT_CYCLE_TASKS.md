@@ -1,114 +1,106 @@
 # Next Cycle Tasks
 
-## Immediate Priority - PR #35 Revision
+## Immediate Priority - Complete Cycle 17 Implementation
 
-### Critical Action Required
-PR #35 has been reviewed and needs revision before merge. The games are well-implemented but not accessible through UI.
+### Must Complete (Cycle 17 Revision)
+1. **Implement Missing Games**
+   - [ ] Pinball game with physics engine
+   - [ ] Nonogram puzzle game with grid logic
 
-**Next Developer Must:**
-1. Fix navigation integration for new games
-2. Add Air Hockey, Go, and Reversi to game list component
-3. Fix ESLint configuration warnings
-4. Re-test user flow from homepage to games
-5. Update PR and request re-review
+2. **Fix Integration Issues**
+   - [ ] Add Wordle to navigation menu
+   - [ ] Add Bubble Shooter to navigation menu
+   - [ ] Add Pinball to navigation menu (once implemented)
+   - [ ] Add Nonogram to navigation menu (once implemented)
+   - [ ] Create database migration for all 4 new games
+   - [ ] Integrate games with category system
 
-### Navigation Fix Steps
-```bash
-# Checkout the PR branch
-gh pr checkout 35
+3. **Address Existing PRs**
+   - [ ] Fix PR #35 navigation for Air Hockey, Go, Reversi
+   - [ ] Review and merge PR #37 (category system)
+   - [ ] Resolve any merge conflicts
 
-# Find where existing games are registered
-grep -r "Chess\|Pool\|Checkers" src/
-
-# Add new games to the same location:
-# - Air Hockey
-# - Go 
-# - Reversi
-
-# Fix ESLint config
-# Remove deprecated options: useEslintrc, extensions
-
-# Test the changes
-npm run build
-npm run dev
-# Navigate to each new game through UI
-
-# Commit and push
-git add .
-git commit -m "fix: Add new games to navigation and fix ESLint config"
-git push
-```
-
-## After PR #35 Fixes
-
-### Remaining Multiplayer Games (Phase 2)
-1. **Backgammon**
-   - Dice rolling mechanics
-   - Doubling cube feature
-   - Move validation
-
-2. **Dots and Boxes**
-   - Line drawing interface
-   - Chain scoring system
-   - Territory calculation
-
-3. **Mahjong Solitaire**
-   - Tile matching logic
-   - Multiple layouts
-   - Hint system
-
-### Infrastructure Tasks
-1. **Database Types**
-   - Generate Supabase types properly
-   - Remove temporary type assertions
-   - Update TypeScript interfaces
-
-2. **Testing**
-   - Add unit tests for game logic
-   - Integration tests for multiplayer
-   - E2E tests for critical flows
-
-3. **Production Deployment**
-   - Configure Vercel project
-   - Set up Supabase production
-   - Deploy and monitor
+4. **Fix Test Suite**
+   - [ ] Address 14 failing test suites
+   - [ ] Add tests for Wordle game
+   - [ ] Add tests for Bubble Shooter game
+   - [ ] Add tests for Pinball (once implemented)
+   - [ ] Add tests for Nonogram (once implemented)
 
 ## Technical Debt
 
 ### High Priority
-- Fix navigation for all multiplayer games
+- Fix ESLint configuration warnings
 - Generate proper Supabase database types
-- Add loading states for multiplayer connections
-- Fix ESLint configuration
+- Remove temporary type assertions
+- Update game metadata for consistency
 
 ### Medium Priority
-- Add comprehensive test coverage
-- Implement ELO rating system
-- Create matchmaking lobby UI
-- Add game thumbnails/icons
+- Add level systems to new games
+- Implement game preview animations
+- Add to featured games section
+- Optimize bundle size further
 
 ### Low Priority
-- Implement spectator mode for all games
-- Add replay system
-- Create tournament brackets
-- Build mobile app wrapper
+- Add comprehensive documentation
+- Implement A/B testing framework
+- Add performance monitoring
 
-## Platform Status
-- **Games Total**: 37/40+ (92.5% complete)
-  - Single-Player: 30 games (all functional)
-  - Multiplayer: 7 games (4 accessible, 3 need navigation)
-- **Build**: Compiles with warnings
-- **Bundle Size**: 87.2KB (within target)
-- **Critical Issue**: New games not in navigation
+## Future Features (After Cycle 17 Completion)
 
-## Success Metrics for Next Cycle
-- [ ] All 37 games accessible through UI
-- [ ] ESLint warnings resolved
-- [ ] Basic test coverage added
-- [ ] PR #35 merged to main
-- [ ] Ready for production deployment
+### Multiplayer Enhancement
+- Implement remaining multiplayer games
+- Add spectator mode enhancements
+- Improve matchmaking algorithm
+- Add tournament scheduling
 
-## Notes
-The multiplayer infrastructure (`useMultiplayerGame` hook) from Cycle 13 is excellent and provides a solid foundation for future games. The immediate priority is making the new games discoverable through the UI - this is a simple fix that will unlock significant value.
+### Platform Features
+- Daily challenges for all games
+- Achievement badges and rewards
+- Social features (friends, chat)
+- Mobile app development
 
-Once navigation is fixed, we'll have 37 functional games (92.5% of target) with both single-player and multiplayer options, making the platform highly competitive.
+### Production Deployment
+- Set up Vercel production environment
+- Configure Supabase production instance
+- Implement CI/CD pipeline
+- Add monitoring and analytics
+
+## Database Tasks
+- Ensure all 45+ games have proper entries
+- Verify category assignments
+- Add game difficulty ratings
+- Implement user preference tracking
+
+## Performance Optimization
+- Code splitting for game components
+- Lazy loading for heavy games
+- Image optimization
+- CDN configuration
+
+## Notes for Next Developer
+
+### Critical Path
+1. First complete the 2 missing games (Pinball, Nonogram)
+2. Fix all navigation and integration issues
+3. Ensure all tests pass
+4. Then PR can be approved and merged
+
+### Known Issues
+- 14 test suites currently failing (pre-existing)
+- ESLint configuration needs update
+- Some games missing from database migration
+- PR #35 and #37 need attention
+
+### Resources
+- All game implementations follow similar patterns
+- Use existing games as templates
+- Category system is already built, just needs integration
+- Database schema supports all planned features
+
+### Success Criteria
+- All 4 new games implemented and playable
+- Navigation includes all games
+- Tests passing (or at least not worse)
+- Clean build with no errors
+- PR can be merged to main
