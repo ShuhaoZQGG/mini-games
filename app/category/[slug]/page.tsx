@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { CategoryService } from '@/services/categoryService';
 import { CategoryWithGames } from '@/types/category';
-import { CategoryLandingPage } from '@/components/CategoryLandingPage';
+import { EnhancedCategoryLandingPage } from '@/components/EnhancedCategoryLandingPage';
 
 export default function CategoryPage() {
   const params = useParams();
@@ -57,5 +57,5 @@ export default function CategoryPage() {
     );
   }
 
-  return <CategoryLandingPage category={category} />;
+  return <EnhancedCategoryLandingPage category={category} />;
 }
