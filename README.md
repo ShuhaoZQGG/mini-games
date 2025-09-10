@@ -45,7 +45,7 @@ A high-performance web application featuring a collection of engaging mini-games
 
 ## Completed Features
 
-### Games (30/30+ target - 100% Complete) ✅
+### Games (34/45+ target - 76% Complete)
 - **CPS Test**: Click speed testing with real-time calculation (with level system)
 - **Memory Match**: Card matching game with emoji pairs (with level system)
 - **Typing Test**: WPM and accuracy testing (with level system)
@@ -76,9 +76,14 @@ A high-performance web application featuring a collection of engaging mini-games
 - **Color Switch**: Physics-based color matching with obstacles (with level system)
 - **Sliding Puzzle**: 15-puzzle with multiple grid sizes (with level system)
 - **Crossword Puzzle**: Word puzzle game with hint system (with level system)
+- **Pinball**: Classic arcade pinball with physics simulation (with level system)
+- **Nonogram**: Picture logic puzzles with grid solving (with level system)
+- **Wordle**: 5-letter word guessing with difficulty levels (with level system)
+- **Bubble Shooter**: Physics-based bubble matching game (with level system)
 
 ### Platform Features
-- **Level System**: 100% coverage across all 30 games with star ratings and progression
+- **Level System**: 100% coverage across all 34 games with star ratings and progression
+- **Game Categorization**: Foundation system with 9 categories (partial implementation)
 - **Dark Mode**: System-aware theme toggle
 - **Database Schema**: Supabase tables with RLS policies and migrations
 - **Mobile Support**: Touch controls on all games
