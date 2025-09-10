@@ -1,596 +1,431 @@
-# Cycle 10: UI/UX Design Specifications - Multiplayer Expansion
+# Cycle 16: Game Categorization UI/UX Design
 
-## Executive Summary
-Design specifications for expanding from 30 to 40+ games with real-time multiplayer, daily challenges, and social features. Focus on performance (< 100KB bundle), accessibility (WCAG 2.1 AA), and mobile-first responsive design.
+## Design Overview
+Transform the mini-games platform from a linear list to an organized, discoverable ecosystem with intuitive categorization, search, and personalized recommendations.
 
-## Design System
+## Visual Design System
 
 ### Color Palette
-- **Primary**: #3B82F6 (Blue)
-- **Secondary**: #10B981 (Green)
-- **Accent**: #F59E0B (Orange)
-- **Error**: #EF4444 (Red)
-- **Dark Background**: #0F172A
-- **Light Background**: #FFFFFF
-- **Surface Dark**: #1E293B
-- **Surface Light**: #F8FAFC
+```css
+--category-quick: #10B981     /* Emerald - Quick Games */
+--category-puzzle: #8B5CF6    /* Purple - Puzzle Games */
+--category-card: #EF4444      /* Red - Card Games */
+--category-strategy: #3B82F6  /* Blue - Strategy Games */
+--category-arcade: #F59E0B    /* Amber - Arcade Classics */
+--category-skill: #06B6D4     /* Cyan - Skill & Reflex */
+--category-memory: #EC4899    /* Pink - Memory Games */
+--category-board: #84CC16     /* Lime - Board Games */
+--category-casual: #FB923C    /* Orange - Casual Games */
+--category-word: #6366F1      /* Indigo - Word Games */
+```
 
 ### Typography
-- **Headings**: Inter (900/700/600)
-- **Body**: Inter (400)
-- **Monospace**: JetBrains Mono (game stats/codes)
+- **Headings**: Inter 600-800 weight
+- **Body**: Inter 400-500 weight
+- **Game Cards**: Mono font for stats/metrics
+- **Sizes**: Responsive scale from 14px to 32px
 
-### Spacing
-- Base unit: 4px
-- Components: 8px, 16px, 24px, 32px
-- Sections: 48px, 64px, 96px
+## Core Components
 
-## Core Layout Components
-
-### Navigation Bar
+### 1. Homepage Redesign
 ```
-┌─────────────────────────────────────────────────┐
-│ 🎮 MiniGames  [Games▼] [Leaderboards] [Daily]   │
-│                              [Avatar] [Theme] 🔔 │
-└─────────────────────────────────────────────────┘
-```
-- Fixed position with backdrop blur
-- Game categories dropdown with search
-- User menu with auth/profile/settings
-- Notification bell for challenges/invites
-
-### Game Hub (Homepage)
-```
-┌─────────────────────────────────────────────────┐
-│ Welcome back, Player!     [Continue Playing >]  │
-├─────────────────────────────────────────────────┤
-│ 🔥 Daily Challenge: Beat 50 in CPS Test         │
-├─────────────────────────────────────────────────┤
-│ Featured Games                                  │
-│ ┌────┐ ┌────┐ ┌────┐ ┌────┐                   │
-│ │Chess│ │CPS │ │2048│ │Snake│ [View All >]     │
-│ └────┘ └────┘ └────┘ └────┘                   │
-├─────────────────────────────────────────────────┤
-│ Multiplayer Lobby          [Create Room] [Join] │
-│ • Chess - 234 players online                    │
-│ • Pool - 156 players online                     │
-│ • Battleship - 89 players online               │
-└─────────────────────────────────────────────────┘
+┌────────────────────────────────────────┐
+│ [Logo] Mini Games     [🔍] [👤] [🌙]  │
+├────────────────────────────────────────┤
+│ Welcome back! Continue where you left  │
+│ ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐ │
+│ │Snake │ │2048  │ │Chess │ │More→ │ │
+│ │🎮35m │ │🎮12m │ │🎮2h  │ │      │ │
+│ └──────┘ └──────┘ └──────┘ └──────┘ │
+├────────────────────────────────────────┤
+│ Browse Categories                      │
+│ ┌────────────────┐ ┌────────────────┐ │
+│ │ ⚡ Quick Games │ │ 🧩 Puzzle      │ │
+│ │ 8 games       │ │ 12 games       │ │
+│ │ < 5 min       │ │ Brain teasers  │ │
+│ └────────────────┘ └────────────────┘ │
+│ ┌────────────────┐ ┌────────────────┐ │
+│ │ 🃏 Card Games │ │ ♟️ Strategy    │ │
+│ │ 3 games       │ │ 10 games       │ │
+│ │ Classic cards │ │ Think & plan   │ │
+│ └────────────────┘ └────────────────┘ │
+│ [View All Categories →]                │
+├────────────────────────────────────────┤
+│ 🔥 Popular Right Now                   │
+│ ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐ │
+│ │CPS   │ │Snake │ │Chess │ │2048  │ │
+│ │12.5K │ │8.2K  │ │6.1K  │ │5.9K  │ │
+│ └──────┘ └──────┘ └──────┘ └──────┘ │
+└────────────────────────────────────────┘
 ```
 
-### Game Interface Template
+### 2. Category Landing Page
 ```
-┌─────────────────────────────────────────────────┐
-│ [← Back] Game Title         Level 3 ⭐⭐⭐☆☆    │
-├─────────────────────────────────────────────────┤
-│                                                 │
-│              [Game Canvas Area]                 │
-│                                                 │
-├─────────────────────────────────────────────────┤
-│ Score: 1250 | Time: 02:45 | Best: 2100        │
-│ [Restart] [Pause] [Settings] [Share]           │
-└─────────────────────────────────────────────────┘
-```
-
-## Feature-Specific Designs
-
-### Level System UI
-```
-Level Progression Bar:
-[█████████░░░░░░] Level 3 - 450/600 XP
-
-Star Requirements:
-⭐ Complete level
-⭐⭐ Score > 1000
-⭐⭐⭐ Time < 60s
-⭐⭐⭐⭐ No mistakes
-⭐⭐⭐⭐⭐ Perfect run
-```
-
-### Multiplayer Game Room
-```
-┌─────────────────────────────────────────────────┐
-│ Chess - Room #4521          [Invite] [Settings] │
-├─────────────────────────────────────────────────┤
-│ ┌─────────┐  VS  ┌─────────┐                  │
-│ │ Player1 │      │ Player2 │   [Spectators: 5]│
-│ │ ELO:1435│      │ ELO:1502│                  │
-│ └─────────┘      └─────────┘                  │
-├─────────────────────────────────────────────────┤
-│              [Chess Board]                      │
-│                                                 │
-│ White: 05:23  ●○  Black: 04:15                │
-├─────────────────────────────────────────────────┤
-│ 💬 Chat                    [Send]               │
-└─────────────────────────────────────────────────┘
+┌────────────────────────────────────────┐
+│ ← Back  🧩 Puzzle Games                │
+├────────────────────────────────────────┤
+│ 12 brain-teasing games to challenge   │
+│ your problem-solving skills            │
+├────────────────────────────────────────┤
+│ Filter: [Difficulty ▼] [Time ▼]       │
+│ Sort: [Most Popular ▼]                │
+├────────────────────────────────────────┤
+│ ┌────────────────────────────────────┐ │
+│ │ 2048                          ⭐4.8 │ │
+│ │ [Preview Image]                    │ │
+│ │ Slide tiles to reach 2048          │ │
+│ │ 🎯 Medium  ⏱️ 10-15min  👤 12.5K   │ │
+│ │ [Play Now]                         │ │
+│ └────────────────────────────────────┘ │
+│ ┌────────────────────────────────────┐ │
+│ │ Sudoku                        ⭐4.7 │ │
+│ │ [Preview Image]                    │ │
+│ │ Classic number puzzle              │ │
+│ │ 🎯 Variable ⏱️ 15-30min  👤 8.3K   │ │
+│ │ [Play Now]                         │ │
+│ └────────────────────────────────────┘ │
+└────────────────────────────────────────┘
 ```
 
-### Daily Challenge Card
+### 3. Universal Search Overlay
 ```
-┌─────────────────────────────────────────────────┐
-│ 📅 Today's Challenge - Nov 9                   │
-│ ┌───────────────────────────────────────────┐ │
-│ │ Beat 100 WPM in Typing Test               │ │
-│ │ Progress: ████░░░░░░ 67/100               │ │
-│ │ Time Left: 14h 32m                        │ │
-│ │ Reward: 500 XP + Badge                    │ │
-│ └───────────────────────────────────────────┘ │
-│ [Play Now] [View Leaderboard]                  │
-└─────────────────────────────────────────────────┘
-```
-
-### Leaderboard Component
-```
-┌─────────────────────────────────────────────────┐
-│ Leaderboards    [Global] [Friends] [Country]   │
-│ Game: [All Games ▼]  Period: [Today ▼]        │
-├─────────────────────────────────────────────────┤
-│ 🥇 1. AlphaGamer      Score: 9,850  🇺🇸       │
-│ 🥈 2. SpeedDemon      Score: 9,720  🇯🇵       │
-│ 🥉 3. ProPlayer123    Score: 9,650  🇬🇧       │
-│ ─────────────────────────────────────          │
-│ 📍 47. You            Score: 4,320  🇺🇸       │
-└─────────────────────────────────────────────────┘
+┌────────────────────────────────────────┐
+│ ┌──────────────────────────────────┐  │
+│ │ 🔍 Search games...               │  │
+│ └──────────────────────────────────┘  │
+│                                        │
+│ Recent Searches                       │
+│ • snake                               │
+│ • puzzle games                        │
+│                                        │
+│ Quick Filters                         │
+│ [🎯 Easy] [⏱️ < 5min] [👥 2-Player]  │
+│                                        │
+│ Categories                            │
+│ [🧩 Puzzle] [🃏 Cards] [♟️ Strategy]  │
+└────────────────────────────────────────┘
 ```
 
-## Responsive Breakpoints
+When typing "sudo":
+```
+┌────────────────────────────────────────┐
+│ ┌──────────────────────────────────┐  │
+│ │ 🔍 sudo                          │  │
+│ └──────────────────────────────────┘  │
+│                                        │
+│ Games (2 results)                     │
+│ ┌────────────────────────────────────┐ │
+│ │ Sudoku               🧩 Puzzle    │ │
+│ │ Classic number puzzle game        │ │
+│ └────────────────────────────────────┘ │
+│ ┌────────────────────────────────────┐ │
+│ │ Word Sudoku          🧩 Puzzle    │ │
+│ │ Letter-based sudoku variant       │ │
+│ └────────────────────────────────────┘ │
+└────────────────────────────────────────┘
+```
 
-### Mobile (< 640px)
-- Single column layout
-- Bottom navigation bar
-- Full-screen game canvas
-- Swipe gestures for navigation
-- Touch-optimized controls
+### 4. Game Card Component
+```
+┌────────────────────────────────┐
+│         [Game Thumbnail]        │
+│         [Hover: Preview GIF]    │
+├────────────────────────────────┤
+│ Game Name              ⭐ 4.5   │
+│ Short description here          │
+├────────────────────────────────┤
+│ 🎯 Easy  ⏱️ 5min  👤 1-2       │
+│ 🏷️ puzzle, logic               │
+├────────────────────────────────┤
+│        [Play Now]               │
+└────────────────────────────────┘
+```
 
-### Tablet (640px - 1024px)
-- 2-column grid for game selection
-- Side navigation drawer
-- Larger touch targets
-- Landscape game optimization
-
-### Desktop (> 1024px)
-- 4-column grid for games
-- Persistent sidebar
-- Hover states and tooltips
-- Keyboard shortcuts
-- Multi-window support
+### 5. Mobile Navigation
+```
+┌─────────────────┐
+│ ☰  Mini Games   │
+├─────────────────┤
+│ [🔍 Search]     │
+├─────────────────┤
+│ Categories      │
+│ ⚡ Quick        │
+│ 🧩 Puzzle      │
+│ 🃏 Cards       │
+│ [More ▼]       │
+├─────────────────┤
+│ Featured Games  │
+│ [Game Grid]     │
+└─────────────────┘
+```
 
 ## User Journeys
 
-### New User Flow
-1. **Landing** → Hero with "Play Now" CTA
-2. **Game Selection** → Popular games grid
-3. **Guest Play** → Immediate gameplay
-4. **Score Screen** → "Sign up to save" prompt
-5. **Registration** → Social/email signup
-6. **Profile Setup** → Avatar, username
-7. **Dashboard** → Personalized home
+### Journey 1: New User Discovery
+1. **Landing**: Homepage with category overview
+2. **Explore**: Click category (e.g., "Puzzle Games")
+3. **Filter**: Apply "Easy" difficulty filter
+4. **Preview**: Hover game card for animated preview
+5. **Play**: Click "Play Now" to start instantly
 
-### Multiplayer Flow
-1. **Game Selection** → Choose multiplayer game
-2. **Lobby** → Quick match / Create room / Join code
-3. **Matchmaking** → ELO-based pairing
-4. **Game Room** → Pre-game chat/settings
-5. **Gameplay** → Real-time sync with indicators
-6. **Results** → Stats, rematch option
-7. **Social** → Add friend, share replay
+### Journey 2: Returning Player Quick Access
+1. **Homepage**: See "Continue Playing" section
+2. **Resume**: One-click to last played game
+3. **Progress**: View level/score from where left off
+4. **Recommendations**: "Because you played Snake..."
 
-### Daily Challenge Flow
-1. **Notification** → Push/banner for new challenge
-2. **Challenge Card** → Requirements and rewards
-3. **Gameplay** → Special challenge mode
-4. **Progress** → Live tracking against goal
-5. **Completion** → Celebration animation
-6. **Rewards** → XP, badges, leaderboard position
+### Journey 3: Search-Driven Discovery
+1. **Search**: Press "/" or click search icon
+2. **Type**: Enter partial game name or category
+3. **Fuzzy Match**: See instant results with highlights
+4. **Filter**: Apply inline filters without leaving search
+5. **Navigate**: Arrow keys + Enter to select
+
+### Journey 4: Social Discovery
+1. **Leaderboard**: See trending games
+2. **Friend Activity**: "Your friends are playing..."
+3. **Challenges**: Accept daily/weekly challenges
+4. **Share**: One-click social sharing of scores
+
+## Responsive Breakpoints
+
+### Mobile (320px - 768px)
+- Single column game cards
+- Bottom navigation bar
+- Swipeable category carousel
+- Full-screen search overlay
+- Touch-optimized controls (44px min)
+
+### Tablet (768px - 1024px)
+- 2-column game grid
+- Side navigation drawer
+- Floating search bar
+- Mixed layout (featured + grid)
+
+### Desktop (1024px+)
+- 3-4 column game grid
+- Persistent sidebar navigation
+- Inline search with dropdown
+- Hover effects and previews
+- Keyboard shortcuts enabled
 
 ## Interaction Patterns
 
-### Loading States
-- Skeleton screens for content
-- Progress bars for game loading
-- Shimmer effects for dynamic content
-- Optimistic UI updates
+### Hover States
+- **Game Cards**: Animated preview + scale
+- **Categories**: Gradient overlay + icon animation
+- **Buttons**: Elevation change + color shift
+- **Links**: Underline animation
 
-### Error Handling
-- Inline validation messages
-- Toast notifications for actions
-- Fallback UI for failed loads
-- Retry mechanisms with countdown
+### Loading States
+- **Skeleton screens** for game grids
+- **Shimmer effect** for content placeholders
+- **Progressive image loading** with blur-up
+- **Optimistic UI** for user actions
 
 ### Animations
-- Page transitions: 200ms fade
-- Button hover: scale(1.05)
-- Card hover: translateY(-4px)
-- Success: confetti burst
-- Level up: star explosion
+```css
+/* Card hover */
+transition: transform 0.2s ease, box-shadow 0.2s ease;
+transform: translateY(-4px);
+
+/* Category selection */
+animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+/* Search results */
+animation: fadeIn 0.15s ease-out;
+```
 
 ## Accessibility
 
 ### WCAG 2.1 AA Compliance
-- Color contrast ratio ≥ 4.5:1
-- Focus indicators on all interactive elements
-- Keyboard navigation support
-- Screen reader announcements
-- Reduced motion options
+- **Color Contrast**: 4.5:1 minimum for text
+- **Focus Indicators**: Visible keyboard navigation
+- **Screen Readers**: Semantic HTML + ARIA labels
+- **Keyboard Nav**: Full keyboard support
+- **Skip Links**: "Skip to games" option
 
-### Game Accessibility
-- Colorblind modes
-- Adjustable game speed
-- Visual/audio cues toggle
-- Pause functionality
-- Skip animations option
+### Touch Targets
+- Minimum 44x44px for mobile
+- 8px spacing between interactive elements
+- Gesture alternatives for all actions
 
-## Performance Optimizations
+## Search & Filter UI
 
-### Initial Load
-- Critical CSS inline
-- Lazy load below-fold content
-- Preload game assets on hover
-- Service worker for offline play
-- WebP images with fallbacks
-
-### Runtime Performance
-- RequestAnimationFrame for games
-- Web Workers for AI opponents
-- Virtual scrolling for leaderboards
-- Debounced search inputs
-- Memoized expensive calculations
-
-## Supabase Auth Integration
-
-### Sign-In Modal
+### Search Features
 ```
-┌─────────────────────────────────────────────────┐
-│              Welcome Back!                      │
-├─────────────────────────────────────────────────┤
-│ [📧 Continue with Email      ]                 │
-│ [🔵 Continue with Google     ]                 │
-│ [🐙 Continue with GitHub     ]                 │
-│ ─────────── or ───────────                     │
-│ Email: [___________________]                   │
-│ Password: [________________]                   │
-│ [Sign In]  Forgot password?                    │
-│                                                 │
-│ New here? Sign up                              │
-└─────────────────────────────────────────────────┘
+┌────────────────────────────────┐
+│ Search Input                   │
+│ ┌──────────────────────────┐  │
+│ │ 🔍 Type to search...     │  │
+│ └──────────────────────────┘  │
+│                                │
+│ Filters                        │
+│ [Category ▼] [Difficulty ▼]   │
+│ [Duration ▼] [Players ▼]      │
+│                                │
+│ Active Filters                 │
+│ [✕ Puzzle] [✕ Easy] [✕ <5min] │
+│                                │
+│ Results (24 games)             │
+│ [Game Grid...]                 │
+└────────────────────────────────┘
 ```
 
-### Profile Management
+### Filter Options
+- **Category**: Multi-select checkboxes
+- **Difficulty**: Easy/Medium/Hard toggle
+- **Duration**: Range slider (1-60 minutes)
+- **Players**: 1/2/2+ radio buttons
+- **Features**: Leaderboard/Save Progress toggles
+
+## Personalization
+
+### User Dashboard
 ```
-┌─────────────────────────────────────────────────┐
-│ Profile Settings                    [Save]      │
-├─────────────────────────────────────────────────┤
-│ [Avatar]  Username: [ProGamer123_]             │
-│           Email: user@example.com              │
-│           Member since: Nov 2024               │
-├─────────────────────────────────────────────────┤
-│ Stats     Games Played: 1,234                  │
-│           Total Score: 45,678                  │
-│           Best Rank: #12 Global                │
-├─────────────────────────────────────────────────┤
-│ Privacy   [✓] Show on leaderboards             │
-│           [✓] Accept challenges                │
-│           [ ] Share activity                   │
-└─────────────────────────────────────────────────┘
-```
-
-## Component Library
-
-### Buttons
-- Primary: Blue background, white text
-- Secondary: Border only, blue text
-- Danger: Red background for destructive
-- Ghost: Transparent with hover state
-- Icon: Square aspect, minimal padding
-
-### Cards
-- Game card: Image, title, play count, rating
-- Stats card: Icon, metric, trend indicator
-- Player card: Avatar, name, status, actions
-- Achievement: Icon, title, progress, unlock
-
-### Forms
-- Input: Border focus, error states
-- Select: Custom dropdown with search
-- Toggle: iOS-style switch
-- Slider: Range with value tooltip
-- Checkbox/Radio: Custom styled
-
-### Modals
-- Center overlay with backdrop
-- Slide-in for mobile
-- Close on escape/outside click
-- Focus trap for accessibility
-
-## Platform-Specific Features
-
-### PWA Manifest
-- App icon: 512x512px
-- Splash screens for iOS/Android
-- Orientation: both
-- Display: standalone
-- Theme color: #3B82F6
-
-### Mobile Optimizations
-- Viewport meta tag
-- Touch gestures (swipe, pinch)
-- Safe area insets (notch)
-- Virtual keyboard handling
-- Orientation lock for games
-
-### Desktop Features
-- Keyboard shortcuts (R: restart, P: pause)
-- Right-click context menus
-- Drag and drop for card games
-- Multi-tab synchronization
-- Download for offline play
-
-## Technical Constraints
-
-### Performance Targets
-- First Contentful Paint < 1.5s
-- Time to Interactive < 3.5s
-- Cumulative Layout Shift < 0.1
-- Bundle size < 100KB initial
-- 60 FPS game rendering
-
-### Browser Support
-- Chrome 90+
-- Firefox 88+
-- Safari 14+
-- Edge 90+
-- Mobile browsers latest 2 versions
-
-### Framework Integration
-- Next.js App Router patterns
-- shadcn/ui component usage
-- Tailwind utility classes
-- Framer Motion animations
-- Supabase client components
-
-## Future Considerations
-
-### Phase 2 Features
-- Tournament brackets UI
-- Replay system interface
-- Achievement showcase
-- Custom room settings
-- Voice chat indicators
-
-### Monetization UI
-- Premium badge display
-- Ad placement zones
-- In-game currency display
-- Shop/store interface
-- Subscription management
-
-### Social Features
-- Friend activity feed
-- Guild/clan interfaces
-- Direct messaging
-- Game invitations
-- Social media sharing
-
-## Multiplayer Game Designs
-
-### Chess Interface
-```
-┌─────────────────────────────────────────────────┐
-│ ♔ Chess - Ranked Match         ELO: 1435 ±15   │
-├─────────────────────────────────────────────────┤
-│ Opponent: GrandMaster99 (1502)    ⏱ 05:23      │
-├─────────────────────────────────────────────────┤
-│   a  b  c  d  e  f  g  h                       │
-│ 8 [♜][♞][♝][♛][♚][♝][♞][♜] 8   Move History   │
-│ 7 [♟][♟][♟][♟][♟][♟][♟][♟] 7   1. e4 e5     │
-│ 6 [ ][ ][ ][ ][ ][ ][ ][ ] 6   2. Nf3 Nc6    │
-│ 5 [ ][ ][ ][ ][ ][ ][ ][ ] 5   3. Bb5 a6     │
-│ 4 [ ][ ][ ][ ][♙][ ][ ][ ] 4   ...           │
-│ 3 [ ][ ][ ][ ][ ][ ][ ][ ] 3                  │
-│ 2 [♙][♙][♙][♙][ ][♙][♙][♙] 2   [Analysis]     │
-│ 1 [♖][♘][♗][♕][♔][♗][♘][♖] 1   [Takeback]     │
-│   a  b  c  d  e  f  g  h       [Draw] [Resign]│
-├─────────────────────────────────────────────────┤
-│ You: WhiteKnight21              ⏱ 04:45        │
-└─────────────────────────────────────────────────┘
+┌──────────────────────────────────┐
+│ Your Gaming Profile              │
+├──────────────────────────────────┤
+│ Favorite Categories              │
+│ 🧩 Puzzle (45%)  ♟️ Strategy (30%)│
+│                                  │
+│ Play Statistics                  │
+│ Total Games: 142                 │
+│ Play Time: 24h 35m               │
+│ Current Streak: 7 days           │
+│                                  │
+│ Recommended For You              │
+│ [Personalized game suggestions]  │
+└──────────────────────────────────┘
 ```
 
-### Pool/8-Ball Interface
+### Recommendation Algorithm Display
+- "Because you enjoyed 2048..."
+- "Popular in Puzzle Games"
+- "Trending with your friends"
+- "New in your favorite categories"
+
+## Performance Indicators
+
+### Visual Feedback
+- **Loading**: Progress bar for game assets
+- **Score Updates**: Animated number transitions
+- **Achievements**: Toast notifications
+- **Network Status**: Offline indicator
+
+### Metrics Display
 ```
-┌─────────────────────────────────────────────────┐
-│ 🎱 8-Ball Pool                  Best of 3      │
-├─────────────────────────────────────────────────┤
-│ ┌───────────────────────────────────────────┐ │
-│ │                                           │ │
-│ │         [Pool Table View]                 │ │
-│ │    ○ ○ ● ● ○ ● ○                        │ │
-│ │         ⬤ (cue ball)                     │ │
-│ │                                           │ │
-│ └───────────────────────────────────────────┘ │
-│ Power: [████████░░] 80%   Spin: [↖️]          │
-│ Angle: ← → (adjust)                            │
-├─────────────────────────────────────────────────┤
-│ Solids: ● ● ● ○ ○ ○ ○  |  Stripes: ▬ ▬ ▬ ▬   │
-│ [Guidelines ON]  [3D View]  [Zoom]             │
-└─────────────────────────────────────────────────┘
+Game Performance:
+├── FPS: 60 ✓
+├── Latency: 12ms ✓
+├── Load Time: 0.8s ✓
+└── Memory: 45MB ✓
 ```
 
-### Battleship Room Setup
+## Error States
+
+### No Results
 ```
-┌─────────────────────────────────────────────────┐
-│ ⚓ Battleship - Ship Placement                  │
-├─────────────────────────────────────────────────┤
-│ Your Fleet         │  Enemy Waters              │
-│ ┌─────────────┐   │  ┌─────────────┐          │
-│ │A B C D E F G│   │  │A B C D E F G│          │
-│ │1 ▬ ▬ ▬ ▬ ▬ │   │  │1 ? ? ? ? ? ? │          │
-│ │2 · · · · · │   │  │2 ? ? ? ? ? ? │          │
-│ │3 ▬ ▬ ▬ · · │   │  │3 ? ? ? ? ? ? │          │
-│ │4 · · · · · │   │  │4 ? ? ? ? ? ? │          │
-│ │5 ▬ ▬ · · · │   │  │5 ? ? ? ? ? ? │          │
-│ └─────────────┘   │  └─────────────┘          │
-│                                                 │
-│ Ships to Place:                                │
-│ [Carrier (5)] [Battleship (4)] [Cruiser (3)]  │
-│ [Submarine (3)] [Destroyer (2)]               │
-│                                                 │
-│ [Random] [Clear] [Ready]                       │
-└─────────────────────────────────────────────────┘
+┌─────────────────────────┐
+│    No games found       │
+│         😔              │
+│                        │
+│ Try adjusting filters  │
+│ or browse categories   │
+│                        │
+│ [Browse All] [Clear]   │
+└─────────────────────────┘
 ```
 
-### Air Hockey Real-time
+### Connection Error
 ```
-┌─────────────────────────────────────────────────┐
-│ 🏒 Air Hockey         First to 7               │
-├─────────────────────────────────────────────────┤
-│ Opponent: SpeedyPuck                Score: 3   │
-│ ┌───────────────────────────────────────────┐ │
-│ │              (Goal Zone)                  │ │
-│ │     ○ <- opponent paddle                  │ │
-│ │                                           │ │
-│ │           ⚪ <- puck                      │ │
-│ │                                           │ │
-│ │     ○ <- your paddle                      │ │
-│ │              (Goal Zone)                  │ │
-│ └───────────────────────────────────────────┘ │
-│ You: IceBreaker99                   Score: 5   │
-│ Power-ups: [⚡ Speed] [🛡️ Shield] [🎯 Magnet]  │
-└─────────────────────────────────────────────────┘
+┌─────────────────────────┐
+│   Connection Lost       │
+│         📡              │
+│                        │
+│ Playing in offline mode │
+│ Scores will sync later │
+│                        │
+│ [Retry] [Continue]     │
+└─────────────────────────┘
 ```
 
-### Checkers Interface
-```
-┌─────────────────────────────────────────────────┐
-│ 🎯 Checkers - International Rules              │
-├─────────────────────────────────────────────────┤
-│   1  2  3  4  5  6  7  8                       │
-│ A [●][ ][●][ ][●][ ][●][ ]  Captures          │
-│ B [ ][●][ ][●][ ][●][ ][●]  You: 3            │
-│ C [●][ ][●][ ][●][ ][●][ ]  Opp: 1            │
-│ D [ ][ ][ ][ ][ ][ ][ ][ ]                     │
-│ E [ ][ ][ ][ ][ ][ ][ ][ ]  Turn: Yours       │
-│ F [ ][○][ ][○][ ][○][ ][○]  Time: 02:15       │
-│ G [○][ ][○][ ][○][ ][○][ ]                     │
-│ H [ ][○][ ][○][ ][○][ ][○]  [Undo] [Hint]     │
-└─────────────────────────────────────────────────┘
-Legend: ● Your pieces  ○ Opponent  ♛♕ Kings
-```
+## Implementation Priority
 
-### Daily Challenge System
-```
-┌─────────────────────────────────────────────────┐
-│ 🎯 Daily Challenges Hub                        │
-├─────────────────────────────────────────────────┤
-│ Current Streak: 🔥 7 days                      │
-│                                                 │
-│ ┌─────────────────┐ ┌─────────────────┐       │
-│ │ Challenge #1    │ │ Challenge #2    │       │
-│ │ Speed Chess     │ │ CPS Marathon    │       │
-│ │ Win in < 3 min  │ │ 100 clicks/10s  │       │
-│ │ ✅ Complete     │ │ ⏳ In Progress  │       │
-│ │ Rank: #234      │ │ 67/100         │       │
-│ └─────────────────┘ └─────────────────┘       │
-│                                                 │
-│ ┌─────────────────┐ ┌─────────────────┐       │
-│ │ Challenge #3    │ │ Bonus Challenge │       │
-│ │ Perfect Tetris  │ │ Unlock All 3   │       │
-│ │ Clear 50 lines  │ │ 1000 XP Bonus  │       │
-│ │ 🔒 Locked       │ │ 2/3 Complete   │       │
-│ └─────────────────┘ └─────────────────┘       │
-│                                                 │
-│ Time Remaining: 16:42:33                       │
-└─────────────────────────────────────────────────┘
-```
+### Phase 1: Core Navigation
+1. Category grid on homepage
+2. Basic game cards
+3. Category landing pages
+4. Mobile-responsive layout
 
-### Matchmaking Lobby
-```
-┌─────────────────────────────────────────────────┐
-│ 🎮 Quick Match - Finding Opponent              │
-├─────────────────────────────────────────────────┤
-│                                                 │
-│           ⚡ Searching for players...           │
-│                                                 │
-│      [█████████░░░░░░░░░] Estimated: 15s      │
-│                                                 │
-│ Filters:                                       │
-│ • Skill Level: Similar (±200 ELO)             │
-│ • Region: Auto                                 │
-│ • Game Mode: Ranked                           │
-│                                                 │
-│ Players Online: 1,234                          │
-│ In Queue: 23                                   │
-│                                                 │
-│ [Cancel]                                       │
-└─────────────────────────────────────────────────┘
-```
+### Phase 2: Search & Discovery
+1. Search overlay with fuzzy matching
+2. Filter system implementation
+3. Sort options
+4. Results pagination
 
-### Friend System
-```
-┌─────────────────────────────────────────────────┐
-│ 👥 Friends & Social                            │
-├─────────────────────────────────────────────────┤
-│ Online (5)                                     │
-│ ● AlphaGamer    Playing Chess    [Join] [Chat] │
-│ ● ProPlayer99   In Lobby         [Invite]      │
-│ ● SpeedDemon    Playing CPS Test [Spectate]    │
-│                                                 │
-│ Offline (12)                                   │
-│ ○ GameMaster    Last seen: 2h ago             │
-│ ○ NinjaPlayer   Last seen: 1d ago             │
-│                                                 │
-│ Pending Invites (3)                           │
-│ 📨 ChessKing99 wants to be friends [✓] [✗]    │
-│                                                 │
-│ [Add Friend] [Find Players] [Import Contacts]  │
-└─────────────────────────────────────────────────┘
-```
+### Phase 3: Personalization
+1. Continue playing section
+2. Play history tracking
+3. Basic recommendations
+4. Favorite games
 
-### Real-time Spectator View
-```
-┌─────────────────────────────────────────────────┐
-│ 👁️ Spectating: AlphaGamer vs ProPlayer99       │
-├─────────────────────────────────────────────────┤
-│ [Live Game View with 5s delay]                 │
-│                                                 │
-│ Spectators (23): You, GameFan22, ChessLover... │
-│                                                 │
-│ 💬 Spectator Chat                              │
-│ GameFan22: Great move!                        │
-│ ChessLover: This is intense                   │
-│ [Type message...]                [Send]        │
-│                                                 │
-│ [Exit] [Follow Player] [Fullscreen]           │
-└─────────────────────────────────────────────────┘
-```
+### Phase 4: Polish
+1. Animated previews
+2. Advanced recommendations
+3. Social features
+4. Achievement system
 
-## Implementation Notes
+## Technical Specifications
 
-### Frontend Technologies
-- **Framework**: Next.js 14 with App Router
+### Component Library
+- **Framework**: Next.js 14 + React 18
 - **UI Library**: shadcn/ui components
-- **Styling**: Tailwind CSS with custom design tokens
-- **Animations**: Framer Motion for smooth transitions
-- **State**: Zustand for client state, SWR for server state
-- **Real-time**: Supabase Realtime channels
+- **Styling**: Tailwind CSS + CSS Modules
+- **Animation**: Framer Motion
+- **Icons**: Lucide React
 
-### Performance Requirements
-- Initial bundle < 100KB
-- Game code splitting with dynamic imports
-- Service Worker for offline play
-- Image optimization with next/image
-- Font subsetting for critical text
+### Performance Budget
+- **First Paint**: < 1.5s
+- **Interactive**: < 3.0s
+- **Bundle Size**: < 100KB initial
+- **Image Loading**: Progressive with WebP
+- **Cache Strategy**: SWR for game metadata
 
-### Accessibility Checklist
-- ✅ Keyboard navigation for all interactions
-- ✅ ARIA labels and live regions
-- ✅ Focus management in modals
-- ✅ Color contrast 4.5:1 minimum
-- ✅ Reduced motion preferences
-- ✅ Screen reader testing
+## Design Tokens
 
-### Testing Strategy
-- Component testing with React Testing Library
-- E2E testing with Playwright
-- Visual regression with Percy
-- Performance testing with Lighthouse CI
-- Real device testing on BrowserStack
+```typescript
+const design = {
+  spacing: {
+    xs: '4px',
+    sm: '8px',
+    md: '16px',
+    lg: '24px',
+    xl: '32px'
+  },
+  borderRadius: {
+    sm: '4px',
+    md: '8px',
+    lg: '12px',
+    full: '9999px'
+  },
+  animation: {
+    fast: '150ms',
+    normal: '250ms',
+    slow: '350ms'
+  },
+  breakpoints: {
+    mobile: '320px',
+    tablet: '768px',
+    desktop: '1024px',
+    wide: '1440px'
+  }
+}
+```
+
+## Success Metrics
+- **Engagement**: 25% increase in games per session
+- **Discovery**: 40% users try 3+ categories
+- **Search Usage**: 30% adoption rate
+- **Load Time**: < 1.5s to interactive
+- **Accessibility**: 100% keyboard navigable
