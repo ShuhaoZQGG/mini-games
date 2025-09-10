@@ -422,6 +422,36 @@ const ALL_GAMES: GameMetadata[] = [
     thumbnail: '/thumbnails/crossword.png',
     path: '/games/crossword'
   },
+  {
+    id: 'wordle',
+    name: 'Wordle',
+    slug: 'wordle',
+    description: 'Guess the 5-letter word',
+    category: 'word',
+    tags: ['words', 'guessing', 'daily', 'puzzle'],
+    difficulty: 'medium',
+    avgPlayTime: 10,
+    playerCount: '1',
+    thumbnail: '/thumbnails/wordle.png',
+    path: '/games/wordle',
+    featured: true
+  },
+
+  // Additional Arcade Game
+  {
+    id: 'bubble-shooter',
+    name: 'Bubble Shooter',
+    slug: 'bubble-shooter',
+    description: 'Match and pop bubbles',
+    category: 'arcade',
+    tags: ['bubbles', 'match-3', 'physics', 'shooting'],
+    difficulty: 'easy',
+    avgPlayTime: 15,
+    playerCount: '1',
+    thumbnail: '/thumbnails/bubble-shooter.png',
+    path: '/games/bubble-shooter',
+    featured: true
+  },
 
   // Note: mental-math not included in categories as requested to focus on the 32 games listed
 ]
