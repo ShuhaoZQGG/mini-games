@@ -1,264 +1,615 @@
-# UI/UX Design Specifications
+# Cycle 24: Enhanced Category Landing Pages & New Games UI/UX Design
 
-## Design System
+## Vision
+Enhanced category landing pages with advanced filtering, social features, and 9 new strategic/card games to reach 60+ total.
 
-### Colors
-- **Primary**: #3B82F6 (Blue)
-- **Secondary**: #8B5CF6 (Purple)
-- **Success**: #10B981 (Green)
-- **Warning**: #F59E0B (Amber)
-- **Error**: #EF4444 (Red)
-- **Dark Background**: #111827
-- **Light Background**: #FFFFFF
+## Enhanced Category Landing Pages
 
-### Typography
-- **Headings**: Inter, system-ui (Bold/Semibold)
-- **Body**: Inter, system-ui (Regular)
-- **Game UI**: SF Mono, monospace
-
-### Spacing
-- Base unit: 4px
-- Component padding: 16px
-- Section spacing: 48px
-- Grid gap: 24px
-
-## Navigation Architecture
-
-### Primary Navigation
+### Hero Section with Live Stats
 ```
-Home | Categories | Leaderboards | Tournaments | Profile
-         ↓
-    [Puzzle] [Action] [Strategy] [Arcade] [Card] [Word] [Skill] [Casino] [Memory]
+┌────────────────────────────────────────────────────┐
+│ [Large Icon] STRATEGY GAMES                        │
+│ Master tactical thinking and strategic planning     │
+│                                                     │
+│ 🎮 15 Games  👥 1.2K Playing Now  ⭐ 4.8 Average  │
+│ 🏆 234 Tournaments Active  📈 +15% This Week       │
+└────────────────────────────────────────────────────┘
 ```
 
-### Category Landing Pages (/category/[slug])
-- Hero section with category icon & description
-- Filter bar: Difficulty | Play Time | Popularity
-- Game grid with enhanced cards
-- "Most Played" sidebar
-- Related categories section
-
-## Component Specifications
-
-### CategoryNavigation
-- **Location**: Below main header
-- **Style**: Horizontal scrollable pills
-- **States**: Default, Hover, Active
-- **Mobile**: Horizontal scroll with fade indicators
-
-### GameCard Enhanced
+### Advanced Multi-Filter System
 ```
-┌─────────────────────┐
-│ [Category Badge]    │
-│                     │
-│    🎮 Game Icon     │
-│                     │
-│ Game Name          │
-│ Description        │
-│                    │
-│ ⭐⭐⭐⭐☆ (4.5)     │
-│ 👥 12.3k plays     │
-│                    │
-│ [Play Now]         │
-└─────────────────────┘
+┌────────────────────────────────────────────────────┐
+│ 🔍 Search games...        [Reset Filters]          │
+├────────────────────────────────────────────────────┤
+│ DIFFICULTY        PLAY TIME         POPULARITY      │
+│ □ Beginner       □ < 5 min         □ Most Played   │
+│ ☑ Intermediate   □ 5-15 min        ☑ Top Rated    │
+│ □ Expert         ☑ 15-30 min       □ Trending Now  │
+│ □ Master         □ 30+ min         □ New Releases  │
+├────────────────────────────────────────────────────┤
+│ Showing 8 of 15 games                              │
+└────────────────────────────────────────────────────┘
 ```
 
-### CategoryBadge
-- **Position**: Top-right corner of GameCard
-- **Style**: Colored pill with icon
-- **Examples**: 
-  - 🧩 Puzzle (Purple)
-  - ⚡ Action (Red)
-  - ♟️ Strategy (Blue)
-
-### CategoryFilter
-- **Type**: Multi-select dropdown
-- **Options**: All 9 categories
-- **Behavior**: Updates game grid in real-time
-- **Mobile**: Full-width bottom sheet
-
-## Page Layouts
-
-### Homepage Enhancement
-1. **Hero Section**: Keep existing
-2. **Quick Category Access**: Icon grid (3x3)
-3. **Personalized Sections**:
-   - Recently Played (existing)
-   - Recommended for You (existing)
-   - Category Highlights (new)
-4. **Game Discovery**: Enhanced search with category filters
-
-### Category Landing Page
+### Featured Games Carousel with Rich Preview
 ```
-┌──────────────────────────────┐
-│ Header & Navigation          │
-├──────────────────────────────┤
-│ Category Hero                │
-│ [Icon] Category Name         │
-│ Description & Stats          │
-├──────────────────────────────┤
-│ Filter Bar                   │
-├─────────────┬────────────────┤
-│             │                │
-│ Game Grid   │ Sidebar        │
-│ (3 cols)    │ - Top Games   │
-│             │ - Quick Stats │
-│             │ - Related     │
-└─────────────┴────────────────┘
+┌────────────────────────────────────────────────────┐
+│ 🌟 FEATURED THIS WEEK                   < 1/3 >    │
+├────────────────────────────────────────────────────┤
+│ ┌──────────────────────────────────────┐          │
+│ │ CHESS - The Ultimate Strategy Game    │          │
+│ │ [Live Preview Animation]              │          │
+│ │                                        │          │
+│ │ ⭐ 4.9/5 (2,345 reviews)             │          │
+│ │ 👥 145 playing now                    │          │
+│ │ ⏱ Avg: 20 minutes                    │          │
+│ │ 🏅 Earn up to 500 XP                 │          │
+│ │                                        │          │
+│ │ [🎮 QUICK PLAY] [ℹ️ Learn More]      │          │
+│ └──────────────────────────────────────┘          │
+└────────────────────────────────────────────────────┘
 ```
 
-### New Game Pages (50+ Target)
+### Enhanced Game Grid with Quick Actions
+```
+┌───────────────────┐ ┌───────────────────┐
+│ CHESS             │ │ CHECKERS          │
+│ [Animated Preview]│ │ [Animated Preview]│
+│                   │ │                   │
+│ ⭐ 4.9 (2.3K)     │ │ ⭐ 4.7 (1.5K)     │
+│ 👥 145 online     │ │ 👥 89 online      │
+│ ⏱ 15-30 min      │ │ ⏱ 10-20 min      │
+│ 🏆 Tournament     │ │ 🎯 Daily Challenge│
+│                   │ │                   │
+│ [Quick Play]      │ │ [Quick Play]      │
+│ [Challenge Friend]│ │ [View Details]    │
+└───────────────────┘ └───────────────────┘
+```
 
-#### Trivia Challenge
-- **Layout**: Question card centered
-- **Elements**: Timer, Score, Progress bar
-- **Categories**: Multiple choice buttons
-- **Difficulty**: Adaptive based on performance
+### Social Sidebar with Live Updates
+```
+┌──────────────────────┐
+│ 🏆 TOP PLAYERS       │
+├──────────────────────┤
+│ 1. GrandMaster92    │
+│    2,450 ELO • 🔥23  │
+│ 2. QueenGambit      │
+│    2,380 ELO • 🔥15  │
+│ 3. KnightRider      │
+│    2,290 ELO • 🔥8   │
+├──────────────────────┤
+│ 📊 CATEGORY STATS    │
+├──────────────────────┤
+│ Games Today: 12,456  │
+│ Avg Rating: 4.8/5    │
+│ Active Players: 1.2K │
+│ Tournaments: 45      │
+├──────────────────────┤
+│ 🎮 RECENT ACTIVITY   │
+├──────────────────────┤
+│ • John beat AI Expert│
+│   in Chess (2 min)   │
+│ • Sarah achieved     │
+│   Reversi Master     │
+│ • Tournament #234    │
+│   starting in 5 min  │
+└──────────────────────┘
+```
 
-#### Asteroid Shooter
-- **Layout**: Full viewport canvas
-- **Controls**: Touch/Mouse movement
-- **HUD**: Score, Lives, Power-ups
-- **Visual**: Retro neon style
+## New Game Designs (9 Games)
 
-#### Mini Golf
-- **Layout**: Isometric view
-- **Controls**: Drag for power/direction
-- **UI**: Stroke counter, Par indicator
-- **Levels**: 9 holes with increasing difficulty
+### Chess - Complete Implementation
+```
+┌─────────────────────────────────────────┐
+│ WHITE: You        Timer: 10:00          │
+│ BLACK: Expert AI  Timer: 09:45          │
+├─────────────────────────────────────────┤
+│   A  B  C  D  E  F  G  H               │
+│ 8 ♜  ♞  ♝  ♛  ♚  ♝  ♞  ♜  8           │
+│ 7 ♟  ♟  ♟  ♟  ♟  ♟  ♟  ♟  7           │
+│ 6 ·  ·  ·  ·  ·  ·  ·  ·  6           │
+│ 5 ·  ·  ·  ·  ·  ·  ·  ·  5  Captured:│
+│ 4 ·  ·  ·  ·  ♙  ·  ·  ·  4  ♟♟♞     │
+│ 3 ·  ·  ·  ·  ·  ·  ·  ·  3  ♙♗      │
+│ 2 ♙  ♙  ♙  ♙  ·  ♙  ♙  ♙  2           │
+│ 1 ♖  ♘  ♗  ♕  ♔  ♗  ♘  ♖  1           │
+│   A  B  C  D  E  F  G  H               │
+├─────────────────────────────────────────┤
+│ [Hint] [Undo] [Resign] [Draw]          │
+│ Notation: 1.e4 e5 2.Nf3 Nc6...         │
+└─────────────────────────────────────────┘
+```
 
-#### Kakuro
-- **Layout**: Grid puzzle interface
-- **Controls**: Number input cells
-- **Helpers**: Sum indicators, Validation
-- **Difficulty**: 6x6, 9x9, 12x12 grids
+### Checkers - Jump & Capture
+```
+┌─────────────────────────────────────────┐
+│ RED TURN          Score: Red 8 - Black 7│
+├─────────────────────────────────────────┤
+│   1  2  3  4  5  6  7  8               │
+│ A ·  ●  ·  ●  ·  ●  ·  ●  A           │
+│ B ●  ·  ●  ·  ●  ·  ●  ·  B           │
+│ C ·  ●  ·  ●  ·  ●  ·  ●  C           │
+│ D ·  ·  ·  ·  ·  ·  ·  ·  D           │
+│ E ·  ·  ·  ·  ·  ·  ·  ·  E           │
+│ F ○  ·  ○  ·  ○  ·  ○  ·  F           │
+│ G ·  ○  ·  ○  ·  ○  ·  ○  G           │
+│ H ○  ·  ○  ·  ○  ·  ○  ·  H           │
+│   1  2  3  4  5  6  7  8               │
+├─────────────────────────────────────────┤
+│ ● Red  ○ White  ♔ King                 │
+│ [Mandatory captures highlighted]        │
+└─────────────────────────────────────────┘
+```
 
-#### Spider Solitaire
-- **Layout**: 10 tableau columns
-- **Controls**: Drag & drop cards
-- **Modes**: 1-suit, 2-suit, 4-suit
-- **Features**: Hint system, Undo
+### Reversi/Othello - Flipping Strategy
+```
+┌─────────────────────────────────────────┐
+│ REVERSI           Black: 32  White: 32  │
+├─────────────────────────────────────────┤
+│   A  B  C  D  E  F  G  H               │
+│ 1 ·  ·  ·  ·  ·  ·  ·  ·  1           │
+│ 2 ·  ·  ·  ·  ·  ·  ·  ·  2           │
+│ 3 ·  ·  ·  ○  ●  ·  ·  ·  3           │
+│ 4 ·  ·  ○  ●  ●  ●  ·  ·  4           │
+│ 5 ·  ·  ●  ●  ●  ○  ·  ·  5           │
+│ 6 ·  ·  ·  ●  ○  ·  ·  ·  6           │
+│ 7 ·  ·  ·  ·  ·  ·  ·  ·  7           │
+│ 8 ·  ·  ·  ·  ·  ·  ·  ·  8           │
+│   A  B  C  D  E  F  G  H               │
+├─────────────────────────────────────────┤
+│ [Valid moves shown with dots]          │
+│ AI Difficulty: [Easy][Med][Hard]       │
+└─────────────────────────────────────────┘
+```
 
-## Mobile Responsive Design
+### Backgammon - Dice & Strategy
+```
+┌─────────────────────────────────────────┐
+│ 13 14 15 16 17 18 │ BAR │ 19 20 21 22 23 24│
+│ ▼  ▼  ▼  ▼  ▼  ▼ │     │ ▼  ▼  ▼  ▼  ▼  ▼│
+│ ●  ·  ·  ·  ○  · │  ·  │ ○  ·  ·  ·  ·  ●│
+│ ●  ·  ·  ·  ○  · │  ·  │ ○  ·  ·  ·  ·  ●│
+│ ●  ·  ·  ·  ○  · │     │ ○  ·  ·  ·  ·  ●│
+│ ●  ·  ·  ·  ·  · │ ⚀⚃ │ ○  ·  ·  ·  ·  ●│
+│ ●  ·  ·  ·  ·  · │     │ ○  ·  ·  ·  ·  ●│
+│────────────────────────────────────────────│
+│ ○  ·  ·  ·  ·  · │     │ ●  ·  ·  ·  ·  ○│
+│ ○  ·  ·  ·  ·  · │ 1-4 │ ●  ·  ·  ·  ·  ○│
+│ ○  ·  ·  ·  ●  · │     │ ●  ·  ·  ·  ·  ○│
+│ ○  ·  ·  ·  ●  · │  ·  │ ●  ·  ·  ·  ·  ○│
+│ ○  ·  ·  ·  ●  · │  ·  │ ●  ·  ·  ·  ·  ○│
+│ ▲  ▲  ▲  ▲  ▲  ▲ │     │ ▲  ▲  ▲  ▲  ▲  ▲│
+│ 12 11 10  9  8  7 │ BAR │  6  5  4  3  2  1│
+├─────────────────────────────────────────┤
+│ [Roll Dice] [Double] Points to Bear: 15 │
+└─────────────────────────────────────────┘
+```
 
-### Breakpoints
-- Mobile: < 768px
-- Tablet: 768px - 1024px
-- Desktop: > 1024px
+### Card Games UI Template
 
-### Mobile Adaptations
-- **Navigation**: Bottom tab bar
-- **Game Cards**: Single column
-- **Category Pills**: Horizontal scroll
-- **Filters**: Bottom sheet overlay
-- **Games**: Touch-optimized controls
+#### Go Fish
+```
+┌─────────────────────────────────────────┐
+│ GO FISH          Pairs: You 3 - CPU 2   │
+├─────────────────────────────────────────┤
+│         OPPONENT (5 cards)               │
+│         🂠 🂠 🂠 🂠 🂠                    │
+│                                          │
+│ "Do you have any Queens?"                │
+│ "Go Fish!"                               │
+│                                          │
+│      [Ocean - 32 cards]                  │
+│           🂠                             │
+│                                          │
+│ YOUR HAND (7 cards)                      │
+│ A♥ A♦ 3♣ 7♠ K♦ Q♥ 2♠                  │
+│                                          │
+│ [Ask for: ] [A][2][3]...[K]             │
+└─────────────────────────────────────────┘
+```
 
-## Accessibility
+#### War
+```
+┌─────────────────────────────────────────┐
+│ WAR               Score: 15 - 11         │
+├─────────────────────────────────────────┤
+│         OPPONENT                         │
+│         Deck: 11 cards                   │
+│                                          │
+│         [K♠]  vs  [A♥]                  │
+│                                          │
+│         YOU WIN THIS ROUND!              │
+│                                          │
+│         YOUR DECK                        │
+│         15 cards remaining               │
+│                                          │
+│ [Play Card] [Auto Play]                  │
+└─────────────────────────────────────────┘
+```
 
-### WCAG 2.1 AA Compliance
-- **Color Contrast**: Minimum 4.5:1
-- **Focus Indicators**: Visible outlines
-- **Keyboard Navigation**: Full support
-- **Screen Readers**: ARIA labels
-- **Touch Targets**: Minimum 44x44px
+#### Crazy Eights
+```
+┌─────────────────────────────────────────┐
+│ CRAZY EIGHTS     Cards: You 5 - CPU 7   │
+├─────────────────────────────────────────┤
+│      OPPONENT (7 cards)                  │
+│      🂠 🂠 🂠 🂠 🂠 🂠 🂠                │
+│                                          │
+│   Discard: [8♦]    Draw: 23 cards       │
+│   Current Suit: ♦                        │
+│                                          │
+│ YOUR HAND                                │
+│ 2♦ 8♣ K♦ 5♠ 9♥                        │
+│                                          │
+│ [Play 2♦] [Play 8♣] [Draw Card]         │
+└─────────────────────────────────────────┘
+```
 
-### Game Accessibility
-- **Difficulty Settings**: Multiple levels
-- **Color Blind Mode**: Pattern alternatives
-- **Pause Feature**: All action games
-- **Tutorial Mode**: Interactive guides
+#### Hearts
+```
+┌─────────────────────────────────────────┐
+│ HEARTS    Round 3/13   Points: 12,8,15,5│
+├─────────────────────────────────────────┤
+│           North (8)                      │
+│           🂠 🂠 🂠                       │
+│                                          │
+│ West (15)    [K♥]     East (5)          │
+│ 🂠 🂠 🂠      Trick     🂠 🂠 🂠         │
+│              [J♥]                        │
+│              [?]                         │
+│                                          │
+│           You (12)                       │
+│ 2♣ 5♦ 7♠ 9♥ Q♠                        │
+│                                          │
+│ Hearts Broken: Yes  Leading: West        │
+└─────────────────────────────────────────┘
+```
 
-## User Journeys
+#### Spades
+```
+┌─────────────────────────────────────────┐
+│ SPADES        Bid: 4  Tricks: 2         │
+│ Team Score: Us 120 - Them 95            │
+├─────────────────────────────────────────┤
+│         Partner (Bid: 3)                 │
+│         🂠 🂠 🂠 🂠                      │
+│                                          │
+│ Left         Current        Right        │
+│ (Bid: 2)      Trick        (Bid: 3)     │
+│ 🂠 🂠        [A♠]          🂠 🂠 🂠      │
+│              [K♠]                        │
+│              [10♠]                       │
+│                                          │
+│         You (Bid: 4)                     │
+│ Q♠ J♠ 5♦ 7♣ 9♥                        │
+│                                          │
+│ Spades Lead | Your Turn                  │
+└─────────────────────────────────────────┘
+```
 
-### New User Flow
-1. Land on homepage
-2. See category grid
-3. Click preferred category
-4. View filtered games
-5. Select game
-6. Play without registration
-7. Prompted to save score (optional signup)
+## Mobile Responsive Layouts
 
-### Returning User Flow
-1. Homepage shows recent games
-2. Personalized recommendations
-3. Quick access to favorites
-4. Continue where left off
-5. View progress/achievements
+### Mobile Category Landing (375px)
+```
+┌──────────────────┐
+│ ← STRATEGY GAMES │
+│ 15 Games Available│
+├──────────────────┤
+│ [Filter] [Sort ↓]│
+├──────────────────┤
+│ 🌟 Featured      │
+│ ┌──────────────┐ │
+│ │ Chess        │ │
+│ │ [Preview]    │ │
+│ │ ⭐4.9  👥145 │ │
+│ │ [Quick Play] │ │
+│ └──────────────┘ │
+├──────────────────┤
+│ All Games        │
+│ ┌──────────────┐ │
+│ │ Checkers     │ │
+│ │ ⭐4.7  👥89  │ │
+│ └──────────────┘ │
+│ ┌──────────────┐ │
+│ │ Reversi      │ │
+│ │ ⭐4.8  👥45  │ │
+│ └──────────────┘ │
+└──────────────────┘
+```
 
-### Category Discovery Flow
-1. Browse categories from nav
-2. Enter category page
-3. Filter by preference
-4. Preview game details
-5. Start playing
-6. Get related suggestions
+### Mobile Filter Sheet
+```
+┌──────────────────┐
+│ Filters      [X] │
+├──────────────────┤
+│ DIFFICULTY       │
+│ ○ All            │
+│ ○ Beginner       │
+│ ● Intermediate   │
+│ ○ Expert         │
+├──────────────────┤
+│ PLAY TIME        │
+│ ○ Any            │
+│ ○ Quick (<5m)    │
+│ ● Medium (5-15m) │
+│ ○ Long (15m+)    │
+├──────────────────┤
+│ [Apply] [Reset]  │
+└──────────────────┘
+```
 
-## Performance Considerations
+## Component Architecture
 
-### Loading States
-- **Skeleton screens**: For game cards
-- **Progressive images**: Lazy load with blur-up
-- **Instant navigation**: Prefetch on hover
-- **Offline support**: PWA with cached games
+### FilterBar Component
+```typescript
+interface FilterBarProps {
+  categories: Category[]
+  onFilterChange: (filters: FilterState) => void
+  defaultFilters?: FilterState
+}
+
+interface FilterState {
+  difficulty: Difficulty[]
+  playTime: PlayTime[]
+  popularity: PopularitySort
+  searchQuery: string
+}
+```
+
+### FeaturedCarousel Component
+```typescript
+interface FeaturedCarouselProps {
+  games: Game[]
+  autoPlayInterval?: number
+  onQuickPlay: (gameId: string) => void
+  showPreview?: boolean
+}
+```
+
+### CategoryStats Component
+```typescript
+interface CategoryStatsProps {
+  categoryId: string
+  realtime?: boolean
+  showLeaderboard?: boolean
+  showActivity?: boolean
+}
+```
+
+### QuickPlay Component
+```typescript
+interface QuickPlayProps {
+  gameId: string
+  variant?: 'modal' | 'inline' | 'fullscreen'
+  onClose?: () => void
+  preloadAssets?: boolean
+}
+```
+
+### GameRating Component
+```typescript
+interface GameRatingProps {
+  gameId: string
+  userId?: string
+  onRate: (rating: number) => void
+  showReviews?: boolean
+  allowHalfStars?: boolean
+}
+```
+
+## Database Schema Extensions
+
+```sql
+-- Enhanced Category Views
+CREATE TABLE category_views (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  category_id UUID REFERENCES categories(id),
+  user_id UUID REFERENCES auth.users(id),
+  session_id VARCHAR(255),
+  viewed_at TIMESTAMPTZ DEFAULT NOW(),
+  time_spent INTEGER, -- seconds
+  games_viewed JSONB -- array of game IDs viewed
+);
+
+-- Game Ratings with Reviews
+CREATE TABLE game_ratings (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  game_id VARCHAR(50) NOT NULL,
+  user_id UUID REFERENCES auth.users(id),
+  rating DECIMAL(2,1) CHECK (rating >= 1 AND rating <= 5),
+  review TEXT,
+  helpful_count INTEGER DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(game_id, user_id)
+);
+
+-- Featured Games Management
+CREATE TABLE featured_games (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  game_id VARCHAR(50) NOT NULL,
+  category_id UUID REFERENCES categories(id),
+  position INTEGER NOT NULL,
+  featured_until TIMESTAMPTZ,
+  click_count INTEGER DEFAULT 0,
+  active BOOLEAN DEFAULT true,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Quick Play Sessions
+CREATE TABLE quick_play_sessions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  game_id VARCHAR(50) NOT NULL,
+  user_id UUID REFERENCES auth.users(id),
+  started_at TIMESTAMPTZ DEFAULT NOW(),
+  ended_at TIMESTAMPTZ,
+  score INTEGER,
+  completed BOOLEAN DEFAULT false
+);
+```
+
+## Performance Specifications
+
+### Loading Performance
+- Category page: < 1s FCP, < 1.5s TTI
+- Game preview: < 300ms to interactive
+- Filter apply: < 50ms visual feedback
+- Quick play: < 500ms to playable
+- Rating submit: < 100ms optimistic update
 
 ### Bundle Optimization
-- **Code splitting**: Per category/game
-- **Dynamic imports**: Load games on demand
-- **Asset optimization**: WebP images, compressed sprites
-- **Target**: < 100KB initial bundle
+- Category page code: < 8KB gzipped
+- Per game lazy load: < 5KB chunks
+- Featured carousel: < 3KB
+- Filter system: < 2KB
+- Maintain total < 100KB target
+
+### Caching Strategy
+- Category data: 5 minute cache
+- Game metadata: 1 hour cache
+- Ratings: 30 second cache, optimistic UI
+- Featured games: 10 minute cache
+- User preferences: Persistent localStorage
+
+## Accessibility Requirements
+
+### WCAG 2.1 AA Compliance
+- Focus indicators: 2px solid outline
+- Keyboard navigation: Tab order logical
+- Screen readers: Descriptive ARIA labels
+- Color contrast: 4.5:1 minimum
+- Touch targets: 44x44px minimum
+
+### Game Accessibility
+- Colorblind modes for all games
+- Adjustable difficulty levels
+- Pause/resume all action games
+- Save progress automatically
+- Tutorial mode with hints
+
+## Animation Specifications
+
+### Micro-interactions
+- Filter toggle: 150ms ease-out
+- Card hover: 100ms scale(1.02)
+- Quick play: 250ms slide-up
+- Rating stars: 200ms fill
+- Carousel: 300ms cubic-bezier
+
+### Page Transitions
+- Route change: 200ms fade
+- Filter results: 150ms stagger
+- Lazy load: 100ms fade-in
+- Modal open: 250ms spring
+- Skeleton: Shimmer 1.5s infinite
+
+## Dark Mode Adjustments
+
+### Color Palette
+```css
+--bg-primary: #0a0a0a;
+--bg-secondary: #1a1a1a;
+--bg-tertiary: #262626;
+--text-primary: #f3f4f6;
+--text-secondary: #9ca3af;
+--border: #404040;
+--accent: #3b82f6;
+```
+
+### Component Adjustments
+- Reduce image brightness: 0.9
+- Soften shadows: 50% opacity
+- Muted accent colors: -10% saturation
+- Inverted loading skeletons
+- Adjusted game canvas backgrounds
 
 ## SEO & Meta Structure
 
 ### Category Pages
 ```html
-<title>{Category} Games - Play Free Online | Mini Games</title>
-<meta name="description" content="Play the best {category} games online..." />
-<link rel="canonical" href="/category/{slug}" />
+<title>Strategy Games - Chess, Checkers & More | Mini Games Platform</title>
+<meta name="description" content="Play 15+ strategy games including Chess, Checkers, and Reversi. Challenge your mind with tactical puzzles. Free online, no download.">
+<meta property="og:image" content="/meta/strategy-games-preview.png">
+<link rel="canonical" href="https://minigames.app/category/strategy">
 ```
 
 ### Structured Data
 ```json
 {
+  "@context": "https://schema.org",
   "@type": "GameApplication",
-  "applicationCategory": "Game",
-  "applicationSubCategory": "{Category}",
-  "numberOfPlayers": "1+",
-  "aggregateRating": {...}
+  "applicationCategory": "GameApplication",
+  "applicationSubCategory": "Strategy Games",
+  "name": "Strategy Games Collection",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "ratingCount": "12456",
+    "bestRating": "5"
+  }
 }
 ```
 
 ## Implementation Priority
 
-### Phase 1: Category UI (Critical)
-1. CategoryNavigation component
-2. CategoryBadge for GameCards
-3. Category landing pages
-4. Filter functionality
+### Phase 1: Core Infrastructure (Day 1-2)
+1. Enhanced FilterBar with multi-select
+2. FeaturedCarousel with auto-rotation
+3. CategoryStats real-time updates
+4. QuickPlay modal system
+5. GameRating component
 
-### Phase 2: New Games (High)
-1. Trivia Challenge
-2. Asteroid Shooter
-3. Mini Golf
-4. Kakuro
-5. Spider Solitaire
+### Phase 2: Category Pages (Day 2-3)
+1. Enhanced landing page layout
+2. Social sidebar implementation
+3. Advanced filtering logic
+4. Real-time updates integration
+5. Mobile responsive design
 
-### Phase 3: Polish (Medium)
-1. Animation transitions
-2. Loading states
-3. Error boundaries
-4. Analytics events
+### Phase 3: Strategy Games (Day 4-5)
+1. Chess with full rules
+2. Checkers with captures
+3. Reversi/Othello logic
+4. Backgammon with dice
+
+### Phase 4: Card Games (Day 5-6)
+1. Go Fish matching
+2. War comparison
+3. Crazy Eights rules
+4. Hearts trick-taking
+5. Spades bidding system
+
+### Phase 5: Polish & Testing (Day 7)
+1. Animation refinement
+2. Performance optimization
+3. Accessibility audit
+4. Cross-browser testing
+5. Documentation update
 
 ## Success Metrics
 
 ### User Engagement
-- Category page visit rate
-- Games per category played
-- Filter usage analytics
-- Cross-category exploration
+- 40% category page engagement rate
+- 60% filter usage rate
+- 30% game rating participation
+- 50% quick play adoption
+- 25% cross-category exploration
 
 ### Performance
-- Page load time < 2s
-- Interaction to Next Paint < 200ms
-- Cumulative Layout Shift < 0.1
-- Bundle size < 100KB
+- 100 Lighthouse performance score
+- < 2s page load time
+- < 100KB bundle size maintained
+- 0% cumulative layout shift
+- 60fps animations
+
+### Business Impact
+- 60+ total games achieved
+- 35% increase in session duration
+- 45% improvement in game discovery
+- 20% increase in return visits
+- 5-star average rating maintained
