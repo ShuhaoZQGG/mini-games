@@ -59,6 +59,20 @@ export default function HomePage() {
     { id: 'tower-of-hanoi', name: 'Tower of Hanoi', description: 'Classic disk puzzle', path: '/games/tower-of-hanoi' },
     { id: 'lights-out', name: 'Lights Out', description: 'Turn off all the lights', path: '/games/lights-out' },
     { id: 'mastermind', name: 'Mastermind', description: 'Break the color code', path: '/games/mastermind' },
+    { id: 'trivia-challenge', name: 'Trivia Challenge', description: 'Test your knowledge', path: '/games/trivia-challenge' },
+    { id: 'asteroid-shooter', name: 'Asteroid Shooter', description: 'Space shooting action', path: '/games/asteroid-shooter' },
+    { id: 'mini-golf', name: 'Mini Golf', description: '9-hole golf adventure', path: '/games/mini-golf' },
+    { id: 'kakuro', name: 'Kakuro', description: 'Number crossword puzzle', path: '/games/kakuro' },
+    { id: 'spider-solitaire', name: 'Spider Solitaire', description: 'Advanced card game', path: '/games/spider-solitaire' },
+    { id: 'chess', name: 'Chess', description: 'Ultimate strategy game', path: '/games/chess' },
+    { id: 'checkers', name: 'Checkers', description: 'Classic board game', path: '/games/checkers' },
+    { id: 'reversi', name: 'Reversi/Othello', description: 'Flip discs to win', path: '/games/reversi' },
+    { id: 'backgammon', name: 'Backgammon', description: 'Ancient dice and strategy', path: '/games/backgammon' },
+    { id: 'go-fish', name: 'Go Fish', description: 'Classic card matching', path: '/games/go-fish' },
+    { id: 'war', name: 'War', description: 'Simple card battle', path: '/games/war' },
+    { id: 'crazy-eights', name: 'Crazy Eights', description: 'Wild card game', path: '/games/crazy-eights' },
+    { id: 'hearts', name: 'Hearts', description: 'Trick-taking card game', path: '/games/hearts' },
+    { id: 'spades', name: 'Spades', description: 'Partnership card game', path: '/games/spades' },
   ]
   
   // Game categories
@@ -147,14 +161,10 @@ export default function HomePage() {
   ];
 
   const multiplayerGames = [
-    { id: 'chess', name: 'Chess', description: 'Strategic board game', path: '/games/chess' },
     { id: 'pool', name: '8-Ball Pool', description: 'Classic billiards game', path: '/games/pool' },
-    { id: 'checkers', name: 'Checkers', description: 'Classic strategy game', path: '/games/checkers' },
     { id: 'battleship', name: 'Battleship', description: 'Naval strategy game', path: '/games/battleship' },
     { id: 'air-hockey', name: 'Air Hockey', description: 'Fast-paced table game', path: '/games/air-hockey' },
     { id: 'go', name: 'Go', description: 'Ancient strategy game', path: '/games/go' },
-    { id: 'reversi', name: 'Reversi/Othello', description: 'Disc-flipping strategy', path: '/games/reversi' },
-    { id: 'backgammon', name: 'Backgammon', description: 'Classic board game', path: '/games/backgammon' },
     { id: 'dots-and-boxes', name: 'Dots and Boxes', description: 'Connect dots to win', path: '/games/dots-and-boxes' },
     { id: 'mahjong-solitaire', name: 'Mahjong Solitaire', description: 'Tile matching puzzle', path: '/games/mahjong-solitaire' },
   ]
