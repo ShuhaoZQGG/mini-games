@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import Battleship from '@/components/games/multiplayer/Battleship';
+import { BattleshipGame } from '@/src/components/games/battleship/battleship-game';
 
 export const metadata: Metadata = {
   title: 'Battleship - Naval Strategy Game | Mini Games',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function BattleshipPage() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <Battleship />
+      <BattleshipGame />
     </div>
   );
 }

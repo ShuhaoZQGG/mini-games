@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import Pool from '@/components/games/multiplayer/Pool';
+import PoolGame from '@/src/components/games/pool/pool-game';
 
 export const metadata: Metadata = {
   title: 'Pool (8-Ball) - Classic Billiards Game | Mini Games',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function PoolPage() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <Pool />
+      <PoolGame />
     </div>
   );
 }

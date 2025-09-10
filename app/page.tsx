@@ -189,6 +189,9 @@ export default function HomePage() {
 
   const multiplayerGames = [
     { id: 'dots-and-boxes', name: 'Dots and Boxes', description: 'Connect dots to win', path: '/games/dots-and-boxes' },
+    { id: 'pool', name: '8-Ball Pool', description: 'Classic billiards game', path: '/games/pool' },
+    { id: 'battleship', name: 'Battleship', description: 'Naval strategy game', path: '/games/battleship' },
+    { id: 'air-hockey', name: 'Air Hockey', description: 'Fast-paced table game', path: '/games/air-hockey' },
   ]
 
   // Combine all games for search with metadata

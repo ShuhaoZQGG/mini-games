@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import AirHockey from '@/components/games/multiplayer/AirHockey';
+import { AirHockeyGame } from '@/src/components/games/air-hockey/air-hockey-game';
 
 export const metadata: Metadata = {
   title: 'Air Hockey - Fast-Paced Table Game | Mini Games',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function AirHockeyPage() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <AirHockey />
+      <AirHockeyGame />
     </div>
   );
 }
