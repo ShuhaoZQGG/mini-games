@@ -34,6 +34,8 @@ export default function HomePage() {
     { id: 'jigsaw', name: 'Jigsaw Puzzle', description: 'Piece together puzzles', path: '/games/jigsaw' },
     { id: 'pinball', name: 'Pinball', description: 'Classic arcade pinball', path: '/games/pinball' },
     { id: 'nonogram', name: 'Nonogram', description: 'Picture logic puzzles', path: '/games/nonogram' },
+    { id: 'wordle', name: 'Wordle', description: 'Guess the 5-letter word', path: '/games/wordle' },
+    { id: 'bubble-shooter', name: 'Bubble Shooter', description: 'Match and pop bubbles', path: '/games/bubble-shooter' },
   ]
   
   const multiplayerGames = [
