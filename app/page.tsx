@@ -46,6 +46,7 @@ export default function HomePage() {
     { id: 'tangram', name: 'Tangram', description: 'Shape arrangement puzzle', path: '/games/tangram' },
     { id: 'pipes', name: 'Pipes', description: 'Connect pipes to create flow', path: '/games/pipes' },
     { id: 'hexagon', name: 'Hexagon', description: 'Fit hexagonal pieces together', path: '/games/hexagon' },
+    { id: 'mahjong-solitaire', name: 'Mahjong Solitaire', description: 'Classic tile matching with multiple layouts', path: '/games/mahjong-solitaire' },
     
     // Word Games
     { id: 'typing-test', name: 'Typing Test', description: 'Test your typing speed', path: '/games/typing-test' },
@@ -187,12 +188,7 @@ export default function HomePage() {
   ];
 
   const multiplayerGames = [
-    { id: 'pool', name: '8-Ball Pool', description: 'Classic billiards game', path: '/games/pool' },
-    { id: 'battleship', name: 'Battleship', description: 'Naval strategy game', path: '/games/battleship' },
-    { id: 'air-hockey', name: 'Air Hockey', description: 'Fast-paced table game', path: '/games/air-hockey' },
-    { id: 'go', name: 'Go', description: 'Ancient strategy game', path: '/games/go' },
     { id: 'dots-and-boxes', name: 'Dots and Boxes', description: 'Connect dots to win', path: '/games/dots-and-boxes' },
-    { id: 'mahjong-solitaire', name: 'Mahjong Solitaire', description: 'Tile matching puzzle', path: '/games/mahjong-solitaire' },
   ]
 
   // Combine all games for search with metadata
