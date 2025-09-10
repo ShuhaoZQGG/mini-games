@@ -6,6 +6,8 @@ import { Search, Gamepad2, Sparkles, Brain, Target, Users, Trophy } from 'lucide
 import { EnhancedGameSearch, Game } from '@/components/EnhancedGameSearch'
 import { CategoryGrid } from '@/src/components/CategoryGrid'
 import { Category } from '@/src/types/category'
+import { RecommendedGames, TrendingGames, RecentlyPlayed, DailyChallenges } from '@/components/RecommendedGames'
+import { analytics } from '@/lib/analytics'
 
 export default function HomePage() {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
@@ -173,7 +175,7 @@ export default function HomePage() {
     }))
   ]
 
-  // Keyboard shortcut for search
+  // Keyboard shortcut for search and analytics
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
@@ -183,6 +185,10 @@ export default function HomePage() {
     }
 
     document.addEventListener('keydown', handleKeyDown)
+    
+    // Track page view
+    analytics.trackPageView('homepage')
+    
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [])
 
@@ -213,6 +219,22 @@ export default function HomePage() {
       </section>
 
       <div className="container-responsive py-12">
+        {/* Recently Played Section */}
+        <div className="mb-8">
+          <RecentlyPlayed />
+        </div>
+
+        {/* Recommendations and Trending Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+          <div className="lg:col-span-2">
+            <RecommendedGames />
+          </div>
+          <div className="space-y-6">
+            <TrendingGames />
+            <DailyChallenges />
+          </div>
+        </div>
+
         {/* View Mode Toggle */}
         <div className="flex justify-center mb-8">
           <div className="inline-flex rounded-lg border border-gray-200 dark:border-gray-700">
