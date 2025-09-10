@@ -5,7 +5,8 @@ export interface Category {
   icon: string;
   color: string;
   description: string;
-  display_order: number;
+  display_order?: number;
+  featured?: boolean;
   created_at?: string;
   updated_at?: string;
 }
