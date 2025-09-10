@@ -90,6 +90,28 @@ export const gameCategories: GameCategoryMapping[] = [
   { id: 'crazy-eights', name: 'Crazy Eights', description: 'Wild card game', path: '/games/crazy-eights', category: 'card', difficulty: 'medium', avgPlayTime: 15, tags: ['card', 'uno-like', 'strategy'] },
   { id: 'hearts', name: 'Hearts', description: 'Trick-taking card game', path: '/games/hearts', category: 'card', difficulty: 'hard', avgPlayTime: 20, tags: ['card', 'tricks', 'strategy'] },
   { id: 'spades', name: 'Spades', description: 'Partnership card game', path: '/games/spades', category: 'card', difficulty: 'hard', avgPlayTime: 25, tags: ['card', 'partnership', 'bidding'] },
+  
+  // New Games (Cycle 27 - 15 new games)
+  // Puzzle Games
+  { id: 'mahjong-solitaire', name: 'Mahjong Solitaire', description: 'Classic tile matching with multiple layouts', path: '/games/mahjong-solitaire', category: 'puzzle', difficulty: 'medium', avgPlayTime: 15, tags: ['puzzle', 'matching', 'tiles'] },
+  { id: 'flow-free', name: 'Flow Free', description: 'Connect matching colors without crossing paths', path: '/games/flow-free', category: 'puzzle', difficulty: 'medium', avgPlayTime: 10, tags: ['puzzle', 'flow', 'logic'] },
+  { id: 'tangram', name: 'Tangram', description: 'Shape arrangement puzzle', path: '/games/tangram', category: 'puzzle', difficulty: 'medium', avgPlayTime: 10, tags: ['puzzle', 'shapes', 'spatial'] },
+  { id: 'pipes', name: 'Pipes', description: 'Connect pipes to create flow', path: '/games/pipes', category: 'puzzle', difficulty: 'medium', avgPlayTime: 10, tags: ['puzzle', 'pipes', 'rotation'] },
+  { id: 'hexagon', name: 'Hexagon', description: 'Fit hexagonal pieces together', path: '/games/hexagon', category: 'puzzle', difficulty: 'hard', avgPlayTime: 15, tags: ['puzzle', 'hexagon', 'tetris-like'] },
+  
+  // Action Games
+  { id: 'fruit-ninja', name: 'Fruit Ninja', description: 'Swipe to slice fruits', path: '/games/fruit-ninja', category: 'action', difficulty: 'easy', avgPlayTime: 5, tags: ['action', 'swipe', 'fruits'] },
+  { id: 'temple-run', name: 'Temple Run', description: 'Endless runner with obstacles', path: '/games/temple-run', category: 'action', difficulty: 'medium', avgPlayTime: 5, tags: ['action', 'endless', 'runner'] },
+  { id: 'angry-birds', name: 'Angry Birds', description: 'Physics-based projectile game', path: '/games/angry-birds', category: 'action', difficulty: 'medium', avgPlayTime: 10, tags: ['action', 'physics', 'projectile'] },
+  { id: 'geometry-dash', name: 'Geometry Dash', description: 'Rhythm-based platformer', path: '/games/geometry-dash', category: 'action', difficulty: 'hard', avgPlayTime: 5, tags: ['action', 'rhythm', 'platformer'] },
+  { id: 'tank-battle', name: 'Tank Battle', description: 'Top-down shooter', path: '/games/tank-battle', category: 'action', difficulty: 'medium', avgPlayTime: 10, tags: ['action', 'shooter', 'tanks'] },
+  
+  // Classic Games
+  { id: 'dominoes', name: 'Dominoes', description: 'Traditional tile game', path: '/games/dominoes', category: 'strategy', difficulty: 'medium', avgPlayTime: 15, tags: ['classic', 'tiles', 'strategy'] },
+  { id: 'yahtzee', name: 'Yahtzee', description: 'Dice game with scoring combinations', path: '/games/yahtzee', category: 'casino', difficulty: 'medium', avgPlayTime: 15, tags: ['dice', 'scoring', 'classic'] },
+  { id: 'boggle', name: 'Boggle', description: 'Word finding in letter grid', path: '/games/boggle', category: 'word', difficulty: 'medium', avgPlayTime: 5, tags: ['word', 'letters', 'search'] },
+  { id: 'scrabble', name: 'Scrabble', description: 'Word building with letter values', path: '/games/scrabble', category: 'word', difficulty: 'hard', avgPlayTime: 30, tags: ['word', 'letters', 'strategy'] },
+  { id: 'risk', name: 'Risk', description: 'Territory conquest strategy', path: '/games/risk', category: 'strategy', difficulty: 'hard', avgPlayTime: 45, tags: ['strategy', 'conquest', 'war'] },
 ]
 
 // Helper function to get games by category

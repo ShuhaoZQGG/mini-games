@@ -1,14 +1,16 @@
-import MahjongSolitaireGame from '@/components/games/mahjong-solitaire/mahjong-solitaire-game'
+import { Metadata } from 'next';
+import MahjongSolitaire from '@/components/games/MahjongSolitaire';
 
-export const metadata = {
-  title: 'Mahjong Solitaire | Mini Games',
-  description: 'Play the classic tile-matching game of Mahjong Solitaire',
-}
+export const metadata: Metadata = {
+  title: 'Mahjong Solitaire - Classic Tile Matching | Mini Games',
+  description: 'Play Mahjong Solitaire online. Match tiles to clear the board with multiple layouts including Dragon, Pyramid, Butterfly, and Fortress.',
+  keywords: ['mahjong solitaire', 'tile matching', 'puzzle game', 'mahjong', 'matching game'],
+};
 
 export default function MahjongSolitairePage() {
   return (
-    <div className="container-responsive py-8">
-      <MahjongSolitaireGame />
+    <div className="container mx-auto px-4 py-8">
+      <MahjongSolitaire />
     </div>
-  )
+  );
 }
