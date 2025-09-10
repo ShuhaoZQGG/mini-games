@@ -1,239 +1,336 @@
-# Cycle 26: Strategic Games Implementation & Production Deployment
+# Cycle 27: Production Deployment & Game Enhancement Plan
 
 ## Vision
 'resolve the merge conflicts and merge the PRs, continue working on the project: assign the games per categories; add more mini games'
 
 ## Current State
-- **Games**: 51/60+ (85% complete)
-- **Categories**: Fully implemented with enhanced landing pages from Cycle 24
-- **PRs**: All merged (Cycle 25 PR #48 merged to main)
-- **Features**: QuickPlay, FilterBar, FeaturedCarousel ready but need game integration
+- **Games**: 60/60 (100% initial target achieved) 
+- **Categories**: 9 fully implemented categories with complete game mappings
+- **PRs**: Cycle 26 PR #49 merged - all strategic/card games complete
+- **Features**: All platform features production-ready
 - **Bundle**: 87.5KB (under 100KB target)
 
 ## Requirements
 
 ### Primary Goals
-1. **New Strategic/Card Games (9 total)**
-   - Chess: Full rules, AI opponent, move validation
-   - Checkers: Jumping mechanics, king promotion
-   - Reversi/Othello: Flipping logic, valid move detection
-   - Backgammon: Dice mechanics, bearing off
-   - Go Fish: Card matching, AI strategy
-   - War: Card comparison, war resolution
-   - Crazy Eights: Suit/number matching, wild cards
-   - Hearts: Trick-taking, point calculation
-   - Spades: Bidding system, partnership scoring
 
-2. **Integration Tasks**
-   - Connect QuickPlay modal to actual game launchers
-   - Wire up real-time leaderboards via Supabase
-   - Implement game rating persistence
-   - Enable featured games rotation
-   - Ensure all 60 games properly categorized
+1. **PR Management & Merge Conflicts**
+   - Review any pending PRs from previous cycles
+   - Resolve merge conflicts if present
+   - Ensure clean main branch state
+   - Update documentation post-merge
 
-3. **Production Deployment**
-   - Deploy to Vercel with environment variables
-   - Configure Supabase production instance
-   - Set up monitoring (Sentry)
-   - Implement CDN caching
+2. **Category Assignment Optimization**
+   - Review all 60 games for proper categorization
+   - Implement multi-category support for games that fit multiple genres
+   - Add category tags and metadata
+   - Build recommendation engine based on categories
+   - Optimize category landing pages for better discovery
+
+3. **New Mini Games Implementation (Target: 75+ total)**
+   **Puzzle Games** (5 new)
+   - Mahjong Solitaire: Classic tile matching with multiple layouts
+   - Flow Free: Connect matching colors without crossing paths
+   - Tangram: Shape arrangement puzzle
+   - Pipes: Connect pipes to create flow
+   - Hexagon: Fit hexagonal pieces together
+
+   **Action Games** (5 new)  
+   - Fruit Ninja: Swipe to slice fruits
+   - Temple Run: Endless runner with obstacles
+   - Angry Birds: Physics-based projectile game
+   - Geometry Dash: Rhythm-based platformer
+   - Tank Battle: Top-down shooter
+
+   **Classic Games** (5 new)
+   - Dominoes: Traditional tile game
+   - Yahtzee: Dice game with scoring combinations
+   - Boggle: Word finding in letter grid
+   - Scrabble: Word building with letter values
+   - Risk: Territory conquest strategy
+
+4. **Production Deployment**
+   - Deploy to Vercel production environment
+   - Configure Supabase production instance  
+   - Set up custom domain
+   - Implement monitoring (Sentry)
+   - Configure CDN for assets
+   - Set up analytics tracking
 
 ## Architecture
 
-### Component Structure
+### Enhanced Category System
+```typescript
+interface EnhancedCategorySystem {
+  primaryCategory: string
+  secondaryCategories?: string[]
+  tags: string[]
+  difficulty: 'easy' | 'medium' | 'hard' | 'expert'
+  playerCount: '1' | '2' | '2+'
+  estimatedTime: number // minutes
+  ageRating: string
+}
+
+interface CategoryRecommendation {
+  gameId: string
+  score: number
+  reasons: string[]
+  basedOn: 'playHistory' | 'similar' | 'trending'
+}
+```
+
+### New Games Component Structure
 ```
 components/
 ├── games/
-│   ├── strategic/
-│   │   ├── Chess.tsx         # ~500 lines
-│   │   ├── Checkers.tsx      # ~350 lines
-│   │   ├── Reversi.tsx       # ~300 lines
-│   │   └── Backgammon.tsx    # ~400 lines
-│   └── card/
-│       ├── GoFish.tsx        # ~250 lines
-│       ├── War.tsx           # ~200 lines
-│       ├── CrazyEights.tsx   # ~300 lines
-│       ├── Hearts.tsx        # ~400 lines
-│       └── Spades.tsx        # ~450 lines
-├── integration/
-│   ├── QuickPlayConnector.tsx
-│   ├── LeaderboardSync.tsx
-│   └── RatingsPersistence.tsx
-```
-
-### Game State Management
-```typescript
-interface GameState {
-  board?: any[][]       // For board games
-  deck?: Card[]         // For card games
-  players: Player[]
-  currentTurn: number
-  score: Record<string, number>
-  gameOver: boolean
-  winner?: string
-  aiDifficulty: 'easy' | 'medium' | 'hard'
-}
+│   ├── puzzle/
+│   │   ├── MahjongSolitaire.tsx
+│   │   ├── FlowFree.tsx
+│   │   ├── Tangram.tsx
+│   │   ├── Pipes.tsx
+│   │   └── Hexagon.tsx
+│   ├── action/
+│   │   ├── FruitNinja.tsx
+│   │   ├── TempleRun.tsx
+│   │   ├── AngryBirds.tsx
+│   │   ├── GeometryDash.tsx
+│   │   └── TankBattle.tsx
+│   └── classic/
+│       ├── Dominoes.tsx
+│       ├── Yahtzee.tsx
+│       ├── Boggle.tsx
+│       ├── Scrabble.tsx
+│       └── Risk.tsx
+├── category/
+│   ├── CategoryRecommendations.tsx
+│   ├── MultiCategoryBadge.tsx
+│   └── CategoryAnalytics.tsx
 ```
 
 ### Database Schema Extensions
 ```sql
--- AI game sessions
-ALTER TABLE game_sessions 
-ADD COLUMN game_state JSONB,
-ADD COLUMN ai_difficulty VARCHAR(20),
-ADD COLUMN move_history JSONB[];
-
--- Game replays
-CREATE TABLE game_replays (
+-- Multi-category support
+CREATE TABLE game_category_mappings (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  game_id VARCHAR(50),
-  player_id UUID REFERENCES auth.users(id),
-  replay_data JSONB,
-  final_score INTEGER,
-  created_at TIMESTAMPTZ DEFAULT NOW()
+  game_id VARCHAR(100) NOT NULL,
+  category_id UUID REFERENCES categories(id),
+  is_primary BOOLEAN DEFAULT false,
+  relevance_score DECIMAL(3,2) DEFAULT 1.0,
+  tags TEXT[],
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(game_id, category_id)
 );
 
--- Update featured games for new additions
-INSERT INTO featured_games (game_id, category_id, position)
-VALUES 
-  ('chess', (SELECT id FROM categories WHERE slug = 'strategy'), 1),
-  ('checkers', (SELECT id FROM categories WHERE slug = 'strategy'), 2),
-  ('hearts', (SELECT id FROM categories WHERE slug = 'card'), 1);
+-- Recommendation engine
+CREATE TABLE game_recommendations (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id),
+  game_id VARCHAR(100),
+  score DECIMAL(3,2),
+  reason TEXT,
+  based_on VARCHAR(50),
+  shown_at TIMESTAMPTZ DEFAULT NOW(),
+  clicked BOOLEAN DEFAULT false
+);
+
+-- Category analytics
+CREATE TABLE category_analytics (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  category_id UUID REFERENCES categories(id),
+  date DATE NOT NULL,
+  views INTEGER DEFAULT 0,
+  unique_users INTEGER DEFAULT 0,
+  avg_time_spent INTEGER, -- seconds
+  conversion_rate DECIMAL(5,2),
+  UNIQUE(category_id, date)
+);
 ```
 
 ## Implementation Phases
 
-### Phase 1: Strategic Board Games (Days 1-2)
-1. **Chess Implementation**
-   - Board setup and piece placement
-   - Move validation (castling, en passant)
-   - Check/checkmate detection
-   - AI using minimax algorithm
-   - Move notation display
+### Phase 1: PR Management & Cleanup (Day 1)
+- Review all pending PRs
+- Resolve any merge conflicts
+- Clean up main branch
+- Update all documentation
+- Verify all 60 games working
 
-2. **Checkers Implementation**
-   - 8x8 board with diagonal movement
-   - Mandatory captures
-   - King promotion at back row
-   - Multiple jump detection
-   - AI opponent
+### Phase 2: Category Enhancement (Days 1-2)
+- Implement multi-category support
+- Add tags and metadata to all games
+- Build recommendation engine
+- Create category analytics dashboard
+- Optimize category discovery UX
 
-3. **Reversi/Othello**
-   - 8x8 grid initialization
-   - Valid move highlighting
-   - Disc flipping logic
-   - Corner strategy AI
+### Phase 3: New Puzzle Games (Days 2-3)
+1. **Mahjong Solitaire**
+   - Tile matching mechanics
+   - Multiple layout options
+   - Hint system
+   - Shuffle when stuck
+
+2. **Flow Free**
+   - Grid-based pathfinding
+   - Color connection logic
+   - Level progression
+   - Solution validation
+
+3. **Tangram**
+   - Shape rotation and placement
+   - Puzzle templates
+   - Snap-to-grid
+   - Solution checking
+
+4. **Pipes**
+   - Pipe rotation mechanics
+   - Flow simulation
+   - Timer challenge mode
+   - Level generation
+
+5. **Hexagon**
+   - Hexagonal grid system
+   - Piece fitting logic
+   - Pattern recognition
    - Score calculation
 
-4. **Backgammon**
-   - Board with 24 points
+### Phase 4: New Action Games (Days 3-4)
+1. **Fruit Ninja**
+   - Swipe gesture detection
+   - Fruit slicing physics
+   - Combo system
+   - Power-ups
+
+2. **Temple Run**
+   - Endless runner mechanics
+   - Obstacle generation
+   - Power-up collection
+   - Distance tracking
+
+3. **Angry Birds**
+   - Physics engine integration
+   - Projectile trajectory
+   - Structure destruction
+   - Level design
+
+4. **Geometry Dash**
+   - Rhythm-based timing
+   - Auto-scrolling
+   - Jump mechanics
+   - Level progression
+
+5. **Tank Battle**
+   - Top-down movement
+   - Projectile system
+   - AI enemies
+   - Power-ups
+
+### Phase 5: New Classic Games (Days 4-5)
+1. **Dominoes**
+   - Tile matching rules
+   - Chain detection
+   - Score calculation
+   - AI opponent
+
+2. **Yahtzee**
    - Dice rolling mechanics
-   - Bearing off rules
-   - Doubling cube
-   - AI with probability calculations
+   - Scoring combinations
+   - Strategy optimization
+   - Score sheet
 
-### Phase 2: Card Games (Days 2-3)
-1. **Go Fish**
-   - 52-card deck management
-   - Hand display and sorting
-   - Asking and fishing mechanics
-   - Set collection
-   - Simple AI memory
+3. **Boggle**
+   - Letter grid generation
+   - Word validation
+   - Timer system
+   - Dictionary integration
 
-2. **War**
-   - Card comparison logic
-   - War resolution (3 cards down, 1 up)
-   - Deck management
-   - Auto-play option
-   - Victory conditions
+4. **Scrabble**
+   - Board layout
+   - Letter values
+   - Word validation
+   - Score multipliers
 
-3. **Crazy Eights**
-   - Suit/number matching
-   - Eight as wildcard
-   - Drawing from deck
-   - AI card selection
-   - Special card effects
+5. **Risk**
+   - Territory management
+   - Dice battle system
+   - AI strategy
+   - Turn phases
 
-4. **Hearts**
-   - Trick-taking mechanics
-   - Passing cards phase
-   - Hearts broken tracking
-   - Point calculation
-   - Shooting the moon
+### Phase 6: Production Deployment (Day 6)
+- Configure Vercel production
+- Set up Supabase production
+- Configure custom domain
+- Implement Sentry monitoring
+- Set up CDN
+- Deploy and verify
 
-5. **Spades**
-   - Bidding phase
-   - Partnership scoring
-   - Nil/blind nil bids
-   - Bag penalties
-   - AI bidding strategy
-
-### Phase 3: Integration & Wiring (Day 4)
-- Connect QuickPlay modal to all 60 games
-- Implement game launcher service
-- Wire real-time leaderboards
-- Enable rating persistence
-- Set up featured games rotation
-- Update category mappings
-
-### Phase 4: Production Deployment (Day 5)
-- Environment configuration
-- Vercel deployment setup
-- Supabase production instance
-- Sentry error tracking
-- CDN configuration
-- Performance optimization
-
-### Phase 5: Testing & Polish (Days 5-6)
+### Phase 7: Testing & Optimization (Day 7)
+- Performance testing
+- Bundle size optimization
 - Cross-browser testing
-- Mobile optimization
+- Mobile responsiveness
 - Accessibility audit
-- Performance profiling
-- Documentation update
-- Final QA pass
+- Final QA
 
 ## Technical Decisions
-- Use chess.js library for chess rules
-- Implement card games with shared deck utilities
-- Use Web Workers for AI calculations
-- Lazy load game components
-- IndexedDB for game state persistence
+- Implement physics engines for action games
+- Use shared game utilities for common mechanics
+- Lazy load all new game components
+- Implement Web Workers for AI/physics calculations
+- Use IndexedDB for game state persistence
+- Optimize assets with WebP and compression
 
 ## Success Metrics
-- **Games**: 60/60+ (100% target achieved)
+- **Games**: 75/75+ (125% of original target)
+- **Categories**: 100% games with multi-category support
 - **Bundle**: < 100KB maintained
-- **Performance**: < 2s page load
-- **Quality**: All games fully playable
-- **Integration**: 100% features connected
+- **Performance**: < 1.5s page load
+- **Lighthouse**: > 95 score
 - **Production**: Successfully deployed
+- **Monitoring**: < 0.1% error rate
 
 ## Risk Mitigation
-- **Bundle Size**: Aggressive code splitting per game
-- **AI Performance**: Web Workers for heavy calculations
-- **Complex Rules**: Use established libraries where available
-- **Testing**: Automated test suites for game logic
-- **Deployment**: Staged rollout with feature flags
+- **Bundle Size**: Aggressive code splitting, tree shaking
+- **Performance**: Web Workers for heavy calculations
+- **Complexity**: Incremental implementation
+- **Testing**: Automated tests for each game
+- **Deployment**: Blue-green deployment strategy
+- **Rollback**: Feature flags for new games
 
 ## Dependencies
-- chess.js for chess rules (npm install)
-- Existing UI components from previous cycles
+- Existing 60 games and infrastructure
 - Supabase client configured
-- Vercel account with deployment access
+- Vercel account ready
 - Sentry account for monitoring
+- CDN service (Cloudflare)
+- Domain name configured
 
 ## Timeline
-- **Days 1-2**: Strategic board games (Chess, Checkers, Reversi, Backgammon)
-- **Days 2-3**: Card games (Go Fish, War, Crazy Eights, Hearts, Spades)
-- **Day 4**: Integration and wiring
-- **Day 5**: Production deployment
-- **Days 5-6**: Testing and polish
-- **Total**: 6 days to completion
+- **Day 1**: PR management and category enhancement
+- **Days 2-3**: Puzzle games implementation
+- **Days 3-4**: Action games implementation  
+- **Days 4-5**: Classic games implementation
+- **Day 6**: Production deployment
+- **Day 7**: Testing and optimization
+- **Total**: 7 days to completion
 
 ## Definition of Done
-- [ ] 9 new games implemented with level progression
-- [ ] All 60 games properly categorized
-- [ ] QuickPlay connected to all games
-- [ ] Real-time features operational
-- [ ] Production deployment successful
+- [ ] All PRs reviewed and merged
+- [ ] 15 new games implemented (75 total)
+- [ ] Multi-category support active
+- [ ] Recommendation engine working
+- [ ] Production deployment live
+- [ ] Custom domain configured
+- [ ] Monitoring operational
 - [ ] Bundle size < 100KB
-- [ ] All tests passing
+- [ ] Lighthouse score > 95
 - [ ] Documentation updated
+
+## Next Cycle Priorities
+1. Multiplayer implementation (Chess, Checkers online)
+2. Daily challenges system
+3. Tournament infrastructure
+4. Mobile app development
+5. Social features (friends, challenges)
+6. Achievement system expansion
+7. Real-time spectator mode
+8. Game replay system
