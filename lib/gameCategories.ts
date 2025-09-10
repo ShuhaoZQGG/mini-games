@@ -72,6 +72,13 @@ export const gameCategories: GameCategoryMapping[] = [
   { id: 'tower-of-hanoi', name: 'Tower of Hanoi', description: 'Classic disk puzzle', path: '/games/tower-of-hanoi', category: 'puzzle', difficulty: 'hard', avgPlayTime: 10, tags: ['puzzle', 'classic', 'logic'] },
   { id: 'lights-out', name: 'Lights Out', description: 'Turn off all the lights', path: '/games/lights-out', category: 'puzzle', difficulty: 'medium', avgPlayTime: 5, tags: ['puzzle', 'logic', 'lights'] },
   { id: 'mastermind', name: 'Mastermind', description: 'Break the color code', path: '/games/mastermind', category: 'puzzle', difficulty: 'hard', avgPlayTime: 10, tags: ['puzzle', 'code', 'colors'] },
+  
+  // New Games (Cycle 23)
+  { id: 'trivia-challenge', name: 'Trivia Challenge', description: 'Test your knowledge across categories', path: '/games/trivia-challenge', category: 'word', difficulty: 'medium', avgPlayTime: 10, tags: ['quiz', 'trivia', 'knowledge'] },
+  { id: 'asteroid-shooter', name: 'Asteroid Shooter', description: 'Destroy asteroids in space', path: '/games/asteroid-shooter', category: 'action', difficulty: 'medium', avgPlayTime: 10, tags: ['space', 'shooter', 'arcade'] },
+  { id: 'mini-golf', name: 'Mini Golf', description: 'Play through 9 challenging holes', path: '/games/mini-golf', category: 'skill', difficulty: 'easy', avgPlayTime: 15, tags: ['sports', 'golf', 'precision'] },
+  { id: 'kakuro', name: 'Kakuro', description: 'Number crossword puzzle', path: '/games/kakuro', category: 'puzzle', difficulty: 'hard', avgPlayTime: 20, tags: ['numbers', 'logic', 'math'] },
+  { id: 'spider-solitaire', name: 'Spider Solitaire', description: 'Classic spider card game', path: '/games/spider-solitaire', category: 'card', difficulty: 'medium', avgPlayTime: 20, tags: ['solitaire', 'cards', 'strategy'] },
 ]
 
 // Helper function to get games by category
