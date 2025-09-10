@@ -79,6 +79,17 @@ export const gameCategories: GameCategoryMapping[] = [
   { id: 'mini-golf', name: 'Mini Golf', description: 'Play through 9 challenging holes', path: '/games/mini-golf', category: 'skill', difficulty: 'easy', avgPlayTime: 15, tags: ['sports', 'golf', 'precision'] },
   { id: 'kakuro', name: 'Kakuro', description: 'Number crossword puzzle', path: '/games/kakuro', category: 'puzzle', difficulty: 'hard', avgPlayTime: 20, tags: ['numbers', 'logic', 'math'] },
   { id: 'spider-solitaire', name: 'Spider Solitaire', description: 'Classic spider card game', path: '/games/spider-solitaire', category: 'card', difficulty: 'medium', avgPlayTime: 20, tags: ['solitaire', 'cards', 'strategy'] },
+  
+  // New Games (Cycle 26)
+  { id: 'chess', name: 'Chess', description: 'Ultimate strategy game', path: '/games/chess', category: 'strategy', difficulty: 'hard', avgPlayTime: 30, tags: ['strategy', 'board', 'classic'] },
+  { id: 'checkers', name: 'Checkers', description: 'Classic board game', path: '/games/checkers', category: 'strategy', difficulty: 'medium', avgPlayTime: 15, tags: ['strategy', 'board', 'classic'] },
+  { id: 'reversi', name: 'Reversi/Othello', description: 'Flip discs to win', path: '/games/reversi', category: 'strategy', difficulty: 'medium', avgPlayTime: 15, tags: ['strategy', 'board', 'othello'] },
+  { id: 'backgammon', name: 'Backgammon', description: 'Ancient dice and strategy', path: '/games/backgammon', category: 'strategy', difficulty: 'hard', avgPlayTime: 20, tags: ['strategy', 'board', 'dice'] },
+  { id: 'go-fish', name: 'Go Fish', description: 'Classic card matching', path: '/games/go-fish', category: 'card', difficulty: 'easy', avgPlayTime: 10, tags: ['card', 'matching', 'family'] },
+  { id: 'war', name: 'War', description: 'Simple card battle', path: '/games/war', category: 'card', difficulty: 'easy', avgPlayTime: 10, tags: ['card', 'simple', 'luck'] },
+  { id: 'crazy-eights', name: 'Crazy Eights', description: 'Wild card game', path: '/games/crazy-eights', category: 'card', difficulty: 'medium', avgPlayTime: 15, tags: ['card', 'uno-like', 'strategy'] },
+  { id: 'hearts', name: 'Hearts', description: 'Trick-taking card game', path: '/games/hearts', category: 'card', difficulty: 'hard', avgPlayTime: 20, tags: ['card', 'tricks', 'strategy'] },
+  { id: 'spades', name: 'Spades', description: 'Partnership card game', path: '/games/spades', category: 'card', difficulty: 'hard', avgPlayTime: 25, tags: ['card', 'partnership', 'bidding'] },
 ]
 
 // Helper function to get games by category
