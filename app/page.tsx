@@ -49,6 +49,14 @@ export default function HomePage() {
     { id: 'hangman', name: 'Hangman', description: 'Guess the word letter by letter', path: '/games/hangman' },
     { id: 'roulette', name: 'Roulette', description: 'Spin the wheel of fortune', path: '/games/roulette' },
     { id: 'bingo', name: 'Bingo', description: 'Classic number matching game', path: '/games/bingo' },
+    { id: 'dice-roll', name: 'Dice Roll', description: 'Roll dice to hit the target', path: '/games/dice-roll' },
+    { id: 'rock-paper-scissors', name: 'Rock Paper Scissors', description: 'Classic hand game', path: '/games/rock-paper-scissors' },
+    { id: 'coin-flip', name: 'Coin Flip', description: 'Heads or tails betting', path: '/games/coin-flip' },
+    { id: 'number-guessing', name: 'Number Guessing', description: 'Guess the secret number', path: '/games/number-guessing' },
+    { id: 'maze-runner', name: 'Maze Runner', description: 'Navigate through the maze', path: '/games/maze-runner' },
+    { id: 'tower-of-hanoi', name: 'Tower of Hanoi', description: 'Classic disk puzzle', path: '/games/tower-of-hanoi' },
+    { id: 'lights-out', name: 'Lights Out', description: 'Turn off all the lights', path: '/games/lights-out' },
+    { id: 'mastermind', name: 'Mastermind', description: 'Break the color code', path: '/games/mastermind' },
   ]
   
   // Game categories
