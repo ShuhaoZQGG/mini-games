@@ -32,6 +32,8 @@ export default function HomePage() {
     { id: 'stack-tower', name: 'Stack Tower', description: 'Build the tallest tower', path: '/games/stack-tower' },
     { id: 'doodle-jump', name: 'Doodle Jump', description: 'Jump to new heights', path: '/games/doodle-jump' },
     { id: 'jigsaw', name: 'Jigsaw Puzzle', description: 'Piece together puzzles', path: '/games/jigsaw' },
+    { id: 'pinball', name: 'Pinball', description: 'Classic arcade pinball', path: '/games/pinball' },
+    { id: 'nonogram', name: 'Nonogram', description: 'Picture logic puzzles', path: '/games/nonogram' },
   ]
   
   const multiplayerGames = [

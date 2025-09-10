@@ -144,16 +144,17 @@ export class GameErrorBoundary extends ErrorBoundary {
     if (this.retryCount < this.maxRetries) {
       this.retryCount++;
       setTimeout(() => {
-        this.handleReset();
+        this.resetGame();
       }, 1000 * this.retryCount); // Exponential backoff
     }
   }
 
-  private handleReset = () => {
+  private resetGame = () => {
     this.setState({
       hasError: false,
       error: null,
       errorInfo: null,
     });
+    this.retryCount = 0;
   };
 }
