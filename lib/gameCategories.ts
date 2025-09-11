@@ -1,12 +1,19 @@
+export type GameCategory = 'puzzle' | 'action' | 'strategy' | 'arcade' | 'card' | 'memory' | 'skill' | 'casino' | 'word' | 'music' | 'physics' | 'simulation'
+export type GameDifficulty = 'easy' | 'medium' | 'hard'
+
 export interface GameCategoryMapping {
   id: string
   name: string
   description: string
   path: string
-  category: 'puzzle' | 'action' | 'strategy' | 'arcade' | 'card' | 'memory' | 'skill' | 'casino' | 'word' | 'music' | 'physics' | 'simulation'
-  difficulty: 'easy' | 'medium' | 'hard'
+  category: GameCategory // Primary category for backward compatibility
+  categories?: { category: GameCategory; relevance: number }[] // Multi-category support with weights
+  difficulty: GameDifficulty
   avgPlayTime: number // in minutes
   tags: string[]
+  rating?: number // User rating (1-5)
+  playCount?: number // Number of times played
+  lastUpdated?: Date // Last update timestamp
 }
 
 export const gameCategories: GameCategoryMapping[] = [
@@ -264,4 +271,153 @@ export function searchGames(query: string): GameCategoryMapping[] {
     game.description.toLowerCase().includes(lowerQuery) ||
     game.tags.some(tag => tag.toLowerCase().includes(lowerQuery))
   )
+}
+
+// Enhanced helper functions for multi-category support
+export function getGamesByCategoriesWithLogic(
+  categories: GameCategory[],
+  logic: 'AND' | 'OR' = 'OR',
+  minRelevance: number = 0
+): GameCategoryMapping[] {
+  if (categories.length === 0) return gameCategories
+
+  return gameCategories.filter(game => {
+    // Check primary category
+    const primaryMatch = categories.includes(game.category)
+    
+    // Check multi-categories if available
+    const multiCategoryMatches = game.categories?.filter(cat => 
+      categories.includes(cat.category) && cat.relevance >= minRelevance
+    ) || []
+    
+    if (logic === 'OR') {
+      return primaryMatch || multiCategoryMatches.length > 0
+    } else {
+      // AND logic - game must match all specified categories
+      return categories.every(cat => 
+        cat === game.category || 
+        game.categories?.some(gc => gc.category === cat && gc.relevance >= minRelevance)
+      )
+    }
+  })
+}
+
+// Get games filtered by multiple criteria
+export interface GameFilterCriteria {
+  categories?: GameCategory[]
+  categoryLogic?: 'AND' | 'OR'
+  difficulty?: GameDifficulty[]
+  minRating?: number
+  maxPlayTime?: number
+  tags?: string[]
+  sortBy?: 'name' | 'rating' | 'playCount' | 'difficulty' | 'newest'
+  sortOrder?: 'asc' | 'desc'
+}
+
+export function filterGames(criteria: GameFilterCriteria): GameCategoryMapping[] {
+  let filtered = [...gameCategories]
+  
+  // Filter by categories
+  if (criteria.categories && criteria.categories.length > 0) {
+    filtered = getGamesByCategoriesWithLogic(
+      criteria.categories,
+      criteria.categoryLogic || 'OR'
+    )
+  }
+  
+  // Filter by difficulty
+  if (criteria.difficulty && criteria.difficulty.length > 0) {
+    filtered = filtered.filter(game => criteria.difficulty!.includes(game.difficulty))
+  }
+  
+  // Filter by rating
+  if (criteria.minRating) {
+    filtered = filtered.filter(game => (game.rating || 0) >= criteria.minRating!)
+  }
+  
+  // Filter by play time
+  if (criteria.maxPlayTime) {
+    filtered = filtered.filter(game => game.avgPlayTime <= criteria.maxPlayTime!)
+  }
+  
+  // Filter by tags
+  if (criteria.tags && criteria.tags.length > 0) {
+    filtered = filtered.filter(game => 
+      criteria.tags!.some(tag => game.tags.includes(tag))
+    )
+  }
+  
+  // Sort results
+  if (criteria.sortBy) {
+    filtered.sort((a, b) => {
+      let comparison = 0
+      
+      switch (criteria.sortBy) {
+        case 'name':
+          comparison = a.name.localeCompare(b.name)
+          break
+        case 'rating':
+          comparison = (b.rating || 0) - (a.rating || 0)
+          break
+        case 'playCount':
+          comparison = (b.playCount || 0) - (a.playCount || 0)
+          break
+        case 'difficulty':
+          const diffOrder = { 'easy': 1, 'medium': 2, 'hard': 3 }
+          comparison = diffOrder[a.difficulty] - diffOrder[b.difficulty]
+          break
+        case 'newest':
+          comparison = (b.lastUpdated?.getTime() || 0) - (a.lastUpdated?.getTime() || 0)
+          break
+      }
+      
+      return criteria.sortOrder === 'desc' ? -comparison : comparison
+    })
+  }
+  
+  return filtered
+}
+
+// Get category statistics
+export interface CategoryStats {
+  category: GameCategory
+  gameCount: number
+  avgRating: number
+  totalPlayCount: number
+  avgPlayTime: number
+  popularTags: string[]
+}
+
+export function getCategoryStats(): CategoryStats[] {
+  const categories = getAllCategories() as GameCategory[]
+  
+  return categories.map(category => {
+    const games = getGamesByCategory(category)
+    const totalRating = games.reduce((sum, game) => sum + (game.rating || 0), 0)
+    const totalPlayCount = games.reduce((sum, game) => sum + (game.playCount || 0), 0)
+    const totalPlayTime = games.reduce((sum, game) => sum + game.avgPlayTime, 0)
+    
+    // Get all tags and count frequency
+    const tagCounts = new Map<string, number>()
+    games.forEach(game => {
+      game.tags.forEach(tag => {
+        tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1)
+      })
+    })
+    
+    // Get top 5 most popular tags
+    const popularTags = Array.from(tagCounts.entries())
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+      .map(([tag]) => tag)
+    
+    return {
+      category,
+      gameCount: games.length,
+      avgRating: games.length > 0 ? totalRating / games.length : 0,
+      totalPlayCount,
+      avgPlayTime: games.length > 0 ? totalPlayTime / games.length : 0,
+      popularTags
+    }
+  })
 }
