@@ -106,6 +106,43 @@ export const gameCategories: GameCategoryMapping[] = [
   { id: 'boggle', name: 'Boggle', description: 'Word finding in letter grid', path: '/games/boggle', category: 'word', difficulty: 'medium', avgPlayTime: 5, tags: ['word', 'letters', 'search'] },
   { id: 'scrabble', name: 'Scrabble', description: 'Word building with letter values', path: '/games/scrabble', category: 'word', difficulty: 'hard', avgPlayTime: 30, tags: ['word', 'letters', 'strategy'] },
   { id: 'risk', name: 'Risk', description: 'Territory conquest strategy', path: '/games/risk', category: 'strategy', difficulty: 'hard', avgPlayTime: 45, tags: ['strategy', 'conquest', 'war'] },
+  
+  // Multiplayer Games (Cycle 29)
+  { id: 'pool', name: 'Pool (8-Ball)', description: 'Classic billiards with physics', path: '/games/pool', category: 'skill', difficulty: 'medium', avgPlayTime: 15, tags: ['billiards', 'physics', 'multiplayer'] },
+  { id: 'battleship', name: 'Battleship', description: 'Naval strategy game', path: '/games/battleship', category: 'strategy', difficulty: 'medium', avgPlayTime: 20, tags: ['strategy', 'naval', 'multiplayer'] },
+  { id: 'air-hockey', name: 'Air Hockey', description: 'Fast-paced table game', path: '/games/air-hockey', category: 'arcade', difficulty: 'easy', avgPlayTime: 5, tags: ['arcade', 'fast', 'multiplayer'] },
+  
+  // Educational Games (Cycle 30)
+  { id: 'geography-quiz', name: 'Geography Quiz', description: 'World capitals and flags challenge', path: '/games/geography-quiz', category: 'puzzle', difficulty: 'medium', avgPlayTime: 10, tags: ['education', 'geography', 'quiz'] },
+  { id: 'math-blaster', name: 'Math Blaster', description: 'Speed arithmetic challenges', path: '/games/math-blaster', category: 'skill', difficulty: 'medium', avgPlayTime: 5, tags: ['education', 'math', 'speed'] },
+  { id: 'chemistry-lab', name: 'Chemistry Lab', description: 'Element matching and compounds', path: '/games/chemistry-lab', category: 'puzzle', difficulty: 'hard', avgPlayTime: 15, tags: ['education', 'science', 'chemistry'] },
+  { id: 'history-timeline', name: 'History Timeline', description: 'Event ordering and dates', path: '/games/history-timeline', category: 'puzzle', difficulty: 'medium', avgPlayTime: 10, tags: ['education', 'history', 'timeline'] },
+  { id: 'language-match', name: 'Language Match', description: 'Vocabulary and translations', path: '/games/language-match', category: 'word', difficulty: 'medium', avgPlayTime: 10, tags: ['education', 'language', 'vocabulary'] },
+  { id: 'science-trivia', name: 'Science Trivia', description: 'STEM knowledge quiz', path: '/games/science-trivia', category: 'puzzle', difficulty: 'medium', avgPlayTime: 10, tags: ['education', 'science', 'trivia'] },
+  
+  // Sports Games (Cycle 30)
+  { id: 'basketball-shootout', name: 'Basketball Shootout', description: 'Free throw accuracy challenge', path: '/games/basketball-shootout', category: 'skill', difficulty: 'easy', avgPlayTime: 5, tags: ['sports', 'basketball', 'accuracy'] },
+  { id: 'soccer-penalty', name: 'Soccer Penalty', description: 'Penalty kick goalkeeper duel', path: '/games/soccer-penalty', category: 'skill', difficulty: 'medium', avgPlayTime: 5, tags: ['sports', 'soccer', 'penalty'] },
+  { id: 'baseball-homerun', name: 'Baseball Home Run', description: 'Batting practice derby', path: '/games/baseball-homerun', category: 'skill', difficulty: 'medium', avgPlayTime: 5, tags: ['sports', 'baseball', 'batting'] },
+  { id: 'golf-putting', name: 'Golf Putting', description: 'Mini putting with physics', path: '/games/golf-putting', category: 'skill', difficulty: 'medium', avgPlayTime: 10, tags: ['sports', 'golf', 'precision'] },
+  { id: 'tennis-rally', name: 'Tennis Rally', description: 'Volley survival endurance', path: '/games/tennis-rally', category: 'skill', difficulty: 'hard', avgPlayTime: 5, tags: ['sports', 'tennis', 'endurance'] },
+  { id: 'boxing-match', name: 'Boxing Match', description: 'Timing-based combat', path: '/games/boxing-match', category: 'action', difficulty: 'medium', avgPlayTime: 5, tags: ['sports', 'boxing', 'combat'] },
+  
+  // Arcade Classics (Cycle 30)
+  { id: 'centipede', name: 'Centipede', description: 'Mushroom field shooter', path: '/games/centipede', category: 'arcade', difficulty: 'medium', avgPlayTime: 10, tags: ['arcade', 'classic', 'shooter'] },
+  { id: 'frogger', name: 'Frogger', description: 'Traffic crossing survival', path: '/games/frogger', category: 'arcade', difficulty: 'medium', avgPlayTime: 5, tags: ['arcade', 'classic', 'crossing'] },
+  { id: 'galaga', name: 'Galaga', description: 'Formation space shooter', path: '/games/galaga', category: 'arcade', difficulty: 'medium', avgPlayTime: 10, tags: ['arcade', 'classic', 'space'] },
+  { id: 'dig-dug', name: 'Dig Dug', description: 'Underground monster hunter', path: '/games/dig-dug', category: 'arcade', difficulty: 'medium', avgPlayTime: 10, tags: ['arcade', 'classic', 'underground'] },
+  { id: 'qbert', name: 'Q*bert', description: 'Isometric pyramid hopper', path: '/games/qbert', category: 'arcade', difficulty: 'hard', avgPlayTime: 10, tags: ['arcade', 'classic', 'isometric'] },
+  { id: 'defender', name: 'Defender', description: 'Horizontal space defender', path: '/games/defender', category: 'arcade', difficulty: 'hard', avgPlayTime: 10, tags: ['arcade', 'classic', 'defender'] },
+  
+  // Board Games (Cycle 30)
+  { id: 'chess-puzzles', name: 'Chess Puzzles', description: 'Daily tactical challenges', path: '/games/chess-puzzles', category: 'strategy', difficulty: 'hard', avgPlayTime: 10, tags: ['chess', 'puzzle', 'tactics'] },
+  { id: 'shogi', name: 'Shogi', description: 'Japanese chess variant', path: '/games/shogi', category: 'strategy', difficulty: 'hard', avgPlayTime: 30, tags: ['board', 'japanese', 'strategy'] },
+  { id: 'xiangqi', name: 'Xiangqi', description: 'Chinese chess strategy', path: '/games/xiangqi', category: 'strategy', difficulty: 'hard', avgPlayTime: 30, tags: ['board', 'chinese', 'strategy'] },
+  { id: 'othello-advanced', name: 'Othello Advanced', description: 'Enhanced reversi gameplay', path: '/games/othello-advanced', category: 'strategy', difficulty: 'medium', avgPlayTime: 15, tags: ['board', 'reversi', 'strategy'] },
+  { id: 'mancala', name: 'Mancala', description: 'Ancient counting strategy', path: '/games/mancala', category: 'strategy', difficulty: 'medium', avgPlayTime: 15, tags: ['board', 'ancient', 'counting'] },
+  { id: 'nine-mens-morris', name: 'Nine Men\'s Morris', description: 'Mill formation tactics', path: '/games/nine-mens-morris', category: 'strategy', difficulty: 'medium', avgPlayTime: 20, tags: ['board', 'mills', 'strategy'] },
 ]
 
 // Helper function to get games by category
