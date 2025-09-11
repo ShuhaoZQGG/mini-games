@@ -143,6 +143,34 @@ export const gameCategories: GameCategoryMapping[] = [
   { id: 'othello-advanced', name: 'Othello Advanced', description: 'Enhanced reversi gameplay', path: '/games/othello-advanced', category: 'strategy', difficulty: 'medium', avgPlayTime: 15, tags: ['board', 'reversi', 'strategy'] },
   { id: 'mancala', name: 'Mancala', description: 'Ancient counting strategy', path: '/games/mancala', category: 'strategy', difficulty: 'medium', avgPlayTime: 15, tags: ['board', 'ancient', 'counting'] },
   { id: 'nine-mens-morris', name: 'Nine Men\'s Morris', description: 'Mill formation tactics', path: '/games/nine-mens-morris', category: 'strategy', difficulty: 'medium', avgPlayTime: 20, tags: ['board', 'mills', 'strategy'] },
+  
+  // New Action Games
+  { id: 'ninja-jump', name: 'Ninja Jump', description: 'Wall-jumping platformer', path: '/games/ninja-jump', category: 'action', difficulty: 'medium', avgPlayTime: 5, tags: ['action', 'platformer', 'ninja'] },
+  { id: 'laser-maze', name: 'Laser Maze', description: 'Navigate through laser obstacles', path: '/games/laser-maze', category: 'action', difficulty: 'hard', avgPlayTime: 10, tags: ['action', 'puzzle', 'maze'] },
+  { id: 'speed-racer', name: 'Speed Racer', description: 'Quick reaction racing game', path: '/games/speed-racer', category: 'action', difficulty: 'medium', avgPlayTime: 5, tags: ['action', 'racing', 'reflex'] },
+  { id: 'asteroid-dodger', name: 'Asteroid Dodger', description: 'Space obstacle avoidance', path: '/games/asteroid-dodger', category: 'action', difficulty: 'medium', avgPlayTime: 5, tags: ['action', 'space', 'survival'] },
+  { id: 'rapid-fire', name: 'Rapid Fire', description: 'Quick shooting gallery', path: '/games/rapid-fire', category: 'action', difficulty: 'easy', avgPlayTime: 3, tags: ['action', 'shooting', 'accuracy'] },
+  
+  // New Strategy Games
+  { id: 'tower-defense', name: 'Tower Defense Lite', description: 'Simple tower defense with waves of enemies', path: '/games/tower-defense', category: 'strategy', difficulty: 'medium', avgPlayTime: 15, tags: ['strategy', 'tower-defense', 'waves'] },
+  { id: 'territory-control', name: 'Territory Control', description: 'Area domination strategy game', path: '/games/territory-control', category: 'strategy', difficulty: 'medium', avgPlayTime: 20, tags: ['strategy', 'conquest', 'territory'] },
+  { id: 'resource-manager', name: 'Resource Manager', description: 'Economic strategy with resource collection', path: '/games/resource-manager', category: 'strategy', difficulty: 'hard', avgPlayTime: 15, tags: ['strategy', 'economy', 'management'] },
+  { id: 'battle-tactics', name: 'Battle Tactics', description: 'Turn-based tactical combat', path: '/games/battle-tactics', category: 'strategy', difficulty: 'hard', avgPlayTime: 20, tags: ['strategy', 'tactical', 'turn-based'] },
+  { id: 'maze-escape', name: 'Maze Escape', description: 'Strategic maze navigation with limited moves', path: '/games/maze-escape', category: 'strategy', difficulty: 'medium', avgPlayTime: 10, tags: ['strategy', 'maze', 'puzzle'] },
+  
+  // New Puzzle Games (Cycle 31)
+  { id: 'block-blast', name: 'Block Blast', description: 'Clear lines by filling rows', path: '/games/block-blast', category: 'puzzle', difficulty: 'medium', avgPlayTime: 10, tags: ['puzzle', 'blocks', 'clearing'] },
+  { id: 'color-match', name: 'Color Match', description: 'Pattern matching with colors', path: '/games/color-match', category: 'puzzle', difficulty: 'medium', avgPlayTime: 8, tags: ['puzzle', 'colors', 'matching'] },
+  { id: 'logic-grid', name: 'Logic Grid', description: 'Grid-based logic puzzles', path: '/games/logic-grid', category: 'puzzle', difficulty: 'hard', avgPlayTime: 15, tags: ['puzzle', 'logic', 'deduction'] },
+  { id: 'rotate-puzzle', name: 'Rotate Puzzle', description: 'Rotation-based puzzle solving', path: '/games/rotate-puzzle', category: 'puzzle', difficulty: 'medium', avgPlayTime: 10, tags: ['puzzle', 'rotation', 'paths'] },
+  { id: 'bridge-builder', name: 'Bridge Builder', description: 'Physics construction puzzle', path: '/games/bridge-builder', category: 'puzzle', difficulty: 'hard', avgPlayTime: 20, tags: ['puzzle', 'physics', 'construction'] },
+
+  // Casual Games (Final 5)
+  { id: 'bubble-pop', name: 'Bubble Pop', description: 'Simple bubble popping game with chain reactions', path: '/games/bubble-pop', category: 'arcade', difficulty: 'easy', avgPlayTime: 5, tags: ['casual', 'bubbles', 'relaxing'] },
+  { id: 'match-three', name: 'Match Three', description: 'Classic match-3 gameplay with combos', path: '/games/match-three', category: 'puzzle', difficulty: 'easy', avgPlayTime: 10, tags: ['casual', 'matching', 'gems'] },
+  { id: 'idle-clicker', name: 'Idle Clicker', description: 'Incremental clicking game with upgrades', path: '/games/idle-clicker', category: 'arcade', difficulty: 'easy', avgPlayTime: 15, tags: ['casual', 'idle', 'upgrades'] },
+  { id: 'ball-bounce', name: 'Ball Bounce', description: 'Physics-based bouncing ball game', path: '/games/ball-bounce', category: 'arcade', difficulty: 'medium', avgPlayTime: 5, tags: ['casual', 'physics', 'bouncing'] },
+  { id: 'color-fill', name: 'Color Fill', description: 'Fill the screen color puzzle', path: '/games/color-fill', category: 'puzzle', difficulty: 'easy', avgPlayTime: 8, tags: ['casual', 'colors', 'filling'] },
 ]
 
 // Helper function to get games by category
