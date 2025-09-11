@@ -332,26 +332,30 @@ export const AchievementSystem: React.FC<AchievementSystemProps> = ({
 
   // Set up real-time subscription
   useEffect(() => {
-    const { data: { user } } = supabase.auth.getUser();
-    if (!user) return;
+    const setupSubscription = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
 
-    const channel = supabase
-      .channel('achievement-updates')
-      .on(
-        'postgres_changes',
-        {
-          event: '*',
-          schema: 'public',
-          table: 'user_achievements',
-          filter: `user_id=eq.${user.id}`,
-        },
-        () => fetchUserAchievements()
-      )
-      .subscribe();
+      const channel = supabase
+        .channel('achievement-updates')
+        .on(
+          'postgres_changes',
+          {
+            event: '*',
+            schema: 'public',
+            table: 'user_achievements',
+            filter: `user_id=eq.${user.id}`,
+          },
+          () => fetchUserAchievements()
+        )
+        .subscribe();
 
-    return () => {
-      supabase.removeChannel(channel);
+      return () => {
+        supabase.removeChannel(channel);
+      };
     };
+
+    setupSubscription();
   }, [supabase, fetchUserAchievements]);
 
   return (

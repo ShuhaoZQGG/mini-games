@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { RotateCcw, Trophy, Star, Users, Clock, TrendingUp } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-type PieceType = 'king' | 'queen' | 'rook' | 'bishop' | 'knight' | 'pawn' | null
+type PieceType = 'king' | 'queen' | 'rook' | 'bishop' | 'knight' | 'pawn'
 type PieceColor = 'white' | 'black'
 type Piece = {
   type: PieceType
