@@ -679,6 +679,28 @@ export const gameCategories: GameCategoryMapping[] = [
   { id: 'fish-tank', name: 'Fish Tank Manager', description: 'Manage virtual aquarium', path: '/games/fish-tank', category: 'simulation', difficulty: 'easy', avgPlayTime: 10, tags: ['casual', 'fish', 'aquarium', 'pet'] },
   { id: 'bubble-wrap', name: 'Bubble Wrap Pop', description: 'Pop virtual bubble wrap', path: '/games/bubble-wrap', category: 'arcade', difficulty: 'easy', avgPlayTime: 5, tags: ['casual', 'bubble', 'popping', 'satisfying'] },
   { id: 'fortune-wheel', name: 'Fortune Wheel', description: 'Spin the wheel of fortune', path: '/games/fortune-wheel', category: 'casino', difficulty: 'easy', avgPlayTime: 5, tags: ['casual', 'wheel', 'fortune', 'luck'] },
+  
+  // Cycle 35: New Games (15 total)
+  // Multiplayer Expansion
+  { id: 'online-mahjong', name: 'Online Mahjong', description: 'Traditional 4-player tile matching game', path: '/games/online-mahjong', category: 'strategy', difficulty: 'hard', avgPlayTime: 30, tags: ['multiplayer', 'strategy', 'tiles', 'mahjong', 'traditional'] },
+  { id: 'online-go', name: 'Online Go', description: 'Ancient strategy board game', path: '/games/online-go', category: 'strategy', difficulty: 'hard', avgPlayTime: 45, tags: ['multiplayer', 'strategy', 'board', 'go', 'ancient'] },
+  { id: 'online-carrom', name: 'Online Carrom', description: 'Disc flicking board game', path: '/games/online-carrom', category: 'skill', difficulty: 'medium', avgPlayTime: 20, tags: ['multiplayer', 'skill', 'board', 'carrom', 'flicking'] },
+  { id: 'online-ludo', name: 'Online Ludo', description: 'Classic board game with dice', path: '/games/online-ludo', category: 'strategy', difficulty: 'easy', avgPlayTime: 25, tags: ['multiplayer', 'strategy', 'board', 'ludo', 'dice'] },
+  { id: 'online-rummy-500', name: 'Online Rummy 500', description: 'Point-based card game', path: '/games/online-rummy-500', category: 'card', difficulty: 'medium', avgPlayTime: 30, tags: ['multiplayer', 'card', 'rummy', 'points', 'strategy'] },
+  
+  // Brain Training Games
+  { id: 'memory-palace', name: 'Memory Palace', description: 'Spatial memory training', path: '/games/memory-palace', category: 'memory', difficulty: 'medium', avgPlayTime: 15, tags: ['memory', 'brain', 'spatial', 'training', 'cognitive'] },
+  { id: 'speed-math', name: 'Speed Math', description: 'Mental calculation challenges', path: '/games/speed-math', category: 'skill', difficulty: 'medium', avgPlayTime: 5, tags: ['math', 'brain', 'speed', 'calculation', 'mental'] },
+  { id: 'pattern-matrix', name: 'Pattern Matrix', description: 'Visual pattern completion', path: '/games/pattern-matrix', category: 'puzzle', difficulty: 'medium', avgPlayTime: 10, tags: ['pattern', 'brain', 'visual', 'matrix', 'logic'] },
+  { id: 'word-association', name: 'Word Association', description: 'Language connection game', path: '/games/word-association', category: 'word', difficulty: 'easy', avgPlayTime: 10, tags: ['word', 'brain', 'language', 'association', 'vocabulary'] },
+  { id: 'logic-gates', name: 'Logic Gates', description: 'Boolean logic puzzles', path: '/games/logic-gates', category: 'puzzle', difficulty: 'hard', avgPlayTime: 15, tags: ['logic', 'brain', 'boolean', 'puzzle', 'programming'] },
+  
+  // Arcade Revival Games
+  { id: 'galaga-redux', name: 'Galaga Redux', description: 'Enhanced space shooter', path: '/games/galaga-redux', category: 'arcade', difficulty: 'medium', avgPlayTime: 10, tags: ['arcade', 'shooter', 'space', 'retro', 'enhanced'] },
+  { id: 'dig-dug-redux', name: 'Dig Dug Redux', description: 'Underground adventure', path: '/games/dig-dug-redux', category: 'arcade', difficulty: 'medium', avgPlayTime: 10, tags: ['arcade', 'underground', 'adventure', 'retro', 'enhanced'] },
+  { id: 'burger-time', name: 'Burger Time', description: 'Food assembly arcade', path: '/games/burger-time', category: 'arcade', difficulty: 'medium', avgPlayTime: 10, tags: ['arcade', 'food', 'assembly', 'retro', 'classic'] },
+  { id: 'joust', name: 'Joust', description: 'Flying knight combat', path: '/games/joust', category: 'arcade', difficulty: 'medium', avgPlayTime: 10, tags: ['arcade', 'flying', 'combat', 'knight', 'retro'] },
+  { id: 'robotron', name: 'Robotron', description: 'Twin-stick shooter', path: '/games/robotron', category: 'arcade', difficulty: 'hard', avgPlayTime: 10, tags: ['arcade', 'shooter', 'twin-stick', 'robots', 'intense'] },
 ]
 
 // Helper function to get games by category

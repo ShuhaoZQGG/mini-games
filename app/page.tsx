@@ -226,6 +226,20 @@ export default function HomePage() {
     { id: 'speed-boat', name: 'Speed Boat', description: 'Water racing with obstacles', path: '/games/speed-boat' },
     { id: 'arrow-master', name: 'Arrow Master', description: 'Archery precision shooting', path: '/games/arrow-master' },
     { id: 'boxing-champion', name: 'Boxing Champion', description: 'Fighting game with combos', path: '/games/boxing-champion' },
+    
+    // Cycle 35: New Brain Training Games
+    { id: 'memory-palace', name: 'Memory Palace', description: 'Spatial memory training', path: '/games/memory-palace' },
+    { id: 'speed-math', name: 'Speed Math', description: 'Mental calculation challenges', path: '/games/speed-math' },
+    { id: 'pattern-matrix', name: 'Pattern Matrix', description: 'Visual pattern completion', path: '/games/pattern-matrix' },
+    { id: 'word-association', name: 'Word Association', description: 'Language connection game', path: '/games/word-association' },
+    { id: 'logic-gates', name: 'Logic Gates', description: 'Boolean logic puzzles', path: '/games/logic-gates' },
+    
+    // Cycle 35: New Arcade Revival Games
+    { id: 'galaga-redux', name: 'Galaga Redux', description: 'Enhanced space shooter', path: '/games/galaga-redux' },
+    { id: 'dig-dug-redux', name: 'Dig Dug Redux', description: 'Underground adventure', path: '/games/dig-dug-redux' },
+    { id: 'burger-time', name: 'Burger Time', description: 'Food assembly arcade', path: '/games/burger-time' },
+    { id: 'joust', name: 'Joust', description: 'Flying knight combat', path: '/games/joust' },
+    { id: 'robotron', name: 'Robotron', description: 'Twin-stick shooter', path: '/games/robotron' },
   ]
   
   // Game categories
@@ -345,6 +359,12 @@ export default function HomePage() {
     { id: 'pool', name: '8-Ball Pool', description: 'Classic billiards game', path: '/games/pool' },
     { id: 'battleship', name: 'Battleship', description: 'Naval strategy game', path: '/games/battleship' },
     { id: 'air-hockey', name: 'Air Hockey', description: 'Fast-paced table game', path: '/games/air-hockey' },
+    // New Cycle 35 Multiplayer Games
+    { id: 'online-mahjong', name: 'Online Mahjong', description: 'Traditional 4-player tile matching game', path: '/games/online-mahjong' },
+    { id: 'online-go', name: 'Online Go', description: 'Ancient strategy board game', path: '/games/online-go' },
+    { id: 'online-carrom', name: 'Online Carrom', description: 'Disc flicking board game', path: '/games/online-carrom' },
+    { id: 'online-ludo', name: 'Online Ludo', description: 'Classic board game with dice', path: '/games/online-ludo' },
+    { id: 'online-rummy-500', name: 'Online Rummy 500', description: 'Point-based card game', path: '/games/online-rummy-500' },
   ]
 
   // Combine all games for search with metadata
