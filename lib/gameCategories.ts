@@ -215,6 +215,35 @@ export const gameCategories: GameCategoryMapping[] = [
   // Enhanced Skill Games (Cycle 32)
   { id: 'precision-timing', name: 'Precision Timing', description: 'Multi-layered timing challenges', path: '/games/precision-timing', category: 'skill', difficulty: 'hard', avgPlayTime: 5, tags: ['skill', 'timing', 'precision'] },
   { id: 'finger-dance', name: 'Finger Dance', description: 'Multi-touch coordination game', path: '/games/finger-dance', category: 'skill', difficulty: 'hard', avgPlayTime: 5, tags: ['skill', 'coordination', 'touch'] },
+
+  // Cycle 33: New Games (20 total)
+  // Competitive Online Games
+  { id: 'online-chess', name: 'Online Chess', description: 'Chess with ELO rating system', path: '/games/online-chess', category: 'strategy', difficulty: 'hard', avgPlayTime: 30, tags: ['strategy', 'online', 'chess', 'elo', 'competitive'] },
+  { id: 'online-checkers', name: 'Online Checkers', description: 'Checkers with matchmaking', path: '/games/online-checkers', category: 'strategy', difficulty: 'medium', avgPlayTime: 15, tags: ['strategy', 'online', 'checkers', 'matchmaking'] },
+  { id: 'online-pool', name: 'Online Pool', description: 'Pool with real-time physics', path: '/games/online-pool', category: 'skill', difficulty: 'medium', avgPlayTime: 15, tags: ['skill', 'online', 'pool', 'billiards', 'physics'] },
+  { id: 'online-reversi', name: 'Online Reversi', description: 'Reversi with strategy ranking', path: '/games/online-reversi', category: 'strategy', difficulty: 'medium', avgPlayTime: 15, tags: ['strategy', 'online', 'reversi', 'othello', 'ranking'] },
+  { id: 'online-backgammon', name: 'Online Backgammon', description: 'Tournament-ready backgammon', path: '/games/online-backgammon', category: 'strategy', difficulty: 'hard', avgPlayTime: 20, tags: ['strategy', 'online', 'backgammon', 'tournament'] },
+  
+  // Puzzle Expansion Games
+  { id: 'hexagon-puzzle', name: 'Hexagon Puzzle', description: 'Hexagonal piece fitting puzzle', path: '/games/hexagon-puzzle', category: 'puzzle', difficulty: 'medium', avgPlayTime: 10, tags: ['puzzle', 'hexagon', 'shapes', 'tetris-like'] },
+  { id: 'word-ladder', name: 'Word Ladder', description: 'Transform words step by step', path: '/games/word-ladder', category: 'word', difficulty: 'medium', avgPlayTime: 10, tags: ['word', 'puzzle', 'vocabulary', 'ladder'] },
+  { id: 'logic-master', name: 'Logic Master', description: 'Advanced logic puzzles', path: '/games/logic-master', category: 'puzzle', difficulty: 'hard', avgPlayTime: 15, tags: ['puzzle', 'logic', 'deduction', 'brain'] },
+  { id: 'number-chain', name: 'Number Chain', description: 'Create chains to reach targets', path: '/games/number-chain', category: 'puzzle', difficulty: 'medium', avgPlayTime: 10, tags: ['puzzle', 'numbers', 'math', 'chain'] },
+  { id: 'pattern-quest', name: 'Pattern Quest', description: 'Match and create patterns', path: '/games/pattern-quest', category: 'puzzle', difficulty: 'medium', avgPlayTime: 10, tags: ['puzzle', 'pattern', 'matching', 'visual'] },
+  
+  // New Action Games
+  { id: 'ninja-warrior', name: 'Ninja Warrior', description: 'Jump and dodge as a ninja', path: '/games/ninja-warrior', category: 'action', difficulty: 'medium', avgPlayTime: 5, tags: ['action', 'ninja', 'platformer', 'jumping'] },
+  { id: 'speed-runner', name: 'Speed Runner', description: 'High-speed platforming', path: '/games/speed-runner', category: 'action', difficulty: 'hard', avgPlayTime: 5, tags: ['action', 'speed', 'runner', 'platformer'] },
+  { id: 'laser-defense', name: 'Laser Defense', description: 'Defend against laser attacks', path: '/games/laser-defense', category: 'action', difficulty: 'medium', avgPlayTime: 10, tags: ['action', 'defense', 'laser', 'shield'] },
+  { id: 'galaxy-explorer', name: 'Galaxy Explorer', description: 'Explore and discover planets', path: '/games/galaxy-explorer', category: 'action', difficulty: 'easy', avgPlayTime: 10, tags: ['action', 'space', 'exploration', 'adventure'] },
+  { id: 'time-attack', name: 'Time Attack', description: 'Hit targets before time runs out', path: '/games/time-attack', category: 'action', difficulty: 'medium', avgPlayTime: 5, tags: ['action', 'time', 'targets', 'reflex'] },
+  
+  // Casual Games
+  { id: 'cookie-clicker', name: 'Cookie Clicker Evolution', description: 'Click cookies and build empire', path: '/games/cookie-clicker', category: 'arcade', difficulty: 'easy', avgPlayTime: 15, tags: ['casual', 'clicker', 'idle', 'cookies'] },
+  { id: 'zen-garden', name: 'Zen Garden', description: 'Grow a peaceful garden', path: '/games/zen-garden', category: 'simulation', difficulty: 'easy', avgPlayTime: 10, tags: ['casual', 'garden', 'relaxing', 'zen'] },
+  { id: 'fish-tank', name: 'Fish Tank Manager', description: 'Manage virtual aquarium', path: '/games/fish-tank', category: 'simulation', difficulty: 'easy', avgPlayTime: 10, tags: ['casual', 'fish', 'aquarium', 'pet'] },
+  { id: 'bubble-wrap', name: 'Bubble Wrap Pop', description: 'Pop virtual bubble wrap', path: '/games/bubble-wrap', category: 'arcade', difficulty: 'easy', avgPlayTime: 5, tags: ['casual', 'bubble', 'popping', 'satisfying'] },
+  { id: 'fortune-wheel', name: 'Fortune Wheel', description: 'Spin the wheel of fortune', path: '/games/fortune-wheel', category: 'casino', difficulty: 'easy', avgPlayTime: 5, tags: ['casual', 'wheel', 'fortune', 'luck'] },
 ]
 
 // Helper function to get games by category

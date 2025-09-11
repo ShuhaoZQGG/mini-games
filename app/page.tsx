@@ -161,6 +161,35 @@ export default function HomePage() {
     // Enhanced Skill Games
     { id: 'precision-timing', name: 'Precision Timing', description: 'Multi-layered timing challenges', path: '/games/precision-timing' },
     { id: 'finger-dance', name: 'Finger Dance', description: 'Multi-touch coordination game', path: '/games/finger-dance' },
+    
+    // Cycle 33: New Games (20 total)
+    // Competitive Online Games
+    { id: 'online-chess', name: 'Online Chess', description: 'Chess with ELO rating system', path: '/games/online-chess' },
+    { id: 'online-checkers', name: 'Online Checkers', description: 'Checkers with matchmaking', path: '/games/online-checkers' },
+    { id: 'online-pool', name: 'Online Pool', description: 'Pool with real-time physics', path: '/games/online-pool' },
+    { id: 'online-reversi', name: 'Online Reversi', description: 'Reversi with strategy ranking', path: '/games/online-reversi' },
+    { id: 'online-backgammon', name: 'Online Backgammon', description: 'Tournament-ready backgammon', path: '/games/online-backgammon' },
+    
+    // Puzzle Expansion Games
+    { id: 'hexagon-puzzle', name: 'Hexagon Puzzle', description: 'Hexagonal piece fitting puzzle', path: '/games/hexagon-puzzle' },
+    { id: 'word-ladder', name: 'Word Ladder', description: 'Transform words step by step', path: '/games/word-ladder' },
+    { id: 'logic-master', name: 'Logic Master', description: 'Advanced logic puzzles', path: '/games/logic-master' },
+    { id: 'number-chain', name: 'Number Chain', description: 'Create chains to reach targets', path: '/games/number-chain' },
+    { id: 'pattern-quest', name: 'Pattern Quest', description: 'Match and create patterns', path: '/games/pattern-quest' },
+    
+    // New Action Games
+    { id: 'ninja-warrior', name: 'Ninja Warrior', description: 'Jump and dodge as a ninja', path: '/games/ninja-warrior' },
+    { id: 'speed-runner', name: 'Speed Runner', description: 'High-speed platforming', path: '/games/speed-runner' },
+    { id: 'laser-defense', name: 'Laser Defense', description: 'Defend against laser attacks', path: '/games/laser-defense' },
+    { id: 'galaxy-explorer', name: 'Galaxy Explorer', description: 'Explore and discover planets', path: '/games/galaxy-explorer' },
+    { id: 'time-attack', name: 'Time Attack', description: 'Hit targets before time runs out', path: '/games/time-attack' },
+    
+    // Casual Games
+    { id: 'cookie-clicker', name: 'Cookie Clicker Evolution', description: 'Click cookies and build empire', path: '/games/cookie-clicker' },
+    { id: 'zen-garden', name: 'Zen Garden', description: 'Grow a peaceful garden', path: '/games/zen-garden' },
+    { id: 'fish-tank', name: 'Fish Tank Manager', description: 'Manage virtual aquarium', path: '/games/fish-tank' },
+    { id: 'bubble-wrap', name: 'Bubble Wrap Pop', description: 'Pop virtual bubble wrap', path: '/games/bubble-wrap' },
+    { id: 'fortune-wheel', name: 'Fortune Wheel', description: 'Spin the wheel of fortune', path: '/games/fortune-wheel' },
   ]
   
   // Game categories
