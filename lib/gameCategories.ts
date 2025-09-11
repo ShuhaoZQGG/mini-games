@@ -3,7 +3,7 @@ export interface GameCategoryMapping {
   name: string
   description: string
   path: string
-  category: 'puzzle' | 'action' | 'strategy' | 'arcade' | 'card' | 'memory' | 'skill' | 'casino' | 'word'
+  category: 'puzzle' | 'action' | 'strategy' | 'arcade' | 'card' | 'memory' | 'skill' | 'casino' | 'word' | 'music' | 'physics' | 'simulation'
   difficulty: 'easy' | 'medium' | 'hard'
   avgPlayTime: number // in minutes
   tags: string[]
@@ -171,6 +171,50 @@ export const gameCategories: GameCategoryMapping[] = [
   { id: 'idle-clicker', name: 'Idle Clicker', description: 'Incremental clicking game with upgrades', path: '/games/idle-clicker', category: 'arcade', difficulty: 'easy', avgPlayTime: 15, tags: ['casual', 'idle', 'upgrades'] },
   { id: 'ball-bounce', name: 'Ball Bounce', description: 'Physics-based bouncing ball game', path: '/games/ball-bounce', category: 'arcade', difficulty: 'medium', avgPlayTime: 5, tags: ['casual', 'physics', 'bouncing'] },
   { id: 'color-fill', name: 'Color Fill', description: 'Fill the screen color puzzle', path: '/games/color-fill', category: 'puzzle', difficulty: 'easy', avgPlayTime: 8, tags: ['casual', 'colors', 'filling'] },
+
+  // Music Games (New Category - Cycle 32)
+  { id: 'piano-tiles', name: 'Piano Tiles', description: 'Tap falling tiles in rhythm', path: '/games/piano-tiles', category: 'music', difficulty: 'medium', avgPlayTime: 5, tags: ['music', 'rhythm', 'reflex'] },
+  { id: 'beat-matcher', name: 'Beat Matcher', description: 'Match beats to music patterns', path: '/games/beat-matcher', category: 'music', difficulty: 'medium', avgPlayTime: 5, tags: ['music', 'rhythm', 'timing'] },
+  { id: 'melody-memory', name: 'Melody Memory', description: 'Remember and replay musical sequences', path: '/games/melody-memory', category: 'music', difficulty: 'hard', avgPlayTime: 10, tags: ['music', 'memory', 'notes'] },
+  { id: 'drum-machine', name: 'Drum Machine', description: 'Create beats with virtual drums', path: '/games/drum-machine', category: 'music', difficulty: 'easy', avgPlayTime: 10, tags: ['music', 'drums', 'creative'] },
+  { id: 'pitch-perfect', name: 'Pitch Perfect', description: 'Identify musical notes and intervals', path: '/games/pitch-perfect', category: 'music', difficulty: 'hard', avgPlayTime: 10, tags: ['music', 'notes', 'education'] },
+  { id: 'rhythm-runner', name: 'Rhythm Runner', description: 'Platformer synchronized to music beats', path: '/games/rhythm-runner', category: 'music', difficulty: 'medium', avgPlayTime: 5, tags: ['music', 'platform', 'rhythm'] },
+
+  // Physics Games (New Category - Cycle 32)
+  { id: 'gravity-well', name: 'Gravity Well', description: 'Manipulate gravity to guide objects', path: '/games/gravity-well', category: 'physics', difficulty: 'medium', avgPlayTime: 10, tags: ['physics', 'gravity', 'space'] },
+  { id: 'pendulum-swing', name: 'Pendulum Swing', description: 'Physics-based swinging mechanics', path: '/games/pendulum-swing', category: 'physics', difficulty: 'hard', avgPlayTime: 5, tags: ['physics', 'swing', 'timing'] },
+  { id: 'balloon-pop-physics', name: 'Balloon Pop Physics', description: 'Air pressure and wind physics', path: '/games/balloon-pop-physics', category: 'physics', difficulty: 'easy', avgPlayTime: 5, tags: ['physics', 'balloons', 'wind'] },
+  { id: 'domino-chain', name: 'Domino Chain', description: 'Create chain reactions with physics', path: '/games/domino-chain', category: 'physics', difficulty: 'medium', avgPlayTime: 10, tags: ['physics', 'chain', 'puzzle'] },
+  { id: 'marble-maze', name: 'Marble Maze', description: 'Tilt-controlled marble navigation', path: '/games/marble-maze', category: 'physics', difficulty: 'medium', avgPlayTime: 5, tags: ['physics', 'maze', 'tilt'] },
+  { id: 'catapult-challenge', name: 'Catapult Challenge', description: 'Projectile physics with trajectory', path: '/games/catapult-challenge', category: 'physics', difficulty: 'medium', avgPlayTime: 5, tags: ['physics', 'projectile', 'aim'] },
+
+  // Simulation Games (New Category - Cycle 32)
+  { id: 'city-builder-mini', name: 'City Builder Mini', description: 'Simplified urban planning', path: '/games/city-builder-mini', category: 'simulation', difficulty: 'medium', avgPlayTime: 20, tags: ['simulation', 'city', 'building'] },
+  { id: 'farm-manager', name: 'Farm Manager', description: 'Quick agricultural simulation', path: '/games/farm-manager', category: 'simulation', difficulty: 'easy', avgPlayTime: 15, tags: ['simulation', 'farm', 'management'] },
+  { id: 'traffic-controller', name: 'Traffic Controller', description: 'Intersection traffic management', path: '/games/traffic-controller', category: 'simulation', difficulty: 'hard', avgPlayTime: 10, tags: ['simulation', 'traffic', 'timing'] },
+  { id: 'ecosystem-balance', name: 'Ecosystem Balance', description: 'Simple predator-prey dynamics', path: '/games/ecosystem-balance', category: 'simulation', difficulty: 'medium', avgPlayTime: 15, tags: ['simulation', 'nature', 'balance'] },
+
+  // Enhanced Action Games (Cycle 32)
+  { id: 'parkour-runner', name: 'Parkour Runner', description: 'Advanced obstacle course navigation', path: '/games/parkour-runner', category: 'action', difficulty: 'hard', avgPlayTime: 5, tags: ['action', 'parkour', 'runner'] },
+  { id: 'laser-tag', name: 'Laser Tag', description: 'Strategic laser-based combat', path: '/games/laser-tag', category: 'action', difficulty: 'medium', avgPlayTime: 10, tags: ['action', 'laser', 'strategy'] },
+  { id: 'rocket-dodge', name: 'Rocket Dodge', description: 'Space debris avoidance with upgrades', path: '/games/rocket-dodge', category: 'action', difficulty: 'medium', avgPlayTime: 5, tags: ['action', 'space', 'dodge'] },
+  { id: 'storm-chaser', name: 'Storm Chaser', description: 'Weather navigation and timing', path: '/games/storm-chaser', category: 'action', difficulty: 'hard', avgPlayTime: 10, tags: ['action', 'weather', 'survival'] },
+  { id: 'neon-racing', name: 'Neon Racing', description: 'Tron-style racing with power-ups', path: '/games/neon-racing', category: 'action', difficulty: 'medium', avgPlayTime: 5, tags: ['action', 'racing', 'neon'] },
+
+  // Advanced Puzzle Games (Cycle 32)
+  { id: 'circuit-builder', name: 'Circuit Builder', description: 'Logic gate and electrical puzzles', path: '/games/circuit-builder', category: 'puzzle', difficulty: 'hard', avgPlayTime: 15, tags: ['puzzle', 'logic', 'circuits'] },
+  { id: 'water-flow', name: 'Water Flow', description: 'Hydraulic path-finding puzzles', path: '/games/water-flow', category: 'puzzle', difficulty: 'medium', avgPlayTime: 10, tags: ['puzzle', 'water', 'flow'] },
+  { id: 'mirror-maze', name: 'Mirror Maze', description: 'Light reflection and redirection', path: '/games/mirror-maze', category: 'puzzle', difficulty: 'hard', avgPlayTime: 10, tags: ['puzzle', 'light', 'mirrors'] },
+  { id: 'gear-works', name: 'Gear Works', description: 'Mechanical gear-fitting puzzles', path: '/games/gear-works', category: 'puzzle', difficulty: 'medium', avgPlayTime: 10, tags: ['puzzle', 'gears', 'mechanical'] },
+
+  // Enhanced Memory Games (Cycle 32)
+  { id: 'face-memory', name: 'Face Memory', description: 'Facial recognition and recall', path: '/games/face-memory', category: 'memory', difficulty: 'hard', avgPlayTime: 10, tags: ['memory', 'faces', 'recognition'] },
+  { id: 'sequence-builder', name: 'Sequence Builder', description: 'Complex pattern memorization', path: '/games/sequence-builder', category: 'memory', difficulty: 'hard', avgPlayTime: 10, tags: ['memory', 'sequence', 'pattern'] },
+  { id: 'location-memory', name: 'Location Memory', description: 'Spatial memory challenges', path: '/games/location-memory', category: 'memory', difficulty: 'medium', avgPlayTime: 10, tags: ['memory', 'spatial', 'location'] },
+
+  // Enhanced Skill Games (Cycle 32)
+  { id: 'precision-timing', name: 'Precision Timing', description: 'Multi-layered timing challenges', path: '/games/precision-timing', category: 'skill', difficulty: 'hard', avgPlayTime: 5, tags: ['skill', 'timing', 'precision'] },
+  { id: 'finger-dance', name: 'Finger Dance', description: 'Multi-touch coordination game', path: '/games/finger-dance', category: 'skill', difficulty: 'hard', avgPlayTime: 5, tags: ['skill', 'coordination', 'touch'] },
 ]
 
 // Helper function to get games by category

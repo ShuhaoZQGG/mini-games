@@ -117,6 +117,50 @@ export default function HomePage() {
     { id: 'idle-clicker', name: 'Idle Clicker', description: 'Incremental clicking game with upgrades', path: '/games/idle-clicker' },
     { id: 'ball-bounce', name: 'Ball Bounce', description: 'Physics-based bouncing ball game', path: '/games/ball-bounce' },
     { id: 'color-fill', name: 'Color Fill', description: 'Fill the screen color puzzle', path: '/games/color-fill' },
+    
+    // Music Games (New Category)
+    { id: 'piano-tiles', name: 'Piano Tiles', description: 'Tap falling tiles in rhythm', path: '/games/piano-tiles' },
+    { id: 'beat-matcher', name: 'Beat Matcher', description: 'Match beats to music patterns', path: '/games/beat-matcher' },
+    { id: 'melody-memory', name: 'Melody Memory', description: 'Remember and replay musical sequences', path: '/games/melody-memory' },
+    { id: 'drum-machine', name: 'Drum Machine', description: 'Create beats with virtual drums', path: '/games/drum-machine' },
+    { id: 'pitch-perfect', name: 'Pitch Perfect', description: 'Identify musical notes and intervals', path: '/games/pitch-perfect' },
+    { id: 'rhythm-runner', name: 'Rhythm Runner', description: 'Platformer synchronized to music beats', path: '/games/rhythm-runner' },
+    
+    // Physics Games (New Category)
+    { id: 'gravity-well', name: 'Gravity Well', description: 'Manipulate gravity to guide objects', path: '/games/gravity-well' },
+    { id: 'pendulum-swing', name: 'Pendulum Swing', description: 'Physics-based swinging mechanics', path: '/games/pendulum-swing' },
+    { id: 'balloon-pop-physics', name: 'Balloon Pop Physics', description: 'Air pressure and wind physics', path: '/games/balloon-pop-physics' },
+    { id: 'domino-chain', name: 'Domino Chain', description: 'Create chain reactions with physics', path: '/games/domino-chain' },
+    { id: 'marble-maze', name: 'Marble Maze', description: 'Tilt-controlled marble navigation', path: '/games/marble-maze' },
+    { id: 'catapult-challenge', name: 'Catapult Challenge', description: 'Projectile physics with trajectory', path: '/games/catapult-challenge' },
+    
+    // Simulation Games (New Category)
+    { id: 'city-builder-mini', name: 'City Builder Mini', description: 'Simplified urban planning', path: '/games/city-builder-mini' },
+    { id: 'farm-manager', name: 'Farm Manager', description: 'Quick agricultural simulation', path: '/games/farm-manager' },
+    { id: 'traffic-controller', name: 'Traffic Controller', description: 'Intersection traffic management', path: '/games/traffic-controller' },
+    { id: 'ecosystem-balance', name: 'Ecosystem Balance', description: 'Simple predator-prey dynamics', path: '/games/ecosystem-balance' },
+    
+    // Enhanced Action Games
+    { id: 'parkour-runner', name: 'Parkour Runner', description: 'Advanced obstacle course navigation', path: '/games/parkour-runner' },
+    { id: 'laser-tag', name: 'Laser Tag', description: 'Strategic laser-based combat', path: '/games/laser-tag' },
+    { id: 'rocket-dodge', name: 'Rocket Dodge', description: 'Space debris avoidance with upgrades', path: '/games/rocket-dodge' },
+    { id: 'storm-chaser', name: 'Storm Chaser', description: 'Weather navigation and timing', path: '/games/storm-chaser' },
+    { id: 'neon-racing', name: 'Neon Racing', description: 'Tron-style racing with power-ups', path: '/games/neon-racing' },
+    
+    // Advanced Puzzle Games
+    { id: 'circuit-builder', name: 'Circuit Builder', description: 'Logic gate and electrical puzzles', path: '/games/circuit-builder' },
+    { id: 'water-flow', name: 'Water Flow', description: 'Hydraulic path-finding puzzles', path: '/games/water-flow' },
+    { id: 'mirror-maze', name: 'Mirror Maze', description: 'Light reflection and redirection', path: '/games/mirror-maze' },
+    { id: 'gear-works', name: 'Gear Works', description: 'Mechanical gear-fitting puzzles', path: '/games/gear-works' },
+    
+    // Enhanced Memory Games
+    { id: 'face-memory', name: 'Face Memory', description: 'Facial recognition and recall', path: '/games/face-memory' },
+    { id: 'sequence-builder', name: 'Sequence Builder', description: 'Complex pattern memorization', path: '/games/sequence-builder' },
+    { id: 'location-memory', name: 'Location Memory', description: 'Spatial memory challenges', path: '/games/location-memory' },
+    
+    // Enhanced Skill Games
+    { id: 'precision-timing', name: 'Precision Timing', description: 'Multi-layered timing challenges', path: '/games/precision-timing' },
+    { id: 'finger-dance', name: 'Finger Dance', description: 'Multi-touch coordination game', path: '/games/finger-dance' },
   ]
   
   // Game categories
@@ -201,6 +245,33 @@ export default function HomePage() {
       icon: '👥',
       color: '#6366F1',
       featured: true
+    },
+    {
+      id: 'music',
+      name: 'Music',
+      slug: 'music',
+      description: 'Rhythm and sound games',
+      icon: '🎵',
+      color: '#9333EA',
+      featured: true
+    },
+    {
+      id: 'physics',
+      name: 'Physics',
+      slug: 'physics',
+      description: 'Physics-based challenges',
+      icon: '🎯',
+      color: '#06B6D4',
+      featured: false
+    },
+    {
+      id: 'simulation',
+      name: 'Simulation',
+      slug: 'simulation',
+      description: 'Manage and build',
+      icon: '🏗️',
+      color: '#84CC16',
+      featured: false
     }
   ];
 
