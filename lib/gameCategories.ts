@@ -1,12 +1,19 @@
+export type GameCategory = 'puzzle' | 'action' | 'strategy' | 'arcade' | 'card' | 'memory' | 'skill' | 'casino' | 'word' | 'music' | 'physics' | 'simulation'
+export type GameDifficulty = 'easy' | 'medium' | 'hard'
+
 export interface GameCategoryMapping {
   id: string
   name: string
   description: string
   path: string
-  category: 'puzzle' | 'action' | 'strategy' | 'arcade' | 'card' | 'memory' | 'skill' | 'casino' | 'word' | 'music' | 'physics' | 'simulation'
-  difficulty: 'easy' | 'medium' | 'hard'
+  category: GameCategory // Primary category for backward compatibility
+  categories?: { category: GameCategory; relevance: number }[] // Multi-category support with weights
+  difficulty: GameDifficulty
   avgPlayTime: number // in minutes
   tags: string[]
+  rating?: number // User rating (1-5)
+  playCount?: number // Number of times played
+  lastUpdated?: Date // Last update timestamp
 }
 
 export const gameCategories: GameCategoryMapping[] = [
@@ -172,6 +179,434 @@ export const gameCategories: GameCategoryMapping[] = [
   { id: 'ball-bounce', name: 'Ball Bounce', description: 'Physics-based bouncing ball game', path: '/games/ball-bounce', category: 'arcade', difficulty: 'medium', avgPlayTime: 5, tags: ['casual', 'physics', 'bouncing'] },
   { id: 'color-fill', name: 'Color Fill', description: 'Fill the screen color puzzle', path: '/games/color-fill', category: 'puzzle', difficulty: 'easy', avgPlayTime: 8, tags: ['casual', 'colors', 'filling'] },
 
+  // Cycle 34: New Multiplayer Games (10 games)
+  { 
+    id: 'online-poker', 
+    name: 'Online Poker', 
+    description: 'Play Texas Hold\'em poker online with friends', 
+    path: '/games/online-poker', 
+    category: 'card',
+    categories: [
+      { category: 'card', relevance: 1.0 },
+      { category: 'casino', relevance: 0.9 },
+      { category: 'strategy', relevance: 0.7 }
+    ],
+    difficulty: 'hard', 
+    avgPlayTime: 30, 
+    tags: ['multiplayer', 'poker', 'cards', 'strategy', 'betting', 'online'] 
+  },
+  { 
+    id: 'online-uno', 
+    name: 'Online UNO', 
+    description: 'Classic UNO card game with multiplayer support', 
+    path: '/games/online-uno', 
+    category: 'card',
+    categories: [
+      { category: 'card', relevance: 1.0 },
+      { category: 'strategy', relevance: 0.5 }
+    ],
+    difficulty: 'easy', 
+    avgPlayTime: 15, 
+    tags: ['multiplayer', 'uno', 'cards', 'family', 'online'] 
+  },
+  { 
+    id: 'online-scrabble', 
+    name: 'Online Scrabble', 
+    description: 'Word building game with online multiplayer', 
+    path: '/games/online-scrabble', 
+    category: 'word',
+    categories: [
+      { category: 'word', relevance: 1.0 },
+      { category: 'strategy', relevance: 0.8 },
+      { category: 'puzzle', relevance: 0.6 }
+    ],
+    difficulty: 'hard', 
+    avgPlayTime: 45, 
+    tags: ['multiplayer', 'scrabble', 'words', 'vocabulary', 'strategy', 'online'] 
+  },
+  { 
+    id: 'online-dominoes', 
+    name: 'Online Dominoes', 
+    description: 'Traditional dominoes with online play', 
+    path: '/games/online-dominoes', 
+    category: 'strategy',
+    categories: [
+      { category: 'strategy', relevance: 1.0 },
+      { category: 'puzzle', relevance: 0.5 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 20, 
+    tags: ['multiplayer', 'dominoes', 'tiles', 'strategy', 'classic', 'online'] 
+  },
+  { 
+    id: 'online-yahtzee', 
+    name: 'Online Yahtzee', 
+    description: 'Dice game with scoring combinations online', 
+    path: '/games/online-yahtzee', 
+    category: 'casino',
+    categories: [
+      { category: 'casino', relevance: 1.0 },
+      { category: 'strategy', relevance: 0.6 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 20, 
+    tags: ['multiplayer', 'yahtzee', 'dice', 'probability', 'online'] 
+  },
+  { 
+    id: 'online-battleship-ii', 
+    name: 'Online Battleship II', 
+    description: 'Enhanced naval combat with special abilities', 
+    path: '/games/online-battleship-ii', 
+    category: 'strategy',
+    categories: [
+      { category: 'strategy', relevance: 1.0 },
+      { category: 'puzzle', relevance: 0.4 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 25, 
+    tags: ['multiplayer', 'battleship', 'naval', 'strategy', 'enhanced', 'online'] 
+  },
+  { 
+    id: 'online-connect-five', 
+    name: 'Online Connect Five', 
+    description: 'Get five in a row in this strategic game', 
+    path: '/games/online-connect-five', 
+    category: 'strategy',
+    categories: [
+      { category: 'strategy', relevance: 1.0 },
+      { category: 'puzzle', relevance: 0.5 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 15, 
+    tags: ['multiplayer', 'connect', 'strategy', 'gomoku', 'online'] 
+  },
+  { 
+    id: 'online-othello', 
+    name: 'Online Othello', 
+    description: 'Reversi game with online multiplayer', 
+    path: '/games/online-othello', 
+    category: 'strategy',
+    categories: [
+      { category: 'strategy', relevance: 1.0 },
+      { category: 'puzzle', relevance: 0.6 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 20, 
+    tags: ['multiplayer', 'othello', 'reversi', 'strategy', 'board', 'online'] 
+  },
+  { 
+    id: 'online-stratego', 
+    name: 'Online Stratego', 
+    description: 'Military strategy with hidden pieces', 
+    path: '/games/online-stratego', 
+    category: 'strategy',
+    categories: [
+      { category: 'strategy', relevance: 1.0 }
+    ],
+    difficulty: 'hard', 
+    avgPlayTime: 40, 
+    tags: ['multiplayer', 'stratego', 'military', 'strategy', 'tactics', 'online'] 
+  },
+  { 
+    id: 'online-risk', 
+    name: 'Online Risk', 
+    description: 'World domination strategy game online', 
+    path: '/games/online-risk', 
+    category: 'strategy',
+    categories: [
+      { category: 'strategy', relevance: 1.0 }
+    ],
+    difficulty: 'hard', 
+    avgPlayTime: 60, 
+    tags: ['multiplayer', 'risk', 'conquest', 'strategy', 'war', 'online'] 
+  },
+
+  // Cycle 34: New Puzzle Games (10 games)
+  { 
+    id: 'rubiks-cube', 
+    name: 'Rubik\'s Cube', 
+    description: '3D cube puzzle solver', 
+    path: '/games/rubiks-cube', 
+    category: 'puzzle',
+    categories: [
+      { category: 'puzzle', relevance: 1.0 },
+      { category: 'skill', relevance: 0.7 }
+    ],
+    difficulty: 'hard', 
+    avgPlayTime: 15, 
+    tags: ['puzzle', '3d', 'cube', 'logic', 'spatial'] 
+  },
+  { 
+    id: 'tower-blocks', 
+    name: 'Tower Blocks', 
+    description: 'Stack blocks to build tall towers', 
+    path: '/games/tower-blocks', 
+    category: 'skill',
+    categories: [
+      { category: 'skill', relevance: 1.0 },
+      { category: 'arcade', relevance: 0.7 },
+      { category: 'puzzle', relevance: 0.5 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 5, 
+    tags: ['stacking', 'tower', 'precision', 'timing', 'building'] 
+  },
+  { 
+    id: 'unblock-me', 
+    name: 'Unblock Me', 
+    description: 'Slide blocks to free the red block', 
+    path: '/games/unblock-me', 
+    category: 'puzzle',
+    categories: [
+      { category: 'puzzle', relevance: 1.0 },
+      { category: 'strategy', relevance: 0.5 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 10, 
+    tags: ['puzzle', 'sliding', 'blocks', 'logic', 'brain-teaser'] 
+  },
+  { 
+    id: 'flow-connect', 
+    name: 'Flow Connect', 
+    description: 'Connect matching colors without crossing', 
+    path: '/games/flow-connect', 
+    category: 'puzzle',
+    categories: [
+      { category: 'puzzle', relevance: 1.0 },
+      { category: 'strategy', relevance: 0.4 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 10, 
+    tags: ['puzzle', 'flow', 'pipes', 'logic', 'colors'] 
+  },
+  { 
+    id: 'hex-puzzle', 
+    name: 'Hex Puzzle', 
+    description: 'Fit hexagonal pieces into the grid', 
+    path: '/games/hex-puzzle', 
+    category: 'puzzle',
+    categories: [
+      { category: 'puzzle', relevance: 1.0 },
+      { category: 'arcade', relevance: 0.5 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 10, 
+    tags: ['puzzle', 'hexagon', 'tetris-like', 'shapes', 'fitting'] 
+  },
+  { 
+    id: 'magic-square', 
+    name: 'Magic Square', 
+    description: 'Arrange numbers for equal sums', 
+    path: '/games/magic-square', 
+    category: 'puzzle',
+    categories: [
+      { category: 'puzzle', relevance: 1.0 },
+      { category: 'skill', relevance: 0.6 }
+    ],
+    difficulty: 'hard', 
+    avgPlayTime: 15, 
+    tags: ['puzzle', 'math', 'numbers', 'logic', 'brain-training'] 
+  },
+  { 
+    id: 'kenken', 
+    name: 'KenKen', 
+    description: 'Mathematical logic puzzle with operations', 
+    path: '/games/kenken', 
+    category: 'puzzle',
+    categories: [
+      { category: 'puzzle', relevance: 1.0 },
+      { category: 'skill', relevance: 0.7 }
+    ],
+    difficulty: 'hard', 
+    avgPlayTime: 20, 
+    tags: ['puzzle', 'math', 'arithmetic', 'logic', 'sudoku-like'] 
+  },
+  { 
+    id: 'hashi', 
+    name: 'Hashi (Bridges)', 
+    description: 'Connect islands with bridges', 
+    path: '/games/hashi', 
+    category: 'puzzle',
+    categories: [
+      { category: 'puzzle', relevance: 1.0 },
+      { category: 'strategy', relevance: 0.5 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 15, 
+    tags: ['puzzle', 'bridges', 'islands', 'logic', 'japanese'] 
+  },
+  { 
+    id: 'slitherlink', 
+    name: 'Slitherlink', 
+    description: 'Create a loop following number clues', 
+    path: '/games/slitherlink', 
+    category: 'puzzle',
+    categories: [
+      { category: 'puzzle', relevance: 1.0 }
+    ],
+    difficulty: 'hard', 
+    avgPlayTime: 20, 
+    tags: ['puzzle', 'loop', 'logic', 'japanese', 'deduction'] 
+  },
+  { 
+    id: 'nurikabe', 
+    name: 'Nurikabe', 
+    description: 'Create islands and walls with logic', 
+    path: '/games/nurikabe', 
+    category: 'puzzle',
+    categories: [
+      { category: 'puzzle', relevance: 1.0 }
+    ],
+    difficulty: 'hard', 
+    avgPlayTime: 20, 
+    tags: ['puzzle', 'islands', 'walls', 'logic', 'japanese'] 
+  },
+
+  // Cycle 34: New Action Games (10 games)
+  { 
+    id: 'subway-runner', 
+    name: 'Subway Runner', 
+    description: 'Endless runner through subway tunnels', 
+    path: '/games/subway-runner', 
+    category: 'action',
+    categories: [
+      { category: 'action', relevance: 1.0 },
+      { category: 'arcade', relevance: 0.8 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 5, 
+    tags: ['action', 'runner', 'endless', 'subway', 'dodge'] 
+  },
+  { 
+    id: 'fruit-slice', 
+    name: 'Fruit Slice', 
+    description: 'Slice flying fruits with swipes', 
+    path: '/games/fruit-slice', 
+    category: 'action',
+    categories: [
+      { category: 'action', relevance: 1.0 },
+      { category: 'arcade', relevance: 0.7 },
+      { category: 'skill', relevance: 0.6 }
+    ],
+    difficulty: 'easy', 
+    avgPlayTime: 5, 
+    tags: ['action', 'slicing', 'fruits', 'ninja', 'arcade'] 
+  },
+  { 
+    id: 'tower-climb', 
+    name: 'Tower Climb', 
+    description: 'Climb an endless tower platform game', 
+    path: '/games/tower-climb', 
+    category: 'action',
+    categories: [
+      { category: 'action', relevance: 1.0 },
+      { category: 'arcade', relevance: 0.6 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 5, 
+    tags: ['action', 'climbing', 'platform', 'vertical', 'endless'] 
+  },
+  { 
+    id: 'laser-quest', 
+    name: 'Laser Quest', 
+    description: 'Navigate laser mazes and hit targets', 
+    path: '/games/laser-quest', 
+    category: 'action',
+    categories: [
+      { category: 'action', relevance: 1.0 },
+      { category: 'puzzle', relevance: 0.7 },
+      { category: 'skill', relevance: 0.6 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 10, 
+    tags: ['action', 'laser', 'puzzle', 'precision', 'maze'] 
+  },
+  { 
+    id: 'ninja-run', 
+    name: 'Ninja Run', 
+    description: 'Fast-paced ninja platformer', 
+    path: '/games/ninja-run', 
+    category: 'action',
+    categories: [
+      { category: 'action', relevance: 1.0 },
+      { category: 'arcade', relevance: 0.7 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 5, 
+    tags: ['action', 'ninja', 'platform', 'runner', 'combat'] 
+  },
+  { 
+    id: 'space-fighter', 
+    name: 'Space Fighter', 
+    description: 'Galactic spaceship combat', 
+    path: '/games/space-fighter', 
+    category: 'action',
+    categories: [
+      { category: 'action', relevance: 1.0 },
+      { category: 'arcade', relevance: 0.8 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 10, 
+    tags: ['action', 'space', 'shooter', 'combat', 'upgrades'] 
+  },
+  { 
+    id: 'ball-jump', 
+    name: 'Ball Jump', 
+    description: 'Bounce through platforms and obstacles', 
+    path: '/games/ball-jump', 
+    category: 'action',
+    categories: [
+      { category: 'action', relevance: 1.0 },
+      { category: 'arcade', relevance: 0.7 },
+      { category: 'skill', relevance: 0.5 }
+    ],
+    difficulty: 'easy', 
+    avgPlayTime: 5, 
+    tags: ['action', 'jumping', 'bouncing', 'platform', 'casual'] 
+  },
+  { 
+    id: 'speed-boat', 
+    name: 'Speed Boat', 
+    description: 'Water racing with obstacles', 
+    path: '/games/speed-boat', 
+    category: 'action',
+    categories: [
+      { category: 'action', relevance: 1.0 },
+      { category: 'arcade', relevance: 0.6 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 5, 
+    tags: ['action', 'racing', 'boat', 'water', 'speed'] 
+  },
+  { 
+    id: 'arrow-master', 
+    name: 'Arrow Master', 
+    description: 'Archery precision shooting', 
+    path: '/games/arrow-master', 
+    category: 'skill',
+    categories: [
+      { category: 'skill', relevance: 1.0 },
+      { category: 'action', relevance: 0.7 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 5, 
+    tags: ['skill', 'archery', 'shooting', 'precision', 'targets'] 
+  },
+  { 
+    id: 'boxing-champion', 
+    name: 'Boxing Champion', 
+    description: 'Fighting game with combos', 
+    path: '/games/boxing-champion', 
+    category: 'action',
+    categories: [
+      { category: 'action', relevance: 1.0 },
+      { category: 'skill', relevance: 0.6 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 10, 
+    tags: ['action', 'boxing', 'fighting', 'combat', 'sports'] 
+  },
+
   // Music Games (New Category - Cycle 32)
   { id: 'piano-tiles', name: 'Piano Tiles', description: 'Tap falling tiles in rhythm', path: '/games/piano-tiles', category: 'music', difficulty: 'medium', avgPlayTime: 5, tags: ['music', 'rhythm', 'reflex'] },
   { id: 'beat-matcher', name: 'Beat Matcher', description: 'Match beats to music patterns', path: '/games/beat-matcher', category: 'music', difficulty: 'medium', avgPlayTime: 5, tags: ['music', 'rhythm', 'timing'] },
@@ -264,4 +699,153 @@ export function searchGames(query: string): GameCategoryMapping[] {
     game.description.toLowerCase().includes(lowerQuery) ||
     game.tags.some(tag => tag.toLowerCase().includes(lowerQuery))
   )
+}
+
+// Enhanced helper functions for multi-category support
+export function getGamesByCategoriesWithLogic(
+  categories: GameCategory[],
+  logic: 'AND' | 'OR' = 'OR',
+  minRelevance: number = 0
+): GameCategoryMapping[] {
+  if (categories.length === 0) return gameCategories
+
+  return gameCategories.filter(game => {
+    // Check primary category
+    const primaryMatch = categories.includes(game.category)
+    
+    // Check multi-categories if available
+    const multiCategoryMatches = game.categories?.filter(cat => 
+      categories.includes(cat.category) && cat.relevance >= minRelevance
+    ) || []
+    
+    if (logic === 'OR') {
+      return primaryMatch || multiCategoryMatches.length > 0
+    } else {
+      // AND logic - game must match all specified categories
+      return categories.every(cat => 
+        cat === game.category || 
+        game.categories?.some(gc => gc.category === cat && gc.relevance >= minRelevance)
+      )
+    }
+  })
+}
+
+// Get games filtered by multiple criteria
+export interface GameFilterCriteria {
+  categories?: GameCategory[]
+  categoryLogic?: 'AND' | 'OR'
+  difficulty?: GameDifficulty[]
+  minRating?: number
+  maxPlayTime?: number
+  tags?: string[]
+  sortBy?: 'name' | 'rating' | 'playCount' | 'difficulty' | 'newest'
+  sortOrder?: 'asc' | 'desc'
+}
+
+export function filterGames(criteria: GameFilterCriteria): GameCategoryMapping[] {
+  let filtered = [...gameCategories]
+  
+  // Filter by categories
+  if (criteria.categories && criteria.categories.length > 0) {
+    filtered = getGamesByCategoriesWithLogic(
+      criteria.categories,
+      criteria.categoryLogic || 'OR'
+    )
+  }
+  
+  // Filter by difficulty
+  if (criteria.difficulty && criteria.difficulty.length > 0) {
+    filtered = filtered.filter(game => criteria.difficulty!.includes(game.difficulty))
+  }
+  
+  // Filter by rating
+  if (criteria.minRating) {
+    filtered = filtered.filter(game => (game.rating || 0) >= criteria.minRating!)
+  }
+  
+  // Filter by play time
+  if (criteria.maxPlayTime) {
+    filtered = filtered.filter(game => game.avgPlayTime <= criteria.maxPlayTime!)
+  }
+  
+  // Filter by tags
+  if (criteria.tags && criteria.tags.length > 0) {
+    filtered = filtered.filter(game => 
+      criteria.tags!.some(tag => game.tags.includes(tag))
+    )
+  }
+  
+  // Sort results
+  if (criteria.sortBy) {
+    filtered.sort((a, b) => {
+      let comparison = 0
+      
+      switch (criteria.sortBy) {
+        case 'name':
+          comparison = a.name.localeCompare(b.name)
+          break
+        case 'rating':
+          comparison = (b.rating || 0) - (a.rating || 0)
+          break
+        case 'playCount':
+          comparison = (b.playCount || 0) - (a.playCount || 0)
+          break
+        case 'difficulty':
+          const diffOrder = { 'easy': 1, 'medium': 2, 'hard': 3 }
+          comparison = diffOrder[a.difficulty] - diffOrder[b.difficulty]
+          break
+        case 'newest':
+          comparison = (b.lastUpdated?.getTime() || 0) - (a.lastUpdated?.getTime() || 0)
+          break
+      }
+      
+      return criteria.sortOrder === 'desc' ? -comparison : comparison
+    })
+  }
+  
+  return filtered
+}
+
+// Get category statistics
+export interface CategoryStats {
+  category: GameCategory
+  gameCount: number
+  avgRating: number
+  totalPlayCount: number
+  avgPlayTime: number
+  popularTags: string[]
+}
+
+export function getCategoryStats(): CategoryStats[] {
+  const categories = getAllCategories() as GameCategory[]
+  
+  return categories.map(category => {
+    const games = getGamesByCategory(category)
+    const totalRating = games.reduce((sum, game) => sum + (game.rating || 0), 0)
+    const totalPlayCount = games.reduce((sum, game) => sum + (game.playCount || 0), 0)
+    const totalPlayTime = games.reduce((sum, game) => sum + game.avgPlayTime, 0)
+    
+    // Get all tags and count frequency
+    const tagCounts = new Map<string, number>()
+    games.forEach(game => {
+      game.tags.forEach(tag => {
+        tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1)
+      })
+    })
+    
+    // Get top 5 most popular tags
+    const popularTags = Array.from(tagCounts.entries())
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+      .map(([tag]) => tag)
+    
+    return {
+      category,
+      gameCount: games.length,
+      avgRating: games.length > 0 ? totalRating / games.length : 0,
+      totalPlayCount,
+      avgPlayTime: games.length > 0 ? totalPlayTime / games.length : 0,
+      popularTags
+    }
+  })
 }

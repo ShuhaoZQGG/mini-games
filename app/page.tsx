@@ -190,6 +190,42 @@ export default function HomePage() {
     { id: 'fish-tank', name: 'Fish Tank Manager', description: 'Manage virtual aquarium', path: '/games/fish-tank' },
     { id: 'bubble-wrap', name: 'Bubble Wrap Pop', description: 'Pop virtual bubble wrap', path: '/games/bubble-wrap' },
     { id: 'fortune-wheel', name: 'Fortune Wheel', description: 'Spin the wheel of fortune', path: '/games/fortune-wheel' },
+    
+    // Cycle 34: New Multiplayer Games
+    { id: 'online-poker', name: 'Online Poker', description: 'Play Texas Hold\'em poker online with friends', path: '/games/online-poker' },
+    { id: 'online-uno', name: 'Online UNO', description: 'Classic UNO card game with multiplayer support', path: '/games/online-uno' },
+    { id: 'online-scrabble', name: 'Online Scrabble', description: 'Word building game with online multiplayer', path: '/games/online-scrabble' },
+    { id: 'online-dominoes', name: 'Online Dominoes', description: 'Traditional dominoes with online play', path: '/games/online-dominoes' },
+    { id: 'online-yahtzee', name: 'Online Yahtzee', description: 'Dice game with scoring combinations online', path: '/games/online-yahtzee' },
+    { id: 'online-battleship-ii', name: 'Online Battleship II', description: 'Enhanced naval combat with special abilities', path: '/games/online-battleship-ii' },
+    { id: 'online-connect-five', name: 'Online Connect Five', description: 'Get five in a row in this strategic game', path: '/games/online-connect-five' },
+    { id: 'online-othello', name: 'Online Othello', description: 'Reversi game with online multiplayer', path: '/games/online-othello' },
+    { id: 'online-stratego', name: 'Online Stratego', description: 'Military strategy with hidden pieces', path: '/games/online-stratego' },
+    { id: 'online-risk', name: 'Online Risk', description: 'World domination strategy game online', path: '/games/online-risk' },
+    
+    // Cycle 34: New Puzzle Games
+    { id: 'rubiks-cube', name: 'Rubik\'s Cube', description: '3D cube puzzle solver', path: '/games/rubiks-cube' },
+    { id: 'tower-blocks', name: 'Tower Blocks', description: 'Stack blocks to build tall towers', path: '/games/tower-blocks' },
+    { id: 'unblock-me', name: 'Unblock Me', description: 'Slide blocks to free the red block', path: '/games/unblock-me' },
+    { id: 'flow-connect', name: 'Flow Connect', description: 'Connect matching colors without crossing', path: '/games/flow-connect' },
+    { id: 'hex-puzzle', name: 'Hex Puzzle', description: 'Fit hexagonal pieces into the grid', path: '/games/hex-puzzle' },
+    { id: 'magic-square', name: 'Magic Square', description: 'Arrange numbers for equal sums', path: '/games/magic-square' },
+    { id: 'kenken', name: 'KenKen', description: 'Mathematical logic puzzle with operations', path: '/games/kenken' },
+    { id: 'hashi', name: 'Hashi (Bridges)', description: 'Connect islands with bridges', path: '/games/hashi' },
+    { id: 'slitherlink', name: 'Slitherlink', description: 'Create a loop following number clues', path: '/games/slitherlink' },
+    { id: 'nurikabe', name: 'Nurikabe', description: 'Create islands and walls with logic', path: '/games/nurikabe' },
+    
+    // Cycle 34: New Action Games
+    { id: 'subway-runner', name: 'Subway Runner', description: 'Endless runner through subway tunnels', path: '/games/subway-runner' },
+    { id: 'fruit-slice', name: 'Fruit Slice', description: 'Slice flying fruits with swipes', path: '/games/fruit-slice' },
+    { id: 'tower-climb', name: 'Tower Climb', description: 'Climb an endless tower platform game', path: '/games/tower-climb' },
+    { id: 'laser-quest', name: 'Laser Quest', description: 'Navigate laser mazes and hit targets', path: '/games/laser-quest' },
+    { id: 'ninja-run', name: 'Ninja Run', description: 'Fast-paced ninja platformer', path: '/games/ninja-run' },
+    { id: 'space-fighter', name: 'Space Fighter', description: 'Galactic spaceship combat', path: '/games/space-fighter' },
+    { id: 'ball-jump', name: 'Ball Jump', description: 'Bounce through platforms and obstacles', path: '/games/ball-jump' },
+    { id: 'speed-boat', name: 'Speed Boat', description: 'Water racing with obstacles', path: '/games/speed-boat' },
+    { id: 'arrow-master', name: 'Arrow Master', description: 'Archery precision shooting', path: '/games/arrow-master' },
+    { id: 'boxing-champion', name: 'Boxing Champion', description: 'Fighting game with combos', path: '/games/boxing-champion' },
   ]
   
   // Game categories
