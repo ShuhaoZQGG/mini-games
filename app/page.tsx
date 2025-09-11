@@ -6,7 +6,10 @@ import { Search, Gamepad2, Sparkles, Brain, Target, Users, Trophy } from 'lucide
 import { EnhancedGameSearch, Game } from '@/components/EnhancedGameSearch'
 import { CategoryGrid } from '@/src/components/CategoryGrid'
 import { Category } from '@/src/types/category'
-import { RecommendedGames, TrendingGames, RecentlyPlayed, DailyChallenges } from '@/components/RecommendedGames'
+import { RecommendedGames, RecentlyPlayed, DailyChallenges } from '@/components/RecommendedGames'
+import { CategoryRecommendationEngine } from '@/components/categories/CategoryRecommendationEngine'
+import { TrendingGames } from '@/components/categories/TrendingGames'
+import { CategoryMastery } from '@/components/categories/CategoryMastery'
 import { analytics } from '@/lib/analytics'
 
 export default function HomePage() {
@@ -484,19 +487,25 @@ export default function HomePage() {
             <h2 className="text-2xl font-semibold mb-6 text-center">Browse Games by Category</h2>
             <CategoryGrid categories={categories} />
             
-            {/* Featured Games */}
-            <div className="mt-12">
-              <h3 className="text-xl font-semibold mb-4">🔥 Popular Games</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {[...singlePlayerGames.slice(0, 4)].map((game) => (
-                  <Link key={game.id} href={game.path}>
-                    <div className="game-card cursor-pointer hover:scale-105 transition-transform">
-                      <h4 className="text-lg font-semibold mb-2">{game.name}</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">{game.description}</p>
-                      <button className="mt-3 btn-primary text-sm">Play Now</button>
-                    </div>
-                  </Link>
-                ))}
+            {/* Enhanced Category Features */}
+            <div className="mt-12 space-y-12">
+              {/* Trending Games Widget */}
+              <div className="max-w-4xl mx-auto">
+                <TrendingGames />
+              </div>
+
+              {/* Personalized Recommendations */}
+              <div>
+                <CategoryRecommendationEngine 
+                  userHistory={[]} 
+                  algorithm="hybrid"
+                  maxRecommendations={8}
+                />
+              </div>
+
+              {/* Category Mastery Progress */}
+              <div>
+                <CategoryMastery />
               </div>
             </div>
           </section>
