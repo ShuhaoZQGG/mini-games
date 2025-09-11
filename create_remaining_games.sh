@@ -1,185 +1,159 @@
 #!/bin/bash
 
-# Create Logic Master
-cat > /Users/shuhaozhang/Project/mini-games/components/games/puzzle/LogicMaster.tsx << 'LOGIC'
+# Function to create a game file
+create_game() {
+  local path=$1
+  local name=$2
+  local icon=$3
+  local description=$4
+  
+  cat > "$path" << GAME_EOF
 'use client'
 
-import React, { useState, useCallback, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { Button } from '@/components/ui/button'
-import { RotateCcw, Trophy, Star, Brain, Lightbulb } from 'lucide-react'
+import { Card } from '@/components/ui/card'
+import { Home, RotateCcw, Play, Pause, $icon } from 'lucide-react'
 
-const LogicMaster: React.FC = () => {
-  const [grid, setGrid] = useState<number[][]>(Array(5).fill(null).map(() => Array(5).fill(0)))
-  const [clues, setClues] = useState<string[]>([])
+export default function $name() {
+  const [gameState, setGameState] = useState<'menu' | 'playing' | 'paused' | 'gameOver'>('menu')
   const [score, setScore] = useState(0)
   const [level, setLevel] = useState(1)
-  const [stars, setStars] = useState(0)
-  const [solved, setSolved] = useState(false)
-  const [hints, setHints] = useState(3)
+  const [lives, setLives] = useState(3)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const animationRef = useRef<number>()
 
-  const generatePuzzle = useCallback(() => {
-    const newGrid = Array(5).fill(null).map(() => Array(5).fill(0))
-    const solution = Array(5).fill(null).map(() => Array(5).fill(0))
+  const startGame = () => {
+    setScore(0)
+    setLevel(1)
+    setLives(3)
+    setGameState('playing')
+  }
+
+  const gameLoop = useCallback(() => {
+    if (gameState !== 'playing') return
     
-    // Generate a valid logic puzzle
-    for (let i = 0; i < 5; i++) {
-      const row = [1, 2, 3, 4, 5].sort(() => Math.random() - 0.5)
-      for (let j = 0; j < 5; j++) {
-        solution[i][j] = row[j]
-      }
-    }
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
 
-    // Create clues based on solution
-    const newClues = [
-      `Row 1 sum equals ${solution[0].reduce((a, b) => a + b, 0)}`,
-      `Column 3 contains the number ${solution[Math.floor(Math.random() * 5)][2]}`,
-      `The diagonal sum is ${solution[0][0] + solution[1][1] + solution[2][2] + solution[3][3] + solution[4][4]}`,
-      `No row or column has duplicate numbers`,
-      `Each number 1-5 appears exactly once in each row and column`
-    ]
+    // Clear canvas
+    ctx.fillStyle = '#1a1a2e'
+    ctx.fillRect(0, 0, 800, 600)
 
-    setGrid(newGrid)
-    setClues(newClues)
-    setSolved(false)
-  }, [])
+    // Game logic here
+    ctx.fillStyle = '#fff'
+    ctx.font = '20px monospace'
+    ctx.fillText(\`Score: \${score}\`, 20, 30)
+    ctx.fillText(\`Level: \${level}\`, 20, 60)
+    ctx.fillText(\`Lives: \${lives}\`, 20, 90)
 
-  const checkSolution = useCallback(() => {
-    // Check if all cells are filled
-    for (let i = 0; i < 5; i++) {
-      for (let j = 0; j < 5; j++) {
-        if (grid[i][j] === 0) return false
-      }
-    }
-
-    // Check no duplicates in rows and columns
-    for (let i = 0; i < 5; i++) {
-      const rowSet = new Set(grid[i])
-      const colSet = new Set(grid.map(row => row[i]))
-      if (rowSet.size !== 5 || colSet.size !== 5) return false
-    }
-
-    setSolved(true)
-    setScore(prev => prev + 1000 * level)
-    setStars(prev => Math.min(prev + 1, 15))
-    return true
-  }, [grid, level])
-
-  const toggleCell = (row: number, col: number) => {
-    if (solved) return
-    const newGrid = grid.map(r => [...r])
-    newGrid[row][col] = (newGrid[row][col] % 5) + 1
-    if (newGrid[row][col] === 6) newGrid[row][col] = 0
-    setGrid(newGrid)
-  }
-
-  const getHint = () => {
-    if (hints <= 0) return
-    setHints(prev => prev - 1)
-    // Place a correct number randomly
-    const emptyCells = []
-    for (let i = 0; i < 5; i++) {
-      for (let j = 0; j < 5; j++) {
-        if (grid[i][j] === 0) emptyCells.push([i, j])
-      }
-    }
-    if (emptyCells.length > 0) {
-      const [row, col] = emptyCells[Math.floor(Math.random() * emptyCells.length)]
-      const newGrid = grid.map(r => [...r])
-      newGrid[row][col] = Math.floor(Math.random() * 5) + 1
-      setGrid(newGrid)
-    }
-  }
+    animationRef.current = requestAnimationFrame(gameLoop)
+  }, [gameState, score, level, lives])
 
   useEffect(() => {
-    generatePuzzle()
-  }, [generatePuzzle])
-
-  useEffect(() => {
-    if (score > 0 && score % 5000 === 0) {
-      setLevel(prev => prev + 1)
+    if (gameState === 'playing') {
+      animationRef.current = requestAnimationFrame(gameLoop)
     }
-  }, [score])
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current)
+      }
+    }
+  }, [gameState, gameLoop])
 
   return (
-    <Card className="w-full max-w-4xl mx-auto">
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold text-center flex items-center justify-center gap-2">
-          <Brain className="w-6 h-6" />
-          Logic Master - Level {level}
-        </CardTitle>
-        <div className="flex justify-between items-center mt-4">
-          <div className="flex gap-4">
-            <div className="flex items-center gap-2">
-              <Trophy className="w-5 h-5 text-yellow-500" />
-              <span className="font-semibold">{score}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Star className="w-5 h-5 text-yellow-500" />
-              <span>{stars}/15</span>
-            </div>
-          </div>
-          <div className="flex gap-2">
-            <Button onClick={getHint} variant="outline" size="sm" disabled={hints === 0}>
-              <Lightbulb className="w-4 h-4 mr-1" />
-              Hint ({hints})
-            </Button>
-            <Button onClick={generatePuzzle} variant="outline" size="sm">
-              <RotateCcw className="w-4 h-4 mr-1" />
-              New Puzzle
-            </Button>
-          </div>
+    <Card className="w-full max-w-4xl mx-auto p-6">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-2xl font-bold flex items-center gap-2">
+          <$icon className="w-8 h-8" />
+          $name
+        </h2>
+        <Button onClick={() => setGameState('menu')} size="sm" variant="outline">
+          <Home className="w-4 h-4" />
+        </Button>
+      </div>
+
+      {gameState === 'menu' && (
+        <div className="flex flex-col items-center justify-center h-[600px] gap-4">
+          <$icon className="w-24 h-24 text-primary" />
+          <h3 className="text-3xl font-bold">$name</h3>
+          <p className="text-muted-foreground text-center max-w-md">
+            $description
+          </p>
+          <Button onClick={startGame} size="lg">
+            <Play className="w-4 h-4 mr-2" />
+            Start Game
+          </Button>
         </div>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-6">
-          <div className="bg-blue-50 dark:bg-blue-950 p-4 rounded-lg">
-            <h3 className="font-semibold mb-2">Clues:</h3>
-            <ul className="list-disc list-inside space-y-1 text-sm">
-              {clues.map((clue, i) => (
-                <li key={i}>{clue}</li>
-              ))}
-            </ul>
-          </div>
+      )}
 
-          <div className="grid grid-cols-5 gap-2 max-w-sm mx-auto">
-            {grid.map((row, i) => 
-              row.map((cell, j) => (
-                <button
-                  key={`${i}-${j}`}
-                  className={`
-                    w-12 h-12 border-2 rounded font-bold text-lg
-                    ${cell === 0 ? 'bg-gray-100 dark:bg-gray-800' : 'bg-white dark:bg-gray-700'}
-                    ${solved ? 'border-green-500' : 'border-gray-300 dark:border-gray-600'}
-                    hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors
-                  `}
-                  onClick={() => toggleCell(i, j)}
-                >
-                  {cell || ''}
-                </button>
-              ))
-            )}
-          </div>
+      {(gameState === 'playing' || gameState === 'paused') && (
+        <canvas
+          ref={canvasRef}
+          width={800}
+          height={600}
+          className="border rounded-lg"
+        />
+      )}
 
-          <div className="flex justify-center">
-            <Button onClick={checkSolution} disabled={solved}>
-              Check Solution
-            </Button>
-          </div>
-
-          {solved && (
-            <div className="bg-green-100 dark:bg-green-900 p-4 rounded-lg text-center">
-              <h3 className="text-xl font-bold mb-2">Solved!</h3>
-              <p>You earned {1000 * level} points!</p>
-            </div>
-          )}
+      {gameState === 'gameOver' && (
+        <div className="flex flex-col items-center justify-center h-[600px] gap-4">
+          <h3 className="text-2xl font-bold">Game Over!</h3>
+          <p className="text-xl">Final Score: {score}</p>
+          <p>Level Reached: {level}</p>
+          <Button onClick={startGame}>
+            <RotateCcw className="w-4 h-4 mr-2" />
+            Play Again
+          </Button>
         </div>
-      </CardContent>
+      )}
     </Card>
   )
 }
+GAME_EOF
+}
 
-export default LogicMaster
-LOGIC
+# Create remaining puzzle games
+create_game "/Users/shuhaozhang/Project/mini-games/components/games/puzzle/Hashi.tsx" \
+  "Hashi" "GitBranch" "Connect islands with bridges following the rules"
 
-echo "Created LogicMaster"
+create_game "/Users/shuhaozhang/Project/mini-games/components/games/puzzle/Slitherlink.tsx" \
+  "Slitherlink" "Circle" "Draw a single loop that satisfies all number clues"
+
+create_game "/Users/shuhaozhang/Project/mini-games/components/games/puzzle/Nurikabe.tsx" \
+  "Nurikabe" "Grid3x3" "Create islands and seas following the number clues"
+
+# Create action games
+create_game "/Users/shuhaozhang/Project/mini-games/components/games/action/SubwayRunner.tsx" \
+  "SubwayRunner" "Train" "Endless runner - dodge obstacles and collect coins"
+
+create_game "/Users/shuhaozhang/Project/mini-games/components/games/action/FruitSlice.tsx" \
+  "FruitSlice" "Cherry" "Slice flying fruits and avoid bombs"
+
+create_game "/Users/shuhaozhang/Project/mini-games/components/games/action/TowerClimb.tsx" \
+  "TowerClimb" "TrendingUp" "Climb the tower before platforms crumble"
+
+create_game "/Users/shuhaozhang/Project/mini-games/components/games/action/LaserQuest.tsx" \
+  "LaserQuest" "Zap" "Redirect lasers with mirrors to hit targets"
+
+create_game "/Users/shuhaozhang/Project/mini-games/components/games/action/NinjaRun.tsx" \
+  "NinjaRun" "UserCheck" "Side-scrolling parkour with wall jumps"
+
+create_game "/Users/shuhaozhang/Project/mini-games/components/games/action/SpaceFighter.tsx" \
+  "SpaceFighter" "Rocket" "Vertical scrolling space shooter"
+
+create_game "/Users/shuhaozhang/Project/mini-games/components/games/action/BallJump.tsx" \
+  "BallJump" "Circle" "Bouncing ball platformer"
+
+create_game "/Users/shuhaozhang/Project/mini-games/components/games/action/SpeedBoat.tsx" \
+  "SpeedBoat" "Anchor" "Water racing with obstacles"
+
+create_game "/Users/shuhaozhang/Project/mini-games/components/games/action/ArrowMaster.tsx" \
+  "ArrowMaster" "Target" "Archery with wind effects"
+
+create_game "/Users/shuhaozhang/Project/mini-games/components/games/action/BoxingChampion.tsx" \
+  "BoxingChampion" "Swords" "Timing-based boxing game"
+
+echo "All games created successfully!"

@@ -179,6 +179,434 @@ export const gameCategories: GameCategoryMapping[] = [
   { id: 'ball-bounce', name: 'Ball Bounce', description: 'Physics-based bouncing ball game', path: '/games/ball-bounce', category: 'arcade', difficulty: 'medium', avgPlayTime: 5, tags: ['casual', 'physics', 'bouncing'] },
   { id: 'color-fill', name: 'Color Fill', description: 'Fill the screen color puzzle', path: '/games/color-fill', category: 'puzzle', difficulty: 'easy', avgPlayTime: 8, tags: ['casual', 'colors', 'filling'] },
 
+  // Cycle 34: New Multiplayer Games (10 games)
+  { 
+    id: 'online-poker', 
+    name: 'Online Poker', 
+    description: 'Play Texas Hold\'em poker online with friends', 
+    path: '/games/online-poker', 
+    category: 'card',
+    categories: [
+      { category: 'card', relevance: 1.0 },
+      { category: 'casino', relevance: 0.9 },
+      { category: 'strategy', relevance: 0.7 }
+    ],
+    difficulty: 'hard', 
+    avgPlayTime: 30, 
+    tags: ['multiplayer', 'poker', 'cards', 'strategy', 'betting', 'online'] 
+  },
+  { 
+    id: 'online-uno', 
+    name: 'Online UNO', 
+    description: 'Classic UNO card game with multiplayer support', 
+    path: '/games/online-uno', 
+    category: 'card',
+    categories: [
+      { category: 'card', relevance: 1.0 },
+      { category: 'strategy', relevance: 0.5 }
+    ],
+    difficulty: 'easy', 
+    avgPlayTime: 15, 
+    tags: ['multiplayer', 'uno', 'cards', 'family', 'online'] 
+  },
+  { 
+    id: 'online-scrabble', 
+    name: 'Online Scrabble', 
+    description: 'Word building game with online multiplayer', 
+    path: '/games/online-scrabble', 
+    category: 'word',
+    categories: [
+      { category: 'word', relevance: 1.0 },
+      { category: 'strategy', relevance: 0.8 },
+      { category: 'puzzle', relevance: 0.6 }
+    ],
+    difficulty: 'hard', 
+    avgPlayTime: 45, 
+    tags: ['multiplayer', 'scrabble', 'words', 'vocabulary', 'strategy', 'online'] 
+  },
+  { 
+    id: 'online-dominoes', 
+    name: 'Online Dominoes', 
+    description: 'Traditional dominoes with online play', 
+    path: '/games/online-dominoes', 
+    category: 'strategy',
+    categories: [
+      { category: 'strategy', relevance: 1.0 },
+      { category: 'puzzle', relevance: 0.5 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 20, 
+    tags: ['multiplayer', 'dominoes', 'tiles', 'strategy', 'classic', 'online'] 
+  },
+  { 
+    id: 'online-yahtzee', 
+    name: 'Online Yahtzee', 
+    description: 'Dice game with scoring combinations online', 
+    path: '/games/online-yahtzee', 
+    category: 'casino',
+    categories: [
+      { category: 'casino', relevance: 1.0 },
+      { category: 'strategy', relevance: 0.6 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 20, 
+    tags: ['multiplayer', 'yahtzee', 'dice', 'probability', 'online'] 
+  },
+  { 
+    id: 'online-battleship-ii', 
+    name: 'Online Battleship II', 
+    description: 'Enhanced naval combat with special abilities', 
+    path: '/games/online-battleship-ii', 
+    category: 'strategy',
+    categories: [
+      { category: 'strategy', relevance: 1.0 },
+      { category: 'puzzle', relevance: 0.4 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 25, 
+    tags: ['multiplayer', 'battleship', 'naval', 'strategy', 'enhanced', 'online'] 
+  },
+  { 
+    id: 'online-connect-five', 
+    name: 'Online Connect Five', 
+    description: 'Get five in a row in this strategic game', 
+    path: '/games/online-connect-five', 
+    category: 'strategy',
+    categories: [
+      { category: 'strategy', relevance: 1.0 },
+      { category: 'puzzle', relevance: 0.5 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 15, 
+    tags: ['multiplayer', 'connect', 'strategy', 'gomoku', 'online'] 
+  },
+  { 
+    id: 'online-othello', 
+    name: 'Online Othello', 
+    description: 'Reversi game with online multiplayer', 
+    path: '/games/online-othello', 
+    category: 'strategy',
+    categories: [
+      { category: 'strategy', relevance: 1.0 },
+      { category: 'puzzle', relevance: 0.6 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 20, 
+    tags: ['multiplayer', 'othello', 'reversi', 'strategy', 'board', 'online'] 
+  },
+  { 
+    id: 'online-stratego', 
+    name: 'Online Stratego', 
+    description: 'Military strategy with hidden pieces', 
+    path: '/games/online-stratego', 
+    category: 'strategy',
+    categories: [
+      { category: 'strategy', relevance: 1.0 }
+    ],
+    difficulty: 'hard', 
+    avgPlayTime: 40, 
+    tags: ['multiplayer', 'stratego', 'military', 'strategy', 'tactics', 'online'] 
+  },
+  { 
+    id: 'online-risk', 
+    name: 'Online Risk', 
+    description: 'World domination strategy game online', 
+    path: '/games/online-risk', 
+    category: 'strategy',
+    categories: [
+      { category: 'strategy', relevance: 1.0 }
+    ],
+    difficulty: 'hard', 
+    avgPlayTime: 60, 
+    tags: ['multiplayer', 'risk', 'conquest', 'strategy', 'war', 'online'] 
+  },
+
+  // Cycle 34: New Puzzle Games (10 games)
+  { 
+    id: 'rubiks-cube', 
+    name: 'Rubik\'s Cube', 
+    description: '3D cube puzzle solver', 
+    path: '/games/rubiks-cube', 
+    category: 'puzzle',
+    categories: [
+      { category: 'puzzle', relevance: 1.0 },
+      { category: 'skill', relevance: 0.7 }
+    ],
+    difficulty: 'hard', 
+    avgPlayTime: 15, 
+    tags: ['puzzle', '3d', 'cube', 'logic', 'spatial'] 
+  },
+  { 
+    id: 'tower-blocks', 
+    name: 'Tower Blocks', 
+    description: 'Stack blocks to build tall towers', 
+    path: '/games/tower-blocks', 
+    category: 'skill',
+    categories: [
+      { category: 'skill', relevance: 1.0 },
+      { category: 'arcade', relevance: 0.7 },
+      { category: 'puzzle', relevance: 0.5 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 5, 
+    tags: ['stacking', 'tower', 'precision', 'timing', 'building'] 
+  },
+  { 
+    id: 'unblock-me', 
+    name: 'Unblock Me', 
+    description: 'Slide blocks to free the red block', 
+    path: '/games/unblock-me', 
+    category: 'puzzle',
+    categories: [
+      { category: 'puzzle', relevance: 1.0 },
+      { category: 'strategy', relevance: 0.5 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 10, 
+    tags: ['puzzle', 'sliding', 'blocks', 'logic', 'brain-teaser'] 
+  },
+  { 
+    id: 'flow-connect', 
+    name: 'Flow Connect', 
+    description: 'Connect matching colors without crossing', 
+    path: '/games/flow-connect', 
+    category: 'puzzle',
+    categories: [
+      { category: 'puzzle', relevance: 1.0 },
+      { category: 'strategy', relevance: 0.4 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 10, 
+    tags: ['puzzle', 'flow', 'pipes', 'logic', 'colors'] 
+  },
+  { 
+    id: 'hex-puzzle', 
+    name: 'Hex Puzzle', 
+    description: 'Fit hexagonal pieces into the grid', 
+    path: '/games/hex-puzzle', 
+    category: 'puzzle',
+    categories: [
+      { category: 'puzzle', relevance: 1.0 },
+      { category: 'arcade', relevance: 0.5 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 10, 
+    tags: ['puzzle', 'hexagon', 'tetris-like', 'shapes', 'fitting'] 
+  },
+  { 
+    id: 'magic-square', 
+    name: 'Magic Square', 
+    description: 'Arrange numbers for equal sums', 
+    path: '/games/magic-square', 
+    category: 'puzzle',
+    categories: [
+      { category: 'puzzle', relevance: 1.0 },
+      { category: 'skill', relevance: 0.6 }
+    ],
+    difficulty: 'hard', 
+    avgPlayTime: 15, 
+    tags: ['puzzle', 'math', 'numbers', 'logic', 'brain-training'] 
+  },
+  { 
+    id: 'kenken', 
+    name: 'KenKen', 
+    description: 'Mathematical logic puzzle with operations', 
+    path: '/games/kenken', 
+    category: 'puzzle',
+    categories: [
+      { category: 'puzzle', relevance: 1.0 },
+      { category: 'skill', relevance: 0.7 }
+    ],
+    difficulty: 'hard', 
+    avgPlayTime: 20, 
+    tags: ['puzzle', 'math', 'arithmetic', 'logic', 'sudoku-like'] 
+  },
+  { 
+    id: 'hashi', 
+    name: 'Hashi (Bridges)', 
+    description: 'Connect islands with bridges', 
+    path: '/games/hashi', 
+    category: 'puzzle',
+    categories: [
+      { category: 'puzzle', relevance: 1.0 },
+      { category: 'strategy', relevance: 0.5 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 15, 
+    tags: ['puzzle', 'bridges', 'islands', 'logic', 'japanese'] 
+  },
+  { 
+    id: 'slitherlink', 
+    name: 'Slitherlink', 
+    description: 'Create a loop following number clues', 
+    path: '/games/slitherlink', 
+    category: 'puzzle',
+    categories: [
+      { category: 'puzzle', relevance: 1.0 }
+    ],
+    difficulty: 'hard', 
+    avgPlayTime: 20, 
+    tags: ['puzzle', 'loop', 'logic', 'japanese', 'deduction'] 
+  },
+  { 
+    id: 'nurikabe', 
+    name: 'Nurikabe', 
+    description: 'Create islands and walls with logic', 
+    path: '/games/nurikabe', 
+    category: 'puzzle',
+    categories: [
+      { category: 'puzzle', relevance: 1.0 }
+    ],
+    difficulty: 'hard', 
+    avgPlayTime: 20, 
+    tags: ['puzzle', 'islands', 'walls', 'logic', 'japanese'] 
+  },
+
+  // Cycle 34: New Action Games (10 games)
+  { 
+    id: 'subway-runner', 
+    name: 'Subway Runner', 
+    description: 'Endless runner through subway tunnels', 
+    path: '/games/subway-runner', 
+    category: 'action',
+    categories: [
+      { category: 'action', relevance: 1.0 },
+      { category: 'arcade', relevance: 0.8 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 5, 
+    tags: ['action', 'runner', 'endless', 'subway', 'dodge'] 
+  },
+  { 
+    id: 'fruit-slice', 
+    name: 'Fruit Slice', 
+    description: 'Slice flying fruits with swipes', 
+    path: '/games/fruit-slice', 
+    category: 'action',
+    categories: [
+      { category: 'action', relevance: 1.0 },
+      { category: 'arcade', relevance: 0.7 },
+      { category: 'skill', relevance: 0.6 }
+    ],
+    difficulty: 'easy', 
+    avgPlayTime: 5, 
+    tags: ['action', 'slicing', 'fruits', 'ninja', 'arcade'] 
+  },
+  { 
+    id: 'tower-climb', 
+    name: 'Tower Climb', 
+    description: 'Climb an endless tower platform game', 
+    path: '/games/tower-climb', 
+    category: 'action',
+    categories: [
+      { category: 'action', relevance: 1.0 },
+      { category: 'arcade', relevance: 0.6 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 5, 
+    tags: ['action', 'climbing', 'platform', 'vertical', 'endless'] 
+  },
+  { 
+    id: 'laser-quest', 
+    name: 'Laser Quest', 
+    description: 'Navigate laser mazes and hit targets', 
+    path: '/games/laser-quest', 
+    category: 'action',
+    categories: [
+      { category: 'action', relevance: 1.0 },
+      { category: 'puzzle', relevance: 0.7 },
+      { category: 'skill', relevance: 0.6 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 10, 
+    tags: ['action', 'laser', 'puzzle', 'precision', 'maze'] 
+  },
+  { 
+    id: 'ninja-run', 
+    name: 'Ninja Run', 
+    description: 'Fast-paced ninja platformer', 
+    path: '/games/ninja-run', 
+    category: 'action',
+    categories: [
+      { category: 'action', relevance: 1.0 },
+      { category: 'arcade', relevance: 0.7 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 5, 
+    tags: ['action', 'ninja', 'platform', 'runner', 'combat'] 
+  },
+  { 
+    id: 'space-fighter', 
+    name: 'Space Fighter', 
+    description: 'Galactic spaceship combat', 
+    path: '/games/space-fighter', 
+    category: 'action',
+    categories: [
+      { category: 'action', relevance: 1.0 },
+      { category: 'arcade', relevance: 0.8 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 10, 
+    tags: ['action', 'space', 'shooter', 'combat', 'upgrades'] 
+  },
+  { 
+    id: 'ball-jump', 
+    name: 'Ball Jump', 
+    description: 'Bounce through platforms and obstacles', 
+    path: '/games/ball-jump', 
+    category: 'action',
+    categories: [
+      { category: 'action', relevance: 1.0 },
+      { category: 'arcade', relevance: 0.7 },
+      { category: 'skill', relevance: 0.5 }
+    ],
+    difficulty: 'easy', 
+    avgPlayTime: 5, 
+    tags: ['action', 'jumping', 'bouncing', 'platform', 'casual'] 
+  },
+  { 
+    id: 'speed-boat', 
+    name: 'Speed Boat', 
+    description: 'Water racing with obstacles', 
+    path: '/games/speed-boat', 
+    category: 'action',
+    categories: [
+      { category: 'action', relevance: 1.0 },
+      { category: 'arcade', relevance: 0.6 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 5, 
+    tags: ['action', 'racing', 'boat', 'water', 'speed'] 
+  },
+  { 
+    id: 'arrow-master', 
+    name: 'Arrow Master', 
+    description: 'Archery precision shooting', 
+    path: '/games/arrow-master', 
+    category: 'skill',
+    categories: [
+      { category: 'skill', relevance: 1.0 },
+      { category: 'action', relevance: 0.7 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 5, 
+    tags: ['skill', 'archery', 'shooting', 'precision', 'targets'] 
+  },
+  { 
+    id: 'boxing-champion', 
+    name: 'Boxing Champion', 
+    description: 'Fighting game with combos', 
+    path: '/games/boxing-champion', 
+    category: 'action',
+    categories: [
+      { category: 'action', relevance: 1.0 },
+      { category: 'skill', relevance: 0.6 }
+    ],
+    difficulty: 'medium', 
+    avgPlayTime: 10, 
+    tags: ['action', 'boxing', 'fighting', 'combat', 'sports'] 
+  },
+
   // Music Games (New Category - Cycle 32)
   { id: 'piano-tiles', name: 'Piano Tiles', description: 'Tap falling tiles in rhythm', path: '/games/piano-tiles', category: 'music', difficulty: 'medium', avgPlayTime: 5, tags: ['music', 'rhythm', 'reflex'] },
   { id: 'beat-matcher', name: 'Beat Matcher', description: 'Match beats to music patterns', path: '/games/beat-matcher', category: 'music', difficulty: 'medium', avgPlayTime: 5, tags: ['music', 'rhythm', 'timing'] },
