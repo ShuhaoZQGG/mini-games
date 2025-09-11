@@ -24,6 +24,11 @@ export default function HomePage() {
     { id: 'angry-birds', name: 'Angry Birds', description: 'Physics-based projectile game', path: '/games/angry-birds' },
     { id: 'geometry-dash', name: 'Geometry Dash', description: 'Rhythm-based platformer', path: '/games/geometry-dash' },
     { id: 'tank-battle', name: 'Tank Battle', description: 'Top-down shooter', path: '/games/tank-battle' },
+    { id: 'ninja-jump', name: 'Ninja Jump', description: 'Wall-jumping platformer', path: '/games/ninja-jump' },
+    { id: 'laser-maze', name: 'Laser Maze', description: 'Navigate through laser obstacles', path: '/games/laser-maze' },
+    { id: 'speed-racer', name: 'Speed Racer', description: 'Quick reaction racing game', path: '/games/speed-racer' },
+    { id: 'asteroid-dodger', name: 'Asteroid Dodger', description: 'Space obstacle avoidance', path: '/games/asteroid-dodger' },
+    { id: 'rapid-fire', name: 'Rapid Fire', description: 'Quick shooting gallery', path: '/games/rapid-fire' },
     
     // Memory Games
     { id: 'memory-match', name: 'Memory Match', description: 'Match the cards', path: '/games/memory-match' },
@@ -67,6 +72,11 @@ export default function HomePage() {
     { id: 'dominoes', name: 'Dominoes', description: 'Traditional tile game', path: '/games/dominoes' },
     { id: 'risk', name: 'Risk', description: 'Territory conquest strategy', path: '/games/risk' },
     { id: 'rock-paper-scissors', name: 'Rock Paper Scissors', description: 'Classic hand game', path: '/games/rock-paper-scissors' },
+    { id: 'tower-defense', name: 'Tower Defense Lite', description: 'Simple tower defense with waves of enemies', path: '/games/tower-defense' },
+    { id: 'territory-control', name: 'Territory Control', description: 'Area domination strategy game', path: '/games/territory-control' },
+    { id: 'resource-manager', name: 'Resource Manager', description: 'Economic strategy with resource collection', path: '/games/resource-manager' },
+    { id: 'battle-tactics', name: 'Battle Tactics', description: 'Turn-based tactical combat', path: '/games/battle-tactics' },
+    { id: 'maze-escape', name: 'Maze Escape', description: 'Strategic maze navigation with limited moves', path: '/games/maze-escape' },
     
     // Arcade Games  
     { id: 'snake', name: 'Snake', description: 'Classic snake game', path: '/games/snake' },
@@ -100,6 +110,13 @@ export default function HomePage() {
     { id: 'dice-roll', name: 'Dice Roll', description: 'Roll dice to hit the target', path: '/games/dice-roll' },
     { id: 'coin-flip', name: 'Coin Flip', description: 'Heads or tails betting', path: '/games/coin-flip' },
     { id: 'yahtzee', name: 'Yahtzee', description: 'Dice game with scoring combinations', path: '/games/yahtzee' },
+    
+    // Casual Games (Final 5)
+    { id: 'bubble-pop', name: 'Bubble Pop', description: 'Simple bubble popping game with chain reactions', path: '/games/bubble-pop' },
+    { id: 'match-three', name: 'Match Three', description: 'Classic match-3 gameplay with combos', path: '/games/match-three' },
+    { id: 'idle-clicker', name: 'Idle Clicker', description: 'Incremental clicking game with upgrades', path: '/games/idle-clicker' },
+    { id: 'ball-bounce', name: 'Ball Bounce', description: 'Physics-based bouncing ball game', path: '/games/ball-bounce' },
+    { id: 'color-fill', name: 'Color Fill', description: 'Fill the screen color puzzle', path: '/games/color-fill' },
   ]
   
   // Game categories
