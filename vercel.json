@@ -3,10 +3,22 @@
   "buildCommand": "npm run build",
   "outputDirectory": ".next",
   "installCommand": "npm install",
-  "regions": ["iad1"],
+  "regions": ["iad1", "sfo1", "lhr1", "syd1"],
   "functions": {
     "app/api/**/*": {
       "maxDuration": 10
+    },
+    "app/api/leaderboards/[...slug]/route.ts": {
+      "maxDuration": 30
+    },
+    "app/api/tournaments/[...slug]/route.ts": {
+      "maxDuration": 30
+    },
+    "app/api/achievements/[...slug]/route.ts": {
+      "maxDuration": 30
+    },
+    "app/api/cron/**/*": {
+      "maxDuration": 60
     }
   },
   "env": {
@@ -16,7 +28,13 @@
     "NEXT_PUBLIC_APP_ENV": "production",
     "NEXT_PUBLIC_ENABLE_PWA": "true",
     "NEXT_PUBLIC_ENABLE_ANALYTICS": "true",
-    "NEXT_PUBLIC_ENABLE_MONITORING": "true"
+    "NEXT_PUBLIC_ENABLE_MONITORING": "true",
+    "NEXT_PUBLIC_SENTRY_DSN": "@sentry-dsn",
+    "SENTRY_AUTH_TOKEN": "@sentry-auth-token",
+    "SENTRY_ORG": "@sentry-org",
+    "SENTRY_PROJECT": "@sentry-project",
+    "DATABASE_URL": "@database-url",
+    "REDIS_URL": "@redis-url"
   },
   "headers": [
     {
@@ -25,6 +43,18 @@
         {
           "key": "Cache-Control",
           "value": "no-store, must-revalidate"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
         }
       ]
     },
@@ -37,11 +67,23 @@
         },
         {
           "key": "X-Frame-Options",
-          "value": "DENY"
+          "value": "SAMEORIGIN"
         },
         {
           "key": "X-XSS-Protection",
           "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.vercel-insights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.sentry.io"
         }
       ]
     },
@@ -59,6 +101,24 @@
     {
       "source": "/sw.js",
       "destination": "/_next/static/sw.js"
+    },
+    {
+      "source": "/api/health",
+      "destination": "/api/monitoring/health"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/tournament-scheduler",
+      "schedule": "0 0 * * *"
+    },
+    {
+      "path": "/api/cron/leaderboard-reset",
+      "schedule": "0 0 * * MON"
+    },
+    {
+      "path": "/api/cron/achievement-calculator",
+      "schedule": "0 */6 * * *"
     }
   ]
 }
