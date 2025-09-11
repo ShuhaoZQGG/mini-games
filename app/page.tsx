@@ -240,6 +240,15 @@ export default function HomePage() {
     { id: 'burger-time', name: 'Burger Time', description: 'Food assembly arcade', path: '/games/burger-time' },
     { id: 'joust', name: 'Joust', description: 'Flying knight combat', path: '/games/joust' },
     { id: 'robotron', name: 'Robotron', description: 'Twin-stick shooter', path: '/games/robotron' },
+    
+    // New Games - Cycle 36
+    { id: 'bridge', name: 'Bridge', description: 'Card game with bidding and trick-taking', path: '/games/bridge' },
+    { id: 'backgammon-pro', name: 'Backgammon Pro', description: 'Board game with dice and doubling cube', path: '/games/backgammon-pro' },
+    { id: 'cribbage', name: 'Cribbage', description: 'Card game with pegging board', path: '/games/cribbage' },
+    { id: 'code-breaker', name: 'Code Breaker', description: 'Programming logic puzzles', path: '/games/code-breaker' },
+    { id: 'science-lab', name: 'Science Lab', description: 'Physics experiments simulator', path: '/games/science-lab' },
+    { id: 'missile-command', name: 'Missile Command', description: 'City defense from missiles', path: '/games/missile-command' },
+    { id: 'tempest', name: 'Tempest', description: 'Tube shooter with geometric enemies', path: '/games/tempest' },
   ]
   
   // Game categories

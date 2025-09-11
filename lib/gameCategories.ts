@@ -115,6 +115,7 @@ export const gameCategories: GameCategoryMapping[] = [
   { id: 'risk', name: 'Risk', description: 'Territory conquest strategy', path: '/games/risk', category: 'strategy', difficulty: 'hard', avgPlayTime: 45, tags: ['strategy', 'conquest', 'war'] },
   
   // Multiplayer Games (Cycle 29)
+  { id: 'dots-and-boxes', name: 'Dots and Boxes', description: 'Territory capture drawing game', path: '/games/dots-and-boxes', category: 'strategy', difficulty: 'medium', avgPlayTime: 10, tags: ['strategy', 'drawing', 'multiplayer', 'territory'] },
   { id: 'pool', name: 'Pool (8-Ball)', description: 'Classic billiards with physics', path: '/games/pool', category: 'skill', difficulty: 'medium', avgPlayTime: 15, tags: ['billiards', 'physics', 'multiplayer'] },
   { id: 'battleship', name: 'Battleship', description: 'Naval strategy game', path: '/games/battleship', category: 'strategy', difficulty: 'medium', avgPlayTime: 20, tags: ['strategy', 'naval', 'multiplayer'] },
   { id: 'air-hockey', name: 'Air Hockey', description: 'Fast-paced table game', path: '/games/air-hockey', category: 'arcade', difficulty: 'easy', avgPlayTime: 5, tags: ['arcade', 'fast', 'multiplayer'] },
@@ -701,6 +702,15 @@ export const gameCategories: GameCategoryMapping[] = [
   { id: 'burger-time', name: 'Burger Time', description: 'Food assembly arcade', path: '/games/burger-time', category: 'arcade', difficulty: 'medium', avgPlayTime: 10, tags: ['arcade', 'food', 'assembly', 'retro', 'classic'] },
   { id: 'joust', name: 'Joust', description: 'Flying knight combat', path: '/games/joust', category: 'arcade', difficulty: 'medium', avgPlayTime: 10, tags: ['arcade', 'flying', 'combat', 'knight', 'retro'] },
   { id: 'robotron', name: 'Robotron', description: 'Twin-stick shooter', path: '/games/robotron', category: 'arcade', difficulty: 'hard', avgPlayTime: 10, tags: ['arcade', 'shooter', 'twin-stick', 'robots', 'intense'] },
+  
+  // New Games - Cycle 36
+  { id: 'bridge', name: 'Bridge', description: 'Card game with bidding system and trick-taking', path: '/games/bridge', category: 'card', difficulty: 'hard', avgPlayTime: 30, tags: ['card', 'bidding', 'partnership', 'strategy', 'trick-taking'] },
+  { id: 'backgammon-pro', name: 'Backgammon Pro', description: 'Board game with dice, doubling cube, and bearing off', path: '/games/backgammon-pro', category: 'strategy', difficulty: 'hard', avgPlayTime: 20, tags: ['board', 'dice', 'strategy', 'doubling-cube', 'classic'] },
+  { id: 'cribbage', name: 'Cribbage', description: 'Card game with pegging board and scoring', path: '/games/cribbage', category: 'card', difficulty: 'medium', avgPlayTime: 20, tags: ['card', 'pegging', 'crib', 'classic', 'scoring'] },
+  { id: 'code-breaker', name: 'Code Breaker', description: 'Programming logic puzzles', path: '/games/code-breaker', category: 'puzzle', difficulty: 'hard', avgPlayTime: 15, tags: ['programming', 'logic', 'educational', 'puzzles', 'coding'] },
+  { id: 'science-lab', name: 'Science Lab', description: 'Physics experiments simulator', path: '/games/science-lab', category: 'simulation', difficulty: 'medium', avgPlayTime: 15, tags: ['physics', 'experiments', 'educational', 'science', 'simulation'] },
+  { id: 'missile-command', name: 'Missile Command', description: 'City defense from missiles', path: '/games/missile-command', category: 'arcade', difficulty: 'medium', avgPlayTime: 10, tags: ['arcade', 'defense', 'missiles', 'classic', 'shooting'] },
+  { id: 'tempest', name: 'Tempest', description: 'Tube shooter with geometric enemies', path: '/games/tempest', category: 'arcade', difficulty: 'hard', avgPlayTime: 10, tags: ['arcade', 'tube-shooter', 'geometric', 'classic', 'vector'] },
 ]
 
 // Helper function to get games by category
