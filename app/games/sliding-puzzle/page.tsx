@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import SlidingPuzzleGame from '@/components/games/sliding-puzzle';
+import SlidingPuzzleWithLevels from '@/components/games/sliding-puzzle-with-levels';
 
 export const metadata: Metadata = {
   title: 'Sliding Puzzle - 15-Puzzle Game | Mini Games',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function SlidingPuzzlePage() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <SlidingPuzzleGame />
+      <SlidingPuzzleWithLevels />
     </div>
   );
 }

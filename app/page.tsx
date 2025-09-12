@@ -1,44 +1,533 @@
+'use client'
+
 import Link from 'next/link'
+import { useState, useEffect } from 'react'
+import { Search, Gamepad2, Sparkles, Brain, Target, Users, Trophy } from 'lucide-react'
+import { EnhancedGameSearch, Game } from '@/components/EnhancedGameSearch'
+import { CategoryGrid } from '@/src/components/CategoryGrid'
+import { Category } from '@/src/types/category'
+import { RecommendedGames, RecentlyPlayed, DailyChallenges } from '@/components/RecommendedGames'
+import { CategoryRecommendationEngine } from '@/components/categories/CategoryRecommendationEngine'
+import { TrendingGames } from '@/components/categories/TrendingGames'
+import { CategoryMastery } from '@/components/categories/CategoryMastery'
+import { analytics } from '@/lib/analytics'
+import { gameCategories } from '@/lib/gameCategories'
 
 export default function HomePage() {
-  const games = [
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [viewMode, setViewMode] = useState<'categories' | 'all'>('categories')
+  
+  // Transform gameCategories to the format expected by the components
+  const allGames = gameCategories.map(game => ({
+    id: game.id,
+    name: game.name,
+    description: game.description,
+    path: game.path
+  }))
+  
+  // Filter out multiplayer games (those with 'online' in their id)
+  const singlePlayerGames = allGames.filter(game => !game.id.includes('online'))
+  const multiplayerGames = allGames.filter(game => game.id.includes('online'))
+  
+  const singlePlayerGamesOld = [
+    // Action/Reflex Games
     { id: 'cps-test', name: 'CPS Test', description: 'Test your clicking speed', path: '/games/cps-test' },
     { id: 'reaction-time', name: 'Reaction Time', description: 'Test your reflexes', path: '/games/reaction-time' },
     { id: 'aim-trainer', name: 'Aim Trainer', description: 'Test your accuracy', path: '/games/aim-trainer' },
+    { id: 'whack-a-mole', name: 'Whack-a-Mole', description: 'Test your reflexes', path: '/games/whack-a-mole' },
+    { id: 'fruit-ninja', name: 'Fruit Ninja', description: 'Swipe to slice fruits', path: '/games/fruit-ninja' },
+    { id: 'temple-run', name: 'Temple Run', description: 'Endless runner with obstacles', path: '/games/temple-run' },
+    { id: 'angry-birds', name: 'Angry Birds', description: 'Physics-based projectile game', path: '/games/angry-birds' },
+    { id: 'geometry-dash', name: 'Geometry Dash', description: 'Rhythm-based platformer', path: '/games/geometry-dash' },
+    { id: 'tank-battle', name: 'Tank Battle', description: 'Top-down shooter', path: '/games/tank-battle' },
+    { id: 'ninja-jump', name: 'Ninja Jump', description: 'Wall-jumping platformer', path: '/games/ninja-jump' },
+    { id: 'laser-maze', name: 'Laser Maze', description: 'Navigate through laser obstacles', path: '/games/laser-maze' },
+    { id: 'speed-racer', name: 'Speed Racer', description: 'Quick reaction racing game', path: '/games/speed-racer' },
+    { id: 'asteroid-dodger', name: 'Asteroid Dodger', description: 'Space obstacle avoidance', path: '/games/asteroid-dodger' },
+    { id: 'rapid-fire', name: 'Rapid Fire', description: 'Quick shooting gallery', path: '/games/rapid-fire' },
+    
+    // Memory Games
     { id: 'memory-match', name: 'Memory Match', description: 'Match the cards', path: '/games/memory-match' },
-    { id: 'typing-test', name: 'Typing Test', description: 'Test your typing speed', path: '/games/typing-test' },
-    { id: 'tic-tac-toe', name: 'Tic-Tac-Toe', description: 'Classic X and O game', path: '/games/tic-tac-toe' },
-    { id: 'minesweeper', name: 'Minesweeper', description: 'Find all the mines', path: '/games/minesweeper' },
-    { id: 'snake', name: 'Snake', description: 'Classic snake game', path: '/games/snake' },
+    { id: 'simon-says', name: 'Simon Says', description: 'Memory pattern game', path: '/games/simon-says' },
+    { id: 'pattern-memory', name: 'Pattern Memory', description: 'Test your memory skills', path: '/games/pattern-memory' },
+    
+    // Puzzle Games
     { id: '2048', name: '2048', description: 'Slide tiles to reach 2048', path: '/games/2048' },
     { id: 'sudoku', name: 'Sudoku', description: 'Number puzzle game', path: '/games/sudoku' },
-    { id: 'connect-four', name: 'Connect Four', description: 'Get four in a row', path: '/games/connect-four' },
+    { id: 'minesweeper', name: 'Minesweeper', description: 'Find all the mines', path: '/games/minesweeper' },
+    { id: 'sliding-puzzle', name: 'Sliding Puzzle', description: 'Classic 15-puzzle game', path: '/games/sliding-puzzle' },
+    { id: 'jigsaw-puzzle', name: 'Jigsaw Puzzle', description: 'Piece together puzzles', path: '/games/jigsaw-puzzle' },
+    { id: 'nonogram', name: 'Nonogram', description: 'Picture logic puzzles', path: '/games/nonogram' },
+    { id: 'number-guessing', name: 'Number Guessing', description: 'Guess the secret number', path: '/games/number-guessing' },
+    { id: 'maze-runner', name: 'Maze Runner', description: 'Navigate through the maze', path: '/games/maze-runner' },
+    { id: 'tower-of-hanoi', name: 'Tower of Hanoi', description: 'Classic disk puzzle', path: '/games/tower-of-hanoi' },
+    { id: 'lights-out', name: 'Lights Out', description: 'Turn off all the lights', path: '/games/lights-out' },
+    { id: 'mastermind', name: 'Mastermind', description: 'Break the color code', path: '/games/mastermind' },
+    { id: 'flow-free', name: 'Flow Free', description: 'Connect matching colors without crossing paths', path: '/games/flow-free' },
+    { id: 'tangram', name: 'Tangram', description: 'Shape arrangement puzzle', path: '/games/tangram' },
+    { id: 'pipes', name: 'Pipes', description: 'Connect pipes to create flow', path: '/games/pipes' },
+    { id: 'hexagon', name: 'Hexagon', description: 'Fit hexagonal pieces together', path: '/games/hexagon' },
+    { id: 'mahjong-solitaire', name: 'Mahjong Solitaire', description: 'Classic tile matching with multiple layouts', path: '/games/mahjong-solitaire' },
+    
+    // Word Games
+    { id: 'typing-test', name: 'Typing Test', description: 'Test your typing speed', path: '/games/typing-test' },
     { id: 'word-search', name: 'Word Search', description: 'Find hidden words', path: '/games/word-search' },
+    { id: 'crossword', name: 'Crossword', description: 'Word puzzle challenges', path: '/games/crossword' },
+    { id: 'wordle', name: 'Wordle', description: 'Guess the 5-letter word', path: '/games/wordle' },
+    { id: 'hangman', name: 'Hangman', description: 'Guess the word letter by letter', path: '/games/hangman' },
+    { id: 'boggle', name: 'Boggle', description: 'Word finding in letter grid', path: '/games/boggle' },
+    { id: 'scrabble', name: 'Scrabble', description: 'Word building with letter values', path: '/games/scrabble' },
+    
+    // Strategy Games
+    { id: 'tic-tac-toe', name: 'Tic-Tac-Toe', description: 'Classic X and O game', path: '/games/tic-tac-toe' },
+    { id: 'connect-four', name: 'Connect Four', description: 'Get four in a row', path: '/games/connect-four' },
+    { id: 'chess', name: 'Chess', description: 'Ultimate strategy game', path: '/games/chess' },
+    { id: 'checkers', name: 'Checkers', description: 'Classic board game', path: '/games/checkers' },
+    { id: 'reversi', name: 'Reversi/Othello', description: 'Flip discs to win', path: '/games/reversi' },
+    { id: 'backgammon', name: 'Backgammon', description: 'Ancient dice and strategy', path: '/games/backgammon' },
+    { id: 'dominoes', name: 'Dominoes', description: 'Traditional tile game', path: '/games/dominoes' },
+    { id: 'risk', name: 'Risk', description: 'Territory conquest strategy', path: '/games/risk' },
+    { id: 'rock-paper-scissors', name: 'Rock Paper Scissors', description: 'Classic hand game', path: '/games/rock-paper-scissors' },
+    { id: 'tower-defense', name: 'Tower Defense Lite', description: 'Simple tower defense with waves of enemies', path: '/games/tower-defense' },
+    { id: 'territory-control', name: 'Territory Control', description: 'Area domination strategy game', path: '/games/territory-control' },
+    { id: 'resource-manager', name: 'Resource Manager', description: 'Economic strategy with resource collection', path: '/games/resource-manager' },
+    { id: 'battle-tactics', name: 'Battle Tactics', description: 'Turn-based tactical combat', path: '/games/battle-tactics' },
+    { id: 'maze-escape', name: 'Maze Escape', description: 'Strategic maze navigation with limited moves', path: '/games/maze-escape' },
+    
+    // Arcade Games  
+    { id: 'snake', name: 'Snake', description: 'Classic snake game', path: '/games/snake' },
     { id: 'tetris', name: 'Tetris', description: 'Stack falling blocks', path: '/games/tetris' },
     { id: 'breakout', name: 'Breakout', description: 'Break all the bricks', path: '/games/breakout' },
-    { id: 'mental-math', name: 'Mental Math', description: 'Solve math problems', path: '/games/mental-math' },
     { id: 'pacman', name: 'Pac-Man', description: 'Classic arcade maze game', path: '/games/pacman' },
     { id: 'space-invaders', name: 'Space Invaders', description: 'Defend Earth from aliens', path: '/games/space-invaders' },
-    { id: 'pattern-memory', name: 'Pattern Memory', description: 'Test your memory skills', path: '/games/pattern-memory' },
+    { id: 'flappy-bird', name: 'Flappy Bird', description: 'Navigate through pipes', path: '/games/flappy-bird' },
+    { id: 'doodle-jump', name: 'Doodle Jump', description: 'Jump to new heights', path: '/games/doodle-jump' },
+    { id: 'pinball', name: 'Pinball', description: 'Classic arcade pinball', path: '/games/pinball' },
+    { id: 'bubble-shooter', name: 'Bubble Shooter', description: 'Match and pop bubbles', path: '/games/bubble-shooter' },
+    
+    // Skill Games
+    { id: 'mental-math', name: 'Mental Math', description: 'Solve math problems', path: '/games/mental-math' },
     { id: 'color-switch', name: 'Color Switch', description: 'Match colors to survive', path: '/games/color-switch' },
-    { id: 'sliding-puzzle', name: 'Sliding Puzzle', description: 'Classic 15-puzzle game', path: '/games/sliding-puzzle' },
-    { id: 'crossword', name: 'Crossword', description: 'Word puzzle challenges', path: '/games/crossword' },
+    { id: 'stack-tower', name: 'Stack Tower', description: 'Build the tallest tower', path: '/games/stack-tower' },
+    
+    // Card/Casino Games
+    { id: 'solitaire', name: 'Solitaire', description: 'Classic card game', path: '/games/solitaire' },
+    { id: 'blackjack', name: 'Blackjack', description: 'Casino card game', path: '/games/blackjack' },
+    { id: 'video-poker', name: 'Video Poker', description: 'Jacks or Better poker', path: '/games/video-poker' },
+    { id: 'go-fish', name: 'Go Fish', description: 'Classic card matching', path: '/games/go-fish' },
+    { id: 'war', name: 'War', description: 'Simple card battle', path: '/games/war' },
+    { id: 'crazy-eights', name: 'Crazy Eights', description: 'Wild card game', path: '/games/crazy-eights' },
+    { id: 'hearts', name: 'Hearts', description: 'Trick-taking card game', path: '/games/hearts' },
+    { id: 'spades', name: 'Spades', description: 'Partnership card game', path: '/games/spades' },
+    
+    // Casino Games
+    { id: 'roulette', name: 'Roulette', description: 'Spin the wheel of fortune', path: '/games/roulette' },
+    { id: 'bingo', name: 'Bingo', description: 'Classic number matching game', path: '/games/bingo' },
+    { id: 'dice-roll', name: 'Dice Roll', description: 'Roll dice to hit the target', path: '/games/dice-roll' },
+    { id: 'coin-flip', name: 'Coin Flip', description: 'Heads or tails betting', path: '/games/coin-flip' },
+    { id: 'yahtzee', name: 'Yahtzee', description: 'Dice game with scoring combinations', path: '/games/yahtzee' },
+    
+    // Casual Games (Final 5)
+    { id: 'bubble-pop', name: 'Bubble Pop', description: 'Simple bubble popping game with chain reactions', path: '/games/bubble-pop' },
+    { id: 'match-three', name: 'Match Three', description: 'Classic match-3 gameplay with combos', path: '/games/match-three' },
+    { id: 'idle-clicker', name: 'Idle Clicker', description: 'Incremental clicking game with upgrades', path: '/games/idle-clicker' },
+    { id: 'ball-bounce', name: 'Ball Bounce', description: 'Physics-based bouncing ball game', path: '/games/ball-bounce' },
+    { id: 'color-fill', name: 'Color Fill', description: 'Fill the screen color puzzle', path: '/games/color-fill' },
+    
+    // Music Games (New Category)
+    { id: 'piano-tiles', name: 'Piano Tiles', description: 'Tap falling tiles in rhythm', path: '/games/piano-tiles' },
+    { id: 'beat-matcher', name: 'Beat Matcher', description: 'Match beats to music patterns', path: '/games/beat-matcher' },
+    { id: 'melody-memory', name: 'Melody Memory', description: 'Remember and replay musical sequences', path: '/games/melody-memory' },
+    { id: 'drum-machine', name: 'Drum Machine', description: 'Create beats with virtual drums', path: '/games/drum-machine' },
+    { id: 'pitch-perfect', name: 'Pitch Perfect', description: 'Identify musical notes and intervals', path: '/games/pitch-perfect' },
+    { id: 'rhythm-runner', name: 'Rhythm Runner', description: 'Platformer synchronized to music beats', path: '/games/rhythm-runner' },
+    
+    // Physics Games (New Category)
+    { id: 'gravity-well', name: 'Gravity Well', description: 'Manipulate gravity to guide objects', path: '/games/gravity-well' },
+    { id: 'pendulum-swing', name: 'Pendulum Swing', description: 'Physics-based swinging mechanics', path: '/games/pendulum-swing' },
+    { id: 'balloon-pop-physics', name: 'Balloon Pop Physics', description: 'Air pressure and wind physics', path: '/games/balloon-pop-physics' },
+    { id: 'domino-chain', name: 'Domino Chain', description: 'Create chain reactions with physics', path: '/games/domino-chain' },
+    { id: 'marble-maze', name: 'Marble Maze', description: 'Tilt-controlled marble navigation', path: '/games/marble-maze' },
+    { id: 'catapult-challenge', name: 'Catapult Challenge', description: 'Projectile physics with trajectory', path: '/games/catapult-challenge' },
+    
+    // Simulation Games (New Category)
+    { id: 'city-builder-mini', name: 'City Builder Mini', description: 'Simplified urban planning', path: '/games/city-builder-mini' },
+    { id: 'farm-manager', name: 'Farm Manager', description: 'Quick agricultural simulation', path: '/games/farm-manager' },
+    { id: 'traffic-controller', name: 'Traffic Controller', description: 'Intersection traffic management', path: '/games/traffic-controller' },
+    { id: 'ecosystem-balance', name: 'Ecosystem Balance', description: 'Simple predator-prey dynamics', path: '/games/ecosystem-balance' },
+    
+    // Enhanced Action Games
+    { id: 'parkour-runner', name: 'Parkour Runner', description: 'Advanced obstacle course navigation', path: '/games/parkour-runner' },
+    { id: 'laser-tag', name: 'Laser Tag', description: 'Strategic laser-based combat', path: '/games/laser-tag' },
+    { id: 'rocket-dodge', name: 'Rocket Dodge', description: 'Space debris avoidance with upgrades', path: '/games/rocket-dodge' },
+    { id: 'storm-chaser', name: 'Storm Chaser', description: 'Weather navigation and timing', path: '/games/storm-chaser' },
+    { id: 'neon-racing', name: 'Neon Racing', description: 'Tron-style racing with power-ups', path: '/games/neon-racing' },
+    
+    // Advanced Puzzle Games
+    { id: 'circuit-builder', name: 'Circuit Builder', description: 'Logic gate and electrical puzzles', path: '/games/circuit-builder' },
+    { id: 'water-flow', name: 'Water Flow', description: 'Hydraulic path-finding puzzles', path: '/games/water-flow' },
+    { id: 'mirror-maze', name: 'Mirror Maze', description: 'Light reflection and redirection', path: '/games/mirror-maze' },
+    { id: 'gear-works', name: 'Gear Works', description: 'Mechanical gear-fitting puzzles', path: '/games/gear-works' },
+    
+    // Enhanced Memory Games
+    { id: 'face-memory', name: 'Face Memory', description: 'Facial recognition and recall', path: '/games/face-memory' },
+    { id: 'sequence-builder', name: 'Sequence Builder', description: 'Complex pattern memorization', path: '/games/sequence-builder' },
+    { id: 'location-memory', name: 'Location Memory', description: 'Spatial memory challenges', path: '/games/location-memory' },
+    
+    // Enhanced Skill Games
+    { id: 'precision-timing', name: 'Precision Timing', description: 'Multi-layered timing challenges', path: '/games/precision-timing' },
+    { id: 'finger-dance', name: 'Finger Dance', description: 'Multi-touch coordination game', path: '/games/finger-dance' },
+    
+    // Cycle 33: New Games (20 total)
+    // Competitive Online Games
+    { id: 'online-chess', name: 'Online Chess', description: 'Chess with ELO rating system', path: '/games/online-chess' },
+    { id: 'online-checkers', name: 'Online Checkers', description: 'Checkers with matchmaking', path: '/games/online-checkers' },
+    { id: 'online-pool', name: 'Online Pool', description: 'Pool with real-time physics', path: '/games/online-pool' },
+    { id: 'online-reversi', name: 'Online Reversi', description: 'Reversi with strategy ranking', path: '/games/online-reversi' },
+    { id: 'online-backgammon', name: 'Online Backgammon', description: 'Tournament-ready backgammon', path: '/games/online-backgammon' },
+    
+    // Puzzle Expansion Games
+    { id: 'hexagon-puzzle', name: 'Hexagon Puzzle', description: 'Hexagonal piece fitting puzzle', path: '/games/hexagon-puzzle' },
+    { id: 'word-ladder', name: 'Word Ladder', description: 'Transform words step by step', path: '/games/word-ladder' },
+    { id: 'logic-master', name: 'Logic Master', description: 'Advanced logic puzzles', path: '/games/logic-master' },
+    { id: 'number-chain', name: 'Number Chain', description: 'Create chains to reach targets', path: '/games/number-chain' },
+    { id: 'pattern-quest', name: 'Pattern Quest', description: 'Match and create patterns', path: '/games/pattern-quest' },
+    
+    // New Action Games
+    { id: 'ninja-warrior', name: 'Ninja Warrior', description: 'Jump and dodge as a ninja', path: '/games/ninja-warrior' },
+    { id: 'speed-runner', name: 'Speed Runner', description: 'High-speed platforming', path: '/games/speed-runner' },
+    { id: 'laser-defense', name: 'Laser Defense', description: 'Defend against laser attacks', path: '/games/laser-defense' },
+    { id: 'galaxy-explorer', name: 'Galaxy Explorer', description: 'Explore and discover planets', path: '/games/galaxy-explorer' },
+    { id: 'time-attack', name: 'Time Attack', description: 'Hit targets before time runs out', path: '/games/time-attack' },
+    
+    // Casual Games
+    { id: 'cookie-clicker', name: 'Cookie Clicker Evolution', description: 'Click cookies and build empire', path: '/games/cookie-clicker' },
+    { id: 'zen-garden', name: 'Zen Garden', description: 'Grow a peaceful garden', path: '/games/zen-garden' },
+    { id: 'fish-tank', name: 'Fish Tank Manager', description: 'Manage virtual aquarium', path: '/games/fish-tank' },
+    { id: 'bubble-wrap', name: 'Bubble Wrap Pop', description: 'Pop virtual bubble wrap', path: '/games/bubble-wrap' },
+    { id: 'fortune-wheel', name: 'Fortune Wheel', description: 'Spin the wheel of fortune', path: '/games/fortune-wheel' },
+    
+    // Cycle 34: New Multiplayer Games
+    { id: 'online-poker', name: 'Online Poker', description: 'Play Texas Hold\'em poker online with friends', path: '/games/online-poker' },
+    { id: 'online-uno', name: 'Online UNO', description: 'Classic UNO card game with multiplayer support', path: '/games/online-uno' },
+    { id: 'online-scrabble', name: 'Online Scrabble', description: 'Word building game with online multiplayer', path: '/games/online-scrabble' },
+    { id: 'online-dominoes', name: 'Online Dominoes', description: 'Traditional dominoes with online play', path: '/games/online-dominoes' },
+    { id: 'online-yahtzee', name: 'Online Yahtzee', description: 'Dice game with scoring combinations online', path: '/games/online-yahtzee' },
+    { id: 'online-battleship-ii', name: 'Online Battleship II', description: 'Enhanced naval combat with special abilities', path: '/games/online-battleship-ii' },
+    { id: 'online-connect-five', name: 'Online Connect Five', description: 'Get five in a row in this strategic game', path: '/games/online-connect-five' },
+    { id: 'online-othello', name: 'Online Othello', description: 'Reversi game with online multiplayer', path: '/games/online-othello' },
+    { id: 'online-stratego', name: 'Online Stratego', description: 'Military strategy with hidden pieces', path: '/games/online-stratego' },
+    { id: 'online-risk', name: 'Online Risk', description: 'World domination strategy game online', path: '/games/online-risk' },
+    
+    // Cycle 34: New Puzzle Games
+    { id: 'rubiks-cube', name: 'Rubik\'s Cube', description: '3D cube puzzle solver', path: '/games/rubiks-cube' },
+    { id: 'tower-blocks', name: 'Tower Blocks', description: 'Stack blocks to build tall towers', path: '/games/tower-blocks' },
+    { id: 'unblock-me', name: 'Unblock Me', description: 'Slide blocks to free the red block', path: '/games/unblock-me' },
+    { id: 'flow-connect', name: 'Flow Connect', description: 'Connect matching colors without crossing', path: '/games/flow-connect' },
+    { id: 'hex-puzzle', name: 'Hex Puzzle', description: 'Fit hexagonal pieces into the grid', path: '/games/hex-puzzle' },
+    { id: 'magic-square', name: 'Magic Square', description: 'Arrange numbers for equal sums', path: '/games/magic-square' },
+    { id: 'kenken', name: 'KenKen', description: 'Mathematical logic puzzle with operations', path: '/games/kenken' },
+    { id: 'hashi', name: 'Hashi (Bridges)', description: 'Connect islands with bridges', path: '/games/hashi' },
+    { id: 'slitherlink', name: 'Slitherlink', description: 'Create a loop following number clues', path: '/games/slitherlink' },
+    { id: 'nurikabe', name: 'Nurikabe', description: 'Create islands and walls with logic', path: '/games/nurikabe' },
+    
+    // Cycle 34: New Action Games
+    { id: 'subway-runner', name: 'Subway Runner', description: 'Endless runner through subway tunnels', path: '/games/subway-runner' },
+    { id: 'fruit-slice', name: 'Fruit Slice', description: 'Slice flying fruits with swipes', path: '/games/fruit-slice' },
+    { id: 'tower-climb', name: 'Tower Climb', description: 'Climb an endless tower platform game', path: '/games/tower-climb' },
+    { id: 'laser-quest', name: 'Laser Quest', description: 'Navigate laser mazes and hit targets', path: '/games/laser-quest' },
+    { id: 'ninja-run', name: 'Ninja Run', description: 'Fast-paced ninja platformer', path: '/games/ninja-run' },
+    { id: 'space-fighter', name: 'Space Fighter', description: 'Galactic spaceship combat', path: '/games/space-fighter' },
+    { id: 'ball-jump', name: 'Ball Jump', description: 'Bounce through platforms and obstacles', path: '/games/ball-jump' },
+    { id: 'speed-boat', name: 'Speed Boat', description: 'Water racing with obstacles', path: '/games/speed-boat' },
+    { id: 'arrow-master', name: 'Arrow Master', description: 'Archery precision shooting', path: '/games/arrow-master' },
+    { id: 'boxing-champion', name: 'Boxing Champion', description: 'Fighting game with combos', path: '/games/boxing-champion' },
+    
+    // Cycle 35: New Brain Training Games
+    { id: 'memory-palace', name: 'Memory Palace', description: 'Spatial memory training', path: '/games/memory-palace' },
+    { id: 'speed-math', name: 'Speed Math', description: 'Mental calculation challenges', path: '/games/speed-math' },
+    { id: 'pattern-matrix', name: 'Pattern Matrix', description: 'Visual pattern completion', path: '/games/pattern-matrix' },
+    { id: 'word-association', name: 'Word Association', description: 'Language connection game', path: '/games/word-association' },
+    { id: 'logic-gates', name: 'Logic Gates', description: 'Boolean logic puzzles', path: '/games/logic-gates' },
+    
+    // Cycle 35: New Arcade Revival Games
+    { id: 'galaga-redux', name: 'Galaga Redux', description: 'Enhanced space shooter', path: '/games/galaga-redux' },
+    { id: 'dig-dug-redux', name: 'Dig Dug Redux', description: 'Underground adventure', path: '/games/dig-dug-redux' },
+    { id: 'burger-time', name: 'Burger Time', description: 'Food assembly arcade', path: '/games/burger-time' },
+    { id: 'joust', name: 'Joust', description: 'Flying knight combat', path: '/games/joust' },
+    { id: 'robotron', name: 'Robotron', description: 'Twin-stick shooter', path: '/games/robotron' },
+    
+    // New Games - Cycle 36
+    { id: 'bridge', name: 'Bridge', description: 'Card game with bidding and trick-taking', path: '/games/bridge' },
+    { id: 'backgammon-pro', name: 'Backgammon Pro', description: 'Board game with dice and doubling cube', path: '/games/backgammon-pro' },
+    { id: 'cribbage', name: 'Cribbage', description: 'Card game with pegging board', path: '/games/cribbage' },
+    { id: 'code-breaker', name: 'Code Breaker', description: 'Programming logic puzzles', path: '/games/code-breaker' },
+    { id: 'science-lab', name: 'Science Lab', description: 'Physics experiments simulator', path: '/games/science-lab' },
+    { id: 'missile-command', name: 'Missile Command', description: 'City defense from missiles', path: '/games/missile-command' },
+    { id: 'tempest', name: 'Tempest', description: 'Tube shooter with geometric enemies', path: '/games/tempest' },
   ]
+  
+  // Game categories
+  const categories: Category[] = [
+    {
+      id: 'puzzle',
+      name: 'Puzzle',
+      slug: 'puzzle',
+      description: 'Brain teasers and logic games',
+      icon: '🧩',
+      color: '#8B5CF6',
+      featured: true
+    },
+    {
+      id: 'action',
+      name: 'Action',
+      slug: 'action',
+      description: 'Fast-paced reflex games',
+      icon: '⚡',
+      color: '#EF4444',
+      featured: true
+    },
+    {
+      id: 'strategy',
+      name: 'Strategy',
+      slug: 'strategy',
+      description: 'Plan and think ahead',
+      icon: '♟️',
+      color: '#3B82F6',
+      featured: true
+    },
+    {
+      id: 'arcade',
+      name: 'Arcade',
+      slug: 'arcade',
+      description: 'Classic arcade games',
+      icon: '👾',
+      color: '#10B981',
+      featured: false
+    },
+    {
+      id: 'card',
+      name: 'Card Games',
+      slug: 'card',
+      description: 'Traditional card games',
+      icon: '🃏',
+      color: '#F59E0B',
+      featured: false
+    },
+    {
+      id: 'word',
+      name: 'Word',
+      slug: 'word',
+      description: 'Vocabulary and language',
+      icon: '📝',
+      color: '#EC4899',
+      featured: false
+    },
+    {
+      id: 'casual',
+      name: 'Casual',
+      slug: 'casual',
+      description: 'Relaxing easy games',
+      icon: '🎮',
+      color: '#14B8A6',
+      featured: false
+    },
+    {
+      id: 'skill',
+      name: 'Skill',
+      slug: 'skill',
+      description: 'Test your abilities',
+      icon: '🎯',
+      color: '#F97316',
+      featured: false
+    },
+    {
+      id: 'multiplayer',
+      name: 'Multiplayer',
+      slug: 'multiplayer',
+      description: 'Play with friends',
+      icon: '👥',
+      color: '#6366F1',
+      featured: true
+    },
+    {
+      id: 'music',
+      name: 'Music',
+      slug: 'music',
+      description: 'Rhythm and sound games',
+      icon: '🎵',
+      color: '#9333EA',
+      featured: true
+    },
+    {
+      id: 'physics',
+      name: 'Physics',
+      slug: 'physics',
+      description: 'Physics-based challenges',
+      icon: '🎯',
+      color: '#06B6D4',
+      featured: false
+    },
+    {
+      id: 'simulation',
+      name: 'Simulation',
+      slug: 'simulation',
+      description: 'Manage and build',
+      icon: '🏗️',
+      color: '#84CC16',
+      featured: false
+    }
+  ];
+
+  const multiplayerGamesOld = [
+    { id: 'dots-and-boxes', name: 'Dots and Boxes', description: 'Connect dots to win', path: '/games/dots-and-boxes' },
+    { id: 'pool', name: '8-Ball Pool', description: 'Classic billiards game', path: '/games/pool' },
+    { id: 'battleship', name: 'Battleship', description: 'Naval strategy game', path: '/games/battleship' },
+    { id: 'air-hockey', name: 'Air Hockey', description: 'Fast-paced table game', path: '/games/air-hockey' },
+    // New Cycle 35 Multiplayer Games
+    { id: 'online-mahjong', name: 'Online Mahjong', description: 'Traditional 4-player tile matching game', path: '/games/online-mahjong' },
+    { id: 'online-go', name: 'Online Go', description: 'Ancient strategy board game', path: '/games/online-go' },
+    { id: 'online-carrom', name: 'Online Carrom', description: 'Disc flicking board game', path: '/games/online-carrom' },
+    { id: 'online-ludo', name: 'Online Ludo', description: 'Classic board game with dice', path: '/games/online-ludo' },
+    { id: 'online-rummy-500', name: 'Online Rummy 500', description: 'Point-based card game', path: '/games/online-rummy-500' },
+  ]
+
+  // Combine all games for search with metadata
+  const allGamesWithMetadata: Game[] = [
+    ...singlePlayerGames.map(g => ({ 
+      ...g, 
+      category: 'Single Player',
+      playerCount: '1',
+      tags: ['casual', 'single-player']
+    })),
+    ...multiplayerGames.map(g => ({ 
+      ...g, 
+      category: 'Multiplayer',
+      playerCount: '2+',
+      tags: ['competitive', 'multiplayer', 'pvp']
+    }))
+  ]
+
+  // Keyboard shortcut for search and analytics
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault()
+        setIsSearchOpen(true)
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    
+    // Track page view
+    analytics.trackPageView('homepage')
+    
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [])
 
   return (
     <div>
+      {/* Enhanced Search Overlay */}
+      <EnhancedGameSearch 
+        games={allGamesWithMetadata}
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+      />
+
       <section className="bg-gradient-to-b from-primary to-indigo-700 text-white py-16">
         <div className="container-responsive text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Play Free Mini Games</h1>
-          <p className="text-xl">No registration required. Start playing instantly!</p>
+          <p className="text-xl mb-6">No registration required. Start playing instantly!</p>
+          
+          {/* Search Button */}
+          <button
+            onClick={() => setIsSearchOpen(true)}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-lg transition-colors"
+          >
+            <Search className="w-5 h-5" />
+            <span>Search Games</span>
+            <kbd className="ml-2 px-2 py-1 text-xs bg-white/20 rounded">⌘K</kbd>
+          </button>
         </div>
       </section>
 
       <div className="container-responsive py-12">
-        <section>
-          <h2 className="text-2xl font-semibold mb-6">Popular Games</h2>
+        {/* Recently Played Section */}
+        <div className="mb-8">
+          <RecentlyPlayed />
+        </div>
+
+        {/* Recommendations and Trending Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+          <div className="lg:col-span-2">
+            <RecommendedGames />
+          </div>
+          <div className="space-y-6">
+            <TrendingGames />
+            <DailyChallenges />
+          </div>
+        </div>
+
+        {/* View Mode Toggle */}
+        <div className="flex justify-center mb-8">
+          <div className="inline-flex rounded-lg border border-gray-200 dark:border-gray-700">
+            <button
+              onClick={() => setViewMode('categories')}
+              className={`px-4 py-2 rounded-l-lg transition-colors ${
+                viewMode === 'categories' 
+                  ? 'bg-blue-500 text-white' 
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300'
+              }`}
+            >
+              Browse by Category
+            </button>
+            <button
+              onClick={() => setViewMode('all')}
+              className={`px-4 py-2 rounded-r-lg transition-colors ${
+                viewMode === 'all' 
+                  ? 'bg-blue-500 text-white' 
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300'
+              }`}
+            >
+              View All Games
+            </button>
+          </div>
+        </div>
+
+        {/* Category View */}
+        {viewMode === 'categories' ? (
+          <section>
+            <h2 className="text-2xl font-semibold mb-6 text-center">Browse Games by Category</h2>
+            <CategoryGrid categories={categories} />
+            
+            {/* Enhanced Category Features */}
+            <div className="mt-12 space-y-12">
+              {/* Trending Games Widget */}
+              <div className="max-w-4xl mx-auto">
+                <TrendingGames />
+              </div>
+
+              {/* Personalized Recommendations */}
+              <div>
+                <CategoryRecommendationEngine 
+                  userHistory={[]} 
+                  algorithm="hybrid"
+                  maxRecommendations={8}
+                />
+              </div>
+
+              {/* Category Mastery Progress */}
+              <div>
+                <CategoryMastery />
+              </div>
+            </div>
+          </section>
+        ) : (
+          <>
+            <section className="mb-12">
+              <h2 className="text-2xl font-semibold mb-6">Single Player Games</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {games.map((game) => (
+            {singlePlayerGames.map((game) => (
               <Link key={game.id} href={game.path}>
                 <div className="game-card cursor-pointer hover:scale-105 transition-transform">
                   <h4 className="text-xl font-semibold mb-2">{game.name}</h4>
@@ -49,6 +538,24 @@ export default function HomePage() {
             ))}
           </div>
         </section>
+        
+        <section>
+          <h2 className="text-2xl font-semibold mb-6">Multiplayer Games</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {multiplayerGames.map((game) => (
+              <Link key={game.id} href={game.path}>
+                <div className="game-card cursor-pointer hover:scale-105 transition-transform border-2 border-blue-500">
+                  <h4 className="text-xl font-semibold mb-2">{game.name}</h4>
+                  <p className="text-gray-600 dark:text-gray-400">{game.description}</p>
+                  <span className="inline-block px-2 py-1 text-xs bg-blue-500 text-white rounded mb-2">Multiplayer</span>
+                  <button className="mt-4 btn-primary">Play Now</button>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+          </>
+        )}
       </div>
     </div>
   )

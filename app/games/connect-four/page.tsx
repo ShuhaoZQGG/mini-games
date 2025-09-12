@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { ConnectFour } from '@/components/games/connect-four';
+import ConnectFourWithLevels from '@/components/games/connect-four-with-levels';
 
 export const metadata: Metadata = {
   title: 'Connect Four - Mini Games',
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function ConnectFourPage() {
-  return <ConnectFour />;
+  return <ConnectFourWithLevels />;
 }

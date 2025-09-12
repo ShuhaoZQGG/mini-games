@@ -35,12 +35,23 @@ export class TwentyFortyEightGame extends BaseGame<TwentyFortyEightGameData> {
     if (this.state === GameState.PLAYING) return;
     
     this.state = GameState.PLAYING;
-    this.score = 0;
-    this.gameData = this.initializeGameData();
     
-    // Add two initial tiles
-    this.addRandomTile();
-    this.addRandomTile();
+    // Only initialize if grid is empty
+    const hasExistingTiles = this.gameData.grid.some(row => row.some(cell => cell !== 0));
+    
+    if (!hasExistingTiles) {
+      this.score = 0;
+      this.gameData = this.initializeGameData();
+      
+      // Add two initial tiles
+      this.addRandomTile();
+      this.addRandomTile();
+    } else {
+      // Check if 2048 is already present when starting with existing tiles
+      if (this.has2048()) {
+        this.gameData.hasWon = true;
+      }
+    }
   }
 
   public reset(): void {

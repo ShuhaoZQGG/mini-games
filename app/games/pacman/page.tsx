@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import PacManGame from '@/components/games/pacman';
+import PacManWithLevels from '@/components/games/pacman-with-levels';
 
 export const metadata: Metadata = {
   title: 'Pac-Man - Classic Arcade Game | Mini Games',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function PacManPage() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <PacManGame />
+      <PacManWithLevels />
     </div>
   );
 }

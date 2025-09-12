@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { CPSTestComponent } from '@/components/games/cps-test'
+import { CPSTestWithLevels } from '@/components/games/cps-test-with-levels'
 
 export const metadata: Metadata = {
   title: 'CPS Test - Clicks Per Second Test | Mini Games',
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function CPSTestPage() {
   return (
     <div className="container-responsive py-8">
-      <CPSTestComponent />
+      <CPSTestWithLevels />
     </div>
   )
 }

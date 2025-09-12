@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import SpaceInvadersGame from '@/components/games/space-invaders';
+import SpaceInvadersWithLevels from '@/components/games/space-invaders-with-levels';
 
 export const metadata: Metadata = {
   title: 'Space Invaders - Classic Arcade Shooter | Mini Games',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function SpaceInvadersPage() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <SpaceInvadersGame />
+      <SpaceInvadersWithLevels />
     </div>
   );
 }
