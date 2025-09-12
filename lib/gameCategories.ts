@@ -49,6 +49,7 @@ export const gameCategories: GameCategoryMapping[] = [
   
   // Arcade Games
   { id: 'snake', name: 'Snake', description: 'Classic snake game', path: '/games/snake', category: 'arcade', difficulty: 'easy', avgPlayTime: 5, tags: ['arcade', 'classic', 'snake'] },
+  { id: 'snake-realtime', name: 'Snake Realtime', description: 'Real-time multiplayer snake game', path: '/games/snake-realtime', category: 'arcade', difficulty: 'medium', avgPlayTime: 10, tags: ['arcade', 'multiplayer', 'snake', 'realtime', 'action'] },
   { id: 'tetris', name: 'Tetris', description: 'Stack falling blocks', path: '/games/tetris', category: 'arcade', difficulty: 'medium', avgPlayTime: 10, tags: ['arcade', 'classic', 'blocks'] },
   { id: 'breakout', name: 'Breakout', description: 'Break all the bricks', path: '/games/breakout', category: 'arcade', difficulty: 'medium', avgPlayTime: 10, tags: ['arcade', 'classic', 'paddle'] },
   { id: 'pacman', name: 'Pac-Man', description: 'Classic arcade maze game', path: '/games/pacman', category: 'arcade', difficulty: 'medium', avgPlayTime: 10, tags: ['arcade', 'classic', 'maze'] },
@@ -711,6 +712,30 @@ export const gameCategories: GameCategoryMapping[] = [
   { id: 'science-lab', name: 'Science Lab', description: 'Physics experiments simulator', path: '/games/science-lab', category: 'simulation', difficulty: 'medium', avgPlayTime: 15, tags: ['physics', 'experiments', 'educational', 'science', 'simulation'] },
   { id: 'missile-command', name: 'Missile Command', description: 'City defense from missiles', path: '/games/missile-command', category: 'arcade', difficulty: 'medium', avgPlayTime: 10, tags: ['arcade', 'defense', 'missiles', 'classic', 'shooting'] },
   { id: 'tempest', name: 'Tempest', description: 'Tube shooter with geometric enemies', path: '/games/tempest', category: 'arcade', difficulty: 'hard', avgPlayTime: 10, tags: ['arcade', 'tube-shooter', 'geometric', 'classic', 'vector'] },
+  
+  // New Games - 10 diverse mini games
+  { id: 'color-matcher', name: 'Color Matcher', description: 'Match colors quickly before time runs out', path: '/games/color-matcher', category: 'skill', difficulty: 'medium', avgPlayTime: 5, tags: ['skill', 'colors', 'speed', 'reflex', 'matching'] },
+  { id: 'math-race', name: 'Math Race', description: 'Solve math problems in a race against time', path: '/games/math-race', category: 'puzzle', difficulty: 'medium', avgPlayTime: 5, tags: ['puzzle', 'math', 'speed', 'educational', 'race'] },
+  { id: 'ball-blast', name: 'Ball Blast', description: 'Shoot balls to break numbered blocks', path: '/games/ball-blast', category: 'action', difficulty: 'medium', avgPlayTime: 10, tags: ['action', 'shooting', 'balls', 'blocks', 'arcade'] },
+  { id: 'memory-sequence', name: 'Memory Sequence', description: 'Remember and repeat increasingly complex sequences', path: '/games/memory-sequence', category: 'memory', difficulty: 'medium', avgPlayTime: 10, tags: ['memory', 'sequence', 'pattern', 'brain', 'cognitive'] },
+  { id: 'word-scramble', name: 'Word Scramble', description: 'Unscramble letters to form words', path: '/games/word-scramble', category: 'word', difficulty: 'medium', avgPlayTime: 5, tags: ['word', 'scramble', 'vocabulary', 'puzzle', 'letters'] },
+  { id: 'brick-breaker', name: 'Brick Breaker', description: 'Classic brick breaking game', path: '/games/brick-breaker', category: 'arcade', difficulty: 'medium', avgPlayTime: 10, tags: ['arcade', 'bricks', 'paddle', 'classic', 'breakout'] },
+  { id: 'number-chain-game', name: 'Number Chain', description: 'Connect numbers to reach target sums', path: '/games/number-chain-game', category: 'puzzle', difficulty: 'medium', avgPlayTime: 10, tags: ['puzzle', 'numbers', 'chain', 'math', 'logic'] },
+  { id: 'quick-draw', name: 'Quick Draw', description: 'Draw shapes as quickly and accurately as possible', path: '/games/quick-draw', category: 'skill', difficulty: 'easy', avgPlayTime: 5, tags: ['skill', 'drawing', 'speed', 'accuracy', 'shapes'] },
+  { id: 'bubble-pop-game', name: 'Bubble Pop', description: 'Pop bubbles before they reach the top', path: '/games/bubble-pop-game', category: 'action', difficulty: 'easy', avgPlayTime: 5, tags: ['action', 'bubbles', 'popping', 'casual', 'arcade'] },
+  { id: 'pattern-match', name: 'Pattern Match', description: 'Find and match patterns in a grid', path: '/games/pattern-match', category: 'puzzle', difficulty: 'medium', avgPlayTime: 10, tags: ['puzzle', 'pattern', 'matching', 'grid', 'visual'] },
+  
+  // Cycle 38: New Mini Games (10 games)
+  { id: 'color-flood', name: 'Color Flood', description: 'Fill the board with one color in limited moves', path: '/games/color-flood', category: 'puzzle', difficulty: 'medium', avgPlayTime: 5, tags: ['puzzle', 'colors', 'strategy', 'flood-fill', 'logic'] },
+  { id: 'word-chain', name: 'Word Chain', description: 'Create word chains by changing one letter', path: '/games/word-chain', category: 'word', difficulty: 'medium', avgPlayTime: 10, tags: ['word', 'vocabulary', 'chain', 'letters', 'puzzle'] },
+  { id: 'rhythm-tap', name: 'Rhythm Tap', description: 'Tap to the beat and maintain rhythm', path: '/games/rhythm-tap', category: 'music', difficulty: 'easy', avgPlayTime: 5, tags: ['music', 'rhythm', 'tapping', 'beat', 'timing'] },
+  { id: 'shape-shifter', name: 'Shape Shifter', description: 'Transform shapes to fit through obstacles', path: '/games/shape-shifter', category: 'puzzle', difficulty: 'medium', avgPlayTime: 8, tags: ['puzzle', 'shapes', 'transformation', 'physics', 'geometry'] },
+  { id: 'math-duel', name: 'Math Duel', description: 'Compete in quick math battles', path: '/games/math-duel', category: 'skill', difficulty: 'medium', avgPlayTime: 5, tags: ['math', 'competitive', 'speed', 'education', 'battle'] },
+  { id: 'pixel-art', name: 'Pixel Art Creator', description: 'Create and share pixel art masterpieces', path: '/games/pixel-art', category: 'simulation', difficulty: 'easy', avgPlayTime: 15, tags: ['creative', 'art', 'pixel', 'drawing', 'design'] },
+  { id: 'tower-defense-mini', name: 'Tower Defense Mini', description: 'Defend your base with strategic tower placement', path: '/games/tower-defense-mini', category: 'strategy', difficulty: 'medium', avgPlayTime: 15, tags: ['strategy', 'defense', 'towers', 'waves', 'tactical'] },
+  { id: 'dodge-master', name: 'Dodge Master', description: 'Master the art of dodging obstacles', path: '/games/dodge-master', category: 'action', difficulty: 'hard', avgPlayTime: 5, tags: ['action', 'dodging', 'reflex', 'speed', 'survival'] },
+  { id: 'memory-grid', name: 'Memory Grid', description: 'Remember and reproduce grid patterns', path: '/games/memory-grid', category: 'memory', difficulty: 'medium', avgPlayTime: 5, tags: ['memory', 'grid', 'pattern', 'visual', 'brain'] },
+  { id: 'bounce-physics', name: 'Bounce Physics', description: 'Use physics to guide bouncing balls to targets', path: '/games/bounce-physics', category: 'physics', difficulty: 'medium', avgPlayTime: 10, tags: ['physics', 'bouncing', 'angles', 'trajectory', 'puzzle'] },
 ]
 
 // Helper function to get games by category
