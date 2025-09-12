@@ -11,12 +11,25 @@ import { CategoryRecommendationEngine } from '@/components/categories/CategoryRe
 import { TrendingGames } from '@/components/categories/TrendingGames'
 import { CategoryMastery } from '@/components/categories/CategoryMastery'
 import { analytics } from '@/lib/analytics'
+import { gameCategories } from '@/lib/gameCategories'
 
 export default function HomePage() {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [viewMode, setViewMode] = useState<'categories' | 'all'>('categories')
   
-  const singlePlayerGames = [
+  // Transform gameCategories to the format expected by the components
+  const allGames = gameCategories.map(game => ({
+    id: game.id,
+    name: game.name,
+    description: game.description,
+    path: game.path
+  }))
+  
+  // Filter out multiplayer games (those with 'online' in their id)
+  const singlePlayerGames = allGames.filter(game => !game.id.includes('online'))
+  const multiplayerGames = allGames.filter(game => game.id.includes('online'))
+  
+  const singlePlayerGamesOld = [
     // Action/Reflex Games
     { id: 'cps-test', name: 'CPS Test', description: 'Test your clicking speed', path: '/games/cps-test' },
     { id: 'reaction-time', name: 'Reaction Time', description: 'Test your reflexes', path: '/games/reaction-time' },
@@ -366,7 +379,7 @@ export default function HomePage() {
     }
   ];
 
-  const multiplayerGames = [
+  const multiplayerGamesOld = [
     { id: 'dots-and-boxes', name: 'Dots and Boxes', description: 'Connect dots to win', path: '/games/dots-and-boxes' },
     { id: 'pool', name: '8-Ball Pool', description: 'Classic billiards game', path: '/games/pool' },
     { id: 'battleship', name: 'Battleship', description: 'Naval strategy game', path: '/games/battleship' },
@@ -380,7 +393,7 @@ export default function HomePage() {
   ]
 
   // Combine all games for search with metadata
-  const allGames: Game[] = [
+  const allGamesWithMetadata: Game[] = [
     ...singlePlayerGames.map(g => ({ 
       ...g, 
       category: 'Single Player',
@@ -416,7 +429,7 @@ export default function HomePage() {
     <div>
       {/* Enhanced Search Overlay */}
       <EnhancedGameSearch 
-        games={allGames}
+        games={allGamesWithMetadata}
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
       />
